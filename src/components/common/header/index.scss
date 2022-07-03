@@ -1,0 +1,66 @@
+.nav_bar {
+    background-color: #ffff!important;
+    width: 100%;
+    
+
+    .avatar_menu {
+        float: right;
+        margin-right: 20px;
+        display: table;
+    }
+
+    .header_container {
+        padding: 5px 20px;
+
+    }
+
+    .dropdown-toggle::after {
+        color: #ffff!important; 
+      }
+
+      .dropdown-toggle svg {
+        height: 18px;
+      }
+
+      .user_name {
+        font-size: 18px;
+        vertical-align: middle;
+        display: table-cell;
+      }
+
+      .avatar {
+        vertical-align: middle;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+      }
+      
+      .avatar_container {
+        margin-right: 10px;
+      }
+
+      .company_name {
+        text-transform: uppercase;
+        font-weight: bold;
+        vertical-align: middle;
+      }
+
+      .logo {
+        vertical-align: middle;
+        width: 50px;
+        height: 50px;
+      }
+
+      
+    .nav_item {
+        padding-left: 5px;
+        cursor: pointer;
+        }
+
+    .dropdown-menu {
+        min-width: 30px!important;
+    }
+
+      
+    
+}
