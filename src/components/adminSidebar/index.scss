@@ -1,0 +1,47 @@
+.sidebar {
+    padding: 20px 0px;
+    font-weight: 500;
+    color: #828282;
+
+  .row {
+    padding: 0px 45px;
+    height: 45px;
+    align-items:center;
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+        background: linear-gradient(89.76deg, rgba(255, 255, 255, 0.8) 37.69%, rgba(255, 255, 255, 0) 89.5%);
+        font-weight: 700;
+
+    }
+
+
+    .blue_rectangle {
+        position: absolute;
+        max-width: 6px!important;
+        max-width: 6px!important;
+        height: 45px;
+        left: 0px;
+        visibility: hidden;
+
+        .inside_blue_rect {
+            background-color: #035476;
+            position: absolute;
+            width: 6px;
+            height: 45px;
+            float: left;
+            left: 0px;
+        }
+
+    }
+
+    
+}
+
+    .row:hover  .blue_rectangle {
+        visibility: visible;
+    }
+
+}
+

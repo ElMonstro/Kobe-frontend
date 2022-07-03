@@ -1,12 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import Header from './components/common/header';
+import Dashboard from './components/dashboard';
 
 function App() {
   return (
     <>
-    <Header />
+    <Dashboard />
     </>
   );
 }

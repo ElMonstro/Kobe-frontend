@@ -1,16 +1,17 @@
 .nav_bar {
     background-color: #ffff!important;
     width: 100%;
+    padding: 0;
     
 
     .avatar_menu {
         float: right;
-        margin-right: 20px;
+        margin-right: 27px;
         display: table;
     }
 
     .header_container {
-        padding: 5px 20px;
+        padding: 0px 60px;
 
     }
 
@@ -58,7 +59,7 @@
         }
 
     .dropdown-menu {
-        min-width: 30px!important;
+        min-width: 85px!important;
     }
 
       
