@@ -5,6 +5,7 @@ import Header from "../common/header";
 import AdminSidebar from "../adminSidebar"
 
 import './index.scss';
+import AdminOrgStructureCont from "../orgStructureAdmin";
 
 const Dashboard = pops => {
     return (
@@ -14,10 +15,11 @@ const Dashboard = pops => {
                 <Container fluid className="inner-cont">
 
                 <Row> 
-                    <Col xs lg="4">
+                    <Col xs lg="3">
                         <AdminSidebar />
                     </Col>
-                    <Col xs lg="14">
+                    <Col xs lg="15">
+                        <AdminOrgStructureCont />
                     </Col>
                 </Row>
                 </Container>

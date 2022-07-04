@@ -1,0 +1,23 @@
+@import "../../assets/scss/_colors";
+
+.cont {
+    padding: 20px 28px!important;
+    background-color: #E6ECF2!important;
+    height: 944px;
+
+    .col {
+        padding: 0!important;
+    }
+
+    .card_btn {
+        background: $btn-background;
+        border-radius: 4px;
+        border: none;
+    }
+
+    .card_title {
+        font-size: 18px;
+        line-height: 28px;
+        font-weight: 500;
+    }
+}

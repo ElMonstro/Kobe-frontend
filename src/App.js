@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-import Dashboard from './components/dashboard';
+import Dashboard from './components/adminDashboard';
 
 function App() {
   return (
