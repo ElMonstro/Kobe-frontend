@@ -5,7 +5,7 @@ import "./index.scss";
 
 const UploadLogoCard = props => {
     return (
-        <Card className="upload_logo_card">
+        <Card className="admin_card">
             <div className="card_cont">
                 <div className="card_title">
                     Upload Organization Logo

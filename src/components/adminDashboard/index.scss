@@ -13,11 +13,23 @@
         background: $btn-background;
         border-radius: 4px;
         border: none;
+        height: 36px;
     }
 
     .card_title {
         font-size: 18px;
         line-height: 28px;
         font-weight: 500;
+    }
+
+    .admin_card {
+        width: 100%;
+        border: none;
+        margin-bottom: 29px;
+        padding: 20px 49px;
+
+        .card_title {
+            margin-bottom: 23px;
+        }
     }
 }
