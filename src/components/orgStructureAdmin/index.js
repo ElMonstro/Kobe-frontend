@@ -1,6 +1,7 @@
 import React from "react";
 import MissionVisionForm from "../cards/missionVisonCard";
-import UploadLogoCard from "../cards/uploadLogo";
+import UploadLogoCard from "../cards/uploadLogoCard";
+import UploadOrgCard from "../cards/uploadOrgCard";
 
 import "./index.scss";
 
@@ -10,6 +11,8 @@ const AdminOrgStructureCont = props => {
         <div className="admin_org_cont">
             <UploadLogoCard />
             <MissionVisionForm />
+            <UploadOrgCard />
+
         </div>
     )
 }
