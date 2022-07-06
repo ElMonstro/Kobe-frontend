@@ -8,7 +8,7 @@ import logo from "../../../assets/logo.svg"
 
 const Header = (props) => {
     return (
-        <Navbar className="nav_bar" bg="light" variant="light">
+        <Navbar sticky="top" className="nav_bar" bg="light" variant="light">
             <Container className="header_container" fluid>
                 <Navbar.Brand href="#home" >
                     <img className="logo" 
