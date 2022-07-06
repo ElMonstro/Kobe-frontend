@@ -6,7 +6,7 @@ import "./index.scss";
 
 const BehavioralSwitchForm = props => {
     return (
-        <Card className="admin_card perspective_switch">
+        <Card className="admin_card side_label_form">
             <div className="card_title">Enable/Disable Behavioral Perspectives</div>
 
             <Form>
@@ -17,9 +17,6 @@ const BehavioralSwitchForm = props => {
                         <Col><Form.Check type="switch" placeholder="" /> </Col>
                     </Row>
                 </Form.Group>
-                <Button className="card_btn" variant="primary" type="">
-                    Save
-                </Button>
             </Form>
         </Card>
         

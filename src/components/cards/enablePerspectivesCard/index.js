@@ -1,12 +1,12 @@
 import React from "react";
-import { Form, Button, Card, Col, Row } from "react-bootstrap";
+import { Form, Card, Col, Row } from "react-bootstrap";
 
 import "./index.scss";
 
 
 const PesrpectiveSwitchForm = props => {
     return (
-        <Card className="admin_card perspective_switch">
+        <Card className="admin_card side_label_form">
             <div className="card_title">Enable/Disable Perspectives</div>
 
             <Form>
@@ -17,9 +17,6 @@ const PesrpectiveSwitchForm = props => {
                         <Col><Form.Check type="switch" placeholder="" /> </Col>
                     </Row>
                 </Form.Group>
-                <Button className="card_btn" variant="primary" type="">
-                    Save
-                </Button>
             </Form>
         </Card>
         

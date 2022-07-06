@@ -15,6 +15,7 @@
         border: none;
         height: 36px;
         width: 134px;
+        margin-top: 10px;
     }
 
     .card_title {
@@ -39,7 +40,7 @@
         height: 43px;
     }
 
-    .perspective_switch {
+    .side_label_form {
 
         form {
             width: 500px;
@@ -68,6 +69,12 @@
             }
         }
     
+    }
+
+    .admin_select_form {
+        .form-select {
+            width: 240px;
+        }
     }
 
 }
