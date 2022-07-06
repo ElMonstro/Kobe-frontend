@@ -10,6 +10,7 @@ import ThresholdsForm from "../cards/threshholdsCard";
 import PesrpectiveSwitchForm from "../cards/enablePerspectivesCard";
 import BehavioralSwitchForm from "../cards/enableBehavioralsCard";
 import CascadeCutoffForm from "../cards/cascadeCutoffCard";
+import ReviewPeriodCard from "../cards/reviewPeriodCard";
 
 const AdminOrgStructureCont = props => {
     
@@ -23,6 +24,7 @@ const AdminOrgStructureCont = props => {
             <PesrpectiveSwitchForm />
             <BehavioralSwitchForm />
             <CascadeCutoffForm />
+            <ReviewPeriodCard />
 
         </div>
     )
