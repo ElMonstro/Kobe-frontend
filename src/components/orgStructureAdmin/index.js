@@ -6,6 +6,7 @@ import DivisionsNamesForm from "../cards/orgNamesCard";
 
 
 import "./index.scss";
+import ThresholdsForm from "../cards/threshholdsCard";
 
 const AdminOrgStructureCont = props => {
     
@@ -15,6 +16,7 @@ const AdminOrgStructureCont = props => {
             <MissionVisionForm />
             <UploadOrgCard />
             <DivisionsNamesForm />
+            <ThresholdsForm />
 
         </div>
     )
