@@ -38,4 +38,36 @@
     .form-control {
         height: 43px;
     }
+
+    .perspective_switch {
+
+        form {
+            width: 500px;
+    
+            .form-control {
+                width: 359px;
+            }
+        
+            .form-label {
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 28px;
+                color: #828282;
+            }
+    
+            .form-switch {
+    
+                input {
+                    height: 20px!important;
+                    width: 40px!important;
+                }
+            }
+    
+            .row {
+                margin-left: 0px;
+            }
+        }
+    
+    }
+
 }
