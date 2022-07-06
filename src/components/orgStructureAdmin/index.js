@@ -7,6 +7,7 @@ import DivisionsNamesForm from "../cards/orgNamesCard";
 
 import "./index.scss";
 import ThresholdsForm from "../cards/threshholdsCard";
+import PesrpectiveSwitchForm from "../cards/enablePerspectivesCard";
 
 const AdminOrgStructureCont = props => {
     
@@ -17,6 +18,7 @@ const AdminOrgStructureCont = props => {
             <UploadOrgCard />
             <DivisionsNamesForm />
             <ThresholdsForm />
+            <PesrpectiveSwitchForm />
 
         </div>
     )

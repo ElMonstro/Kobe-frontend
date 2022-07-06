@@ -1,7 +1,7 @@
-.org_names_card {
+.perspective_switch {
 
     form {
-        width: 500px;
+        width: 300px;
 
         .form-control {
             width: 359px;
@@ -9,12 +9,17 @@
     
         .form-label {
             font-weight: 500;
-            font-size: 16px;
+            font-size: 18px;
             line-height: 28px;
-            height: 100%;
-            width: 100%;
             color: #828282;
-            align-items: center;
+        }
+
+        .form-switch {
+
+            input {
+                height: 20px!important;
+                width: 40px!important;
+            }
         }
 
         .row {
@@ -22,8 +27,4 @@
         }
     }
 
-
-    .inputs_row {
-        margin-left: 0px;
-    }
 }
