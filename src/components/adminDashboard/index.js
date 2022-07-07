@@ -5,7 +5,7 @@ import Header from "../common/header";
 import AdminSidebar from "../adminSidebar"
 
 import './index.scss';
-import AdminOrgStructureCont from "../orgStructureAdmin";
+import AdminOrgStructureCont from "../orgStructureContAdmin";
 
 const Dashboard = pops => {
     return (
