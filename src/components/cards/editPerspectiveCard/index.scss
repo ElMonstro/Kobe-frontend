@@ -1,0 +1,50 @@
+.edit_perpectives {
+    .perspective_input {
+        background-color: #F2F2F2;
+        position: relative;
+        height: fit-content;
+        width: 370px;
+        padding: 6px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 28px;
+        color: #828282;
+        padding-left: 15px;
+        margin-bottom: 12px;
+
+        input {
+            border: none;
+            background-color: #ffff;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 28px;
+            color: #828282;
+            width: 87%;
+            padding-left: 5px;
+
+
+            &:disabled {
+                background-color: #F2F2F2;
+            }
+
+            &:focus {
+                outline: none!important;
+            }
+        }
+        .save_btn {
+            background-color: inherit;
+            right: 0;
+            position: absolute;
+            padding: 3px;
+            padding-right: 15px;
+            cursor: pointer;
+
+            .cancel_btn {
+               svg {
+                height: 20px;
+                font-weight: 600;
+               }
+            }
+        }
+    }
+}

@@ -11,11 +11,13 @@ import PesrpectiveSwitchForm from "../cards/enablePerspectivesCard";
 import BehavioralSwitchForm from "../cards/enableBehavioralsCard";
 import CascadeCutoffForm from "../cards/cascadeCutoffCard";
 import ReviewPeriodCard from "../cards/reviewPeriodCard";
+import EditPerspectivesCard from "../cards/editPerspectiveCard";
 
 const AdminOrgStructureCont = props => {
     
     return (
         <div className="admin_org_cont">
+            <EditPerspectivesCard />
             <UploadLogoCard />
             <MissionVisionForm />
             <UploadOrgCard />
