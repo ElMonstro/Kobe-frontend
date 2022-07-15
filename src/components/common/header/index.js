@@ -34,13 +34,13 @@ const Header = (props) => {
                     <span  className="user_name">
                             Jerry
                     </span>
-                    <NavDropdown eventKey={1} 
+                    <NavDropdown eventkey={1} 
                     id="nav_dropdown"
                     title = {(<ChevronDown/ >)}>
                     
 
-                        <NavDropdown.Item eventKey={1.1} className="nav_item">Profile</NavDropdown.Item >
-                        <NavDropdown.Item eventKey={1.3} className="nav_item">
+                        <NavDropdown.Item eventkey={1.1} className="nav_item">Profile</NavDropdown.Item >
+                        <NavDropdown.Item eventkey={1.3} className="nav_item">
                             Logout
                         </NavDropdown.Item >
                     </NavDropdown>

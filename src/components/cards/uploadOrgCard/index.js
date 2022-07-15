@@ -5,7 +5,7 @@ import "./index.scss";
 
 const UploadOrgCard = props => {
     return (
-        <Card className="admin_card">
+        <Card className="admin_card upload_org_card">
             <div className="card_cont">
                 <div className="card_title">
                     Upload Excel Sheet to Create  Organization Chart
