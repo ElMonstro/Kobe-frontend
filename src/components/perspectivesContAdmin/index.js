@@ -4,6 +4,7 @@ import "./index.scss";
 import PesrpectiveSwitchForm from "../cards/enablePerspectivesCard";
 import BehavioralSwitchForm from "../cards/enableBehavioralsCard";
 import EditPerspectivesCard from "../cards/editPerspectiveCard";
+import PerspectiveCutoffForm from "../cards/perspectiveCutoff";
 
 const PerspectivesCont = props => {
     
@@ -12,6 +13,7 @@ const PerspectivesCont = props => {
             <PesrpectiveSwitchForm />
             <EditPerspectivesCard />
             <BehavioralSwitchForm />
+            <PerspectiveCutoffForm />
         </div>
     )
 }
