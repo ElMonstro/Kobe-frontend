@@ -30,13 +30,15 @@
             line-height: 28px;
     
             input {
-                width: 312px;
-                margin-bottom: 20px;  
-        
+                width: 312px;        
             }
 
-            .password_input {
-                margin-bottom: 40px;
+            .password_group {
+                height: 130px;
+            }
+
+            .email_group {
+                height: 100px;
             }
 
             .login_btn {

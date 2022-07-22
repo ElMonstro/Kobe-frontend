@@ -1,4 +1,5 @@
 import { Navigate } from "react-router-dom";
+import {connect} from 'react-redux';
 
 
 const Protected = ({ isLoggedIn, children }) => {
@@ -9,4 +10,10 @@ const Protected = ({ isLoggedIn, children }) => {
     return children;
 };
 
-export default Protected;
+const mapStateToProps = ({authReducer}) => ({
+    ...authReducer,
+});
+
+export default connect(
+    mapStateToProps,
+) (Protected);

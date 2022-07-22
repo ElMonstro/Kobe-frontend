@@ -6,16 +6,22 @@ import { ORG_STRUCTURE, PERSPECTIVES, CASCADE, REVEIEW_PERIOD } from "./utils/co
 
 import Dashboard from './components/adminDashboard';
 import Protected from './components/common/Protected';
+import { isLoggedInFromLocalStorage } from './utils';
+import store from './redux/store/store';
+import { changeLoginStatus } from './redux/actions';
 
 function App() {
-  const isLoggedIn = false;
+
+  const isLoggedIn = isLoggedInFromLocalStorage();
+  store.dispatch(changeLoginStatus(isLoggedIn));
+  
   return (
     <BrowserRouter>
         <Routes>
-          <Route exact path="/admin" element={<Protected isLoggedIn={isLoggedIn}> <Dashboard activeComponent={ORG_STRUCTURE} /> </Protected>} /> 
-          <Route path="/admin/perspectives" element={<Protected isLoggedIn={isLoggedIn}> <Dashboard activeComponent={PERSPECTIVES} /> </Protected>} />    
-          <Route path="/admin/cascade"  element={<Protected isLoggedIn={isLoggedIn}> <Dashboard activeComponent={CASCADE} /> </Protected>} />
-          <Route path="/admin/review-period" element={<Protected isLoggedIn={isLoggedIn}> <Dashboard activeComponent={REVEIEW_PERIOD} /> </Protected>} />
+          <Route exact path="/admin" element={<Protected> <Dashboard activeComponent={ORG_STRUCTURE} /> </Protected>} /> 
+          <Route path="/admin/perspectives" element={<Protected> <Dashboard activeComponent={PERSPECTIVES} /> </Protected>} />    
+          <Route path="/admin/cascade"  element={<Protected> <Dashboard activeComponent={CASCADE} /> </Protected>} />
+          <Route path="/admin/review-period" element={<Protected> <Dashboard activeComponent={REVEIEW_PERIOD} /> </Protected>} />
           <Route path="/admin/login" element={<Dashboard activeComponent={ORG_STRUCTURE} isLoggedOut={!isLoggedIn}/>} />
         </Routes>
     </BrowserRouter>
