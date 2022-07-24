@@ -7,5 +7,12 @@ export const yupLoginObj = Yup.object({
         .required('* Required'),
     password: Yup.string()
         .required('* Required'),
+    });
+
+export const yupMissionFormObj = Yup.object({
+    mission: Yup.string()
+        .required('* Required'),
+    vision: Yup.string()
+        .required('* Required'),
     })
     

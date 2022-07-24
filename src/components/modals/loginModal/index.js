@@ -14,11 +14,7 @@ import "./index.scss";
 const LoginModal = props => {
 
     const { isLoggedIn, changeLoginStatus } = props;
-    const [show, setShow] = useState(Boolean(!isLoggedIn));
     const navigate = useNavigate();
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     const [loaderVisibility, changeLoaderVisibility] = useState('hidden');
 
@@ -45,7 +41,6 @@ const LoginModal = props => {
         <div className="auth_modal">
             <Modal
                 show={!isLoggedIn}
-                onHide={handleClose}
                 backdrop="static"
                 keyboard={false}
                 size="lg"
