@@ -12,7 +12,12 @@ const UploadLogoCard = props => {
                 <div className="card_title">
                     Upload Organization Logo
                 </div>
-                <UploadButton uploadURL={companyInfoURL} contentText="Upload Logo" className="card_btn" />
+                <UploadButton 
+                    uploadURL={companyInfoURL} 
+                    contentText="Upload Logo" 
+                    className="card_btn" 
+                    fileKey="logo"
+                />
             </div>
         </Card>
     )

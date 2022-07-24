@@ -9,3 +9,4 @@ export const PATCH = 'patch';
 export const AUTHENTICATION_ERROR_MESSAGE = 'Authentication error'
 export const RESOURCE_NOT_FOUND_MESSAGE = 'Resource not found'
 export const ACTION_SUCCESSFUL_MESSAGE = 'Sucess'
+export const CHARACTERS ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

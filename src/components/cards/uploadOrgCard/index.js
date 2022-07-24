@@ -1,6 +1,10 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 
+import UploadButton from "../../common/uploadButton";
+import { uploadOrgChartURL } from "../../../services/urls";
+
+
 import "./index.scss";
 
 const UploadOrgCard = props => {
@@ -14,12 +18,13 @@ const UploadOrgCard = props => {
                     Download Sample Excel Sheet
                 </div>
                 <div className="upload_btn_div">
-                    <Button className="card_btn">
-                        Upload Logo
-                    </Button>
-                    <span className="file_name blue_text">
-                        Eurochem_org.xls
-                    </span>
+                    <UploadButton 
+                        uploadURL={uploadOrgChartURL} 
+                        contentText="Upload Excel" 
+                        className="card_btn" 
+                        fileKey="file"
+                    />
+                      
                 </div>
                 
             </div>

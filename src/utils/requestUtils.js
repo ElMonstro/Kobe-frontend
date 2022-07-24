@@ -51,6 +51,7 @@ export const makeRequest =  async (url, type, data, authenticated, sucessMessage
         const response = await request(url, data, headerDetails);
         console.log(response);
         responseHandler(response);
+        return response.data;
     } catch (error) {
         responseHandler(error.response);
     }

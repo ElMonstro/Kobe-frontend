@@ -1,6 +1,7 @@
 import forge from 'node-forge';
 import store from "../redux/store/store.js";
 import { changeLoginStatus } from "../redux/actions";
+import { CHARACTERS } from './constants.js';
 
 
 export const getHeaderDetails = (formData) => {
@@ -69,4 +70,15 @@ export const createErrorObjects = (data) => {
 
     return errorObjects
 
+}
+
+
+export const generateString = length => {
+    let result = ' ';
+    const charactersLength = CHARACTERS.length;
+    for ( let i = 0; i < length; i++ ) {
+        result += CHARACTERS.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
 }
