@@ -1,15 +1,19 @@
 import React from "react";
 import { Row, Col, Container } from "react-bootstrap";
+import { ToastContainer } from 'react-toastify';
+
 
 import Header from "../common/header";
 import AdminSidebar from "../adminSidebar"
 
-import "./index.scss";
 import AdminOrgStructureCont from "../orgStructureContAdmin";
 import PerspectivesCont from "../perspectivesContAdmin";
 import ReviewPeriodCont from "../reviewPeriodCont";
 import CascadeCutoffCont from "../cascadeCutoffCont";
 import LoginModal from "../modals/loginModal";
+
+import 'react-toastify/dist/ReactToastify.css';
+import "./index.scss";
 
 
 const Dashboard = props => {
@@ -28,6 +32,7 @@ const Dashboard = props => {
     return (
         <div>
             {isLoggedOut && <LoginModal isLoggedOut={isLoggedOut}/>}
+            <ToastContainer limit={8}/>
             <Header />
             <div className="cont">
                 <Container fluid className="inner-cont">
