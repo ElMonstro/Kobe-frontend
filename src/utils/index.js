@@ -2,12 +2,17 @@ import forge from 'node-forge';
 import store from "../redux/store/store.js";
 import { changeLoginStatus } from "../redux/actions";
 
-export const getHeaderDetails = () => {
+
+export const getHeaderDetails = (formData) => {
     const localStorage = window.localStorage;
     const accessToken = JSON.parse(localStorage.getItem('tokens')).access;
     const config = {
         headers: { Authorization: `Bearer ${accessToken}` }
     };
+    
+    if (formData){ 
+        config.headers['Content-Type'] = "multipart/form-data"; 
+    }
     return config;
 }
 
@@ -21,37 +26,7 @@ export const isLoggedInFromLocalStorage = () => {
 export const fireNotification = (type, message, description) => {
  
   };
-
-
-export const notificationHandler = (response, message) => {
-    switch (response.status){
-        case 200:
-            fireNotification('success', 'Success', message);
-            break;
-        case 201:
-            fireNotification('success', 'Success', message);
-            break;
-        case 204:
-            fireNotification('success', 'Success', message);
-            break;
-        case 400:
-            fireNotification('error', 'Error', message?message:response.data.detail)
-            break;      
-        case 401:
-            fireNotification('error', 'Error', 'Authentication Error');
-            break;
-        case 403:
-        fireNotification('error', 'Error', 'You do not have permission to use resource');
-            break;
-        case 404:
-                fireNotification('error', 'Error', 'Resource not found');
-                break;
-        default:
-            
-
-    }
-} 
-
+  
 
   String.format = function() {
     var s = arguments[0];
