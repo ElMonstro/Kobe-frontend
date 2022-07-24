@@ -2,9 +2,9 @@ import React from "react";
 import { Form, Button, Card, Col, Row } from "react-bootstrap";
 import { useFormik } from 'formik';
 
-import { yupDivisionNamesobj, yupMissionFormObj } from "../../../utils/validators";
+import { yupDivisionNamesObj, yupMissionFormObj } from "../../../utils/validators";
 import { makeRequest } from "../../../utils/requestUtils";
-import { settingURL } from "../../../services/urls";
+import { settingsURL } from "../../../services/urls";
 import { POST } from "../../../utils/constants";
 
 import "./index.scss";
@@ -19,9 +19,9 @@ const DivisionNamesForm = props => {
         department_name: '',
         section_name: '',
         },
-        validationSchema: yupDivisionNamesobj,
+        validationSchema: yupDivisionNamesObj,
         onSubmit: async (values) => {
-           makeRequest(settingURL, POST, values, true);
+           makeRequest(settingsURL, POST, values, true);
         },
     });
 

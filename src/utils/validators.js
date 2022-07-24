@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
 
-
 export const yupLoginObj = Yup.object({
     email: Yup.string()
         .email('* Invalid email address')
@@ -16,9 +15,24 @@ export const yupMissionFormObj = Yup.object({
         .required('* Required'),
     })
 
-export const yupDivisionNamesobj = Yup.object({
+export const yupDivisionNamesObj = Yup.object({
     division_name: Yup.string(),
     department_name: Yup.string(),
     section_name: Yup.string()
+    })
+
+export const yupThresholdObj = Yup.object({
+    upper_threshold: Yup.number()
+        .required('* Required')
+        .typeError('you must specify a number')
+        .min(0, 'Min value 0.')
+        .max(100, 'Max value 100.'),
+
+    lower_threshold: Yup.number()
+        .required('* Required')
+        .required('* Required')
+        .typeError('you must specify a number')
+        .min(0, 'Min value 0.')
+        .max(100, 'Max value 100.'),
     })
     
