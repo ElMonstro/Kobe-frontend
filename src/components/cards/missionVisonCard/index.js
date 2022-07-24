@@ -5,9 +5,9 @@ import { useFormik } from 'formik';
 import { yupMissionFormObj } from "../../../utils/validators";
 import { makeRequest } from "../../../utils/requestUtils";
 
-import "./index.scss";
 import { companyInfoURL } from "../../../services/urls";
 import { POST } from "../../../utils/constants";
+import "./index.scss";
 
 
 const MissionVisionForm = props => {

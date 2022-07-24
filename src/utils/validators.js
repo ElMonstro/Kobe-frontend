@@ -15,4 +15,10 @@ export const yupMissionFormObj = Yup.object({
     vision: Yup.string()
         .required('* Required'),
     })
+
+export const yupDivisionNamesobj = Yup.object({
+    division_name: Yup.string(),
+    department_name: Yup.string(),
+    section_name: Yup.string()
+    })
     
