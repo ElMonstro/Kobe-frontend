@@ -43,14 +43,14 @@ export const responseHandler = (response, successMessage, errorMessage) => {
 } 
 
 // Make a function to centralize all backend requests
-export const makeRequest =  async (url, type, data, authenticated, sucessMessage, errorMessage) => {
+export const makeRequest =  async (url, method, data, authenticated, sucessMessage, errorMessage) => {
     var headerDetails;
     authenticated?  headerDetails = getHeaderDetails(true): headerDetails = null;
-    const request = requestTypeMapper[type];
+    const request = requestTypeMapper[method];
     try {
         const response = await request(url, data, headerDetails);
         console.log(response);
-        responseHandler(response);
+        responseHandler(response, sucessMessage, errorMessage);
         return response.data;
     } catch (error) {
         responseHandler(error.response);

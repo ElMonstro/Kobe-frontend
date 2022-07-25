@@ -3,7 +3,6 @@ import {
 } from "../actions/actionTypes";
 
 const initialState = {
-    settings: {},
     user: {},
     isLoggedIn: false
 };

@@ -28,7 +28,6 @@ export default class AuthService {
             const response = await axios.get(url, getHeaderDetails());
             return response;
         }catch (error) {
-            checkSessionStatus(error.response);
             return error.response.data
         }
             

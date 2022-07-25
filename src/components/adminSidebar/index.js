@@ -28,12 +28,6 @@ const AdminSidebar = props => {
                     </Link>
                 </Row>
                 <Row tabIndex={0}>
-                    <Link to="/admin/perspectives">
-                        <div className="blue_rectangle"><div className="inside_blue_rect"></div></div>
-                        Organization Structure
-                    </Link>
-                </Row>
-                <Row tabIndex={0}>
                     <Link to="/admin/review-period">
                         <div className="blue_rectangle"><div className="inside_blue_rect"></div></div>
                         Review Period
