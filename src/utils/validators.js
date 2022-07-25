@@ -41,4 +41,9 @@ export const yupPerspectiveCutoffObj = Yup.object({
     perspective_cutoff: Yup.number()
             .required('* Required')
 });
-    
+
+
+export const yupCascadeCutoffObj = Yup.object({
+    cascade_cutoff: Yup.number()
+            .required('* Required')
+});
