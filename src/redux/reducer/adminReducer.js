@@ -5,7 +5,8 @@ import {
 
 const initialState = {
     settings: {},
-    companyInfo: {}
+    companyInfo: {},
+    orgChart: []
 };
 
 const adminReducer = ( state=initialState, action ) => {
