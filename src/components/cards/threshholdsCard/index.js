@@ -29,6 +29,21 @@ const ThresholdsForm = props => {
             <Form onSubmit={ formik.handleSubmit }>
                 <Row className="inputs_row">
                 <Col>
+                    <Form.Group className="mb-3" controlId="lower_threshold">
+                        <Form.Label>Lower</Form.Label>
+                        <Form.Control 
+                        type="text" 
+                        placeholder=""
+                        { ...formik.getFieldProps('lower_threshold') } 
+                        isInvalid={ formik.touched.lower_threshold && formik.errors.lower_threshold }
+                        />
+                        <Form.Control.Feedback type='invalid'>
+                            { formik.errors.lower_threshold }
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                    
+                </Col>
+                <Col>
                     <Form.Group className="mb-3" controlId="upper_threshold">
                         <Form.Label>Upper</Form.Label>
                         <Form.Control 
@@ -39,20 +54,6 @@ const ThresholdsForm = props => {
                         />
                         <Form.Control.Feedback type='invalid'>
                             { formik.errors.upper_threshold }
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                </Col>
-                <Col>
-                    <Form.Group className="mb-3" controlId="lower_threshold">
-                        <Form.Label>Lower</Form.Label>
-                        <Form.Control 
-                        type="text" 
-                        placeholder=""
-                        { ...formik.getFieldProps('mission') } 
-                        isInvalid={ formik.touched.lower_threshold && formik.errors.lower_threshold }
-                        />
-                        <Form.Control.Feedback type='invalid'>
-                            { formik.errors.lower_threshold }
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>

@@ -30,10 +30,9 @@ export const yupThresholdObj = Yup.object({
 
     lower_threshold: Yup.number()
         .required('* Required')
-        .required('* Required')
         .typeError('you must specify a number')
         .min(0, 'Min value 0.')
-        .max(100, 'Max value 100.'),
+        .max(120, 'Max value 100.'),
     });
 
 
