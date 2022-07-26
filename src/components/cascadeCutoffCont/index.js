@@ -8,7 +8,7 @@ const CascadeCutoffCont = props => {
     
     return (
         <div className="admin_cont">
-            <CascadeCutoffForm />
+            <CascadeCutoffForm { ...props }/>
 
         </div>
     )

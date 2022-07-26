@@ -7,7 +7,7 @@ const ReviewPeriodCont = props => {
     
     return (
         <div className="admin_cont">
-            <ReviewPeriodCard />
+            <ReviewPeriodCard { ...props }/>
         </div>
     )
 }

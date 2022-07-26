@@ -7,7 +7,7 @@ export const changeLoginStatus = isLoggedIn => ({
 
 export const setSettings = settings => ({
     type: SET_SETTINGS,
-    settings,
+    settings
 });
 
 export const fetchSettings = () => ({

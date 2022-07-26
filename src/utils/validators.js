@@ -47,3 +47,9 @@ export const yupCascadeCutoffObj = Yup.object({
     cascade_cutoff: Yup.number()
             .required('* Required')
 });
+
+
+export const yupReviewPeriodObj = Yup.object({
+    review_period: Yup.number()
+            .required('* Required')
+});

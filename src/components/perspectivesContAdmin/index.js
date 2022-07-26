@@ -10,10 +10,10 @@ const PerspectivesCont = props => {
     
     return (
         <div className="admin_cont">
-            <PesrpectiveSwitchForm />
-            <EditPerspectivesCard />
-            <BehavioralSwitchForm />
-            <PerspectiveCutoffForm />
+            <PesrpectiveSwitchForm { ...props }/>
+            <EditPerspectivesCard { ...props }/>
+            <BehavioralSwitchForm { ...props }/>
+            <PerspectiveCutoffForm { ...props }/>
         </div>
     )
 }

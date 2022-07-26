@@ -14,13 +14,13 @@ const AdminOrgStructureCont = props => {
     
     return (
         <div className="admin_cont">
-            <UploadLogoCard />
-            <MissionVisionForm />
-            <UploadOrgCard />
-            <LoginForm />
-            <OrgChartCard />
-            <DivisionsNamesForm />
-            <ThresholdsForm />
+            <UploadLogoCard { ...props }/>
+            <MissionVisionForm { ...props }/>
+            <UploadOrgCard { ...props }/>
+            <LoginForm { ...props }/>
+            <OrgChartCard { ...props }/>
+            <DivisionsNamesForm { ...props }/>
+            <ThresholdsForm { ...props }/>
         </div>
     )
 }

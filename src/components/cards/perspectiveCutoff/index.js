@@ -17,9 +17,10 @@ const PerspectiveCutoffForm = props => {
         },
         validationSchema: yupPerspectiveCutoffObj,
         onSubmit: async (values) => {
-            console.log(values)
            makeRequest(settingsURL, POST, values, true);
         },
+
+        
     });
 
     return (
