@@ -23,6 +23,7 @@
         &:focus {
             background: linear-gradient(89.76deg, rgba(255, 255, 255, 0.8) 37.69%, rgba(255, 255, 255, 0) 89.5%);
             font-weight: 700;
+            color: #000;
         }
 
         
@@ -30,6 +31,7 @@
 
     &:hover {
         font-weight: 700;
+        color: #000;
     }    
 
     .blue_rectangle {

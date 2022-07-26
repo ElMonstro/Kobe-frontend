@@ -1,4 +1,6 @@
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -17,6 +19,7 @@ function App() {
   
   return (
     <BrowserRouter>
+    <ToastContainer limit={8}/>
         <Routes>
           <Route exact path="/admin" element={<Protected> <Dashboard activeComponent={ORG_STRUCTURE} /> </Protected>} /> 
           <Route path="/admin/perspectives" element={<Protected> <Dashboard activeComponent={PERSPECTIVES} /> </Protected>} />    

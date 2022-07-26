@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Row, Col, Container } from "react-bootstrap";
-import { ToastContainer } from 'react-toastify';
 import { connect } from 'react-redux';
 
 
@@ -39,7 +38,6 @@ const Dashboard = props => {
     return (
         <div>
             {isLoggedOut && <LoginModal isLoggedOut={isLoggedOut}/>}
-            <ToastContainer limit={8}/>
             <Header />
             <div className="cont">
                 <Container fluid className="inner-cont">

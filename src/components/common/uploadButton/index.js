@@ -12,8 +12,10 @@ const UploadButton = props => {
     const {contentText, className, uploadURL, fileKey, extraData} = props;
     const [inputFile, setInputFile] = useState(null);
     const [fileName, setFileName] = useState(null);
+    const [fileNameClass, setFileNameClass] = useState('blue_text');
     const randomString = generateString(5);
     const inputElementID = `${fileKey}-${randomString}`;
+    
 
     useEffect(() => {
         setInputFile(document.getElementById(inputElementID));
@@ -23,7 +25,7 @@ const UploadButton = props => {
         inputFile?.click();
     };
 
-    const uploadFile = () => {
+    const uploadFile = async () => {
         setFileName(inputFile?.files[0]?.name);
         const formData = new FormData();
         for ( var key in extraData ) {
@@ -31,7 +33,9 @@ const UploadButton = props => {
         }
         console.log(uploadURL);
         formData.append(fileKey, inputFile?.files[0]);
-        makeRequest(uploadURL, POST, formData, true);
+        const data = await makeRequest(uploadURL, POST, formData, true);
+        console.log(data)
+        data? setFileNameClass('green_text'): setFileNameClass('red_text');
     }
 
     return (
@@ -40,7 +44,7 @@ const UploadButton = props => {
             <Button onClick={handleUpload} className={className}>
                 {contentText}
             </Button>
-            {fileName && <span className="blue_text">
+            {fileName && <span className={ fileNameClass }>
                {fileName} 
             </span>}
         </div>

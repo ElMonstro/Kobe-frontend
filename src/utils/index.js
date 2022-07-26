@@ -1,7 +1,16 @@
 import forge from 'node-forge';
+import { toast } from 'react-toastify';
 import store from "../redux/store/store.js";
 import { changeLoginStatus } from "../redux/actions";
 import { CHARACTERS } from './constants.js';
+
+
+const notificationTypeMapper = {
+    success: toast.success,
+    info: toast.info,
+    warning: toast.warn,
+    error: toast.error
+}
 
 
 export const getHeaderDetails = (formData) => {
@@ -17,6 +26,7 @@ export const getHeaderDetails = (formData) => {
     return config;
 }
 
+
 export const isLoggedInFromLocalStorage = () => {
     const localStorage = window.localStorage;
     const tokens = localStorage.getItem('tokens');
@@ -24,8 +34,18 @@ export const isLoggedInFromLocalStorage = () => {
 }
 
 
-export const fireNotification = (type, message, description) => {
- 
+export const fireNotification = (type, message) => {
+    const notification = notificationTypeMapper[type];
+    console.log(notification)
+    notification(message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
   };
   
 
