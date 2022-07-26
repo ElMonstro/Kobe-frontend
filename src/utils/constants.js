@@ -14,3 +14,10 @@ export const NOTIF_SUCCESS = "success";
 export const NOTIF_ERROR = "error";
 export const NOTIF_INFO = "info";
 export const NOIF_WARNING = "warning";
+export const PERSPECTIVE_OBJECT = {
+    financial_name: "Financial",
+    customer_name: "Customer",
+    internal_processes_name: "Internal Processes",
+    learning_growth_name: "Learning & Growth",
+    behavioral_name: "Behavioral"  
+ }

@@ -17,7 +17,6 @@ const CascadeCutoffForm = props => {
         },
         validationSchema: yupCascadeCutoffObj,
         onSubmit: async (values) => {
-            console.log(values)
            makeRequest(settingsURL, POST, values, true);
         },
     });

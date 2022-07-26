@@ -36,7 +36,6 @@ export const isLoggedInFromLocalStorage = () => {
 
 export const fireNotification = (type, message) => {
     const notification = notificationTypeMapper[type];
-    console.log(notification)
     notification(message, {
         position: "top-right",
         autoClose: 5000,

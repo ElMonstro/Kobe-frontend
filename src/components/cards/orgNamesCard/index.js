@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Button, Card, Col, Row } from "react-bootstrap";
 import { useFormik } from 'formik';
 
-import { yupDivisionNamesObj, yupMissionFormObj } from "../../../utils/validators";
+import { yupDivisionNamesObj } from "../../../utils/validators";
 import { makeRequest } from "../../../utils/requestUtils";
 import { settingsURL } from "../../../services/urls";
 import { POST } from "../../../utils/constants";
