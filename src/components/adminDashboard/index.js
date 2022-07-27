@@ -43,7 +43,7 @@ const Dashboard = props => {
                 <Container fluid className="inner-cont">
                     <Row> 
                         <Col xs lg="3">
-                            <AdminSidebar />
+                            <AdminSidebar activeComponent={ activeComponent }/>
                         </Col>
                         <Col xs lg="15">
                             <ActiveComponent { ...props }/>
