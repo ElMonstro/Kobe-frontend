@@ -4,19 +4,21 @@ import {ChevronDown} from '@styled-icons/bootstrap/ChevronDown'
 
 import './index.scss';
 import src from "../../../assets/josh_logo.jpg"
-import logo from "../../../assets/logo.svg"
+import defaultLogo from "../../../assets/logo.svg"
+import { base_cloudinary_url } from "../../../services/baseURL";
 
-const Header = (props) => {
+const Header = ({ companyInfo: { name, logo }}) => {
+    
     return (
         <Navbar sticky="top" className="nav_bar" bg="light" variant="light">
             <Container className="header_container" fluid>
                 <Navbar.Brand href="#home" >
                     <img className="logo" 
-                            src={logo} 
-                            alt="logo"
-                        />
+                        src={ logo? base_cloudinary_url + logo: defaultLogo } 
+                        alt="logo"
+                    />
                     <span className="company_name">
-                        Eurochem Limited
+                        { name? name: "Eurochem Limited"}
                     </span>
                     
                     </Navbar.Brand>
@@ -24,7 +26,7 @@ const Header = (props) => {
                 <Nav className="avatar_menu">
                     <div className="avatar_container">
                         <img className="avatar" 
-                            src={src} 
+                            src={ src } 
                             alt="user pic"
                         />
                     </div>

@@ -9,7 +9,7 @@ import { POST } from "../../../utils/constants";
 import "./index.scss";
 
 
-const MissionVisionForm = props => {
+const MissionVisionForm = ({ setCompanyInfo }) => {
 
     const formik = useFormik({
         initialValues: {
@@ -19,7 +19,8 @@ const MissionVisionForm = props => {
         },
         validationSchema: yupMissionFormObj,
         onSubmit: async (values) => {
-           makeRequest(companyInfoURL, POST, values, true);
+           makeRequest(companyInfoURL, POST, values, true)
+            .then(data => setCompanyInfo(data));
         },
     });
     

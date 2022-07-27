@@ -14,9 +14,9 @@ export const fetchSettings = () => ({
     type: FETCH_SETTINGS
 });
 
-export const setCompanyInfo = settings => ({
+export const setCompanyInfo = companyInfo => ({
     type: SET_COMPANY_INFO,
-    settings,
+    companyInfo,
 });
 
 export const fetchCompanyInfo = () => ({

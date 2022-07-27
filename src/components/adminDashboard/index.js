@@ -38,7 +38,7 @@ const Dashboard = props => {
     return (
         <div>
             {isLoggedOut && <LoginModal isLoggedOut={isLoggedOut}/>}
-            <Header />
+            <Header { ...props } />
             <div className="cont">
                 <Container fluid className="inner-cont">
                     <Row> 
