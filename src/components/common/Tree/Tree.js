@@ -57,7 +57,16 @@ const TreeRecursive = ({ data, parentNode }) => {
     const name = item.user.first_name + " " + item.user.second_name
 
     return (
-      <Node key={item.id} id={item.id} name={name} node={item}>
+      <Node 
+        key={item.id} 
+        designation={item.code} 
+        job_grade={item.job_grade} 
+        id={item.id}
+        department={item.department?.name}
+        name={name}
+        staff_no={item.staff_no} 
+        node={item}
+      >
         <TreeRecursive parentNode={item} data={item.underlings} />
       </Node>
     );

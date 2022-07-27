@@ -11,7 +11,7 @@ import ReviewPeriodCont from "../reviewPeriodCont";
 import CascadeCutoffCont from "../cascadeCutoffCont";
 import LoginModal from "../modals/loginModal";
 
-import { fetchCompanyInfo, fetchSettings, setSettings, setCompanyInfo } from "../../redux/actions";
+import { fetchCompanyInfo, fetchSettings, setSettings, setOrgChart, setCompanyInfo } from "../../redux/actions";
 
 import 'react-toastify/dist/ReactToastify.css';
 import "./index.scss";
@@ -59,7 +59,8 @@ const mapDispatchToProps = {
     fetchSettings,
     fetchCompanyInfo,
     setSettings,
-    setCompanyInfo
+    setCompanyInfo,
+    setOrgChart
 }
 
 const mapStateToProps = ({ adminReducer }) => ({

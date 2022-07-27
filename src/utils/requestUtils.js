@@ -6,7 +6,7 @@ import {
     ACTION_SUCCESSFUL_MESSAGE, 
     AUTHENTICATION_ERROR_MESSAGE, 
     RESOURCE_NOT_FOUND_MESSAGE, 
-    NOTIF_SUCCESS, NOTIF_ERROR
+    NOTIF_SUCCESS, NOTIF_ERROR, GET
  } from "./constants";
 
 const requestTypeMapper = {
@@ -54,7 +54,12 @@ export const makeRequest =  async (url, method, data, authenticated=true, notify
     authenticated?  headerDetails = getHeaderDetails(true): headerDetails = null;
 
     try {
-        response = await request(url, data, headerDetails);
+        if (method === GET) {
+            response = await request(url, headerDetails);
+        } else {
+            response = await request(url, data, headerDetails);
+        }
+        
         console.log(response);
         notify && notificationHandler(response, sucessMessage, errorMessage);
         return response.data;

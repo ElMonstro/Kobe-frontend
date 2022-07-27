@@ -5,7 +5,6 @@ import {ChevronDown} from "@styled-icons/evaicons-solid/ChevronDown";
 import { Col, Row } from "react-bootstrap";
 
 import {
-  ActionsWrapper,
   Collapse,
   StyledName,
   VerticalLine,
@@ -22,10 +21,11 @@ const NodeName = ({ isOpen, name, handleClick }) => (
   </StyledName>
 );
 
-const Node = ({ id, name, children, node }) => {
+const Node = ({ id, name, children, node, job_grade, department, staff_no, designation }) => {
   const { onNodeClick } = useTreeContext();
   const [isOpen, setIsOpen] = useState(false);
   const [childs, setChilds] = useState([]);
+  
 
   useEffect(() => {
     setChilds([children]);
@@ -55,10 +55,10 @@ const Node = ({ id, name, children, node }) => {
 
             <Col className="employee_details">
               <Row>
-                <Col className="employee_detail"><span>CEO</span></Col>
-                <Col className="employee_detail"><span>C3</span></Col>
-                <Col className="employee_detail"><span>THOSG356</span></Col>
-                <Col className="employee_detail"><span>"</span></Col>
+                <Col className="employee_detail"><span>{ designation }</span></Col>
+                <Col className="employee_detail"><span>{ job_grade }</span></Col>
+                <Col className="employee_detail"><span>{ staff_no }</span></Col>
+                <Col className="employee_detail"><span>{department?department: '\"'}</span></Col>
               </Row>
               
             </Col>
