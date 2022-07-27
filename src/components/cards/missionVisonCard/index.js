@@ -15,6 +15,7 @@ const MissionVisionForm = props => {
         initialValues: {
         vision: '',
         mission: '',
+        name: ''
         },
         validationSchema: yupMissionFormObj,
         onSubmit: async (values) => {
@@ -24,39 +25,57 @@ const MissionVisionForm = props => {
     
     return (
         <Card className="admin_card mission_card">
-            <div className="card_title">Add organization Mission and Vision</div>
+            <div className="card_title">Add Organization Info</div>
 
             <Form onSubmit={ formik.handleSubmit }>
-                <Row className="inputs_row">
-                <Col>
-                    <Form.Group className="mb-3" controlId="mission">
-                        <Form.Label>Mission</Form.Label>
-                        <Form.Control 
-                            type="text" 
-                            placeholder="" 
-                            { ...formik.getFieldProps('mission') } 
-                            isInvalid={ formik.touched.mission && formik.errors.mission }
-                        />
-                        <Form.Control.Feedback type='invalid'>
-                            { formik.errors.mission }
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                </Col>
-                <Col>
-                    <Form.Group className="mb-3" controlId="vision">
-                        <Form.Label>Vision</Form.Label>
-                        <Form.Control 
-                            type="text" 
-                            placeholder="" 
-                            { ...formik.getFieldProps('vision') } 
-                            isInvalid={ formik.touched.vision && formik.errors.vision }
-                        />
-                        <Form.Control.Feedback type='invalid'>
-                            { formik.errors.vision }
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                </Col>
-                </Row>
+                <Form.Group className="mb-3" controlId="name">
+                    <Row>
+                        <Col><Form.Label>Name</Form.Label></Col>
+                        <Col>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="" 
+                                { ...formik.getFieldProps('name') } 
+                                isInvalid={ formik.touched.name && formik.errors.name }
+                            /> 
+                            <Form.Control.Feedback type='invalid'>
+                                { formik.errors.name }
+                            </Form.Control.Feedback>
+                        </Col>
+                    </Row>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="vision">
+                    <Row>
+                        <Col><Form.Label>Vision</Form.Label></Col> 
+                        <Col>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="" 
+                                { ...formik.getFieldProps('vision') } 
+                                isInvalid={ formik.touched.vision && formik.errors.vision }
+                            />
+                            <Form.Control.Feedback type='invalid'>
+                                { formik.errors.vision }
+                            </Form.Control.Feedback>
+                        </Col>
+                    </Row>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="mission">
+                    <Row>
+                        <Col><Form.Label>Mission</Form.Label></Col>      
+                        <Col>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="" 
+                                { ...formik.getFieldProps('mission') } 
+                                isInvalid={ formik.touched.mission && formik.errors.mission }
+                            />
+                            <Form.Control.Feedback type='invalid'>
+                                { formik.errors.mission }
+                            </Form.Control.Feedback>
+                        </Col>
+                    </Row>
+                </Form.Group>
                 <Button className="card_btn" variant="primary" type="">
                     Save
                 </Button>

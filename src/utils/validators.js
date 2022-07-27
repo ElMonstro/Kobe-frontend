@@ -13,6 +13,8 @@ export const yupMissionFormObj = Yup.object({
         .required('* Required'),
     vision: Yup.string()
         .required('* Required'),
+    name: Yup.string()
+        .required('* Required'),
     });
 
 export const yupDivisionNamesObj = Yup.object({

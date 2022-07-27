@@ -1,16 +1,30 @@
 .mission_card {
 
-    .card_btn {
-        width: 134px;
+    form {
+        width: 500px;
+
+        .form-control {
+            width: 359px;
+        }
+    
+        .form-label {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 28px;
+            height: 100%;
+            width: 100%;
+            color: #828282;
+            align-items: center;
+        }
+
+        .row {
+            margin-left: 0px;
+        }
     }
 
-    .form-control {
-        width: 359px;
-    }
 
     .inputs_row {
         margin-left: 0px;
-        min-height: 110px;
     }
     
 }

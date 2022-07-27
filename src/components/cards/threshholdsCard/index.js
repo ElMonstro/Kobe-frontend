@@ -23,7 +23,7 @@ const ThresholdsForm = props => {
     });
 
     return (
-        <Card className="admin_card mission_card">
+        <Card className="admin_card threshold_card">
             <div className="card_title">Thresholds</div>
 
             <Form onSubmit={ formik.handleSubmit }>
