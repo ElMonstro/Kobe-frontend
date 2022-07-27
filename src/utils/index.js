@@ -15,7 +15,7 @@ const notificationTypeMapper = {
 
 export const getHeaderDetails = (formData) => {
     const localStorage = window.localStorage;
-    const accessToken = JSON.parse(localStorage.getItem('tokens')).access;
+    const accessToken = JSON.parse(localStorage.getItem('tokens'))?.access;
     const config = {
         headers: { Authorization: `Bearer ${accessToken}` }
     };
@@ -100,4 +100,10 @@ export const generateString = length => {
     }
 
     return result;
+}
+
+
+export const logout = () => {
+    localStorage.clear()
+    store.dispatch(changeLoginStatus(false));
 }

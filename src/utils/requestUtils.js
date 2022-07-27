@@ -1,7 +1,5 @@
 import axios from "axios";
-import { changeLoginStatus } from "../redux/actions";
-import store from "../redux/store/store";
-import { fireNotification, getHeaderDetails } from "../utils";
+import { fireNotification, getHeaderDetails, logout } from "../utils";
 import { 
     ACTION_SUCCESSFUL_MESSAGE, 
     AUTHENTICATION_ERROR_MESSAGE, 
@@ -66,8 +64,7 @@ export const makeRequest =  async (url, method, data, authenticated=true, notify
     } catch (error) {
         notificationHandler(error.response);
         if (error.response.status === 401) {
-            localStorage.clear()
-            store.dispatch(changeLoginStatus(false));
+            logout();
         }
     }
 }

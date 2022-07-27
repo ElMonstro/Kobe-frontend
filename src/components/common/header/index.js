@@ -6,6 +6,7 @@ import './index.scss';
 import src from "../../../assets/josh_logo.jpg"
 import defaultLogo from "../../../assets/logo.svg"
 import { base_cloudinary_url } from "../../../services/baseURL";
+import { logout } from "../../../utils";
 
 const Header = ({ companyInfo: { name, logo }}) => {
     
@@ -41,8 +42,10 @@ const Header = ({ companyInfo: { name, logo }}) => {
                     title = {(<ChevronDown/ >)}>
                     
 
-                        <NavDropdown.Item eventkey={1.1} className="nav_item">Profile</NavDropdown.Item >
-                        <NavDropdown.Item eventkey={1.3} className="nav_item">
+                        <NavDropdown.Item eventkey={1.1} className="nav_item">
+                            Profile
+                        </NavDropdown.Item >
+                        <NavDropdown.Item eventkey={1.2} onClick={ () => logout() } className="nav_item">
                             Logout
                         </NavDropdown.Item >
                     </NavDropdown>
