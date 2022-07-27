@@ -34,7 +34,7 @@ const BehavioralSwitchForm = props => {
                         type="switch" 
                         placeholder=""
                         onChange={ onChange }
-                        checked={ behaviorals_enabled } 
+                        checked={ Boolean(behaviorals_enabled) } 
                         /> 
                         </Col>
                     </Row>

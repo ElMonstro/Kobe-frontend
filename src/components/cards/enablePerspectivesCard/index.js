@@ -33,7 +33,7 @@ const PesrpectiveSwitchForm = props => {
                         <Col><Form.Check
                          type="switch" placeholder="" 
                          onChange={ onChange }
-                         checked={ perspective_enabled }
+                         checked={ Boolean(perspective_enabled) }
                          /> </Col>
                     </Row>
                 </Form.Group>

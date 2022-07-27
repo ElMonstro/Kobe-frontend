@@ -30,7 +30,7 @@ const EmbededInput = props => {
         <Form className="perspective_input" id={ `${initialValueKey}-form` } onSubmit={ formik.handleSubmit }>
             <input 
                 type="text" 
-                defaultValue={ defaultValue } 
+                valuedefault ={ defaultValue } 
                 disabled={!isEditable}
                 { ...formik.getFieldProps(initialValueKey) }
                 id={ initialValueKey } 
