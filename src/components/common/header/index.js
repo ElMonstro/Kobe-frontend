@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import {ChevronDown} from '@styled-icons/bootstrap/ChevronDown'
 
@@ -7,8 +7,20 @@ import src from "../../../assets/josh_logo.jpg"
 import defaultLogo from "../../../assets/logo.svg"
 import { base_cloudinary_url } from "../../../services/baseURL";
 import { logout } from "../../../utils";
+import { makeRequest } from "../../../utils/requestUtils";
+import { GET } from "../../../utils/constants";
+import { companyInfoURL, settingsURL } from "../../../services/urls";
 
-const Header = ({ companyInfo: { name, logo }}) => {
+const Header = ({ companyInfo, setSettings, setCompanyInfo }) => {
+
+     const { name, logo } = companyInfo;
+
+    useEffect(() => {
+        !companyInfo && makeRequest(settingsURL, GET, null, true, false)
+            .then( data => setSettings(data))
+        !companyInfo && makeRequest(companyInfoURL, GET, null, true, false)
+            .then( data => setCompanyInfo(data))
+    }, []);
     
     return (
         <Navbar sticky="top" className="nav_bar" bg="light" variant="light">

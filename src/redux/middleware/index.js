@@ -1,10 +1,12 @@
 import { all } from 'redux-saga/effects';
-import { fetchCompanyInfoWatcher, fetchSettingsWatcher } from './adminSagas';
+import { fetchCompanyInfoSaga, fetchCompanyInfoWatcher, fetchSettingsSaga, fetchSettingsWatcher } from './adminSagas';
 
 function* rootSaga(){
     yield all([
         fetchCompanyInfoWatcher,
         fetchSettingsWatcher,
+        fetchCompanyInfoSaga,
+        fetchSettingsSaga
     ]);
 }
 
