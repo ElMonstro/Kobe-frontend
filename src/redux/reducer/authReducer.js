@@ -1,10 +1,13 @@
 import {
+    SET_USER,
+    SHOW_CONF_MODAL,
     USER_LOGGED_IN,
 } from "../actions/actionTypes";
 
 const initialState = {
     user: {},
-    isLoggedIn: false
+    isLoggedIn: false,
+    showConfirmationModal: false
 };
 
 const authReducer = ( state=initialState, action ) => {
@@ -12,6 +15,14 @@ const authReducer = ( state=initialState, action ) => {
         case USER_LOGGED_IN:
             const { isLoggedIn } = action;
             return {...state, isLoggedIn}
+        
+        case SET_USER:
+            const { user } = action;
+            return {...state, user}
+
+        case SHOW_CONF_MODAL:
+            const { showConfirmationModal } = action;
+            return {...state, showConfirmationModal};
             
         default:
             return state;

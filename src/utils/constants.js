@@ -1,5 +1,6 @@
 export const ORG_STRUCTURE = 'orgStructure';
 export const PERSPECTIVES = 'perspectives';
+export const SEND_EMAILS = 'send_emails'
 export const CASCADE = 'cascade';
 export const REVEIEW_PERIOD = 'reviewPeriod';
 export const POST = 'post';

@@ -1,0 +1,63 @@
+@import "../../../assets/scss/colors";
+
+.conf_modal {
+   margin-top: 80px;
+
+    .auth_model_content {
+
+        width: 500px;
+        height: auto;
+        background: #FFFFFF;
+        box-shadow: 4px 4px 25px -7px rgba(0, 0, 0, 0.25);
+        border-radius: 6px;
+        border: none;
+        padding-bottom: 30px;
+
+        .header_title {
+            font-weight: 500!important;
+            text-align: center;
+            line-height: 28px;
+            color: #000;
+  
+        }
+
+        .auth_modal_body {
+            margin: auto;
+            width: 312px;
+            color: #828282;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 28px;
+    
+            input {
+                width: 312px;        
+            }
+
+            .password_group {
+                height: 90px;
+            }
+
+            .email_group {
+                display: none!important;
+
+            }
+
+            .conf_btn {
+                background: $btn-background;
+                width: 312px;
+            }
+
+            .confirm_btn{
+                margin-right: 70px;
+            }
+        }
+        
+    }
+
+}
+
+.modal_backdrop {
+    background: #D8D8D8;
+    opacity: 0.5;
+    top: 60px;
+}

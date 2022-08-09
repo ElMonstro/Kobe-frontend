@@ -11,10 +11,19 @@ import ReviewPeriodCont from "../reviewPeriodCont";
 import CascadeCutoffCont from "../cascadeCutoffCont";
 import LoginModal from "../modals/loginModal";
 
-import { fetchCompanyInfo, fetchSettings, setSettings, setOrgChart, setCompanyInfo } from "../../redux/actions";
+import { 
+    fetchCompanyInfo, 
+    fetchSettings, 
+    setSettings, 
+    setOrgChart, 
+    setCompanyInfo, 
+    setShowConfirmationModal 
+} 
+    from "../../redux/actions";
 
 import 'react-toastify/dist/ReactToastify.css';
 import "./index.scss";
+import SendEmailCont from "../sendEmailsCont";
 
 
 const Dashboard = props => {
@@ -24,6 +33,7 @@ const Dashboard = props => {
         perspectives: PerspectivesCont,
         cascade: CascadeCutoffCont,
         reviewPeriod: ReviewPeriodCont,
+        send_emails: SendEmailCont
     }
 
     const { activeComponent, isLoggedOut, fetchSettings, fetchCompanyInfo } = props;
@@ -34,7 +44,6 @@ const Dashboard = props => {
         fetchCompanyInfo();
       }, []);
        
-
     return (
         <div>
             {isLoggedOut && <LoginModal isLoggedOut={isLoggedOut}/>}
@@ -60,10 +69,11 @@ const mapDispatchToProps = {
     fetchCompanyInfo,
     setSettings,
     setCompanyInfo,
-    setOrgChart
+    setOrgChart,
+    setShowConfirmationModal
 }
 
-const mapStateToProps = ({ adminReducer }) => ({
+const mapStateToProps = ({ adminReducer, authReducer }) => ({
     ...adminReducer,
 });
 

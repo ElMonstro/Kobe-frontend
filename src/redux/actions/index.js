@@ -1,4 +1,8 @@
-import { FETCH_COMPANY_INFO, FETCH_ORG_CHART, FETCH_SETTINGS, SET_COMPANY_INFO, SET_ORG_CHART, SET_SETTINGS, USER_LOGGED_IN } from "./actionTypes";
+import { 
+    FETCH_COMPANY_INFO, FETCH_ORG_CHART,
+    FETCH_SETTINGS, SET_COMPANY_INFO, SET_ORG_CHART, 
+    SET_SETTINGS, SET_USER, SHOW_CONF_MODAL, USER_LOGGED_IN 
+    } from "./actionTypes";
 
 export const changeLoginStatus = isLoggedIn => ({
     type: USER_LOGGED_IN,
@@ -30,4 +34,14 @@ export const fetchOrgChart = () => ({
 export const setOrgChart = orgChart => ({
     type: SET_ORG_CHART,
     orgChart: [orgChart] 
+});
+
+export const setShowConfirmationModal = showConfirmationModal => ({
+    type: SHOW_CONF_MODAL,
+    showConfirmationModal,
+});
+
+export const setUser = user => ({
+    type: SET_USER,
+    user,
 });

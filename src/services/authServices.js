@@ -7,7 +7,7 @@ import { getHeaderDetails, checkSessionStatus } from '../utils';
 
 export default class AuthService {
 
-    static async loginUser(userDetails, setLoaderSatus) {
+    static async loginUser(userDetails) {
         try{
             const { email, password } = userDetails;
             const newUser = { email, password }

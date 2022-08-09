@@ -15,9 +15,11 @@ const adminReducer = ( state=initialState, action ) => {
         case SET_SETTINGS:
             const { settings } = action;
             return {...state, settings};
+
         case SET_COMPANY_INFO:
             const { companyInfo } = action;
             return {...state, companyInfo};
+
         case SET_ORG_CHART:
             const { orgChart } = action;
             return {...state, orgChart};

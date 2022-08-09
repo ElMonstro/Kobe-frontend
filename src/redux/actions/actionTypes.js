@@ -5,3 +5,5 @@ export const SET_COMPANY_INFO = "SET_COMPANY_INFO";
 export const FETCH_COMPANY_INFO = "FETCH_COMPANY_INFO";
 export const FETCH_ORG_CHART = "FETCH_ORG_CHART";
 export const SET_ORG_CHART = "SET_ORG_CHART";
+export const SHOW_CONF_MODAL = "SHOW_CONF_MODAL";
+export const SET_USER = "SET_USER";
