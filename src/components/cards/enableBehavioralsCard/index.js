@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button, Card, Col, Row } from "react-bootstrap";
+import { Form, Card, Col, Row } from "react-bootstrap";
 
 import { makeRequest } from "../../../utils/requestUtils";
 import { settingsURL } from "../../../services/urls";

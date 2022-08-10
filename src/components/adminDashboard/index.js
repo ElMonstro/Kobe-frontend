@@ -75,6 +75,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = ({ adminReducer, authReducer }) => ({
     ...adminReducer,
+    ...authReducer
 });
 
 export default connect(

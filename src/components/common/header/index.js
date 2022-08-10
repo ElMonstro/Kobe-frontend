@@ -13,15 +13,21 @@ import { companyInfoURL, settingsURL } from "../../../services/urls";
 import LoginForm from "../../modals/loginModal";
 
 
-const Header = ({ companyInfo, setSettings, setCompanyInfo }) => {
+const Header = ({ companyInfo, setSettings, setCompanyInfo, user: {first_name} }) => {
 
-     const { name, logo } = companyInfo;
+    const { name: companyName, logo } = companyInfo;
+    
 
     useEffect(() => {
-        companyInfo !== {} && makeRequest(settingsURL, GET, null, true, false)
-            .then( data => setSettings(data))
-        companyInfo !== {} && makeRequest(companyInfoURL, GET, null, true, false)
-            .then( data => setCompanyInfo(data))
+
+        !companyName && makeRequest(settingsURL, GET, null, true, false)
+            .then( data => {
+                data && setSettings(data)
+            })
+        !companyName && makeRequest(companyInfoURL, GET, null, true, false)
+            .then( data => {
+                data && setCompanyInfo(data)}
+            )
     }, []);
     
     return (
@@ -34,7 +40,7 @@ const Header = ({ companyInfo, setSettings, setCompanyInfo }) => {
                         alt="logo"
                     />
                     <span className="company_name">
-                        { name? name: "Eurochem Limited"}
+                        { companyName? companyName: "Eurochem Limited"}
                     </span>
                     
                     </Navbar.Brand>
@@ -50,11 +56,11 @@ const Header = ({ companyInfo, setSettings, setCompanyInfo }) => {
                         
                
                     <span  className="user_name">
-                        Jerry
+                        { first_name?first_name: "Admin"}
                     </span>
                     <NavDropdown eventkey={1} 
-                    id="nav_dropdown"
-                    title = {(<ChevronDown/ >)}>
+                        id="nav_dropdown"
+                        title = {(<ChevronDown/ >)}>
                     
                         <NavDropdown.Item eventkey={1.1} className="nav_item">
                             Profile

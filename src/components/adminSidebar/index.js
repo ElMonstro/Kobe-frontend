@@ -45,7 +45,7 @@ const AdminSidebar = props => {
                 <Row>
                     <Link to="/admin/review-period" id={ REVEIEW_PERIOD }>
                         <div className="blue_rectangle"><div className="inside_blue_rect"></div></div>
-                        Review Period
+                        Review Period/Appraisal
                     </Link>
                 </Row>
                 <Row>
