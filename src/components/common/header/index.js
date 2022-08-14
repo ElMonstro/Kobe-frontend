@@ -13,10 +13,10 @@ import { companyInfoURL, settingsURL } from "../../../services/urls";
 import LoginForm from "../../modals/loginModal";
 
 
-const Header = ({ companyInfo, setSettings, setCompanyInfo, user: {first_name} }) => {
+const Header = ({ companyInfo, setSettings, setCompanyInfo }) => {
 
     const { name: companyName, logo } = companyInfo;
-    
+    const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
 
@@ -46,18 +46,24 @@ const Header = ({ companyInfo, setSettings, setCompanyInfo, user: {first_name} }
                     </Navbar.Brand>
                     
                 <Nav className="avatar_menu">
-                    <div className="avatar_container">
+                    <div className="avatar_container">   
+                        {
+                        user?.is_admin? 
+                        <div className="avatar letter_avatar">
+                            { user?.first_name?.charAt(0) }
+                        </div> :
+
                         <img className="avatar" 
                             src={ src } 
                             alt="user pic"
                         />
+                        }
                     </div>
-                        
-                        
                
                     <span  className="user_name">
-                        { first_name?first_name: "Admin"}
+                        { user?.first_name?user?.first_name: "Menu"}
                     </span>
+
                     <NavDropdown eventkey={1} 
                         id="nav_dropdown"
                         title = {(<ChevronDown/ >)}>

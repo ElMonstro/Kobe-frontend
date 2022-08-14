@@ -48,6 +48,11 @@ export const makeRequest =  async (url, method, data, authenticated=true, notify
     let headerDetails;
     const request = requestTypeMapper[method];
     let response;
+    headerDetails = getHeaderDetails(true);
+
+    if (headerDetails.headers.Authorization === "Bearer undefined") {
+        return;
+    }
 
     authenticated?  headerDetails = getHeaderDetails(true): headerDetails = null;
 

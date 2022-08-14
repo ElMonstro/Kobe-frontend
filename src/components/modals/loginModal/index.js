@@ -14,7 +14,7 @@ import { parseJwt } from "../../../utils";
 
 const LoginModal = props => {
 
-    const { isLoggedIn, changeLoginStatus, setUser } = props;
+    const { isLoggedIn, changeLoginStatus } = props;
     const navigate = useNavigate();
 
     const formik = useFormik({
@@ -25,12 +25,12 @@ const LoginModal = props => {
             validationSchema: yupLoginObj,
             onSubmit: async (values) => {
                 const response = await AuthService.loginUser(values);
-                const user = parseJwt(response.data.accces);
-                setUser(user);
+                const user = parseJwt(response.data.access);
                 changeLoginStatus(true);
                 navigate('/admin');
                 // store access tokens in local storage
-                window.localStorage.setItem('tokens',JSON.stringify(response.data));
+                window.localStorage.setItem('tokens', JSON.stringify(response.data));
+                window.localStorage.setItem('user', JSON.stringify(user));
                 
             },
         });
@@ -89,8 +89,7 @@ const LoginModal = props => {
 }
 
 const mapDispatchToProps = {
-    changeLoginStatus,
-    setUser
+    changeLoginStatus
 }
 
 const mapStateToProps = ({authReducer}) => ({
