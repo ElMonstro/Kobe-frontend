@@ -1,9 +1,14 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 
+import UploadButton from "../../common/uploadButton";
+import { uploadOrgChartURL } from "../../../services/urls";
+import exampleOrgFile from "../../../assets/example_org_file.xlsx"
+
+
 import "./index.scss";
 
-const UploadOrgCard = props => {
+const UploadOrgCard = ({ setOrgChartSpinner }) => {
     return (
         <Card className="admin_card upload_org_card">
             <div className="card_cont">
@@ -11,15 +16,19 @@ const UploadOrgCard = props => {
                     Upload Excel Sheet to Create  Organization Chart
                 </div>
                 <div className="sample_csv blue_text">
-                    Download Sample Excel Sheet
+                    <a href={ exampleOrgFile } download>
+                        Download Sample Excel Sheet
+                    </a>
                 </div>
                 <div className="upload_btn_div">
-                    <Button className="card_btn">
-                        Upload Logo
-                    </Button>
-                    <span className="file_name blue_text">
-                        Eurochem_org.xls
-                    </span>
+                    <UploadButton 
+                        setSpinnerStatus={ setOrgChartSpinner }
+                        uploadURL={ uploadOrgChartURL } 
+                        contentText="Upload Excel" 
+                        className="card_btn" 
+                        fileKey="file"
+                    />
+                      
                 </div>
                 
             </div>

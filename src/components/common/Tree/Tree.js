@@ -48,16 +48,28 @@ const Tree = ({ children, data, onNodeClick, onUpdate }) => {
 
 const TreeRecursive = ({ data, parentNode }) => {
   return data.map((item) => {
+    if (!item) {
+      return <></>;
+    }
     item.parentNode = parentNode;
     if (!parentNode) {
       item.parentNode = data;
     }
     if (!item.id) item.id = v4();
 
-    const name = item.user.first_name + " " + item.user.second_name
+    const name = item?.user.first_name + " " + item.user.second_name
 
     return (
-      <Node key={item.id} id={item.id} name={name} node={item}>
+      <Node 
+        key={item.id} 
+        designation={item.code} 
+        job_grade={item.job_grade} 
+        id={item.id}
+        department={item.department?.name}
+        name={name}
+        staff_no={item.staff_no} 
+        node={item}
+      >
         <TreeRecursive parentNode={item} data={item.underlings} />
       </Node>
     );

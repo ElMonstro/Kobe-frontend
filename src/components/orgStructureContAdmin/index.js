@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./index.scss";
 import MissionVisionForm from "../cards/missionVisonCard";
@@ -10,16 +10,22 @@ import OrgChartCard from "../cards/orgCard";
 
 
 const AdminOrgStructureCont = props => {
+
+    const [orgChartSpinner, setOrgChartSpinner] = useState(false);
     
     return (
         <div className="admin_cont">
-            <UploadLogoCard />
-            <MissionVisionForm />
-            <UploadOrgCard />
-            
-            <OrgChartCard />
-            <DivisionsNamesForm />
-            <ThresholdsForm />
+            <UploadLogoCard { ...props }/>
+            <MissionVisionForm { ...props }/>
+            <UploadOrgCard 
+                setOrgChartSpinner={ setOrgChartSpinner }
+                />
+            <OrgChartCard 
+                spinnerState={ orgChartSpinner }
+                { ...props }
+            />
+            <DivisionsNamesForm { ...props }/>
+            <ThresholdsForm { ...props }/>
         </div>
     )
 }

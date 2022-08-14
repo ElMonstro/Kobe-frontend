@@ -16,6 +16,10 @@
         height: 36px;
         width: 134px;
         margin-top: 10px;
+
+        &:focus {
+            outline: none;
+        }
     }
 
     .card_title {

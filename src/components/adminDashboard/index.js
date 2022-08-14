@@ -1,47 +1,84 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Row, Col, Container } from "react-bootstrap";
+import { connect } from 'react-redux';
+
 
 import Header from "../common/header";
 import AdminSidebar from "../adminSidebar"
-
-import "./index.scss";
 import AdminOrgStructureCont from "../orgStructureContAdmin";
 import PerspectivesCont from "../perspectivesContAdmin";
 import ReviewPeriodCont from "../reviewPeriodCont";
 import CascadeCutoffCont from "../cascadeCutoffCont";
+import LoginModal from "../modals/loginModal";
+
+import { 
+    fetchCompanyInfo, 
+    fetchSettings, 
+    setSettings, 
+    setOrgChart, 
+    setCompanyInfo, 
+    setShowConfirmationModal 
+} 
+    from "../../redux/actions";
+
+import 'react-toastify/dist/ReactToastify.css';
+import "./index.scss";
+import SendEmailCont from "../sendEmailsCont";
 
 
 const Dashboard = props => {
+
     const activeComponentMapper = {
         orgStructure: AdminOrgStructureCont,
         perspectives: PerspectivesCont,
         cascade: CascadeCutoffCont,
-        reviewPeriod: ReviewPeriodCont 
-
+        reviewPeriod: ReviewPeriodCont,
+        send_emails: SendEmailCont
     }
-    const { activeComponent } = props;
 
+    const { activeComponent, isLoggedOut, fetchSettings, fetchCompanyInfo } = props;
     const ActiveComponent = activeComponentMapper[activeComponent];
 
+    useEffect(() => {
+        fetchSettings();
+        fetchCompanyInfo();
+      }, []);
+       
     return (
         <div>
-            <Header />
+            {isLoggedOut && <LoginModal isLoggedOut={isLoggedOut}/>}
+            <Header { ...props } />
             <div className="cont">
                 <Container fluid className="inner-cont">
-
-                <Row> 
-                    <Col xs lg="3">
-                        <AdminSidebar />
-                    </Col>
-                    <Col xs lg="15">
-                        <ActiveComponent />
-                    </Col>
-                </Row>
+                    <Row> 
+                        <Col xs lg="3">
+                            <AdminSidebar activeComponent={ activeComponent }/>
+                        </Col>
+                        <Col xs lg="15">
+                            <ActiveComponent { ...props }/>
+                        </Col>
+                    </Row>
                 </Container>
-                
             </div>
         </div>
     )
 };
 
-export default Dashboard;
+const mapDispatchToProps = {
+    fetchSettings,
+    fetchCompanyInfo,
+    setSettings,
+    setCompanyInfo,
+    setOrgChart,
+    setShowConfirmationModal
+}
+
+const mapStateToProps = ({ adminReducer, authReducer }) => ({
+    ...adminReducer,
+    ...authReducer
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+) (Dashboard);
