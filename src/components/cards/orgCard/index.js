@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import Tree from "../../common/Tree/Tree";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Spinner} from "react-bootstrap";
 
 
 import "./index.scss";
@@ -14,7 +14,7 @@ const handleClick = (node) => {
   };
 
 const OrgChartCard = props => {
-    const { orgChart, setOrgChart } = props;
+    const { orgChart, setOrgChart, spinnerState } = props;
 
     useEffect(() => {
         makeRequest(fetchOrgChartURL, GET, null, true, false).then( data => setOrgChart(data))
@@ -42,7 +42,9 @@ const OrgChartCard = props => {
         <Card className="admin_card org_chart_card">
 
             <div>
-            <Tree data={orgChart} onNodeClick={handleClick} />
+            {
+            spinnerState? <Spinner animation="border"  variant="info"/>: 
+            <Tree data={orgChart} onNodeClick={handleClick} />}
             </div>
         </Card>
       </div>

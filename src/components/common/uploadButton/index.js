@@ -9,7 +9,7 @@ import "./index.scss";
 
 const UploadButton = props => {
 
-    const {contentText, className, uploadURL, fileKey, extraData} = props;
+    const { contentText, className, uploadURL, fileKey, extraData, setSpinnerStatus } = props;
     const [inputFile, setInputFile] = useState(null);
     const [fileName, setFileName] = useState(null);
     const [fileNameClass, setFileNameClass] = useState('blue_text');
@@ -32,7 +32,9 @@ const UploadButton = props => {
             formData.append(key, extraData[key]);
         }
         formData.append(fileKey, inputFile?.files[0]);
+        setSpinnerStatus(true);
         const data = await makeRequest(uploadURL, POST, formData, true);
+        setSpinnerStatus(false);
         data? setFileNameClass('green_text'): setFileNameClass('red_text');
     }
 

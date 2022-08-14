@@ -8,7 +8,7 @@ import exampleOrgFile from "../../../assets/example_org_file.xlsx"
 
 import "./index.scss";
 
-const UploadOrgCard = props => {
+const UploadOrgCard = ({ setOrgChartSpinner }) => {
     return (
         <Card className="admin_card upload_org_card">
             <div className="card_cont">
@@ -22,7 +22,8 @@ const UploadOrgCard = props => {
                 </div>
                 <div className="upload_btn_div">
                     <UploadButton 
-                        uploadURL={uploadOrgChartURL} 
+                        setSpinnerStatus={ setOrgChartSpinner }
+                        uploadURL={ uploadOrgChartURL } 
                         contentText="Upload Excel" 
                         className="card_btn" 
                         fileKey="file"
