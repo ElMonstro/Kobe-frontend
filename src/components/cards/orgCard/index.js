@@ -5,20 +5,14 @@ import { Col, Row, Spinner} from "react-bootstrap";
 
 
 import "./index.scss";
-import { makeRequest } from "../../../utils/requestUtils";
-import { fetchOrgChartURL } from "../../../services/urls";
-import { GET } from "../../../utils/constants";
 
 
 const handleClick = (node) => {
   };
 
 const OrgChartCard = props => {
-    const { orgChart, setOrgChart, spinnerState } = props;
+    const { orgChart, spinnerState } = props;
 
-    useEffect(() => {
-        makeRequest(fetchOrgChartURL, GET, null, true, false).then( data => setOrgChart(data))
-    }, []);
 
     return (
       <div className="org_chart_cont">

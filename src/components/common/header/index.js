@@ -9,19 +9,21 @@ import { base_cloudinary_url } from "../../../services/baseURL";
 import { logout } from "../../../utils";
 import { makeRequest } from "../../../utils/requestUtils";
 import { GET } from "../../../utils/constants";
-import { companyInfoURL, settingsURL } from "../../../services/urls";
+import { companyInfoURL, fetchOrgChartURL, settingsURL } from "../../../services/urls";
 import LoginForm from "../../modals/loginModal";
 import { 
     fetchCompanyInfo, 
     fetchSettings, 
     setSettings, 
     setCompanyInfo, 
-    setUser
+    setUser,
+    setOrgChart
 } 
 from "../../../redux/actions";
 import { connect } from "react-redux";
 
-const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser }) => {
+
+const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser, setOrgChart }) => {
 
     const { name: companyName, logo } = companyInfo;
     const user = JSON.parse(localStorage.getItem('user'));
@@ -31,12 +33,17 @@ const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser }) => {
         !companyName && makeRequest(settingsURL, GET, null, true, false)
             .then( data => {
                 data && setSettings(data)
-            })
+            });
+
         !companyName && makeRequest(companyInfoURL, GET, null, true, false)
             .then( data => {
                 data && setCompanyInfo(data)}
-            )
-            setUser(user);
+            );
+        
+        !companyName && makeRequest(fetchOrgChartURL, GET, null, true, false)
+            .then( data => setOrgChart(data));
+
+        setUser(user);
 
     }, []);
     
@@ -96,7 +103,8 @@ const mapDispatchToProps = {
     fetchCompanyInfo,
     setSettings,
     setCompanyInfo,
-    setUser
+    setUser,
+    setOrgChart
 }
 
 const mapStateToProps = ({ adminReducer: { companyInfo }, }) => ({

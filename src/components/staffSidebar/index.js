@@ -1,21 +1,39 @@
-import React, { useEffect, useState } from "react";
-import { Row, Col } from "react-bootstrap";
-import { CASCADE } from "../../utils/constants";
+import React from "react";
 
+import SearchBox from "../common/searchBox";
+import Tree from "../common/Tree/Tree";
 import './index.scss';
+import { connect } from "react-redux";
 
 
-const StaffSidebar = props => {
+const StaffSidebar = ({ orgChart }) => {
+
+    const handleClick = (node) => {
+    };
 
     return (
         <div className="staff_sidebar">
             <div className="sidebar_cont">
                 <div className="title">
-                    ORGANIZATION CHART
+                    Organization Chart
                 </div>
+                <SearchBox />
+                <Tree data={orgChart} onNodeClick={handleClick}/>
             </div>
+
         </div>
     )
 }
 
-export default StaffSidebar
+const mapDispatchToProps = {
+}
+
+const mapStateToProps = ({ adminReducer: { orgChart } }) => ({
+    orgChart,
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+) (StaffSidebar);
+
