@@ -13,7 +13,7 @@ import { companyInfoURL, settingsURL } from "../../../services/urls";
 import LoginForm from "../../modals/loginModal";
 
 
-const Header = ({ companyInfo, setSettings, setCompanyInfo }) => {
+const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser }) => {
 
     const { name: companyName, logo } = companyInfo;
     const user = JSON.parse(localStorage.getItem('user'));
@@ -28,6 +28,8 @@ const Header = ({ companyInfo, setSettings, setCompanyInfo }) => {
             .then( data => {
                 data && setCompanyInfo(data)}
             )
+            setUser(user);
+
     }, []);
     
     return (

@@ -17,7 +17,8 @@ import {
     setSettings, 
     setOrgChart, 
     setCompanyInfo, 
-    setShowConfirmationModal 
+    setShowConfirmationModal,
+    setUser
 } 
     from "../../redux/actions";
 
@@ -70,7 +71,8 @@ const mapDispatchToProps = {
     setSettings,
     setCompanyInfo,
     setOrgChart,
-    setShowConfirmationModal
+    setShowConfirmationModal,
+    setUser
 }
 
 const mapStateToProps = ({ adminReducer, authReducer }) => ({

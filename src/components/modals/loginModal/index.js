@@ -6,7 +6,7 @@ import { Modal, Form, Button } from "react-bootstrap";
 
 import { yupLoginObj } from "../../../utils/validators";
 import AuthService from "../../../services/authServices";
-import { changeLoginStatus, setUser } from "../../../redux/actions";
+import { changeLoginStatus } from "../../../redux/actions";
 
 import "./index.scss";
 import { parseJwt } from "../../../utils";
