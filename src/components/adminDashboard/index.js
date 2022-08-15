@@ -2,14 +2,12 @@ import React, { useEffect } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { connect } from 'react-redux';
 
-
 import Header from "../common/header";
 import AdminSidebar from "../adminSidebar"
 import AdminOrgStructureCont from "../orgStructureContAdmin";
 import PerspectivesCont from "../perspectivesContAdmin";
 import ReviewPeriodCont from "../reviewPeriodCont";
 import CascadeCutoffCont from "../cascadeCutoffCont";
-import LoginModal from "../modals/loginModal";
 
 import { 
     fetchCompanyInfo, 
@@ -27,7 +25,7 @@ import "./index.scss";
 import SendEmailCont from "../sendEmailsCont";
 
 
-const Dashboard = props => {
+const AdminDashboard = props => {
 
     const activeComponentMapper = {
         orgStructure: AdminOrgStructureCont,
@@ -37,7 +35,7 @@ const Dashboard = props => {
         send_emails: SendEmailCont
     }
 
-    const { activeComponent, isLoggedOut, fetchSettings, fetchCompanyInfo } = props;
+    const { activeComponent, fetchSettings, fetchCompanyInfo } = props;
     const ActiveComponent = activeComponentMapper[activeComponent];
 
     useEffect(() => {
@@ -47,8 +45,7 @@ const Dashboard = props => {
        
     return (
         <div>
-            {isLoggedOut && <LoginModal isLoggedOut={isLoggedOut}/>}
-            <Header { ...props } />
+            <Header />
             <div className="cont">
                 <Container fluid className="inner-cont">
                     <Row> 
@@ -83,4 +80,4 @@ const mapStateToProps = ({ adminReducer, authReducer }) => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-) (Dashboard);
+) (AdminDashboard);

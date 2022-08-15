@@ -11,7 +11,15 @@ import { makeRequest } from "../../../utils/requestUtils";
 import { GET } from "../../../utils/constants";
 import { companyInfoURL, settingsURL } from "../../../services/urls";
 import LoginForm from "../../modals/loginModal";
-
+import { 
+    fetchCompanyInfo, 
+    fetchSettings, 
+    setSettings, 
+    setCompanyInfo, 
+    setUser
+} 
+from "../../../redux/actions";
+import { connect } from "react-redux";
 
 const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser }) => {
 
@@ -36,7 +44,7 @@ const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser }) => {
         <Navbar sticky="top" className="nav_bar" bg="light" variant="light">
             <LoginForm />
             <Container className="header_container" fluid>
-                <Navbar.Brand href="#home" >
+                <Navbar.Brand href={ user?.is_admin? "/admin": "/"} >
                     <img className="logo" 
                         src={ logo? base_cloudinary_url + logo: defaultLogo } 
                         alt="logo"
@@ -83,4 +91,19 @@ const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser }) => {
     );
 };
 
-export default Header;
+const mapDispatchToProps = {
+    fetchSettings,
+    fetchCompanyInfo,
+    setSettings,
+    setCompanyInfo,
+    setUser
+}
+
+const mapStateToProps = ({ adminReducer: { companyInfo }, }) => ({
+    companyInfo,
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+) (Header);

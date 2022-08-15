@@ -2,10 +2,13 @@ import { Navigate } from "react-router-dom";
 import {connect} from 'react-redux';
 
 
-const Protected = ({ isLoggedIn, children }) => {
+const Protected = ({ isLoggedIn, children, user: { is_admin } }) => {
+    let toUrl;
+    is_admin? toUrl = "/admin/login": toUrl = "/login";
+
     if (!isLoggedIn) {
         
-    return <Navigate to="/admin/login" replace />;
+    return <Navigate to={ toUrl } replace />;
     }
     return children;
 };
