@@ -9,6 +9,7 @@ import StaffSidebar from "../staffSidebar";
 
 import 'react-toastify/dist/ReactToastify.css';
 import "./index.scss";
+import ScoreCardCont from "../scoreCardCont";
 
 const StaffDashboard = props => {
 
@@ -23,11 +24,11 @@ const StaffDashboard = props => {
             <div className="staff_cont">
                 <Container fluid className="inner-cont">
                     <Row> 
-                        <Col xs lg="3">
+                        <Col xs sm="3">
                             <StaffSidebar />
                         </Col>
                         <Col xs lg="15">
-                            
+                            <ScoreCardCont />
                         </Col>
                     </Row>
                 </Container>

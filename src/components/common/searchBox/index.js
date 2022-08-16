@@ -8,7 +8,7 @@ const SearchBox = props => {
     return (
         <div className="search_cont">
             <Search />
-            <input className="search_box"></input>
+            <input className="search_box" placeholder="Enter Employee"></input>
         </div>
     );
 }

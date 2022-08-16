@@ -17,7 +17,7 @@ import { useEffect } from 'react';
 import LoginModal from './components/modals/loginModal';
 
 
-function App({ isLoggedIn, is_admin }) {
+function App({ isLoggedIn }) {
 
   const loggedIn = isLoggedInFromLocalStorage();
   
@@ -38,8 +38,8 @@ function App({ isLoggedIn, is_admin }) {
           <Route path="/admin/review-period" element={<Protected> <AdminDashboard activeComponent={REVEIEW_PERIOD} /> </Protected>} />
           <Route path="/admin/send-emails" element={<Protected> <AdminDashboard activeComponent={SEND_EMAILS} /> </Protected>} />
           <Route path="/admin/login" element={<AdminDashboard activeComponent={ORG_STRUCTURE} isLoggedOut={!isLoggedIn}/>} />
-          <Route path="/" element={<Protected> <StaffDashboard /> </Protected>} />
-          <Route path="/login" element={<StaffDashboard activeComponent={ORG_STRUCTURE} isLoggedOut={!isLoggedIn}/>} />
+          <Route path="" element={<Protected> <StaffDashboard /> </Protected>} />
+          <Route path="/login" element={ <StaffDashboard /> } />
         </Routes>
     </BrowserRouter>
   );

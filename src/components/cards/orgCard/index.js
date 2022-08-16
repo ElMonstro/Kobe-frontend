@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Card } from "react-bootstrap";
 import Tree from "../../common/Tree/Tree";
 import { Col, Row, Spinner} from "react-bootstrap";
