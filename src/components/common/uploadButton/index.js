@@ -9,7 +9,7 @@ import "./index.scss";
 
 const UploadButton = props => {
 
-    const { contentText, className, uploadURL, fileKey, extraData, setSpinnerStatus } = props;
+    const { disabled, contentText, className, uploadURL, fileKey, extraData, setSpinnerStatus } = props;
     const [inputFile, setInputFile] = useState(null);
     const [fileName, setFileName] = useState(null);
     const [fileNameClass, setFileNameClass] = useState('blue_text');
@@ -41,7 +41,7 @@ const UploadButton = props => {
     return (
         <div className="upload_btn">
             <input id={inputElementID} onChange={uploadFile} className="d-none" type="file" />
-            <Button onClick={handleUpload} className={className}>
+            <Button disabled={disabled} onClick={handleUpload} className={className}>
                 {contentText}
             </Button>
             {fileName && <span className={ fileNameClass }>
