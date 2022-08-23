@@ -50,21 +50,6 @@
     .quarterly_targets {
         margin-bottom: 20px;
     }
-    .title {
-        margin-left: 0;
-        font-style: normal;
-        font-weight: 700;
-        font-size: 18px;
-        line-height: 24px;
-        text-transform: uppercase;
-        color: #BDBDBD;
-    }
-
-    .card_title {
-        border-bottom: 1px solid #E0E0E0;
-        padding: 10px 35px;
-        margin-bottom: 18px;
-    }
     
     .card_btn {
         width: 134px;
@@ -89,6 +74,10 @@
         padding: 0 0 20px 0;
         height: 164px auto;
         margin-bottom: 20px;
+    }
+
+    .card_title {
+        margin-bottom: 18px;
     }
 
 

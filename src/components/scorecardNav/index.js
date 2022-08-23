@@ -7,7 +7,7 @@ import { CASCADED, CREATE, UPDATE, VIEW } from "../../utils/constants";
 import './index.scss';
 
 
-const ScorecardNavCard = ({ activeComponent, user }) => {
+const ScorecardNavCard = ({ activeComponent, setActiveComponent, user }) => {
 
     const setSelectedClass = activeComponent => {
 
@@ -15,6 +15,11 @@ const ScorecardNavCard = ({ activeComponent, user }) => {
         // selectedElements[0]? selectedElements[0].className = "": selectedElements=null;
         // const newSelectedElement = document.getElementById(activeComponent);
         // newSelectedElement.className = "selected col";
+    }
+
+    const handleClick = e => {
+        console.log(e.target.id)
+        setActiveComponent(e.target.id);
     }
 
     useEffect(() => {
@@ -26,22 +31,22 @@ const ScorecardNavCard = ({ activeComponent, user }) => {
 
             <Row className="nav">
                 <Col>
-                    <Link id={ CREATE } className="selected" to="/overview">
+                    <Link id={ CREATE } onClick={ handleClick } className="selected" to="/">
                         Create
                     </Link>
                 </Col>
                 <Col>
-                    <Link id={ CASCADED } to="/scorecard">
+                    <Link id={ CASCADED } onClick={ handleClick } to="/">
                         Cascaded
                     </Link>
                 </Col>
                 <Col>
-                    <Link id={ VIEW } to="/strategy-map">
+                    <Link id={ VIEW } onClick={ handleClick } to="/">
                         View
                     </Link>
                 </Col>
                 <Col>
-                    <Link id={ UPDATE } to="/dashboards">
+                    <Link id={ UPDATE } onClick={ handleClick } to="/">
                         Update
                     </Link>
                 </Col>

@@ -28,7 +28,7 @@ const StaffDashboard = props => {
                             <StaffSidebar />
                         </Col>
                         <Col xs lg="15">
-                            <MemberMenuCardCont />
+                            <MemberMenuCardCont { ...props } />
                         </Col>
                     </Row>
                 </Container>
