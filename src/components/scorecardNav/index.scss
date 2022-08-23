@@ -1,0 +1,21 @@
+.scorecard_nav {
+    a {
+        background: #FFFFFF;
+        border: 1px solid #035476;
+        width: 80px;
+        height: 24px auto;
+        text-decoration: none;
+        color: #333333;
+        display: block;
+        text-align: center;
+        padding-bottom: 2px;
+
+        &.selected {
+            background: #035476;
+            color: #FFFFFF;
+        }
+    }
+
+    width: 500px;
+    margin: 12px 12px;
+}

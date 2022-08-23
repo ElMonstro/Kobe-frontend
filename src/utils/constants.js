@@ -20,6 +20,10 @@ export const SCORECARD = "scorecard";
 export const STRATEGY_MAP = "strategy_map";
 export const DASHBOARDS = "dashboards";
 export const REPORTS = "reports";
+export const CREATE = "create";
+export const CASCADED = "cascaded";
+export const VIEW = "view";
+export const UPDATE = "update";
 export const PERSPECTIVE_OBJECT = {
     financial_name: "Financial",
     customer_name: "Customer",

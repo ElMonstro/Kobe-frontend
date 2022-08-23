@@ -48,5 +48,4 @@ const CascadeCutoffForm = props => {
     );
 };
 
-
 export default CascadeCutoffForm;

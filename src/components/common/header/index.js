@@ -3,7 +3,7 @@ import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import {ChevronDown} from '@styled-icons/bootstrap/ChevronDown'
 
 import './index.scss';
-import src from "../../../assets/josh_logo.jpg"
+import src from "../../../assets/josh_logo.jpg";
 import defaultLogo from "../../../assets/logo.svg"
 import { base_cloudinary_url } from "../../../services/baseURL";
 import { logout } from "../../../utils";
