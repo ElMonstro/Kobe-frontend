@@ -4,6 +4,7 @@ import CascadedCards from "../cards/cascadedCards";
 import UpdateScorecardCard from "../cards/updateScorecardCard";
 import ScorecardCreate from "../ScorecardCreate";
 import ScorecardNav from "../scorecardNav";
+import ViewScorecardCard from "../viewScorecard";
 
 import "./index.scss";
 
@@ -13,7 +14,8 @@ const ScorecardCont = props => {
     const activeComponentMapper = {
         create: ScorecardCreate,
         update: UpdateScorecardCard,
-        cascaded: CascadedCards
+        cascaded: CascadedCards,
+        view: ViewScorecardCard
     }
 
     const ActiveComponent = activeComponentMapper[activeComponent];
