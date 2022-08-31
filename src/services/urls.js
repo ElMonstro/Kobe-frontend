@@ -1,8 +1,10 @@
 import baseUrl from './baseURL';
 
-export const loginURL = `${baseUrl()}/auth/login/`;
-export const settingsURL = `${baseUrl()}/administration/settings/`;
-export const companyInfoURL = `${baseUrl()}/administration/company-info/`;
-export const uploadOrgChartURL = `${baseUrl()}/administration/org-chart/`;
-export const fetchOrgChartURL = `${baseUrl()}/auth/org-chart/`;
-export const sendEmailsURL = `${baseUrl()}/administration/send-auth-emails/`;
+const baseURL = baseUrl();
+export const loginURL = `${baseURL}/auth/login/`;
+export const settingsURL = `${baseURL}/administration/settings/`;
+export const companyInfoURL = `${baseURL}/administration/company-info/`;
+export const uploadOrgChartURL = `${baseURL}/administration/org-chart/`;
+export const fetchOrgChartURL = `${baseURL}/auth/org-chart/`;
+export const sendEmailsURL = `${baseURL}/administration/send-auth-emails/`;
+export const fetchUnderlingsURL = `${baseURL}/scorecard/role/fetch-underlings/`;
