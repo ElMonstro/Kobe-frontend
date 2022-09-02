@@ -114,7 +114,7 @@ export const generateString = length => {
         result += CHARACTERS.charAt(Math.floor(Math.random() * charactersLength));
     }
 
-    return result;
+    return result.trim();
 }
 
 

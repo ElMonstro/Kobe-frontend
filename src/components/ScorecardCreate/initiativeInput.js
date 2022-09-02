@@ -21,7 +21,7 @@ const InitiativeInput = ({ formik, initiativeId, weightId, cascadeId, deleteId, 
         </span>
 
         <span className="underling_name">
-            Joshua Moracha
+            {selectedUser?.user.first_name} {selectedUser?.user.second_name}
         </span>
     
     </div>
@@ -29,17 +29,32 @@ const InitiativeInput = ({ formik, initiativeId, weightId, cascadeId, deleteId, 
 
     const Cascade = (
         <Form.Group controlId={ cascadeId }>
-                <Form.Select
+                {
+                 <Form.Select
                     className="cascade"
                     type="text" 
-                    placeholder=""
+                    placeholder="Select Role"
                     valuedefault=""
                     { ...formik.getFieldProps(cascadeId) } 
                     isInvalid={ formik.touched[cascadeId] && formik.errors[cascadeId] }
-                />
+                >
+                    <option>Cascade to Employee</option>
+                    <option value={ 3 }>Joshua Moracha</option>
+                    {
+                        underlings?.map(underling => {
+                            return (
+                                <option value={ underling.id } key={ underling.id }>{ underling?.user.first_name + ' '  + underling?.user.second_name}</option>
+                            )
+                        })
+                    }
+
+
+                </Form.Select>
+                }
                 <Form.Control.Feedback type='invalid'>
                     { formik.errors.cascade }
                 </Form.Control.Feedback>
+                
             </Form.Group>
     )
 
@@ -77,7 +92,7 @@ const InitiativeInput = ({ formik, initiativeId, weightId, cascadeId, deleteId, 
             </Form.Group>
         </Col>
         <Col>
-            { selectedUser? Cascaded : Cascade }
+            {selectedUser? Cascaded: Cascade}
         </Col>
         <Col className="delete_btn">
             <span id={ deleteId } onClick={ onDeleteInit }><DeleteBin5 /></span>

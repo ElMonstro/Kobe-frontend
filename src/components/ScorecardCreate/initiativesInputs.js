@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 
 import addBtn from "../../assets/plus_sign.svg";
+import { fetchUnderlingsURL } from "../../services/urls";
 import { generateString } from "../../utils";
+import { GET } from "../../utils/constants";
+import { makeRequest } from "../../utils/requestUtils";
 import InitiativeInput from "./initiativeInput";
 
 
 
 const InitiativeInputs = ({ formik }) => {
+
+    const [underlings, setUnderlings] = useState([]);
+
+    useEffect(() => {
+        makeRequest(fetchUnderlingsURL, GET, null, true, false)
+        .then( data => {
+            data && setUnderlings(data);
+        });
+    }, []);
 
     const [initiatives, setInitiatives] = useState([
         {
@@ -42,7 +54,7 @@ const InitiativeInputs = ({ formik }) => {
             {
                 initiativeId: `intiative-name-${randomString}`, 
                 weightId: `initiative-weight-${randomString}`, 
-                cascadeId: `cascade-${randomString}`,
+                cascadeId: `cascade-role-${randomString}`,
                 deleteId: `delete-${randomString}`
             },
         ]);
@@ -73,6 +85,7 @@ const InitiativeInputs = ({ formik }) => {
                     key={ initiative.initiativeId } 
                     formik={ formik }
                     deleteInitiative={ deleteInitiative }
+                    underlings={ underlings }
                 />)
         })
         }   

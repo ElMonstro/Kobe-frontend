@@ -18,7 +18,10 @@ const TargetInputs = ({ formik }) => {
                         placeholder=""
                         { ...formik.getFieldProps('data_type') } 
                         isInvalid={ formik.touched.data_type && formik.errors.data_type }
-                        />
+                        >
+                            <option value="percentage">Percentge</option>
+                            <option value="units">Units</option>
+                        </Form.Select>
                         <Form.Control.Feedback type='invalid'>
                             { formik.errors.data_type }
                         </Form.Control.Feedback>
