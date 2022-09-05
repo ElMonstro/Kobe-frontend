@@ -7,33 +7,33 @@ const BaselineTargetInputs = ({ formik }) => {
     return (
         <Row className="inputs_row">
             <Col>
-                <Form.Group className="mb-1" controlId="upper_threshold">
-                    <Form.Label>Lower Threshold</Form.Label>
+                <Form.Group className="mb-1" controlId="baseline">
+                    <Form.Label>Baseline</Form.Label>
                     <Form.Control 
                     type="text" 
                     placeholder=""
-                    { ...formik.getFieldProps('upper_threshold') } 
-                    isInvalid={ formik.touched.upper_threshold && formik.errors.upper_threshold }
+                    { ...formik.getFieldProps('baseline') } 
+                    isInvalid={ formik.touched.baseline && formik.errors.baseline }
                     disabled
                     />
                     <Form.Control.Feedback type='invalid'>
-                        { formik.errors.upper_threshold }
+                        { formik.errors.baseline }
                     </Form.Control.Feedback>
                 </Form.Group>
                 
             </Col>
             <Col>
-                <Form.Group className="mb-1" controlId="upper_threshold">
-                    <Form.Label>Upper Threshold</Form.Label>
+                <Form.Group className="mb-1" controlId="units_target">
+                    <Form.Label>Target</Form.Label>
                     <Form.Control 
                     type="text" 
                     placeholder=""
-                    { ...formik.getFieldProps('perspective') } 
-                    isInvalid={ formik.touched.lower_threshold && formik.errors.lower_threshold }
+                    { ...formik.getFieldProps('units_target') } 
+                    isInvalid={ formik.touched.units_target && formik.errors.units_target }
                     disabled
                     />
                     <Form.Control.Feedback type='invalid'>
-                        { formik.errors.lower_threshold }
+                        { formik.errors.units_target }
                     </Form.Control.Feedback>
                 </Form.Group>
             </Col>

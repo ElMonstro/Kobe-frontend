@@ -1,9 +1,12 @@
 import React from "react";
 import { Form, Row, Col } from "react-bootstrap"
+import { PERCENTAGE, UNITS } from "../../utils/constants";
 
 
-const TargetInputs = ({ formik }) => {
+const TargetInputs = ({ formik, setDataType, targetDisabled }) => {
 
+    const dataTypeProps = formik.getFieldProps('data_type');
+    
     return (
         <>
             <div className="title">
@@ -16,11 +19,12 @@ const TargetInputs = ({ formik }) => {
                         <Form.Select 
                         type="text" 
                         placeholder=""
-                        { ...formik.getFieldProps('data_type') } 
+                        { ...dataTypeProps } 
                         isInvalid={ formik.touched.data_type && formik.errors.data_type }
                         >
-                            <option value="percentage">Percentge</option>
-                            <option value="units">Units</option>
+                            <option>Enter Data Type</option>
+                            <option value={ PERCENTAGE }>Percentage</option>
+                            <option value={ UNITS }>Units</option>
                         </Form.Select>
                         <Form.Control.Feedback type='invalid'>
                             { formik.errors.data_type }

@@ -52,7 +52,7 @@ const InitiativeInput = ({ formik, initiativeId, weightId, cascadeId, deleteId, 
                 </Form.Select>
                 }
                 <Form.Control.Feedback type='invalid'>
-                    { formik.errors.cascade }
+                    { formik.errors[cascadeId] }
                 </Form.Control.Feedback>
                 
             </Form.Group>
@@ -70,7 +70,7 @@ const InitiativeInput = ({ formik, initiativeId, weightId, cascadeId, deleteId, 
                 isInvalid={ formik.touched[initiativeId] && formik.errors[initiativeId] }
                 />
                 <Form.Control.Feedback type='invalid'>
-                    { formik.errors.initiative_name }
+                    { formik.errors[initiativeId] }
                 </Form.Control.Feedback>
             </Form.Group>
             

@@ -2,7 +2,7 @@ import forge from 'node-forge';
 import { toast } from 'react-toastify';
 import store from "../redux/store/store.js";
 import { changeLoginStatus } from "../redux/actions";
-import { CHARACTERS } from './constants.js';
+import { BIANNUALS, CHARACTERS, QUARTERS } from './constants.js';
 
 
 const notificationTypeMapper = {
@@ -121,4 +121,14 @@ export const generateString = length => {
 export const logout = () => {
     localStorage.clear()
     store.dispatch(changeLoginStatus(false));
+}
+
+
+export const getPeriods = months => {
+    const mapper = {
+        3: QUARTERS,
+        6: BIANNUALS
+    }
+
+    return mapper[months]
 }

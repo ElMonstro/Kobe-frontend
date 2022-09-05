@@ -4,24 +4,19 @@ import addBtn from "../../assets/plus_sign.svg"
 import { generateString } from "../../utils";
 import MeasureInput from "./measureInput";
 
-const MeasuresInputs = ({ formik }) => {
+const MeasuresInputs = ({ formik, measures, setMeasures }) => {
 
-    const [measures, setMeasures] = useState([
-        {
-            measureId: 'measure-name-1', 
-            weightId: 'measure-weight-1', 
-
-        },
-    ]);
+    const [measureIndex, setMeasureIndex] = useState(1);
 
     const addMeasure = e => {
-        const randomString = generateString(5);
+        const currentIndex = measureIndex + 1;
+        setMeasureIndex(currentIndex);
 
         setMeasures([
             ...measures,
             {
-                measureId: `measure-name-${randomString}`, 
-                weightId: `measure-weight-${randomString}`, 
+                measureId: `measure-name-${currentIndex}`, 
+                weightId: `measure-weight-${currentIndex}`, 
             },
             
         ]);

@@ -1,13 +1,15 @@
 import {
     SET_COMPANY_INFO,
     SET_ORG_CHART,
+    SET_PERIODS,
     SET_SETTINGS,
 } from "../actions/actionTypes";
 
 const initialState = {
     settings: {},
     companyInfo: {},
-    orgChart: []
+    orgChart: [],
+    periods: []
 };
 
 const adminReducer = ( state=initialState, action ) => {
@@ -23,6 +25,10 @@ const adminReducer = ( state=initialState, action ) => {
         case SET_ORG_CHART:
             const { orgChart } = action;
             return {...state, orgChart};
+
+        case SET_PERIODS:
+            const { periods } = action;
+            return {...state, periods};
             
         default:
             return state;

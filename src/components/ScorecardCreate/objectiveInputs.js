@@ -1,8 +1,10 @@
 import React from "react";
 import { Form, Card, Row, Col } from "react-bootstrap"
+import { connect } from "react-redux";
+import { PERSPECTIVE_OBJECT } from "../../utils/constants";
 
 
-const ObjectiveInputs = ({ formik }) => {
+const ObjectiveInputs = ({ formik, settings }) => {
 
     return (
         <Card className="staff_card">
@@ -27,12 +29,19 @@ const ObjectiveInputs = ({ formik }) => {
                     <Col>
                         <Form.Group className="mb-1" controlId="perspective">
                             <Form.Label>Perspective</Form.Label>
-                            <Form.Control 
+                            <Form.Select 
                             type="text" 
                             placeholder=""
                             { ...formik.getFieldProps('perspective') } 
                             isInvalid={ formik.touched.perspective && formik.errors.perspective }
-                            />
+                            >
+                                <option>Perspectives</option>
+                                {
+                                    Object.keys(PERSPECTIVE_OBJECT).map(perspective => {
+                                        return <option key={ perspective } className="">{ settings[perspective] }</option>
+                                    })
+                                }
+                            </Form.Select>
                             <Form.Control.Feedback type='invalid'>
                                 { formik.errors.perspective }
                             </Form.Control.Feedback>
@@ -44,4 +53,10 @@ const ObjectiveInputs = ({ formik }) => {
     );
 }
 
-export default ObjectiveInputs;
+const mapStateToProps = ({ adminReducer: { settings }, }) => ({
+    settings, 
+});
+
+export default connect(
+    mapStateToProps
+) (ObjectiveInputs);

@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import {ChevronDown} from '@styled-icons/bootstrap/ChevronDown'
+import { connect } from "react-redux";
 
 import './index.scss';
 import src from "../../../assets/josh_logo.jpg";
 import defaultLogo from "../../../assets/logo.svg"
 import { base_cloudinary_url } from "../../../services/baseURL";
-import { logout } from "../../../utils";
+import { getPeriods, logout } from "../../../utils";
 import { makeRequest } from "../../../utils/requestUtils";
 import { GET } from "../../../utils/constants";
 import { companyInfoURL, fetchOrgChartURL, settingsURL } from "../../../services/urls";
@@ -17,13 +18,13 @@ import {
     setSettings, 
     setCompanyInfo, 
     setUser,
-    setOrgChart
+    setOrgChart,
+    setPeriods
 } 
 from "../../../redux/actions";
-import { connect } from "react-redux";
 
 
-const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser, setOrgChart }) => {
+const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser, setOrgChart, setPeriods }) => {
 
     const { name: companyName, logo } = companyInfo;
     const user = JSON.parse(localStorage.getItem('user'));
@@ -32,7 +33,8 @@ const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser, setOrgChart
 
         !companyName && makeRequest(settingsURL, GET, null, true, false)
             .then( data => {
-                data && setSettings(data)
+                data && setSettings(data);
+                data && setPeriods(getPeriods(data.review_period));
             });
 
         !companyName && makeRequest(companyInfoURL, GET, null, true, false)
@@ -104,7 +106,8 @@ const mapDispatchToProps = {
     setSettings,
     setCompanyInfo,
     setUser,
-    setOrgChart
+    setOrgChart,
+    setPeriods
 }
 
 const mapStateToProps = ({ adminReducer: { companyInfo }, }) => ({

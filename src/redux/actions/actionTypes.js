@@ -7,3 +7,4 @@ export const FETCH_ORG_CHART = "FETCH_ORG_CHART";
 export const SET_ORG_CHART = "SET_ORG_CHART";
 export const SHOW_CONF_MODAL = "SHOW_CONF_MODAL";
 export const SET_USER = "SET_USER";
+export const SET_PERIODS = "SET_PERIODS";

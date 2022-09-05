@@ -30,4 +30,17 @@ export const PERSPECTIVE_OBJECT = {
     internal_processes_name: "Internal Processes",
     learning_growth_name: "Learning & Growth",
     behavioral_name: "Behavioral"  
-}
+};
+export const QUARTERS = [
+    'quater 1',
+    'quater 2',
+    'quater 3',
+    'quater 4', 
+]
+
+export const BIANNUALS = [
+    'biannual 1',
+    'biannual 2',
+];
+export const UNITS = 'units';
+export const PERCENTAGE = 'percentage';

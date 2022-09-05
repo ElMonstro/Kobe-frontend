@@ -1,43 +1,104 @@
 import React, { useState } from "react";
 import { Form, Button, Card, Row, Col } from "react-bootstrap"
-import { OVER_VIEW, SCORECARD } from "../../utils/constants";
+import { OVER_VIEW, PERCENTAGE, SCORECARD, UNITS } from "../../utils/constants";
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 import "./index.scss";
-import { yupCascadeCutoffObj } from "../../utils/validators";
 import ObjectiveInputs from "./objectiveInputs";
 import MeasuresInputs from "./measuresInputs";
 import TargetInputs from "./targetsInputs";
 import QuaterlyTargetInputs from "./quaterlyTargetsInputs";
+import ThresholdsInputs from "./thresholdsInputs";
 import BaselineTargetInputs from "./baselineTargetInputs";
-import ThresholdInputs from "./thresholdnputs";
 import InitiativeInputs from "./initiativesInputs";
 import BudgetInputs from "./budgetInput";
+import { connect } from "react-redux";
 
-const ScorecardCreate = props => {
+const ScorecardCreate = ({ periods }) => {
 
     const [activeComponent, setActiveComponent] = useState(SCORECARD);
 
-    const formik = useFormik({
-        initialValues: {
+    const periodPercentage = 100/periods.length;
+
+    const [dataType, setDataType] = useState(PERCENTAGE);
+
+    const [initiatives, setInitiatives] = useState([
+        {
+            initiativeId: 'initiative-name-1', 
+            weightId: 'initiative-weight-1', 
+            cascadeId: 'cascade-role-1',
+            deleteId: 'delete-1'
+        },
+    ]);
+
+    const [measures, setMeasures] = useState([
+        {
+            measureId: 'measure-name-1', 
+            weightId: 'measure-weight-1', 
+        },
+    ]);
+
+    const initialValues = {
         upper_threshold: '',
         lower_threshold: '',
         name: '',
         perspective: '',
-        "measure-name-1": '',
-        "measure-weight-1": '',
         data_type: '',
-        percentage_target: '',
-        period: '',
         quaterly_target: '',
         baseline: '',
-        target: '',
+        percentage_target: '',
+        unit_target: '',
         budget: '',
-        "initiative-name-1": '',
-        "initiative-weight-1": '',
-        "cascade-role-1": '',
-        },
-        // validationSchema: yupCascadeCutoffObj,
+        }
+
+    const validationSchema = {
+        name: Yup.string()
+            .required('*Required'),
+        perspective: Yup.string()
+            .required('*Required'),
+        data_type: Yup.string()
+            .required('*Required'),
+        target: Yup.number(),
+        upper_threshold: Yup.number(),
+        lower_threshold: Yup.number(),
+        budget: Yup.number(),
+        baseline: Yup.number(),
+        percentage_target: Yup.number(),
+        unit_target: Yup.number(),
+    }
+
+    periods.map(period => {
+        initialValues[period] = periodPercentage;
+        validationSchema[period] = Yup.number().required('*Required');
+        return undefined;
+    });
+
+    initiatives.map(initiative => {
+        initialValues[initiative.initiativeId] = '';
+        initialValues[initiative.weightId] = '';
+        initialValues[initiative.cascadeId] = '';
+        validationSchema[initiative.initiativeId] = Yup.string();
+        validationSchema[initiative.weightId] = Yup.number();
+        validationSchema[initiative.cascadeId] = Yup.number();
+        return undefined;
+    })
+
+    measures.map(measure => {
+        initialValues[measure.measureId] = '';
+        initialValues[measure.weightId] = '';
+        validationSchema[measure.measureId] = Yup.string();
+        validationSchema[measure.weightId] = Yup.number();
+        return undefined;
+    })
+
+    validationSchema['measure-name-1'] = Yup.string().required('*Measure name is required');
+    validationSchema[initiatives[0].initiativeId] = Yup.string().required('*Initiative is required');
+    validationSchema[initiatives[0].cascadeId] = Yup.string().required('*Required');
+
+    const formik = useFormik({
+        initialValues: initialValues,
+        validationSchema: Yup.object(validationSchema),
         onSubmit: async (values) => {
             // makeRequest(settingsURL, POST, values, true);
             console.log(values)
@@ -53,13 +114,21 @@ const ScorecardCreate = props => {
                     
                     <div className="inputs_cont">
                         
-                        <MeasuresInputs formik={ formik } />
-                        <TargetInputs formik={ formik } />
+                        <MeasuresInputs 
+                            formik={ formik } 
+                            measures={ measures } 
+                            setMeasures={ setMeasures }
+                        />
+                        <TargetInputs targetDisabled={ dataType!==PERCENTAGE } setDataType={ setDataType } formik={ formik } />
                         <QuaterlyTargetInputs formik={ formik } />
-                        <BaselineTargetInputs formik={ formik } />
-                        <ThresholdInputs formik={ formik } />
+                        <BaselineTargetInputs targetDisabled={ dataType!==UNITS} formik={ formik } />
+                        <ThresholdsInputs formik={ formik } />
                         <BudgetInputs formik={ formik } />
-                        <InitiativeInputs formik={ formik } />
+                        <InitiativeInputs 
+                            formik={ formik }
+                            initiatives={ initiatives }
+                            setInitiatives={ setInitiatives }
+                        />
                     
                     </div>
 
@@ -75,4 +144,14 @@ const ScorecardCreate = props => {
     )
 }
 
-export default ScorecardCreate;
+const mapDispatchToProps = {
+}
+
+const mapStateToProps = ({ adminReducer: { periods }, }) => ({
+    periods, 
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+) (ScorecardCreate);

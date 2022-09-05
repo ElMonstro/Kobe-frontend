@@ -10,7 +10,7 @@ import InitiativeInput from "./initiativeInput";
 
 
 
-const InitiativeInputs = ({ formik }) => {
+const InitiativeInputs = ({ formik, initiatives, setInitiatives }) => {
 
     const [underlings, setUnderlings] = useState([]);
 
@@ -21,14 +21,9 @@ const InitiativeInputs = ({ formik }) => {
         });
     }, []);
 
-    const [initiatives, setInitiatives] = useState([
-        {
-            initiativeId: 'intiative-name-1', 
-            weightId: 'initiative-weight-1', 
-            cascadeId: 'cascade-role-1',
-            deleteId: 'delete-1'
-        },
-    ]);
+    
+
+    const [initiativesIndex, setInitiativesIndex] = useState(1);
 
     const deleteInitiative = deleteId => {
         if (initiatives.length === 1) {
@@ -48,14 +43,17 @@ const InitiativeInputs = ({ formik }) => {
     }
 
     const addInitiative = e => {
-        const randomString = generateString(4);
+
+        const currentIndex = initiativesIndex + 1;
+        setInitiativesIndex(currentIndex);
+
         setInitiatives([
             ...initiatives,
             {
-                initiativeId: `intiative-name-${randomString}`, 
-                weightId: `initiative-weight-${randomString}`, 
-                cascadeId: `cascade-role-${randomString}`,
-                deleteId: `delete-${randomString}`
+                initiativeId: `intiative-name-${currentIndex}`, 
+                weightId: `initiative-weight-${currentIndex}`, 
+                cascadeId: `cascade-role-${currentIndex}`,
+                deleteId: `delete-${currentIndex}`
             },
         ]);
     }

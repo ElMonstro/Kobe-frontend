@@ -3,8 +3,6 @@ import { Form, Row, Col } from "react-bootstrap"
 
 
 const MeasureInput = ({ formik, measureId, weightId }) => {
-
-
     
     return (
             <Row className="inputs_row measure_inputs">
