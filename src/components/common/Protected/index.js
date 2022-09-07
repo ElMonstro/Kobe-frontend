@@ -2,22 +2,16 @@ import { Navigate } from "react-router-dom";
 import { connect } from 'react-redux';
 
 
-const Protected = ({ isLoggedIn, children, user }) => {
+const Protected = ({ children }) => {
     let toUrl;
-    
-    user?.is_admin? toUrl = "/admin/login": toUrl = "/";
-    if (!isLoggedIn) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    user?.is_admin? toUrl = "/admin/login": toUrl = "/login";
+    if (!user) {
         
-    return <Navigate to={ toUrl } replace />;
+     <Navigate to={ toUrl } replace />;
     }
 
     return children;
 };
 
-const mapStateToProps = ({authReducer}) => ({
-    ...authReducer,
-});
-
-export default connect(
-    mapStateToProps,
-) (Protected);
+export default Protected;
