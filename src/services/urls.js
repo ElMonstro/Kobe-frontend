@@ -9,3 +9,6 @@ export const fetchOrgChartURL = `${baseURL}/auth/org-chart/`;
 export const sendEmailsURL = `${baseURL}/administration/send-auth-emails/`;
 export const fetchUnderlingsURL = `${baseURL}/scorecard/role/fetch-underlings/`;
 export const createObjectiveURL = `${baseURL}/scorecard/objectives/`;
+export const fetchSelfCascadedInitURL = `${baseURL}/scorecard/objectives/?type=self_cascaded_init`;
+export const fetchInitiativeURL = `${baseURL}/scorecard/objectives/?type=initiative`;
+export const updateObjectiveURL = id => `${baseURL}/scorecard/objectives/${id}/`;

@@ -113,7 +113,7 @@ const ScorecardCreate = ({ periods }) => {
                 })
         },
     });
-    console.log(formik.errors)
+
     return (
         <div className="score_card_create">
             <Form onSubmit={ formik.handleSubmit }>

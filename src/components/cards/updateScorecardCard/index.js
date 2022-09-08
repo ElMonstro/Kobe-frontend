@@ -1,9 +1,23 @@
-import React, { useState } from "react";
-import { Card, Row, Col } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import { Card, Row, Col, Form } from "react-bootstrap";
+import { useFormik } from 'formik';
 
+import { makeRequest } from "../../../utils/requestUtils";
 import "./index.scss";
+import { createObjectiveURL, fetchSelfCascadedInitURL } from "../../../services/urls";
+import { GET } from "../../../utils/constants";
+import Initiative from "./initiative";
 
 const UpdateScorecardCard = props => {
+
+    const [initiatives, setInitiatives] = useState([])
+
+    useEffect(() => {
+        makeRequest(fetchSelfCascadedInitURL, GET, null, true, false)
+        .then(data => {
+            setInitiatives(data);
+        });
+    }, [])
     
     return (
         <Card className="staff_card update_scorecard">
@@ -18,98 +32,13 @@ const UpdateScorecardCard = props => {
                     <Col>Score</Col>
                     <Col>Status</Col>
                     <Col>Evidence</Col>
+                    <Col></Col>
                 </Row>
-
-                <Row className="initiative">
-                    <Col lg={3} className="initiative_name">
-                        'selectedElements' is assi
-                    </Col>
-                    <Col>
-                        <div className="budget">
-                            15000
-                        </div>
-                    </Col>
-                    <Col>
-                        <input placeholder="13000" className="cost_input" />
-                    </Col>
-                    <Col>
-                        25%
-                    </Col>
-                    <Col>
-                        30%
-                    </Col>
-                    <Col>
-                        <input placeholder="15" className="score_input" />
-                    </Col>
-                    <Col>
-                        <span className="status_color poor"></span>
-                        <span className="status_text">Poor</span>
-                    </Col>
-                    <Col>
-                        <input placeholder="https://www.google.com"  className="evidence_input" />
-                    </Col>
-                </Row>
-
-                <Row className="initiative">
-                    <Col lg={3} className="initiative_name">
-                        'selectedElements' vzvs bavsdfbd zb bzdd vzbz
-                    </Col>
-                    <Col>
-                        <div className="budget">
-                            15000
-                        </div>
-                    </Col>
-                    <Col>
-                        <input placeholder="13000" className="cost_input" />
-                    </Col>
-                    <Col>
-                        25%
-                    </Col>
-                    <Col>
-                        30%
-                    </Col>
-                    <Col>
-                        <input placeholder="15" className="score_input" />
-                    </Col>
-                    <Col>
-                        <span className="status_color good"></span>
-                        <span className="status_text">Good</span>
-                    </Col>
-                    <Col>
-                        <input placeholder="https://www.google.com" className="evidence_input" />
-                    </Col>
-                </Row>
-
-                <Row className="initiative">
-                    <Col lg={3} className="initiative_name">
-                        'selectedElements' vzvs bavsdfbd zb bzdd vzbz
-                    </Col>
-                    <Col>
-                        <div className="budget">
-                            15000
-                        </div>
-                    </Col>
-                    <Col>
-                        <input placeholder="13000" className="cost_input" />
-                    </Col>
-                    <Col>
-                        25%
-                    </Col>
-                    <Col>
-                        30%
-                    </Col>
-                    <Col>
-                        <input placeholder="15" className="score_input" />
-                    </Col>
-                    <Col>
-                        <span className="status_color satisfactory"></span>
-                        <span className="status_text">Satisfactory</span>
-                    </Col>
-                    <Col>
-                        <input placeholder="https://www.google.com" className="evidence_input" />
-                    </Col>
-                </Row>
-                
+                {
+                    initiatives?.map(initiative => {
+                        return <Initiative key={ initiative.id } { ...initiative }/>
+                    })
+                } 
             </div>
             
         </Card>
