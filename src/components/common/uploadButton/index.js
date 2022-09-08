@@ -33,7 +33,7 @@ const UploadButton = props => {
         }
         formData.append(fileKey, inputFile?.files[0]);
         setSpinnerStatus(true);
-        const data = await makeRequest(uploadURL, POST, formData, true);
+        const data = await makeRequest(uploadURL, POST, formData, true, true, true);
         setSpinnerStatus(false);
         data? setFileNameClass('green_text'): setFileNameClass('red_text');
     }
