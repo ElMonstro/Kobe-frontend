@@ -8,3 +8,4 @@ export const uploadOrgChartURL = `${baseURL}/administration/org-chart/`;
 export const fetchOrgChartURL = `${baseURL}/auth/org-chart/`;
 export const sendEmailsURL = `${baseURL}/administration/send-auth-emails/`;
 export const fetchUnderlingsURL = `${baseURL}/scorecard/role/fetch-underlings/`;
+export const createObjectiveURL = `${baseURL}/scorecard/objectives/`;

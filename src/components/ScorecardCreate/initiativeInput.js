@@ -39,7 +39,6 @@ const InitiativeInput = ({ formik, initiativeId, weightId, cascadeId, deleteId, 
                     isInvalid={ formik.touched[cascadeId] && formik.errors[cascadeId] }
                 >
                     <option>Cascade to Employee</option>
-                    <option value={ 3 }>Joshua Moracha</option>
                     {
                         underlings?.map(underling => {
                             return (

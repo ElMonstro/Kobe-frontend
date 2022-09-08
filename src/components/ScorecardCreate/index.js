@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Form, Button, Card, Row, Col } from "react-bootstrap"
-import { OVER_VIEW, PERCENTAGE, SCORECARD, UNITS } from "../../utils/constants";
+import { Form, Button, Card } from "react-bootstrap"
+import { OVER_VIEW, PERCENTAGE, POST, SCORECARD, UNITS } from "../../utils/constants";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { connect } from "react-redux";
 
 import "./index.scss";
 import ObjectiveInputs from "./objectiveInputs";
@@ -13,7 +14,10 @@ import ThresholdsInputs from "./thresholdsInputs";
 import BaselineTargetInputs from "./baselineTargetInputs";
 import InitiativeInputs from "./initiativesInputs";
 import BudgetInputs from "./budgetInput";
-import { connect } from "react-redux";
+import { createObjectPayload } from "../../utils";
+import { makeRequest } from "../../utils/requestUtils";
+import { createObjectiveURL } from "../../services/urls";
+
 
 const ScorecardCreate = ({ periods }) => {
 
@@ -69,7 +73,7 @@ const ScorecardCreate = ({ periods }) => {
     }
 
     periods.map(period => {
-        initialValues[period] = periodPercentage;
+        initialValues[period] = '';
         validationSchema[period] = Yup.number().required('*Required');
         return undefined;
     });
@@ -99,12 +103,17 @@ const ScorecardCreate = ({ periods }) => {
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: Yup.object(validationSchema),
-        onSubmit: async (values) => {
-            // makeRequest(settingsURL, POST, values, true);
-            console.log(values)
+        onSubmit: async (values, { setErrors, resetForm }) => {
+            const payload = createObjectPayload(values, initiatives, measures, periods);
+            
+            makeRequest(createObjectiveURL, POST, payload, true)
+                .then(data => {
+                    console.log(data)
+                    
+                })
         },
     });
-    
+    console.log(formik.errors)
     return (
         <div className="score_card_create">
             <Form onSubmit={ formik.handleSubmit }>
