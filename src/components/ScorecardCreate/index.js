@@ -123,7 +123,7 @@ const ScorecardCreate = ({ periods, initiativeId, setInitiativeId }) => {
             const payload = createObjectPayload(values, initiatives, measures, periods);
             values.percentage_target = (values.percentage_target/100).toFixed(2);
 
-            if (isUndefined(initiativeId)){
+            if (!Boolean(initiativeId)){
                 makeRequest(createObjectiveURL, POST, payload, true)
                     .then(data => {
                         if (data) resetForm();

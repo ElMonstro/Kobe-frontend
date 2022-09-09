@@ -148,8 +148,6 @@ export const createObjectPayload = (data, initiatives, measures, periods) => {
       delete data[initiative.initiativeId];
       delete data[initiative.weightId];
       delete data[initiative.cascadeId];
-
-      console.log(data[initiative.initiativeId])
   
       initiativesPayload.push(initiativePayload);
       return undefined;

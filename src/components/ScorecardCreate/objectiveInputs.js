@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Card, Row, Col } from "react-bootstrap"
 import { connect } from "react-redux";
 import { PERSPECTIVE_OBJECT } from "../../utils/constants";
 
 
-const ObjectiveInputs = ({ formik, settings, initiativeId }) => {
+const ObjectiveInputs = ({ formik, settings, initiativeId, perspective, initiative }) => {
 
     const isDisabled = Boolean(initiativeId);
-    console.log(isDisabled);
+
     return (
         <Card className="staff_card">
             <div className="card_title title">Objective</div>
             <div className="inputs_cont">
-                <Row className="inputs_row">
+                <Row className={ `inputs_row` }>
                     <Col>
                         <Form.Group className="mb-1" controlId="name">
                             <Form.Label>Objective</Form.Label>

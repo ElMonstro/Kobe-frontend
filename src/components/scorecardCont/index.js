@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CASCADED, CREATE, UPDATE } from "../../utils/constants";
+import { CASCADED, CREATE, UPDATE, VIEW } from "../../utils/constants";
 import CascadedCards from "../cards/cascadedCards";
 import UpdateScorecardCard from "../cards/updateScorecardCard";
 import ScorecardCreate from "../ScorecardCreate";
@@ -24,7 +24,7 @@ const ScorecardCont = props => {
     const ActiveComponent = activeComponentMapper[activeComponent];
 
     useEffect(() => {
-        setActiveComponent(CASCADED);
+        setActiveComponent(CREATE);
     }, []);
     
     return (

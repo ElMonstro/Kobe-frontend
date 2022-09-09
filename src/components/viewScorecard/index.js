@@ -3,6 +3,7 @@ import { Card, Col, Row } from "react-bootstrap";
 
 
 import "./index.scss";
+import ViewPerspective from "./viewPerspective.";
 
 const ViewScorecard = props => {
 

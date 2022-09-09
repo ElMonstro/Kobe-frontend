@@ -3,11 +3,9 @@ import { Row, Col } from "react-bootstrap";
 
 import addBtn from "../../assets/plus_sign.svg";
 import { fetchUnderlingsURL } from "../../services/urls";
-import { generateString } from "../../utils";
 import { GET } from "../../utils/constants";
 import { makeRequest } from "../../utils/requestUtils";
 import InitiativeInput from "./initiativeInput";
-
 
 
 const InitiativeInputs = ({ formik, initiatives, setInitiatives }) => {

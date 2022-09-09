@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Row, Col } from "react-bootstrap"
 import { DeleteBin5 } from "@styled-icons/remix-fill/DeleteBin5";
 
 import thumbnail from "../../assets/josh_logo.jpg";
+import { connect } from "react-redux";
 
 
-const InitiativeInput = ({ formik, initiativeId, weightId, cascadeId, deleteId, deleteInitiative, underlings }) => {
+const InitiativeInput = ({ formik, initiativeId, weightId, cascadeId, deleteId, deleteInitiative, underlings, orgChart }) => {
 
     const [selectedUser, setSelectedUser] = useState(null);
 
@@ -39,10 +40,11 @@ const InitiativeInput = ({ formik, initiativeId, weightId, cascadeId, deleteId, 
                     isInvalid={ formik.touched[cascadeId] && formik.errors[cascadeId] }
                 >
                     <option>Cascade to Employee</option>
+                    <option value={ orgChart?.id } key={ orgChart?.id }>{ orgChart?.user.first_name + " "  + orgChart?.user.second_name}</option>
                     {
                         underlings?.map(underling => {
                             return (
-                                <option value={ underling.id } key={ underling.id }>{ underling?.user.first_name + ' '  + underling?.user.second_name}</option>
+                                <option value={ underling?.id } key={ underling?.id }>{ underling?.user.first_name + ' '  + underling?.user.second_name}</option>
                             )
                         })
                     }
@@ -100,4 +102,14 @@ const InitiativeInput = ({ formik, initiativeId, weightId, cascadeId, deleteId, 
     );
 }
 
-export default InitiativeInput;
+const mapDispatchToProps = {
+}
+
+const mapStateToProps = ({ adminReducer: { orgChart }, }) => ({
+    orgChart: orgChart[0]
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+) (InitiativeInput);
