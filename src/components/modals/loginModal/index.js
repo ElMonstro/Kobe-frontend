@@ -27,7 +27,7 @@ const LoginModal = props => {
                 const response = await AuthService.loginUser(values);
                 const user = parseJwt(response.data.access);
                 changeLoginStatus(true);
-                navigate('/admin');
+                navigate('/');
                 // store access tokens in local storage
                 window.localStorage.setItem('tokens', JSON.stringify(response.data));
                 window.localStorage.setItem('user', JSON.stringify(user));

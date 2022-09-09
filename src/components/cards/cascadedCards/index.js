@@ -8,11 +8,10 @@ const CascadedCards = props => {
     
     return (
         <div className="">
-            <CascadedCard type="cascaded" title="Cascaded objectives" />
-            <CascadedCard type="selfCascaded" title="Self cascaded initiatives" />
+            <CascadedCard {...props} type="cascaded" title="Cascaded objectives" />
+            <CascadedCard {...props}  type="selfCascaded" title="Self cascaded initiatives" />
         </div>
     );
 }
-
 
 export default CascadedCards;

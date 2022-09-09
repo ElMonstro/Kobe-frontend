@@ -4,8 +4,10 @@ import { connect } from "react-redux";
 import { PERSPECTIVE_OBJECT } from "../../utils/constants";
 
 
-const ObjectiveInputs = ({ formik, settings }) => {
+const ObjectiveInputs = ({ formik, settings, initiativeId }) => {
 
+    const isDisabled = Boolean(initiativeId);
+    console.log(isDisabled);
     return (
         <Card className="staff_card">
             <div className="card_title title">Objective</div>
@@ -19,6 +21,7 @@ const ObjectiveInputs = ({ formik, settings }) => {
                             placeholder=""
                             { ...formik.getFieldProps('name') } 
                             isInvalid={ formik.touched.name && formik.errors.name }
+                            disabled={ isDisabled }
                             />
                             <Form.Control.Feedback type='invalid'>
                                 { formik.errors.name }
@@ -34,6 +37,7 @@ const ObjectiveInputs = ({ formik, settings }) => {
                             placeholder=""
                             { ...formik.getFieldProps('perspective') } 
                             isInvalid={ formik.touched.perspective && formik.errors.perspective }
+                            disabled={ isDisabled }
                             >
                                 <option>Perspectives</option>
                                 {

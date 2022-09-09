@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button, Card } from "react-bootstrap"
-import { OVER_VIEW, PERCENTAGE, POST, SCORECARD, UNITS } from "../../utils/constants";
+import { GET, OVER_VIEW, PATCH, PERCENTAGE, POST, SCORECARD, UNITS } from "../../utils/constants";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from "react-redux";
+import { isUndefined } from "lodash";
 
 import "./index.scss";
 import ObjectiveInputs from "./objectiveInputs";
@@ -16,12 +17,20 @@ import InitiativeInputs from "./initiativesInputs";
 import BudgetInputs from "./budgetInput";
 import { createObjectPayload } from "../../utils";
 import { makeRequest } from "../../utils/requestUtils";
-import { createObjectiveURL } from "../../services/urls";
+import { createObjectiveURL, updateObjectiveURL, createObjectiveFromInitURL } from "../../services/urls";
 
 
-const ScorecardCreate = ({ periods }) => {
+const ScorecardCreate = ({ periods, initiativeId, setInitiativeId }) => {
 
-    const [activeComponent, setActiveComponent] = useState(SCORECARD);
+    const [initiative, setInitiative] = useState({});
+    const { perspective, name } = initiative;
+
+    useEffect(() => {
+        initiativeId && makeRequest(updateObjectiveURL(initiativeId), GET, null, true, false)
+            .then(data => {
+                setInitiative(data);
+            })
+    }, [])
 
     const periodPercentage = 100/periods.length;
 
@@ -72,6 +81,13 @@ const ScorecardCreate = ({ periods }) => {
         unit_target: Yup.number(),
     }
 
+    if ( !isUndefined(name)) {
+        initialValues.name = name;
+        initialValues.perspective = perspective;
+        validationSchema.name = Yup.string();
+        validationSchema.perspective = Yup.string();
+    }
+
     periods.map(period => {
         initialValues[period] = '';
         validationSchema[period] = Yup.number().required('*Required');
@@ -105,12 +121,24 @@ const ScorecardCreate = ({ periods }) => {
         validationSchema: Yup.object(validationSchema),
         onSubmit: async (values, { setErrors, resetForm }) => {
             const payload = createObjectPayload(values, initiatives, measures, periods);
+            values.percentage_target = (values.percentage_target/100).toFixed(2);
+
+            if (isUndefined(initiativeId)){
+                makeRequest(createObjectiveURL, POST, payload, true)
+                    .then(data => {
+                        if (data) resetForm();
+                    });
+                
+            } else {
+                makeRequest(createObjectiveFromInitURL(initiativeId), PATCH, payload, true)
+                .then(data=> {
+                    if (data) {
+                        setInitiativeId(null);
+                        resetForm();
+                    } 
+                });   
+            }
             
-            makeRequest(createObjectiveURL, POST, payload, true)
-                .then(data => {
-                    console.log(data)
-                    
-                })
         },
     });
 
@@ -118,7 +146,12 @@ const ScorecardCreate = ({ periods }) => {
         <div className="score_card_create">
             <Form onSubmit={ formik.handleSubmit }>
                 
-                <ObjectiveInputs formik={ formik } />
+                <ObjectiveInputs 
+                    formik={ formik } 
+                    initiativeId={ initiativeId }
+                    name = { name }
+                    perspective = { perspective } 
+                    />
                 <Card className="staff_card">
                     
                     <div className="inputs_cont">
@@ -127,6 +160,7 @@ const ScorecardCreate = ({ periods }) => {
                             formik={ formik } 
                             measures={ measures } 
                             setMeasures={ setMeasures }
+                            initiative = {initiative}
                         />
                         <TargetInputs targetDisabled={ dataType!==PERCENTAGE } setDataType={ setDataType } formik={ formik } />
                         <QuaterlyTargetInputs formik={ formik } />

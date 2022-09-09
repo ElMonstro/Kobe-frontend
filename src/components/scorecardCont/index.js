@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { CREATE, UPDATE } from "../../utils/constants";
+import { CASCADED, CREATE, UPDATE } from "../../utils/constants";
 import CascadedCards from "../cards/cascadedCards";
 import UpdateScorecardCard from "../cards/updateScorecardCard";
 import ScorecardCreate from "../ScorecardCreate";
 import ScorecardNav from "../scorecardNav";
 import ViewScorecardCard from "../viewScorecard";
+  
 
 import "./index.scss";
 
 const ScorecardCont = props => {
 
-    const [activeComponent, setActiveComponent] = useState(CREATE);
+    const [activeComponent, setActiveComponent] = useState(CASCADED);
     const activeComponentMapper = {
         create: ScorecardCreate,
         update: UpdateScorecardCard,
@@ -18,16 +19,18 @@ const ScorecardCont = props => {
         view: ViewScorecardCard
     }
 
+    const [intiativeId, setInitiativeId] = useState(null);
+
     const ActiveComponent = activeComponentMapper[activeComponent];
 
     useEffect(() => {
-        setActiveComponent(UPDATE);
+        setActiveComponent(CASCADED);
     }, []);
     
     return (
         <div className="scorecard_cont">
             <ScorecardNav setActiveComponent={ setActiveComponent } />
-            <ActiveComponent />
+            <ActiveComponent setActiveComponent={ setActiveComponent } setInitiativeId={ setInitiativeId } initiativeId={intiativeId}/>
             
         </div>
     )

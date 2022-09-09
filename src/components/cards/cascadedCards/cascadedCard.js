@@ -7,7 +7,7 @@ import CascadedInitiative from "./cascadedInitiative";
 
 import "./index.scss";
 
-const CascadedCard = ({ title, type }) => {
+const CascadedCard = ({ title, type, setInitiativeId, setActiveComponent }) => {
 
     const urlMapper = {
         selfCascaded: fetchSelfCascadedInitURL,
@@ -31,12 +31,14 @@ const CascadedCard = ({ title, type }) => {
                 <div className="card_title title">{ title }</div>
                     <div className="initiatives">
                         {
-                            initiatives.map(initiative => {
+                            initiatives?.map(initiative => {
                                 return <CascadedInitiative 
                                         key={ initiative.id } 
                                         id={ initiative.id }
                                         name={ initiative.name } 
-                                        type={ initiative.type } 
+                                        type={ initiative.type }
+                                        setInitiativeId={setInitiativeId}
+                                        setActiveComponent={setActiveComponent}
                                     />
                             })
                         }

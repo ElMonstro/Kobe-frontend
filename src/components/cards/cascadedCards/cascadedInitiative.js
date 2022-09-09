@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
+import { CREATE } from "../../../utils/constants";
 
 import "./index.scss";
 
-const CascadedInitiative = ({ name, type, id })=> {
+const CascadedInitiative = ({ name, type, id, setActiveComponent, setInitiativeId })=> {
 
     const buttonMapper = {
         initiative: 'create',
@@ -12,7 +13,8 @@ const CascadedInitiative = ({ name, type, id })=> {
     }
 
     const handleClick = e => {
-        console.log(e.target.id);
+        setInitiativeId(e.target.id);
+        setActiveComponent(CREATE);
     };
 
     const buttonType = buttonMapper[type];
