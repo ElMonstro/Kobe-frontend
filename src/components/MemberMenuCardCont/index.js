@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
 import { OVER_VIEW, SCORECARD } from "../../utils/constants";
 import MemberNavCard from "../cards/MemberNavCard";
 import ScorecardCont from "../scorecardCont";
@@ -15,7 +16,7 @@ const MemberMenuCont = props => {
                 activeComponent={ activeComponent } 
                 setActiveComponent={ setActiveComponent }
             />
-            <ScorecardCont />
+            <Outlet />
         </div>
     )
 }

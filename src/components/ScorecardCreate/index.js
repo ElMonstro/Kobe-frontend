@@ -18,12 +18,14 @@ import BudgetInputs from "./budgetInput";
 import { createObjectPayload } from "../../utils";
 import { makeRequest } from "../../utils/requestUtils";
 import { createObjectiveURL, updateObjectiveURL, createObjectiveFromInitURL } from "../../services/urls";
+import { useParams } from "react-router-dom";
 
 
-const ScorecardCreate = ({ periods, initiativeId, setInitiativeId }) => {
+const ScorecardCreate = ({ periods }) => {
 
     const [initiative, setInitiative] = useState({});
     const { perspective, name } = initiative;
+    const { initiativeId } = useParams();
 
     useEffect(() => {
         initiativeId && makeRequest(updateObjectiveURL(initiativeId), GET, null, true, false)
@@ -132,9 +134,7 @@ const ScorecardCreate = ({ periods, initiativeId, setInitiativeId }) => {
             } else {
                 makeRequest(createObjectiveFromInitURL(initiativeId), PATCH, payload, true)
                 .then(data=> {
-                    if (data) {
-                        setInitiativeId(null);
-                        resetForm();
+                    if (data) {                        resetForm();
                     } 
                 });   
             }

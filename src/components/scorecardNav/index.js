@@ -31,22 +31,22 @@ const ScorecardNavCard = ({ activeComponent, setActiveComponent, user }) => {
 
             <Row className="nav">
                 <Col>
-                    <Link id={ CREATE } onClick={ handleClick } className="selected" to="/">
+                    <Link id={ CREATE } onClick={ handleClick } className="selected" to={ CREATE }>
                         Create
                     </Link>
                 </Col>
                 <Col>
-                    <Link id={ CASCADED } onClick={ handleClick } to="/">
+                    <Link id={ CASCADED } onClick={ handleClick } to={ CASCADED }>
                         Cascaded
                     </Link>
                 </Col>
                 <Col>
-                    <Link id={ VIEW } onClick={ handleClick } to="/">
+                    <Link id={ VIEW } onClick={ handleClick } to={ VIEW }>
                         View
                     </Link>
                 </Col>
                 <Col>
-                    <Link id={ UPDATE } onClick={ handleClick } to="/">
+                    <Link id={ UPDATE } onClick={ handleClick } to={ UPDATE }>
                         Update
                     </Link>
                 </Col>

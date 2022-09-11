@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
-import { CREATE } from "../../../utils/constants";
+import { useNavigate } from "react-router-dom";
+import { CREATE, SCORECARD } from "../../../utils/constants";
 
 import "./index.scss";
 
-const CascadedInitiative = ({ name, type, id, setActiveComponent, setInitiativeId })=> {
+const CascadedInitiative = ({ name, type, id})=> {
 
     const buttonMapper = {
         initiative: 'create',
@@ -12,9 +13,10 @@ const CascadedInitiative = ({ name, type, id, setActiveComponent, setInitiativeI
         objective: 'edit'
     }
 
+    const navigate = useNavigate();
+
     const handleClick = e => {
-        setInitiativeId(e.target.id);
-        setActiveComponent(CREATE);
+        navigate(`/${SCORECARD}/${CREATE}/${e.target.id}`);
     };
 
     const buttonType = buttonMapper[type];

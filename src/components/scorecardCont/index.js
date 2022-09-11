@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import { CASCADED, CREATE, UPDATE, VIEW } from "../../utils/constants";
 import CascadedCards from "../cards/cascadedCards";
 import UpdateScorecardCard from "../cards/updateScorecardCard";
@@ -12,16 +13,6 @@ import "./index.scss";
 const ScorecardCont = props => {
 
     const [activeComponent, setActiveComponent] = useState(CASCADED);
-    const activeComponentMapper = {
-        create: ScorecardCreate,
-        update: UpdateScorecardCard,
-        cascaded: CascadedCards,
-        view: ViewScorecardCard
-    }
-
-    const [intiativeId, setInitiativeId] = useState(null);
-
-    const ActiveComponent = activeComponentMapper[activeComponent];
 
     useEffect(() => {
         setActiveComponent(CREATE);
@@ -30,7 +21,7 @@ const ScorecardCont = props => {
     return (
         <div className="scorecard_cont">
             <ScorecardNav setActiveComponent={ setActiveComponent } />
-            <ActiveComponent setActiveComponent={ setActiveComponent } setInitiativeId={ setInitiativeId } initiativeId={intiativeId}/>
+            <Outlet setActiveComponent={ setActiveComponent } />
             
         </div>
     )
