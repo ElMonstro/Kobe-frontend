@@ -47,7 +47,7 @@ function App({ isLoggedIn }) {
           <Route path="/" element={<Protected> <StaffDashboard /> </Protected>} >
             <Route index element={<ScorecardCont />} />
             <Route path={ SCORECARD } element={<ScorecardCont />} >
-              <Route index element={ <CascadedCards />}/>
+              <Route index element={ <ViewScorecard />}/>
               <Route path={ CREATE } element={ <ScorecardCreate/> }/>
               <Route path={`${CREATE}/:initiativeId`} element={ <ScorecardCreate/> }/>
               <Route path={ CASCADED } element={ <CascadedCards />}/>

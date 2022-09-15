@@ -14,19 +14,19 @@ const ViewScorecard = props => {
                     <Col>
                         Name
                     </Col>
-                    <Col>
+                    <Col className="second_half">
                         <Row>
                             <Col> Status </Col>
-                            <Col> Measure </Col>
+                            <Col className="measure"> Measure </Col>
                             <Col> Weight </Col>
                             <Col> Target </Col>
                             <Col> Score  </Col>
                             <Col> Perfomance  </Col>
                         </Row>
                     </Col>
-                </Row>
+            </Row>
             <Card className="staff_card">
-                
+                <ViewPerspective />
             </Card>
         </div>
     )

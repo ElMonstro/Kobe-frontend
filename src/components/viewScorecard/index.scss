@@ -6,9 +6,121 @@
         height: 45px;
         padding: 10px 35px;
         margin-bottom: 20px;
+        margin-right: 0;
+
+        .measure {
+            text-align: center;
+        }
+
+        .second_half{
+            .row {
+                margin-left: 0;
+                padding-left: 0;
+                margin-right: 0;
+            }
+        }
     }
 
     .staff_card {
 
+        .thumbnail {
+            vertical-align: middle;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+
+        .gray_lines>:nth-child(odd) {
+            background: #F2F2F2;
+        } 
+
+        .initiative {
+ 
+                
+            .initiative_row {
+                padding-left: 40px!important;
+            }
+    
+        }
+
+        .row {
+            margin-left: 0;
+            padding-left: 0;
+        }
+        
+        .objective {
+
+            .initiatives>:nth-child(odd) {
+                background: #F2F2F2;
+            } 
+
+            .first_half {
+                .objective_row {
+                    padding-left: 20px!important;
+                }
+            }
+            
+            .measure {
+                font-weight: 400;
+                font-size: 12px;
+                text-align: center;
+                letter-spacing: 0.035em;
+                color: #828282;
+            }
+
+            .status {
+                color: greenyellow;
+            }
+
+        }
+        
+
+        .perspective {
+            margin-left: 0;
+            padding: 5px 35px;
+
+            .row {
+                padding-right: 0!important;
+            }
+
+            .name {
+                cursor: pointer;
+            }
+
+            .second_half {
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 28px;
+                letter-spacing: 0.035em;
+                color: #4F4F4F;
+            }
+
+            .type {
+                font-style: normal;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 28px;
+                letter-spacing: 0.035em;
+                color: #828282;
+                margin-left: 20px;
+
+            }
+
+            .name {
+                font-style: normal;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 28px;
+                letter-spacing: 0.035em;
+                color: #828282;
+            }
+
+            .perfomance {
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                margin-top: 5px;
+            }
+        }
     }
 }
