@@ -9,12 +9,8 @@ import { isUndefined } from "lodash";
 import "./index.scss";
 import ObjectiveInputs from "./objectiveInputs";
 import MeasuresInputs from "./measuresInputs";
-import TargetInputs from "./targetsInputs";
-import QuaterlyTargetInputs from "./quaterlyTargetsInputs";
 import ThresholdsInputs from "./thresholdsInputs";
-import BaselineTargetInputs from "./baselineTargetInputs";
 import InitiativeInputs from "./initiativesInputs";
-import BudgetInputs from "./budgetInput";
 import { createObjectPayload } from "../../utils";
 import { makeRequest } from "../../utils/requestUtils";
 import { createObjectiveURL, updateObjectiveURL, createObjectiveFromInitURL } from "../../services/urls";
@@ -25,7 +21,7 @@ const ScorecardCreate = ({ periods }) => {
 
     const [initiative, setInitiative] = useState({});
     const { perspective, name } = initiative;
-    const { initiativeId } = useParams();
+    const { initiativeId, mode } = useParams();
 
     useEffect(() => {
         initiativeId && makeRequest(updateObjectiveURL(initiativeId), GET, null, true, false)
@@ -35,8 +31,6 @@ const ScorecardCreate = ({ periods }) => {
     }, [])
 
     const periodPercentage = 100/periods.length;
-
-    const [dataType, setDataType] = useState(PERCENTAGE);
 
     const [initiatives, setInitiatives] = useState([
         {
@@ -134,7 +128,8 @@ const ScorecardCreate = ({ periods }) => {
             } else {
                 makeRequest(createObjectiveFromInitURL(initiativeId), PATCH, payload, true)
                 .then(data=> {
-                    if (data) {                        resetForm();
+                    if (data) {                        
+                        resetForm();
                     } 
                 });   
             }
@@ -160,17 +155,15 @@ const ScorecardCreate = ({ periods }) => {
                             formik={ formik } 
                             measures={ measures } 
                             setMeasures={ setMeasures }
-                            initiative = {initiative}
+                            initiative = { initiative }
                         />
-                        <TargetInputs targetDisabled={ dataType!==PERCENTAGE } setDataType={ setDataType } formik={ formik } />
-                        <QuaterlyTargetInputs formik={ formik } />
-                        <BaselineTargetInputs targetDisabled={ dataType!==UNITS} formik={ formik } />
+                        
                         <ThresholdsInputs formik={ formik } />
-                        <BudgetInputs formik={ formik } />
                         <InitiativeInputs 
                             formik={ formik }
                             initiatives={ initiatives }
                             setInitiatives={ setInitiatives }
+                            mode={ mode }
                         />
                     
                     </div>

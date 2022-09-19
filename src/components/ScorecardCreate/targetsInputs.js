@@ -40,6 +40,7 @@ const TargetInputs = ({ formik, setDataType, targetDisabled }) => {
                         placeholder=""
                         { ...formik.getFieldProps('percentage_target') } 
                         isInvalid={ formik.touched.percentage_target && formik.errors.percentage_target }
+                        disabled={ targetDisabled }
                         />
                         <Form.Control.Feedback type='invalid'>
                             { formik.errors.percentage_target }

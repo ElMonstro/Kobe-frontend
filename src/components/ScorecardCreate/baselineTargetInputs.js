@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Row, Col } from "react-bootstrap"
 
 
-const BaselineTargetInputs = ({ formik }) => {
+const BaselineTargetInputs = ({ formik, targetDisabled }) => {
 
     return (
         <Row className="inputs_row">
@@ -14,7 +14,7 @@ const BaselineTargetInputs = ({ formik }) => {
                     placeholder=""
                     { ...formik.getFieldProps('baseline') } 
                     isInvalid={ formik.touched.baseline && formik.errors.baseline }
-                    disabled
+                    disabled={ targetDisabled }
                     />
                     <Form.Control.Feedback type='invalid'>
                         { formik.errors.baseline }
@@ -30,7 +30,7 @@ const BaselineTargetInputs = ({ formik }) => {
                     placeholder=""
                     { ...formik.getFieldProps('units_target') } 
                     isInvalid={ formik.touched.units_target && formik.errors.units_target }
-                    disabled
+                    disabled={ targetDisabled }
                     />
                     <Form.Control.Feedback type='invalid'>
                         { formik.errors.units_target }

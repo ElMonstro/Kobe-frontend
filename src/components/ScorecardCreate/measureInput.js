@@ -1,10 +1,18 @@
 import React, { useState } from "react";
-import { Form, Row, Col } from "react-bootstrap"
+import { Form, Row, Col } from "react-bootstrap";
+
+import { PERCENTAGE, UNITS } from "../../utils/constants";
+import QuaterlyTargetInputs from "./quaterlyTargetsInputs";
+import BaselineTargetInputs from "./baselineTargetInputs";
+import TargetInputs from "./targetsInputs";
 
 
 const MeasureInput = ({ formik, measureId, weightId }) => {
+
+    const dataType = formik.getFieldProps('data_type').value;
     
     return (
+        <>
             <Row className="inputs_row measure_inputs">
                 <Col>
                     <Form.Group className="mb-1" controlId={ measureId }>
@@ -27,6 +35,7 @@ const MeasureInput = ({ formik, measureId, weightId }) => {
                         <Form.Control 
                         type="text" 
                         placeholder=""
+                        value={ 100 }
                         { ...formik.getFieldProps(weightId) } 
                         isInvalid={ formik.touched[weightId] && formik.errors[weightId] }
                         disabled
@@ -36,7 +45,13 @@ const MeasureInput = ({ formik, measureId, weightId }) => {
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
-            </Row>    
+            </Row>
+            
+            <TargetInputs formik={ formik }  targetDisabled={ dataType!==PERCENTAGE }/>
+            <BaselineTargetInputs targetDisabled={ dataType!==UNITS} formik={ formik } />
+            <QuaterlyTargetInputs formik={ formik }/>
+        </>
+                
         );
 }
 
