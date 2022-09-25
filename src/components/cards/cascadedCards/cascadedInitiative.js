@@ -5,21 +5,23 @@ import { CREATE, SCORECARD } from "../../../utils/constants";
 
 import "./index.scss";
 
-const CascadedInitiative = ({ name, type, id})=> {
+const CascadedInitiative = ({ name, type, id, is_created})=> {
 
     const buttonMapper = {
-        initiative: 'create',
-        self_cascaded_init: 'create',
-        objective: 'edit'
+        false: 'create',
+        true: 'edit'
     }
+    const buttonType = buttonMapper[is_created];
+
 
     const navigate = useNavigate();
 
     const handleClick = e => {
-        navigate(`/${SCORECARD}/${CREATE}/${e.target.id}`);
+        const url = `/${SCORECARD}/${CREATE}/${e.target.id}/${buttonType}`;
+        navigate(url);
     };
 
-    const buttonType = buttonMapper[type];
+    
 
     return (
         <Row className="initiative">
