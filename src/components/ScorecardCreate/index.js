@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Card } from "react-bootstrap"
-import { GET, OVER_VIEW, PATCH, PERCENTAGE, POST, SCORECARD, UNITS } from "../../utils/constants";
+import { CASCADED, CREATE, EDIT, GET, OVER_VIEW, PATCH, PERCENTAGE, POST, SCORECARD, SELF_CASCADED_INIT, UNITS } from "../../utils/constants";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from "react-redux";
 import { isUndefined } from "lodash";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "./index.scss";
 import ObjectiveInputs from "./objectiveInputs";
@@ -14,23 +15,22 @@ import InitiativeInputs from "./initiativesInputs";
 import { createObjectPayload } from "../../utils";
 import { makeRequest } from "../../utils/requestUtils";
 import { createObjectiveURL, updateObjectiveURL, createObjectiveFromInitURL } from "../../services/urls";
-import { useParams } from "react-router-dom";
 
 
 const ScorecardCreate = ({ periods }) => {
 
     const [initiative, setInitiative] = useState({});
-    const { perspective, name } = initiative;
+    const { perspective, name, type, data_type } = initiative;
     const { initiativeId, mode } = useParams();
+    const navigate = useNavigate();
+    const reinitializeForm = mode === EDIT;
 
     useEffect(() => {
         initiativeId && makeRequest(updateObjectiveURL(initiativeId), GET, null, true, false)
             .then(data => {
-                setInitiative(data);
+                data && setInitiative(data);
             })
     }, [])
-
-    const periodPercentage = 100/periods.length;
 
     const [initiatives, setInitiatives] = useState([
         {
@@ -57,8 +57,7 @@ const ScorecardCreate = ({ periods }) => {
         quaterly_target: '',
         baseline: '',
         percentage_target: '',
-        unit_target: '',
-        budget: '',
+        units_target: '',
         }
 
     const validationSchema = {
@@ -73,20 +72,13 @@ const ScorecardCreate = ({ periods }) => {
         lower_threshold: Yup.number(),
         budget: Yup.number(),
         baseline: Yup.number(),
-        percentage_target: Yup.number(),
+        percentage_target: Yup.number().max(100).min(0),
         unit_target: Yup.number(),
-    }
-
-    if ( !isUndefined(name)) {
-        initialValues.name = name;
-        initialValues.perspective = perspective;
-        validationSchema.name = Yup.string();
-        validationSchema.perspective = Yup.string();
     }
 
     periods.map(period => {
         initialValues[period] = '';
-        validationSchema[period] = Yup.number().required('*Required');
+        mode===EDIT? validationSchema[period] = Yup.number().max(100).min(0): validationSchema[period] = Yup.number().max(100).min(0).required('*Required');
         return undefined;
     });
 
@@ -108,11 +100,39 @@ const ScorecardCreate = ({ periods }) => {
         return undefined;
     })
 
-    validationSchema['measure-name-1'] = Yup.string().required('*Measure name is required');
+    validationSchema[measures[0].measureId] = Yup.string().required('*Measure name is required');
     validationSchema[initiatives[0].initiativeId] = Yup.string().required('*Initiative is required');
     validationSchema[initiatives[0].cascadeId] = Yup.string().required('*Required');
 
+    if (mode === "edit") {
+        validationSchema[measures[0].measureId] = Yup.string();
+        validationSchema[initiatives[0].initiativeId] = Yup.string();
+        validationSchema[initiatives[0].cascadeId] = Yup.string();
+        validationSchema.data_type = Yup.string();
+    }
+
+    if ( !isUndefined(name)) {
+        initialValues.name = initiative.name;
+        initialValues.perspective = initiative.perspective;
+        initialValues.units_target = initiative.target;
+        initialValues.baseline = initiative.baseline;
+        initialValues.data_type = initiative.data_type;
+        initialValues[measures[0].measureId] = initiative?.measures[0]?.name
+        if (initiative.data_type === PERCENTAGE) initialValues.percentage_target = initiative.target * 100;
+        initiative.period_targets?.map(period => {
+            initialValues[period.period] = period.target * 100;
+            return undefined;
+        });
+
+        validationSchema.name = Yup.string();
+        validationSchema.perspective = Yup.string();
+        validationSchema[initiatives[0].initiativeId] = Yup.string();
+        validationSchema[initiatives[0].cascadeId] = Yup.string();
+    }
+
+
     const formik = useFormik({
+        enableReinitialize: reinitializeForm,
         initialValues: initialValues,
         validationSchema: Yup.object(validationSchema),
         onSubmit: async (values, { setErrors, resetForm }) => {
@@ -126,10 +146,12 @@ const ScorecardCreate = ({ periods }) => {
                     });
                 
             } else {
+                (type === SELF_CASCADED_INIT || mode === EDIT) && delete payload.initiatives
                 makeRequest(createObjectiveFromInitURL(initiativeId), PATCH, payload, true)
                 .then(data=> {
-                    if (data) {                        
+                    if (data) {
                         resetForm();
+                        navigate(`/${SCORECARD}/${CASCADED}/`);
                     } 
                 });   
             }
@@ -162,6 +184,7 @@ const ScorecardCreate = ({ periods }) => {
                         <InitiativeInputs 
                             formik={ formik }
                             initiatives={ initiatives }
+                            initiative={ initiative }
                             setInitiatives={ setInitiatives }
                             mode={ mode }
                         />

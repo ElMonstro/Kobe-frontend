@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Row, Col } from "react-bootstrap"
+import { useParams } from "react-router-dom";
 import { PERCENTAGE, UNITS } from "../../utils/constants";
 
 
-const TargetInputs = ({ formik, setDataType, targetDisabled }) => {
+const TargetInputs = ({ formik, targetDisabled }) => {
 
     const dataTypeProps = formik.getFieldProps('data_type');
+    const percentageTargetProps = formik.getFieldProps('percentage_target') 
     
     return (
         <>
@@ -17,10 +19,10 @@ const TargetInputs = ({ formik, setDataType, targetDisabled }) => {
                     <Form.Group className="mb-1" controlId="data_type">
                         <Form.Label>Data Type</Form.Label>
                         <Form.Select 
-                        type="text" 
-                        placeholder=""
-                        { ...dataTypeProps } 
-                        isInvalid={ formik.touched.data_type && formik.errors.data_type }
+                            type="text" 
+                            placeholder=""
+                            { ...dataTypeProps } 
+                            isInvalid={ formik.touched.data_type && formik.errors.data_type }
                         >
                             <option>Enter Data Type</option>
                             <option value={ PERCENTAGE }>Percentage</option>
@@ -38,7 +40,7 @@ const TargetInputs = ({ formik, setDataType, targetDisabled }) => {
                         <Form.Control 
                         type="text" 
                         placeholder=""
-                        { ...formik.getFieldProps('percentage_target') } 
+                        { ...percentageTargetProps } 
                         isInvalid={ formik.touched.percentage_target && formik.errors.percentage_target }
                         disabled={ targetDisabled }
                         />

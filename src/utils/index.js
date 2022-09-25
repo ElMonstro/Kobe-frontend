@@ -2,7 +2,8 @@ import forge from 'node-forge';
 import { toast } from 'react-toastify';
 import store from "../redux/store/store.js";
 import { changeLoginStatus } from "../redux/actions";
-import { BIANNUALS, CHARACTERS, QUARTERS } from './constants.js';
+import { BIANNUALS, CHARACTERS, QUARTERS, UNITS } from './constants.js';
+import { round } from 'lodash';
 
 
 const notificationTypeMapper = {
@@ -167,19 +168,21 @@ export const createObjectPayload = (data, initiatives, measures, periods) => {
     });
   
     periods.map(period => {
-      const periodTargetPayload = {};
-      periodTargetPayload['weight'] = data[period];
-      periodTargetPayload['period'] = period;
+        const periodTargetPayload = {};
+        if (data[period]) {
+            periodTargetPayload['target'] = round(data[period]/100, 2)
+            periodTargetPayload['period'] = period;
+            periodTargetsPayload.push(periodTargetPayload);
+        } 
 
-      delete data[period];
-  
-      periodTargetsPayload.push(periodTargetPayload);
-      return undefined;
+        delete data[period];
+        return undefined;
     })
   
     data.measures = measuresPayload;
     data.initiatives = initiativesPayload;
-    data.period_targets = periodTargetsPayload;
+    if (periodTargetsPayload.length > 0) data.period_targets = periodTargetsPayload;
+    console.log(data)
     
     Object.keys(data).map(key => {
         if (data[key]==="") {
@@ -187,6 +190,12 @@ export const createObjectPayload = (data, initiatives, measures, periods) => {
         }
         return undefined;
     });
+
+    if (data.data_type === UNITS) {
+        data.target = data.units_target;
+    } else {
+        data.target = round(data.percentage_target / 100, 2);
+    }
 
     return data;
   };

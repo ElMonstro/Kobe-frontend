@@ -1,20 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Form, Card, Row, Col } from "react-bootstrap"
 import { connect } from "react-redux";
-import { PERSPECTIVE_OBJECT } from "../../utils/constants";
+import { useParams } from "react-router-dom";
+import { CREATE, PERSPECTIVE_OBJECT } from "../../utils/constants";
 
 
-const ObjectiveInputs = ({ formik, settings, initiativeId, perspective, name }) => {
+const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective }) => {
 
     const isDisabled = Boolean(initiativeId);
     const nameFieldProps = formik.getFieldProps('name');
     const perspectiveFieldProps = formik.getFieldProps('perspective');
+    const { mode } = useParams();
 
-    if (name) {
+    if (mode === CREATE) {
         nameFieldProps.value = name;
-        perspectiveFieldProps.value = perspective
+        perspectiveFieldProps.value = perspective;
     }
-
 
     return (
         <Card className="staff_card">
@@ -28,7 +29,6 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, perspective, name }) 
                             type="text" 
                             placeholder=""
                             { ...nameFieldProps }
-                            defaultValue={ name } 
                             isInvalid={ formik.touched.name && formik.errors.name }
                             disabled={ isDisabled }
                             />
@@ -45,7 +45,6 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, perspective, name }) 
                             type="text" 
                             placeholder=""
                             { ...perspectiveFieldProps }
-                            defaultValue={ perspective } 
                             isInvalid={ formik.touched.perspective && formik.errors.perspective }
                             disabled={ isDisabled }
                             >

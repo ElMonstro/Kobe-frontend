@@ -49,7 +49,7 @@ function App({ isLoggedIn }) {
             <Route path={ SCORECARD } element={<ScorecardCont />} >
               <Route index element={ <ViewScorecard />}/>
               <Route path={ CREATE } element={ <ScorecardCreate/> }/>
-              <Route path={`${CREATE}/:initiativeId`} element={ <ScorecardCreate/> }/>
+              <Route path={`${CREATE}/:initiativeId/:mode`} element={ <ScorecardCreate/> }/>
               <Route path={ CASCADED } element={ <CascadedCards />}/>
               <Route path={ VIEW } element={ <ViewScorecard />} />
               <Route path={ UPDATE } element={ <UpdateScorecardCard />} />

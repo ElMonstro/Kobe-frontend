@@ -44,3 +44,5 @@ export const BIANNUALS = [
 ];
 export const UNITS = 'units';
 export const PERCENTAGE = 'percentage';
+export const SELF_CASCADED_INIT = "self_cascaded_init";
+export const EDIT = "edit";

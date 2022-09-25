@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, Row, Col } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
 import { PERCENTAGE, UNITS } from "../../utils/constants";
 import QuaterlyTargetInputs from "./quaterlyTargetsInputs";
@@ -7,9 +8,17 @@ import BaselineTargetInputs from "./baselineTargetInputs";
 import TargetInputs from "./targetsInputs";
 
 
-const MeasureInput = ({ formik, measureId, weightId }) => {
+const MeasureInput = ({ formik, measureId, weightId, initiative }) => {
 
     const dataType = formik.getFieldProps('data_type').value;
+    const { measures, period_targets } = initiative;
+    const { mode } = useParams();
+    const nameFieldProps = formik.getFieldProps(measureId)
+
+    if (mode === "edit" && measures === []) {
+        const { name } = measures[0];
+        nameFieldProps.value = name;
+    }
     
     return (
         <>
@@ -20,7 +29,7 @@ const MeasureInput = ({ formik, measureId, weightId }) => {
                         <Form.Control 
                         type="text" 
                         placeholder=""
-                        { ...formik.getFieldProps(measureId) } 
+                        { ...nameFieldProps } 
                         isInvalid={ formik.touched[measureId] && formik.errors[measureId] }
                         />
                         <Form.Control.Feedback type='invalid'>
@@ -47,9 +56,9 @@ const MeasureInput = ({ formik, measureId, weightId }) => {
                 </Col>
             </Row>
             
-            <TargetInputs formik={ formik }  targetDisabled={ dataType!==PERCENTAGE }/>
-            <BaselineTargetInputs targetDisabled={ dataType!==UNITS} formik={ formik } />
-            <QuaterlyTargetInputs formik={ formik }/>
+            <TargetInputs formik={ formik }  targetDisabled={ dataType!==PERCENTAGE } initiative={ initiative }/>
+            <BaselineTargetInputs targetDisabled={ dataType!==UNITS} formik={ formik } initiative={ initiative }/>
+            <QuaterlyTargetInputs formik={ formik } periodTargets={ period_targets }/>
         </>
                 
         );

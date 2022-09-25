@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 
 import { Form, Row, Col } from "react-bootstrap"
 
-
-const QuaterlyTargetInputs = ({ formik, periods }) => {
+const QuaterlyTargetInputs = ({ formik, periods, periodTargets }) => {
 
     const periodHalfLength = periods.length / 2;
 
@@ -16,7 +15,7 @@ const QuaterlyTargetInputs = ({ formik, periods }) => {
                         periods.slice(0, periodHalfLength).map(
                             period => {
                             return <Form.Group key={ period } controlId={ period } className="mb-3">
-                                <Form.Label>{ period } Target</Form.Label>
+                                <Form.Label>{ period } Target </Form.Label>
                                 <Form.Control 
                                 type="text" 
                                 placeholder=""

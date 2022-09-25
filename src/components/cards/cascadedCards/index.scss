@@ -18,6 +18,7 @@
         .action_btn {
             display: flex;
             align-items: center;
+            text-align: center;
             width: 76px;
             height: 30px;
             
@@ -32,6 +33,7 @@
 
             &.edit {
                 background: #FFA800;
+                padding-left: 20px!important;
             }
 
             &.create {

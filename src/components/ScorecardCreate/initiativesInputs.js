@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
 import addBtn from "../../assets/plus_sign.svg";
 import { fetchUnderlingsURL } from "../../services/urls";
-import { GET } from "../../utils/constants";
+import { GET, SELF_CASCADED_INIT } from "../../utils/constants";
 import { makeRequest } from "../../utils/requestUtils";
 import InitiativeInput from "./initiativeInput";
 
 
-const InitiativeInputs = ({ formik, initiatives, setInitiatives }) => {
+const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives }) => {
 
     const [underlings, setUnderlings] = useState([]);
+    const { type } = initiative;
+    const { mode } = useParams();
+    let contClassName;
+
+    if (mode === "edit" || type === SELF_CASCADED_INIT) {
+        contClassName = "initiatives hidden";
+    } else {
+        contClassName = "initiatives";
+    }
 
     useEffect(() => {
         makeRequest(fetchUnderlingsURL, GET, null, true, false)
@@ -58,13 +68,14 @@ const InitiativeInputs = ({ formik, initiatives, setInitiatives }) => {
     
 
     return (
-        <div className="initiatives" id={ initiatives.weightId }>
+        <div className={ contClassName } id={ initiatives.weightId }>
             <div className="title mt-3 mb-2">
                 Initiatives
                 <span className="add" onClick={ addInitiative }>
                     <span className="add_btn">
                         <img src={ addBtn }  alt="Logo"/>
-                    </span> Add Initiative
+                    </span> 
+                    Add Initiative
                 </span>
             </div>
             <Row className="initiatives_labels">
@@ -75,13 +86,13 @@ const InitiativeInputs = ({ formik, initiatives, setInitiatives }) => {
             </Row>
 
         { 
-        initiatives.map( initiative => {
-             return (<InitiativeInput 
-                    { ...initiative } 
-                    key={ initiative.initiativeId } 
-                    formik={ formik }
-                    deleteInitiative={ deleteInitiative }
-                    underlings={ underlings }
+            initiatives.map( initiative => {
+            return (<InitiativeInput 
+                        { ...initiative } 
+                        key={ initiative.initiativeId } 
+                        formik={ formik }
+                        deleteInitiative={ deleteInitiative }
+                        underlings={ underlings }
                 />)
         })
         }   

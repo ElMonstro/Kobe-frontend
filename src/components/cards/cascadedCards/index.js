@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Card, Row, Col, Button } from "react-bootstrap";
+import React from "react";
 import CascadedCard from "./cascadedCard";
 
 import "./index.scss";
