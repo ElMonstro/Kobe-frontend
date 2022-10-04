@@ -6,3 +6,7 @@
 .not_hidden {
     display: flex;
 }
+
+.white_bg {
+    background-color: #fff!important;
+}

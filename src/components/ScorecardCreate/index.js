@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Card } from "react-bootstrap"
-import { CASCADED, CREATE, EDIT, GET, OVER_VIEW, PATCH, PERCENTAGE, POST, SCORECARD, SELF_CASCADED_INIT, UNITS } from "../../utils/constants";
+import { CASCADED, EDIT, GET, PATCH, PERCENTAGE, POST, SCORECARD, SELF_CASCADED_INIT } from "../../utils/constants";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from "react-redux";
@@ -14,7 +14,7 @@ import ThresholdsInputs from "./thresholdsInputs";
 import InitiativeInputs from "./initiativesInputs";
 import { createObjectPayload } from "../../utils";
 import { makeRequest } from "../../utils/requestUtils";
-import { createObjectiveURL, updateObjectiveURL, createObjectiveFromInitURL } from "../../services/urls";
+import { createObjectiveURL, updateObjectiveURL, createObjectiveFromInitURL, editObjectiveURL } from "../../services/urls";
 
 
 const ScorecardCreate = ({ periods }) => {
@@ -146,8 +146,8 @@ const ScorecardCreate = ({ periods }) => {
                     });
                 
             } else {
-                (type === SELF_CASCADED_INIT || mode === EDIT) && delete payload.initiatives
-                makeRequest(createObjectiveFromInitURL(initiativeId), PATCH, payload, true)
+                (type === SELF_CASCADED_INIT || mode === EDIT) && delete payload.initiatives;
+                makeRequest(createObjectiveFromInitURL(initiativeId, mode), PATCH, payload, true)
                 .then(data=> {
                     if (data) {
                         resetForm();

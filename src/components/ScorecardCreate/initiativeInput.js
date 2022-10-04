@@ -39,8 +39,8 @@ const InitiativeInput = ({ formik, initiativeId, weightId, cascadeId, deleteId, 
                     { ...formik.getFieldProps(cascadeId) } 
                     isInvalid={ formik.touched[cascadeId] && formik.errors[cascadeId] }
                 >
-                    <option>Cascade to Employee</option>
-                    <option value={ orgChart?.id } key={ orgChart?.id }>{ orgChart?.user.first_name + " "  + orgChart?.user.second_name}</option>
+                    <option>Cascade</option>
+                    <option value={ orgChart?.id } key={ orgChart?.id }>Cascade to Self</option>
                     {
                         underlings?.map(underling => {
                             return (

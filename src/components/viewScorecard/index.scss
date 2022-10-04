@@ -21,6 +21,10 @@
         }
     }
 
+    .perspectives>:nth-child(odd) {
+        background: #F2F2F2;
+    }
+
     .staff_card {
 
         .thumbnail {
@@ -28,19 +32,12 @@
             width: 15px;
             height: 15px;
             border-radius: 50%;
-        }
-
-        .gray_lines>:nth-child(odd) {
-            background: #F2F2F2;
         } 
 
         .initiative {
- 
-                
             .initiative_row {
                 padding-left: 40px!important;
             }
-    
         }
 
         .row {
@@ -78,6 +75,10 @@
         .perspective {
             margin-left: 0;
             padding: 5px 35px;
+
+            .objectives>:nth-child(odd) {
+                background: #F2F2F2;
+            } 
 
             .row {
                 padding-right: 0!important;

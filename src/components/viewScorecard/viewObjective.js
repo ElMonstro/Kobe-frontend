@@ -5,19 +5,21 @@ import OpenCloseIcon from "../common/openCloseIcon";
 import "./index.scss";
 import ViewInitiative from "./viewInitiative";
 
-const ViewObjective= ({name, measure}) => {
+const ViewObjective= ({name, measures, weight, target, score, status, initiatives}) => {
 
     const [isOpen, setIsOpen] = useState(false);
+    const measure_name = measures && measures[0].name
 
     let initiativesClassName;
+    let objectiveClassName;
     isOpen? initiativesClassName="initiatives": initiativesClassName="hidden";
-
+    isOpen? objectiveClassName="objective white_bg": objectiveClassName="objective";
     const handleClick = e => {
         setIsOpen(!isOpen);
     } 
 
     return (
-        <Row className="objective">
+        <Row className={ objectiveClassName }>
             <Row className="top_row">
                 <Col className="first_half">
                     <Row className="objective_row">
@@ -28,7 +30,7 @@ const ViewObjective= ({name, measure}) => {
                             />
                             <span className="name" 
                                 onClick={ handleClick }>
-                                Customer assistance programmes
+                                { name }
                             </span>
                         </Col>
                         <Col><span className="type">objective</span></Col>
@@ -37,18 +39,20 @@ const ViewObjective= ({name, measure}) => {
                 <Col className="second_half">
                     <Row>
                         <Col className="status">Approved</Col>
-                        <Col className="measure">Increase in profit</Col>
-                        <Col className="weight">30%</Col>
-                        <Col>50%</Col>
-                        <Col>40%</Col>
-                        <Col><div className="perfomance poor"></div></Col>
+                        <Col className="measure">{ measure_name }</Col>
+                        <Col className="weight">{ weight * 100 }</Col>
+                        <Col>{ target * 100 }</Col>
+                        <Col>{ score * 100 }</Col>
+                        <Col><div className={ `perfomance ${status}`}></div></Col>
                     </Row>
                 </Col>
             </Row>
             <Row className={ initiativesClassName } >
-                <ViewInitiative />
-                <ViewInitiative />
-                <ViewInitiative />
+                {
+                    initiatives.map(initiative => {
+                        return <ViewInitiative key={ initiative.id } { ...initiative }/>
+                    })
+                }
             </Row>
         </Row>
     )

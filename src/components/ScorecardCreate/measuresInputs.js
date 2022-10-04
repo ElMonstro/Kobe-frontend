@@ -26,7 +26,7 @@ const MeasuresInputs = ({ formik, measures, setMeasures, initiative }) => {
         <>
             <div className="title mt-3 mb-2">
                 Measure 
-                <span className="add" onClick={ addMeasure }>
+                <span className="add add_measure" onClick={ addMeasure }>
                     <span className="add_btn">
                         <img src={ addBtn }  alt="Logo"/>
                     </span> Add Measure

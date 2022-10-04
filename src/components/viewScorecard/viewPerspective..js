@@ -6,30 +6,33 @@ import OpenCloseIcon from "../common/openCloseIcon";
 import "./index.scss";
 import ViewObjective from "./viewObjective";
 
-const ViewPerspective = ({name, initiative}) => {
+const ViewPerspective = ({ objectives, name, score, status}) => {
 
     const [isOpen, setIsOpen] = useState(false);
 
     let objectivesClassName;
-    isOpen? objectivesClassName="objectives": objectivesClassName="hidden";
+    let perspectiveClassName;
+    isOpen? objectivesClassName="objectives gray_lines": objectivesClassName="hidden";
+    isOpen? perspectiveClassName="perspective white_bg": perspectiveClassName="perspective";
+
 
     const handleClick = e => {
         setIsOpen(!isOpen);
     }
 
     return (
-        <Row className="perspective">
+        <Row className={ perspectiveClassName }>
             <Row>
                 <Col className="">
                     <Row>
-                    <Col>
+                    <Col lg="8">
                         <Row>
                             <Col onClick={ handleClick }>
                                 <OpenCloseIcon 
                                     handleclick={ handleClick } 
                                     defaultMode={ isOpen } 
                                     />
-                                    <span className="name">Financial</span>
+                                    <span className="name">{ name }</span>
                             </Col>
                             <Col><span className="type">perspective</span></Col>
                         </Row>
@@ -43,15 +46,18 @@ const ViewPerspective = ({name, initiative}) => {
                         <Col></Col>
                         <Col></Col>
                         <Col></Col>
-                        <Col>50%</Col>
-                        <Col>40%</Col>
-                        <Col><div className="perfomance good"></div></Col>
+                        <Col></Col>
+                        <Col>{ score * 100 }</Col>
+                        <Col><div className={ `perfomance ${status}` }></div></Col>
                     </Row>
                 </Col>
             </Row>
             <Row className={ objectivesClassName }>
-                <ViewObjective />
-                <ViewObjective />
+                {
+                    objectives.map(objective => {
+                        return <ViewObjective key={ objective.id } { ...objective } />
+                    })
+                }
             </Row>
         
         

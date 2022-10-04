@@ -12,4 +12,7 @@ export const createObjectiveURL = `${baseURL}/scorecard/objectives/`;
 export const fetchSelfCascadedInitURL = `${baseURL}/scorecard/objectives/?type=self_cascaded_init`;
 export const fetchInitiativeURL = `${baseURL}/scorecard/objectives/?type=initiative&type=objective`;
 export const updateObjectiveURL = id => `${baseURL}/scorecard/objectives/${id}/`;
-export const createObjectiveFromInitURL = id => `${baseURL}/scorecard/objectives/${id}/initiative-to-objective/`;
+export const createObjectiveFromInitURL = (id, mode) => `${baseURL}/scorecard/objectives/${id}/initiative-to-objective/?mode=${mode}`;
+export const editObjectiveURL = id => `${baseURL}/scorecard/objectives/${id}/initiative-to-objective/?mode=edit`;
+export const fetchPerspectivesURL = `${baseURL}/scorecard/role/perspectives/`;
+
