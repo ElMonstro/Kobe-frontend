@@ -4,11 +4,15 @@ import SearchBox from "../common/searchBox";
 import Tree from "../common/Tree/Tree";
 import './index.scss';
 import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 
 const StaffSidebar = ({ orgChart }) => {
 
+    const navigate = useNavigate();
+
     const handleClick = (node) => {
+        navigate(`/${node.node.id}/scorecard`);
     };
 
     return (

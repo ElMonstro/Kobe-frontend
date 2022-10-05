@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CREATE, SCORECARD } from "../../../utils/constants";
 
 import "./index.scss";
@@ -13,11 +13,11 @@ const CascadedInitiative = ({ name, type, id, is_created})=> {
     }
     const buttonType = buttonMapper[is_created];
 
-
     const navigate = useNavigate();
+    const { role } = useParams();
 
     const handleClick = e => {
-        const url = `/${SCORECARD}/${CREATE}/${e.target.id}/${buttonType}`;
+        const url = `/${role}/${SCORECARD}/${CREATE}/${e.target.id}/${buttonType}`;
         navigate(url);
     };
 

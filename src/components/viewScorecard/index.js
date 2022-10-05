@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, Col, Row, Spinner } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 import { fetchPerspectivesURL } from "../../services/urls";
 import { GET } from "../../utils/constants";
 import { makeRequest } from "../../utils/requestUtils";
@@ -10,13 +11,17 @@ import ViewPerspective from "./viewPerspective.";
 const ViewScorecard = props => {
 
     const [perspectives, setPerspective] = useState([])
+    const { role } = useParams();
+    const [spinnerState, setSpinnerState] = useState(true);
 
     useEffect(() => {
-        makeRequest(fetchPerspectivesURL, GET, null, true, false)
+        setSpinnerState(true);
+        makeRequest(fetchPerspectivesURL(role), GET, null, true, false)
             .then(data => {
                 data && setPerspective(data);
-            })
-    }, [])
+            });
+        setSpinnerState(false);
+    }, [role])
     
     return (
         <div className="view_scorecard">
@@ -35,14 +40,17 @@ const ViewScorecard = props => {
                         </Row>
                     </Col>
             </Row>
-            <Card className="staff_card perspectives">
+            {
+                spinnerState? <Spinner className="spinner" animation="grow"/>:
+                <Card className="staff_card perspectives">
                     {
                         perspectives.map(perspective => {
                             return <ViewPerspective {...perspective} />
                         })
                         
                     }
-            </Card>
+                </Card>
+            }
         </div>
     )
 }

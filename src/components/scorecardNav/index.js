@@ -1,24 +1,30 @@
 import React, { useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { CASCADED, CREATE, UPDATE, VIEW } from "../../utils/constants";
 import './index.scss';
 
 
-const ScorecardNavCard = ({ activeComponent, setActiveComponent, user }) => {
+const ScorecardNavCard = ({ activeComponent, setActiveComponent, orgChart }) => {
 
     const setSelectedClass = activeComponent => {
 
-        let selectedElements = document.getElementsByClassName("selected");
-        // selectedElements[0]? selectedElements[0].className = "": selectedElements=null;
-        // const newSelectedElement = document.getElementById(activeComponent);
-        // newSelectedElement.className = "selected col";
+        let selectedElements = document.getElementsByClassName("selected_mode");
+        
+        selectedElements[0]? selectedElements[0].className = "": selectedElements=null;
+        const newSelectedElement = document.getElementById(activeComponent);
+        newSelectedElement.className = "selected_mode";
     }
 
+    const { role } = useParams();
+    const isOwnScorcard = role === orgChart?.id
+
+    let noneViewClassNames;
+    isOwnScorcard? noneViewClassNames = "": noneViewClassNames="hidden";
+
     const handleClick = e => {
-        console.log(e.target.id)
         setActiveComponent(e.target.id);
     }
 
@@ -30,22 +36,22 @@ const ScorecardNavCard = ({ activeComponent, setActiveComponent, user }) => {
         <div className="scorecard_nav">
 
             <Row className="nav">
-                <Col>
-                    <Link id={ CREATE } onClick={ handleClick } className="selected" to={ CREATE }>
+                <Col className={ noneViewClassNames }>
+                    <Link id={ CREATE } onClick={ handleClick } className="selected_mode" to={ CREATE }>
                         Create
                     </Link>
                 </Col>
-                <Col>
+                <Col className={ noneViewClassNames }>
                     <Link id={ CASCADED } onClick={ handleClick } to={ CASCADED }>
                         Cascaded
                     </Link>
                 </Col>
-                <Col>
+                <Col className={ noneViewClassNames }>
                     <Link id={ VIEW } onClick={ handleClick } to={ VIEW }>
                         View
                     </Link>
                 </Col>
-                <Col>
+                <Col className={ noneViewClassNames }>
                     <Link id={ UPDATE } onClick={ handleClick } to={ UPDATE }>
                         Update
                     </Link>
@@ -58,8 +64,9 @@ const ScorecardNavCard = ({ activeComponent, setActiveComponent, user }) => {
 const mapDispatchToProps = {
 }
 
-const mapStateToProps = ({ authReducer: { user } }) => ({
-    user
+const mapStateToProps = ({ authReducer: { user }, adminReducer: { orgChart } }) => ({
+    user,
+    orgChart: orgChart[0]
 });
 
 export default connect(

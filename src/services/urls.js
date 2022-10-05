@@ -14,5 +14,5 @@ export const fetchInitiativeURL = `${baseURL}/scorecard/objectives/?type=initiat
 export const updateObjectiveURL = id => `${baseURL}/scorecard/objectives/${id}/`;
 export const createObjectiveFromInitURL = (id, mode) => `${baseURL}/scorecard/objectives/${id}/initiative-to-objective/?mode=${mode}`;
 export const editObjectiveURL = id => `${baseURL}/scorecard/objectives/${id}/initiative-to-objective/?mode=edit`;
-export const fetchPerspectivesURL = `${baseURL}/scorecard/role/perspectives/`;
+export const fetchPerspectivesURL = role =>  `${baseURL}/scorecard/role/${role}/perspectives/`;
 

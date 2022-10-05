@@ -1,28 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { CASCADED, CREATE, UPDATE, VIEW } from "../../utils/constants";
-import CascadedCards from "../cards/cascadedCards";
-import UpdateScorecardCard from "../cards/updateScorecardCard";
-import ScorecardCreate from "../ScorecardCreate";
-import ScorecardNav from "../scorecardNav";
-import ViewScorecardCard from "../viewScorecard";
-  
+import { VIEW } from "../../utils/constants";
+import ScorecardNav from "../scorecardNav";  
 
 import "./index.scss";
 
 const ScorecardCont = props => {
 
-    const [activeComponent, setActiveComponent] = useState(CASCADED);
+    const [activeComponent, setActiveComponent] = useState(VIEW);
 
     useEffect(() => {
-        setActiveComponent(CREATE);
+        setActiveComponent(VIEW);
     }, []);
     
     return (
         <div className="scorecard_cont">
-            <ScorecardNav setActiveComponent={ setActiveComponent } />
-            <Outlet setActiveComponent={ setActiveComponent } />
-            
+            <ScorecardNav activeComponent={ activeComponent } setActiveComponent={ setActiveComponent } />
+            <Outlet />
         </div>
     )
 }
