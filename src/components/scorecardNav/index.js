@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link, useParams } from "react-router-dom";
@@ -19,10 +19,16 @@ const ScorecardNavCard = ({ activeComponent, setActiveComponent, orgChart }) => 
     }
 
     const { role } = useParams();
-    const isOwnScorcard = role === orgChart?.id
+    const isOwnScorecard = orgChart?.id?.toString() === role;
 
-    let noneViewClassNames;
-    isOwnScorcard? noneViewClassNames = "": noneViewClassNames="hidden";
+    const [noneViewClassNames, setNoneViewClassNames] = useState("col");
+
+    let classNames;
+    isOwnScorecard? classNames = "": classNames="hidden";
+    
+    useEffect(() => {
+        setNoneViewClassNames(classNames);
+      }, [classNames]);
 
     const handleClick = e => {
         setActiveComponent(e.target.id);

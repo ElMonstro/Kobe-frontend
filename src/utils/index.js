@@ -182,7 +182,6 @@ export const createObjectPayload = (data, initiatives, measures, periods) => {
     data.measures = measuresPayload;
     data.initiatives = initiativesPayload;
     if (periodTargetsPayload.length > 0) data.period_targets = periodTargetsPayload;
-    console.log(data)
     
     Object.keys(data).map(key => {
         if (data[key]==="") {
@@ -195,6 +194,10 @@ export const createObjectPayload = (data, initiatives, measures, periods) => {
         data.target = data.units_target;
     } else {
         data.target = round(data.percentage_target / 100, 2);
+    }
+
+    if (data.weight) {
+        data.weight = round( data.weight / 100, 2);
     }
 
     return data;

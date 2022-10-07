@@ -14,14 +14,14 @@ import ThresholdsInputs from "./thresholdsInputs";
 import InitiativeInputs from "./initiativesInputs";
 import { createObjectPayload } from "../../utils";
 import { makeRequest } from "../../utils/requestUtils";
-import { createObjectiveURL, updateObjectiveURL, createObjectiveFromInitURL, editObjectiveURL } from "../../services/urls";
+import { createObjectiveURL, updateObjectiveURL, createObjectiveFromInitURL } from "../../services/urls";
 
 
-const ScorecardCreate = ({ periods }) => {
+const ScorecardCreate = ({ periods, orgChart }) => {
 
     const [initiative, setInitiative] = useState({});
-    const { perspective, name, type, data_type } = initiative;
-    const { initiativeId, mode } = useParams();
+    const { perspective, name, type } = initiative;
+    const { initiativeId, mode, role } = useParams();
     const navigate = useNavigate();
     const reinitializeForm = mode === EDIT;
 
@@ -58,6 +58,7 @@ const ScorecardCreate = ({ periods }) => {
         baseline: '',
         percentage_target: '',
         units_target: '',
+        weight: ''
         }
 
     const validationSchema = {
@@ -67,6 +68,8 @@ const ScorecardCreate = ({ periods }) => {
             .required('*Required'),
         data_type: Yup.string()
             .required('*Required'),
+        weight: Yup.number().max(100)
+            .min(0),
         target: Yup.number(),
         upper_threshold: Yup.number(),
         lower_threshold: Yup.number(),
@@ -109,6 +112,11 @@ const ScorecardCreate = ({ periods }) => {
         validationSchema[initiatives[0].initiativeId] = Yup.string();
         validationSchema[initiatives[0].cascadeId] = Yup.string();
         validationSchema.data_type = Yup.string();
+        validationSchema.weight = Yup.number().max(100).min(0);
+    }
+
+    if (!Boolean(orgChart?.reporting_to)) {
+        validationSchema.weight = Yup.number().max(100).min(0).required('*Required');
     }
 
     if ( !isUndefined(name)) {
@@ -117,6 +125,7 @@ const ScorecardCreate = ({ periods }) => {
         initialValues.units_target = initiative.target;
         initialValues.baseline = initiative.baseline;
         initialValues.data_type = initiative.data_type;
+        initialValues.weight = initiative.weight;
         initialValues[measures[0].measureId] = initiative?.measures[0]?.name
         if (initiative.data_type === PERCENTAGE) initialValues.percentage_target = initiative.target * 100;
         initiative.period_targets?.map(period => {
@@ -128,6 +137,7 @@ const ScorecardCreate = ({ periods }) => {
         validationSchema.perspective = Yup.string();
         validationSchema[initiatives[0].initiativeId] = Yup.string();
         validationSchema[initiatives[0].cascadeId] = Yup.string();
+        validationSchema.weight = Yup.number().max(100).min(0);
     }
 
 
@@ -151,7 +161,7 @@ const ScorecardCreate = ({ periods }) => {
                 .then(data=> {
                     if (data) {
                         resetForm();
-                        navigate(`/${SCORECARD}/${CASCADED}/`);
+                        navigate(`/${role}/${SCORECARD}/${CASCADED}/`);
                     } 
                 });   
             }
@@ -206,8 +216,9 @@ const ScorecardCreate = ({ periods }) => {
 const mapDispatchToProps = {
 }
 
-const mapStateToProps = ({ adminReducer: { periods }, }) => ({
+const mapStateToProps = ({ adminReducer: { periods, orgChart }, }) => ({
     periods, 
+    orgChart: orgChart[0]
 });
 
 export default connect(

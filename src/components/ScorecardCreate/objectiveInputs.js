@@ -1,21 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Card, Row, Col } from "react-bootstrap"
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { CREATE, PERSPECTIVE_OBJECT } from "../../utils/constants";
 
 
-const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective }) => {
+const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, orgChart }) => {
 
     const isDisabled = Boolean(initiativeId);
     const nameFieldProps = formik.getFieldProps('name');
     const perspectiveFieldProps = formik.getFieldProps('perspective');
     const { mode } = useParams();
+    const [displayWeight, setDisplayWeight] = useState(false);
 
     if (mode === CREATE) {
         nameFieldProps.value = name;
         perspectiveFieldProps.value = perspective;
     }
+
+    useEffect(() => {
+        orgChart && setDisplayWeight(!Boolean(orgChart?.reporting_to) && !Boolean(name));
+    }, [orgChart, name]);
 
     return (
         <Card className="staff_card">
@@ -61,13 +66,32 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective }) 
                         </Form.Group>
                     </Col>
                 </Row>
+                <Row className="inputs_row">
+                    <Col>
+                    {   displayWeight &&
+                        <Form.Group className="mb-1" controlId="weight">
+                            <Form.Label>Weight</Form.Label>
+                            <Form.Control 
+                            type="text" 
+                            placeholder=""
+                            { ...formik.getFieldProps('weight') }
+                            isInvalid={ formik.touched.weight && formik.errors.weight }
+                            />
+            
+                            <Form.Control.Feedback type='invalid'>
+                                { formik.errors.weight }
+                            </Form.Control.Feedback>
+                        </Form.Group>}
+                    </Col>
+                </Row>
             </div>
     </Card>
     );
 }
 
-const mapStateToProps = ({ adminReducer: { settings }, }) => ({
-    settings, 
+const mapStateToProps = ({ adminReducer: { settings, orgChart }, }) => ({
+    settings,
+    orgChart: orgChart[0] 
 });
 
 export default connect(
