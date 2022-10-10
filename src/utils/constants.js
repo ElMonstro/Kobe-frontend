@@ -25,11 +25,11 @@ export const CASCADED = "cascaded";
 export const VIEW = "view";
 export const UPDATE = "update";
 export const PERSPECTIVE_OBJECT = {
-    financial_name: "Financial",
-    customer_name: "Customer",
-    internal_processes_name: "Internal Processes",
-    learning_growth_name: "Learning & Growth",
-    behavioral_name: "Behavioral"  
+    financial_name: "financial",
+    customer_name: "customer",
+    internal_processes_name: "internal processes",
+    learning_growth_name: "learning & growth",
+    behavioral_name: "behavioral"  
 };
 export const QUARTERS = [
     'quater 1',
