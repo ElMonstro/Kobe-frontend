@@ -17,20 +17,34 @@ export const NOTIF_INFO = "info";
 export const NOIF_WARNING = "warning";
 export const OVER_VIEW= "overview";
 export const SCORECARD = "scorecard";
-export const STRATEGY_MAP = "strategy_map";
+export const STRATEGY_MAP = "strategy-map";
 export const DASHBOARDS = "dashboards";
 export const REPORTS = "reports";
 export const CREATE = "create";
 export const CASCADED = "cascaded";
 export const VIEW = "view";
 export const UPDATE = "update";
+export const FINANCIAL = 'financial'
+export const CUSTOMER = 'customer'
+export const INTERNAL_PROCESSES = 'internal processes'
+export const LEARNING_GROWTH = 'learning & growth'
+export const BEHAVIORAL = 'behavioral'
+
 export const PERSPECTIVE_OBJECT = {
-    financial_name: "financial",
-    customer_name: "customer",
-    internal_processes_name: "internal processes",
-    learning_growth_name: "learning & growth",
-    behavioral_name: "behavioral"  
+    financial_name: FINANCIAL,
+    customer_name: CUSTOMER,
+    internal_processes_name: INTERNAL_PROCESSES,
+    learning_growth_name: LEARNING_GROWTH,
+    behavioral_name: BEHAVIORAL  
 };
+
+export const PERSPECTIVES_ORDER_ARRAY = [
+    FINANCIAL,
+    CUSTOMER,
+    INTERNAL_PROCESSES,
+    LEARNING_GROWTH
+]
+
 export const QUARTERS = [
     'quater 1',
     'quater 2',

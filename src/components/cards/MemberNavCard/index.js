@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { DASHBOARDS, OVER_VIEW, REPORTS, SCORECARD, STRATEGY_MAP } from "../../../utils/constants";
 import './index.scss';
@@ -16,6 +16,8 @@ const MemberNavCard = ({ activeComponent, user }) => {
         newSelectedElement.className = "selected col";
     }
 
+    const { role } = useParams();
+
     useEffect(() => {
         setSelectedClass(activeComponent);
       }, [activeComponent]);
@@ -29,27 +31,27 @@ const MemberNavCard = ({ activeComponent, user }) => {
             </Row>
             <Row className="nav">
                 <Col id={ OVER_VIEW }>
-                    <Link to="/overview">
+                    <Link to={ `/${role}/${OVER_VIEW}/`}>
                         Overview
                     </Link>
                 </Col>
                 <Col id={ SCORECARD } className="selected">
-                    <Link to="/scorecard">
+                    <Link to={ `/${role}/${SCORECARD}/`}>
                         Scorecard
                     </Link>
                 </Col>
                 <Col id={ STRATEGY_MAP }>
-                    <Link to="/strategy-map">
+                    <Link to={ `/${role}/${STRATEGY_MAP}/`}>
                         Strategy Map
                     </Link>
                 </Col>
                 <Col id={ DASHBOARDS }>
-                    <Link to="/dashboards">
+                    <Link to={ `/${role}/${DASHBOARDS}/` }>
                         Dashboards
                     </Link>
                 </Col>
                 <Col id={ REPORTS }>
-                    <Link to="/reports">
+                    <Link to={ `/${role}/${REPORTS}/` }>
                         Reports & Trends
                     </Link>
                 </Col>

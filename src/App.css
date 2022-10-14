@@ -10,3 +10,9 @@
 .white_bg {
     background-color: #fff!important;
 }
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

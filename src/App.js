@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { ORG_STRUCTURE, PERSPECTIVES, CASCADE, REVEIEW_PERIOD, SEND_EMAILS, SCORECARD, CREATE, CASCADED, VIEW, UPDATE } from "./utils/constants";
+import { ORG_STRUCTURE, PERSPECTIVES, CASCADE, REVEIEW_PERIOD, SEND_EMAILS, SCORECARD, CREATE, CASCADED, VIEW, UPDATE, STRATEGY_MAP } from "./utils/constants";
 
 import AdminDashboard from './components/adminDashboard';
 import StaffDashboard from './components/staffDashboard';
@@ -20,6 +20,8 @@ import ScorecardCreate from './components/ScorecardCreate';
 import CascadedCards from './components/cards/cascadedCards';
 import ViewScorecard from './components/viewScorecard';
 import UpdateScorecardCard from './components/cards/updateScorecardCard';
+import StrategyMapCont from './components/strategyMapCont';
+import StrategyMapCreate from './components/strategyMapCreate';
 
 
 function App({ isLoggedIn }) {
@@ -53,6 +55,10 @@ function App({ isLoggedIn }) {
               <Route path={ CASCADED } element={ <CascadedCards />}/>
               <Route path={ VIEW } element={ <ViewScorecard />} />
               <Route path={ UPDATE } element={ <UpdateScorecardCard />} />
+            </Route>
+            <Route element={ <Protected> <StrategyMapCont /> </Protected>} path={ STRATEGY_MAP }>
+              <Route index element={ <StrategyMapCreate/> } path={ CREATE } />
+              <Route element={''} path={ VIEW }/>
             </Route>
           </Route>
           <Route path="/login" element={ <StaffDashboard /> } />

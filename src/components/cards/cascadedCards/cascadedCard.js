@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
-import { fetchSelfCascadedInitURL, fetchInitiativeURL } from "../../../services/urls";
+import { fetchSelfCascadedInitURL, fetchCascadedObjectiveURL } from "../../../services/urls";
 import { GET } from "../../../utils/constants";
 import { makeRequest } from "../../../utils/requestUtils";
 import CascadedInitiative from "./cascadedInitiative";
@@ -11,7 +11,7 @@ const CascadedCard = ({ title, type, setInitiativeId, setActiveComponent }) => {
 
     const urlMapper = {
         selfCascaded: fetchSelfCascadedInitURL,
-        cascaded: fetchInitiativeURL
+        cascaded: fetchCascadedObjectiveURL
     }
 
     const [initiatives, setInitiatives] = useState([])

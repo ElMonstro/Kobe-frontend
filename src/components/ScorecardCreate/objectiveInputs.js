@@ -56,7 +56,7 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, or
                                 <option>Perspectives</option>
                                 {
                                     Object.keys(PERSPECTIVE_OBJECT).map(perspective => {
-                                        return <option key={ perspective } className="">{ settings[perspective] }</option>
+                                        return <option key={ perspective } value={PERSPECTIVE_OBJECT[perspective]} className="">{ settings[perspective] }</option>
                                     })
                                 }
                             </Form.Select>

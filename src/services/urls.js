@@ -10,9 +10,10 @@ export const sendEmailsURL = `${baseURL}/administration/send-auth-emails/`;
 export const fetchUnderlingsURL = `${baseURL}/scorecard/role/fetch-underlings/`;
 export const createObjectiveURL = `${baseURL}/scorecard/objectives/`;
 export const fetchSelfCascadedInitURL = `${baseURL}/scorecard/objectives/?type=self_cascaded_init`;
-export const fetchInitiativeURL = `${baseURL}/scorecard/objectives/`;
+export const fetchCascadedObjectiveURL = `${baseURL}/scorecard/objectives/?type=initiative`;
 export const updateObjectiveURL = id => `${baseURL}/scorecard/objectives/${id}/`;
 export const createObjectiveFromInitURL = (id, mode) => `${baseURL}/scorecard/objectives/${id}/initiative-to-objective/?mode=${mode}`;
 export const editObjectiveURL = id => `${baseURL}/scorecard/objectives/${id}/initiative-to-objective/?mode=edit`;
 export const fetchPerspectivesURL = role =>  `${baseURL}/scorecard/role/${role}/perspectives/`;
-
+export const fetchStrategyMapObjectivesURL = `${baseURL}/scorecard/objectives/strategy-map/`;
+export const linkObjectiveURL = id => `${baseURL}/scorecard/objectives/${id}/link-objectives/`;

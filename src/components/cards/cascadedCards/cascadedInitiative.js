@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Card, Row, Col, Button } from "react-bootstrap";
+import React from "react";
+import { Row, Col, Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { CREATE, SCORECARD } from "../../../utils/constants";
 
@@ -25,7 +25,7 @@ const CascadedInitiative = ({ name, type, id, is_created})=> {
 
     return (
         <Row className="initiative">
-            <Col lg={3}>
+            <Col lg={4}>
                 { name }
             </Col>
 
