@@ -1,17 +1,18 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import { CREATE, SCORECARD } from "../../../utils/constants";
+import { CREATE, EDIT, SCORECARD } from "../../../utils/constants";
 
 import "./index.scss";
 
-const CascadedInitiative = ({ name, type, id, is_created})=> {
+const CascadedInitiative = ({ name, type, id, target})=> {
 
-    const buttonMapper = {
-        false: 'create',
-        true: 'edit'
+
+    let buttonType = EDIT
+
+    if (target === "0.00"){
+        buttonType = CREATE;
     }
-    const buttonType = buttonMapper[is_created];
 
     const navigate = useNavigate();
     const { role } = useParams();
@@ -20,8 +21,6 @@ const CascadedInitiative = ({ name, type, id, is_created})=> {
         const url = `/${role}/${SCORECARD}/${CREATE}/${e.target.id}/${buttonType}`;
         navigate(url);
     };
-
-    
 
     return (
         <Row className="initiative">

@@ -37,7 +37,7 @@ const CascadedCard = ({ title, type, setInitiativeId, setActiveComponent }) => {
                                             id={ initiative.id }
                                             name={ initiative.name } 
                                             type={ initiative.type }
-                                            is_created={ initiative.is_created }
+                                            target={ initiative.target }
                                             setInitiativeId={setInitiativeId}
                                             setActiveComponent={setActiveComponent}
                                     />
