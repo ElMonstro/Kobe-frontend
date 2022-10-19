@@ -10,10 +10,10 @@ import './index.scss';
 const MemberNavCard = ({ activeComponent, user }) => {
 
     const setSelectedClass = activeComponent => {
-        let selectedElements = document.getElementsByClassName("selected");
-        selectedElements[0]? selectedElements[0].className = "": selectedElements=null;
+        let selectedElements = document.getElementsByClassName("current");
+        selectedElements[0]? selectedElements[0].className = "col": selectedElements=null;
         const newSelectedElement = document.getElementById(activeComponent);
-        newSelectedElement.className = "selected col";
+        newSelectedElement.className = "current col";
     }
 
     const { role } = useParams();

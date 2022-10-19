@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Card, Row, Col, Form } from "react-bootstrap";
-import { useFormik } from 'formik';
+import { Card, Row, Col } from "react-bootstrap";
 
 import { makeRequest } from "../../../utils/requestUtils";
 import "./index.scss";
-import { createObjectiveURL, fetchSelfCascadedInitURL } from "../../../services/urls";
-import { GET } from "../../../utils/constants";
+import { fetchSelfCascadedInitURL } from "../../../services/urls";
+import { GET, UPDATE } from "../../../utils/constants";
 import Initiative from "./initiative";
+import { useOutletContext } from "react-router-dom";
 
 const UpdateScorecardCard = props => {
 
-    const [initiatives, setInitiatives] = useState([])
+    const [initiatives, setInitiatives] = useState([]);
+    const { setActiveComponent } = useOutletContext();
 
     useEffect(() => {
+        setActiveComponent(UPDATE);
         makeRequest(fetchSelfCascadedInitURL, GET, null, true, false)
         .then(data => {
             setInitiatives(data);

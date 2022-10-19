@@ -30,10 +30,6 @@ const ScorecardNavCard = ({ activeComponent, setActiveComponent, orgChart }) => 
         setNoneViewClassNames(classNames);
       }, [classNames]);
 
-    const handleClick = e => {
-        setActiveComponent(e.target.id);
-    }
-
     useEffect(() => {
         setSelectedClass(activeComponent);
       }, [activeComponent]);
@@ -43,22 +39,22 @@ const ScorecardNavCard = ({ activeComponent, setActiveComponent, orgChart }) => 
 
             <Row className="nav">
                 <Col className={ noneViewClassNames }>
-                    <Link id={ CREATE } onClick={ handleClick } className="selected_mode" to={ CREATE }>
+                    <Link id={ CREATE } className="selected_mode" to={ CREATE }>
                         Create
                     </Link>
                 </Col>
                 <Col className={ noneViewClassNames }>
-                    <Link id={ CASCADED } onClick={ handleClick } to={ CASCADED }>
+                    <Link id={ CASCADED } to={ CASCADED }>
                         Cascaded
                     </Link>
                 </Col>
                 <Col className={ noneViewClassNames }>
-                    <Link id={ VIEW } onClick={ handleClick } to={ VIEW }>
+                    <Link id={ VIEW } to={ VIEW }>
                         View
                     </Link>
                 </Col>
                 <Col className={ noneViewClassNames }>
-                    <Link id={ UPDATE } onClick={ handleClick } to={ UPDATE }>
+                    <Link id={ UPDATE } to={ UPDATE }>
                         Update
                     </Link>
                 </Col>

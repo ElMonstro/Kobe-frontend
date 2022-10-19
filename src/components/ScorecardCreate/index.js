@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Card } from "react-bootstrap"
-import { CASCADED, EDIT, GET, PATCH, PERCENTAGE, POST, SCORECARD, SELF_CASCADED_INIT } from "../../utils/constants";
+import { CASCADED, CREATE, EDIT, GET, PATCH, PERCENTAGE, POST, SCORECARD, SELF_CASCADED_INIT } from "../../utils/constants";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from "react-redux";
 import { isUndefined } from "lodash";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 
 import "./index.scss";
 import ObjectiveInputs from "./objectiveInputs";
@@ -24,8 +24,10 @@ const ScorecardCreate = ({ periods, orgChart }) => {
     const { initiativeId, mode, role } = useParams();
     const navigate = useNavigate();
     const reinitializeForm = mode === EDIT;
+    const { setActiveComponent } = useOutletContext();
 
     useEffect(() => {
+        setActiveComponent(CREATE);
         initiativeId && makeRequest(updateObjectiveURL(initiativeId), GET, null, true, false)
             .then(data => {
                 data && setInitiative(data);

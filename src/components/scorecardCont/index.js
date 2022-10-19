@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
-import { VIEW } from "../../utils/constants";
+import { Outlet, useOutletContext } from "react-router-dom";
+import { SCORECARD, VIEW } from "../../utils/constants";
 import ScorecardNav from "../scorecardNav";  
 
 import "./index.scss";
@@ -8,15 +8,17 @@ import "./index.scss";
 const ScorecardCont = props => {
 
     const [activeComponent, setActiveComponent] = useState(VIEW);
+    const { setActiveCompMemberNav } = useOutletContext();
 
     useEffect(() => {
+        setActiveCompMemberNav(SCORECARD);
         setActiveComponent(VIEW);
     }, []);
     
     return (
         <div className="scorecard_cont">
             <ScorecardNav activeComponent={ activeComponent } setActiveComponent={ setActiveComponent } />
-            <Outlet />
+            <Outlet context={{ setActiveComponent: setActiveComponent } } />
         </div>
     )
 }

@@ -7,7 +7,7 @@ import { CREATE, VIEW } from "../../utils/constants";
 import './index.scss';
 
 
-const StrategyMapNavCard = ({ activeComponent, setActiveComponent, orgChart }) => {
+const StrategyMapNavCard = ({ activeComponent, orgChart }) => {
 
     const setSelectedClass = activeComponent => {
 
@@ -30,10 +30,6 @@ const StrategyMapNavCard = ({ activeComponent, setActiveComponent, orgChart }) =
         setNoneViewClassNames(classNames);
       }, [classNames]);
 
-    const handleClick = e => {
-        setActiveComponent(e.target.id);
-    }
-
     useEffect(() => {
         setSelectedClass(activeComponent);
       }, [activeComponent]);
@@ -43,12 +39,12 @@ const StrategyMapNavCard = ({ activeComponent, setActiveComponent, orgChart }) =
 
             <Row className="nav">
                 <Col className={ noneViewClassNames }>
-                    <Link id={ CREATE } onClick={ handleClick } className="selected_mode" to={ CREATE }>
+                    <Link id={ CREATE } className="selected_mode" to={ CREATE }>
                         Create
                     </Link>
                 </Col>
                 <Col className={ noneViewClassNames }>
-                    <Link id={ VIEW } onClick={ handleClick } to={ VIEW }>
+                    <Link id={ VIEW } to={ VIEW }>
                         View
                     </Link>
                 </Col>

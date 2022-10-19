@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
 
 import { fetchStrategyMapObjectivesURL } from "../../services/urls";
-import { GET, PERSPECTIVES, PERSPECTIVES_ORDER_ARRAY } from "../../utils/constants";
+import { CREATE, GET, PERSPECTIVES_ORDER_ARRAY } from "../../utils/constants";
 import { makeRequest } from "../../utils/requestUtils";
 import "./index.scss";
 import StrategyMapPerspective from "./strategyPerspective";
@@ -12,13 +13,15 @@ const StrategyMapCreate = props => {
     let perspectiveObjectives;
     let linkableObjectives;
     let abovePerspective;
+    const { setActiveComponent } = useOutletContext();
 
     useEffect(() => {
+        setActiveComponent(CREATE);
         makeRequest(fetchStrategyMapObjectivesURL, GET, null, true, false)
             .then(data => {
                 data && setObjectives(data);
             })
-    }, [])
+    }, []);
 
     return (
         <div className="strategy_map_create">

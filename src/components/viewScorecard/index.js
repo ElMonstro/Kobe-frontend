@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Card, Col, Row, Spinner } from "react-bootstrap";
-import { useParams } from "react-router-dom";
-import { fetchPerspectivesURL } from "../../services/urls";
-import { GET } from "../../utils/constants";
-import { makeRequest } from "../../utils/requestUtils";
+import { useOutletContext, useParams } from "react-router-dom";
 
+import { fetchPerspectivesURL } from "../../services/urls";
+import { GET, VIEW } from "../../utils/constants";
+import { makeRequest } from "../../utils/requestUtils";
 import "./index.scss";
-import ViewPerspective from "./viewPerspective.";
+import ViewPerspective from "./viewPerspective";
 
 const ViewScorecard = props => {
 
     const [perspectives, setPerspective] = useState([])
     const { role } = useParams();
     const [spinnerState, setSpinnerState] = useState(true);
+    const { setActiveComponent } = useOutletContext();
 
     useEffect(() => {
+        setActiveComponent(VIEW);
         setSpinnerState(true);
         makeRequest(fetchPerspectivesURL(role), GET, null, true, false)
             .then(data => {
