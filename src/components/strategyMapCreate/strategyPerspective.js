@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Col, Row } from "react-bootstrap";
 
 import "./index.scss";
@@ -27,7 +27,12 @@ const StrategyMapPerspective = ({ linkableObjectives, perspectiveObjectives, per
                 <div className="objectives">
                     {
                         perspectiveObjectives?.map(objective => {
-                            return <StrategyObjective key={ objective.id } objective={objective} linkableObjectives={ linkableObjectives } perspective={ perspective }/>
+                            return <StrategyObjective 
+                                        key={ objective.id } 
+                                        objective={objective} 
+                                        linkableObjectives={ linkableObjectives } 
+                                        perspective={ perspective }
+                                    />
                         })
                         
                     }

@@ -22,6 +22,7 @@ import ViewScorecard from './components/viewScorecard';
 import UpdateScorecardCard from './components/cards/updateScorecardCard';
 import StrategyMapCont from './components/strategyMapCont';
 import StrategyMapCreate from './components/strategyMapCreate';
+import StrategyMapView from './components/viewStrategyMap';
 
 
 function App({ isLoggedIn }) {
@@ -36,7 +37,7 @@ function App({ isLoggedIn }) {
   
   return (
     <BrowserRouter>
-    <ToastContainer limit={8}/>
+    <ToastContainer limit={4}/>
       {!isLoggedIn && <LoginModal isLoggedOut={!isLoggedIn}/>}
         <Routes>
           <Route index element={<Protected> <StaffDashboard /> </Protected>} />
@@ -57,8 +58,9 @@ function App({ isLoggedIn }) {
               <Route path={ UPDATE } element={ <UpdateScorecardCard />} />
             </Route>
             <Route element={ <Protected> <StrategyMapCont /> </Protected>} path={ STRATEGY_MAP }>
-              <Route index element={ <StrategyMapCreate/> } path={ CREATE } />
-              <Route element={''} path={ VIEW }/>
+              <Route index element={ <StrategyMapView /> } />
+              <Route element={ <StrategyMapCreate/> } path={ CREATE } />
+              <Route element={ <StrategyMapView /> } path={ VIEW }/>
             </Route>
           </Route>
           <Route path="/login" element={ <StaffDashboard /> } />

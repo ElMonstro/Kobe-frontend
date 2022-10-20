@@ -1,0 +1,44 @@
+.strategy_map_view {
+    width: 100%;
+    
+    svg {
+        text-overflow: clip;
+    }
+
+    .strategy_view_perspective {
+        margin: 0 0 20px 0!important;
+        height: 180px;
+        width: 100%!important;
+        background: #FFFFFF;
+
+        .objectives {
+            padding-top: 18px;
+        }
+
+        .strategy_map_objective {
+            width: fit-content;
+            margin-left: 20px;
+        }
+
+        .name_container {
+            padding-top: 10px;
+            position: relative;
+            margin-right: 10px;
+            
+        }
+
+        .name {
+            position: absolute;
+            left: 10px;
+            top: 60px;
+            font-weight: 700;
+            width: 100px;
+            font-size: 24px;
+            line-height: 28px;
+            color: #035476;
+            transform: rotate(-90deg);
+            text-transform: capitalize;
+        }
+    }
+
+}
