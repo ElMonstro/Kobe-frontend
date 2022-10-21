@@ -2,7 +2,8 @@ import {
     FETCH_COMPANY_INFO, FETCH_ORG_CHART,
     FETCH_SETTINGS, SET_COMPANY_INFO, SET_ORG_CHART, 
     SET_SETTINGS, SET_USER, SHOW_CONF_MODAL, USER_LOGGED_IN,
-    SET_PERIODS
+    SET_PERIODS,
+    SET_CURRENT_ROLE
     } from "./actionTypes";
 
 export const changeLoginStatus = isLoggedIn => ({
@@ -47,8 +48,12 @@ export const setUser = user => ({
     user,
 });
 
-
 export const setPeriods = periods => ({
     type: SET_PERIODS,
     periods,
+});
+
+export const setCurrentRole = currentRole => ({
+    type: SET_CURRENT_ROLE,
+    currentRole,
 });

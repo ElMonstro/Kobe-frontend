@@ -202,3 +202,24 @@ export const createObjectPayload = (data, initiatives, measures, periods) => {
 
     return data;
   };
+
+
+export const searchOrgChart = (orgChart, roleId) => {
+    for (let i = 0; i < orgChart.length; i++) {
+        const role = orgChart[i]; 
+
+        if (role.id.toString() === roleId) {
+            
+            return role;
+        } else {
+            return searchOrgChart(role.underlings, roleId);
+        }
+    }
+};
+
+
+export const isObjectEmpty = obj => {
+    return obj 
+        && Object.keys(obj).length === 0 
+        && Object.getPrototypeOf(obj) === Object.prototype;
+}

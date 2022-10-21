@@ -1,18 +1,21 @@
 import React from "react";
-
-import SearchBox from "../common/searchBox";
-import Tree from "../common/Tree/Tree";
-import './index.scss';
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import SearchBox from "../common/searchBox";
+import Tree from "../common/Tree/Tree";
+import { setCurrentRole } from "../../redux/actions";
+import "./index.scss";
 
-const StaffSidebar = ({ orgChart }) => {
+
+
+const StaffSidebar = ({ orgChart, setCurrentRole }) => {
 
     const navigate = useNavigate();
 
     const handleClick = (node) => {
         navigate(`/${node.node.id}/scorecard`);
+        setCurrentRole(node.node);
     };
 
     return (
@@ -30,6 +33,7 @@ const StaffSidebar = ({ orgChart }) => {
 }
 
 const mapDispatchToProps = {
+    setCurrentRole
 }
 
 const mapStateToProps = ({ adminReducer: { orgChart } }) => ({

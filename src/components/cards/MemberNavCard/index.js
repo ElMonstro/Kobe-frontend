@@ -4,10 +4,12 @@ import { connect } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 
 import { DASHBOARDS, OVER_VIEW, REPORTS, SCORECARD, STRATEGY_MAP } from "../../../utils/constants";
+import { isObjectEmpty, searchOrgChart } from "../../../utils";
+import { setCurrentRole } from "../../../redux/actions";
 import './index.scss';
 
 
-const MemberNavCard = ({ activeComponent, user }) => {
+const MemberNavCard = ({ activeComponent, currentRole, orgChart, setCurrentRole }) => {
 
     const setSelectedClass = activeComponent => {
         let selectedElements = document.getElementsByClassName("current");
@@ -22,11 +24,19 @@ const MemberNavCard = ({ activeComponent, user }) => {
         setSelectedClass(activeComponent);
       }, [activeComponent]);
 
+    useEffect(() => {
+        
+        if (isObjectEmpty(currentRole) && orgChart.length === 1 && orgChart[0]) {
+            const gottenRole = searchOrgChart(orgChart, role);
+            setCurrentRole(gottenRole);
+        }
+      }, [orgChart]);
+
     return (
         <div className="member_nav">
             <Row className="title">
                 <div className="staff_name">
-                    { user?.first_name }  { user?.second_name }
+                    { currentRole?.user?.first_name }&nbsp;{ currentRole?.user?.second_name }
                 </div>
             </Row>
             <Row className="nav">
@@ -61,10 +71,12 @@ const MemberNavCard = ({ activeComponent, user }) => {
 }
 
 const mapDispatchToProps = {
+    setCurrentRole
 }
 
-const mapStateToProps = ({ authReducer: { user } }) => ({
-    user
+const mapStateToProps = ({ authReducer: { currentRole }, adminReducer: { orgChart }  }) => ({
+    currentRole,
+    orgChart
 });
 
 export default connect(

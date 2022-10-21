@@ -12,12 +12,16 @@ import {
 import { StyledNode } from "./TreeNode.style";
 
 import { useTreeContext } from "../state/TreeContext";
+import { useNavigate } from "react-router-dom";
 
 
-const NodeName = ({ isOpen, name, handleClick }) => (
-  <StyledName onClick={handleClick} className="employee_name">
-    {isOpen ? <ChevronDown /> : <ChevronRight />}
-    &nbsp;&nbsp;{name}
+const NodeName = ({ isOpen, name, openCloseNode, handleNameClick }) => (
+  <StyledName className="employee_name">
+    {isOpen ? <ChevronDown onClick={openCloseNode} /> : <ChevronRight onClick={openCloseNode} />}
+    &nbsp;&nbsp;
+    <span onClick={handleNameClick}>
+       {name} 
+    </span>
   </StyledName>
 );
 
@@ -25,12 +29,11 @@ const Node = ({ id, name, children, node, job_grade, department, staff_no, desig
   const { onNodeClick } = useTreeContext();
   const [isOpen, setIsOpen] = useState(false);
   const [childs, setChilds] = useState([]);
-  
+  const navigate = useNavigate();  
 
   useEffect(() => {
     setChilds([children]);
   }, [children]);
-
 
   const handleNodeClick = React.useCallback(
     (event) => {
@@ -41,7 +44,7 @@ const Node = ({ id, name, children, node, job_grade, department, staff_no, desig
   );
 
   return (
-    <StyledNode id={id} onClick={handleNodeClick} className="tree__node">
+    <StyledNode id={id} className="tree__node">
       <VerticalLine>
         <div className="org_row">
           <Row>
@@ -49,7 +52,8 @@ const Node = ({ id, name, children, node, job_grade, department, staff_no, desig
               <NodeName
                 name={name}
                 isOpen={isOpen}
-                handleClick={() => setIsOpen(!isOpen)}
+                openCloseNode={() => setIsOpen(!isOpen)}
+                handleNameClick={handleNodeClick}
               />
             </Col>
 

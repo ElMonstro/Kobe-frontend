@@ -12,27 +12,40 @@ import ObjectiveInputs from "./objectiveInputs";
 import MeasuresInputs from "./measuresInputs";
 import ThresholdsInputs from "./thresholdsInputs";
 import InitiativeInputs from "./initiativesInputs";
-import { createObjectPayload } from "../../utils";
+import { arePeriodicalInputsValid, createObjectPayload, isWeightsFieldValid } from "../../utils";
 import { makeRequest } from "../../utils/requestUtils";
 import { createObjectiveURL, updateObjectiveURL, createObjectiveFromInitURL } from "../../services/urls";
+import { yupObjectiveValidationObj as validationSchema } from "../../utils/validators";
 
 
-const ScorecardCreate = ({ periods, orgChart }) => {
+const ScorecardCreate = ({ periods, actingRole }) => {
 
     const [initiative, setInitiative] = useState({});
+    const [topObjectivesTotalWeight, setTopObjectivesTotalWeight] = useState(0);
     const { perspective, name, type } = initiative;
     const { initiativeId, mode, role } = useParams();
     const navigate = useNavigate();
     const reinitializeForm = mode === EDIT;
     const { setActiveComponent } = useOutletContext();
-
+    
     useEffect(() => {
         setActiveComponent(CREATE);
         initiativeId && makeRequest(updateObjectiveURL(initiativeId), GET, null, true, false)
             .then(data => {
                 data && setInitiative(data);
-            })
+            });
     }, [])
+
+    useEffect(() => {
+        if (actingRole && !actingRole?.reporting_to) {
+            makeRequest(createObjectiveURL, GET, null, true, false)
+                .then(objectives => {
+                    let totalWeight = 0;
+                    objectives?.map(objective => totalWeight += objective.weight * 100);
+                    setTopObjectivesTotalWeight(totalWeight);
+                })
+        }
+    }, [actingRole])
 
     const [initiatives, setInitiatives] = useState([
         {
@@ -63,27 +76,10 @@ const ScorecardCreate = ({ periods, orgChart }) => {
         weight: ''
         }
 
-    const validationSchema = {
-        name: Yup.string()
-            .required('*Required'),
-        perspective: Yup.string()
-            .required('*Required'),
-        data_type: Yup.string()
-            .required('*Required'),
-        weight: Yup.number().max(100)
-            .min(0),
-        target: Yup.number(),
-        upper_threshold: Yup.number(),
-        lower_threshold: Yup.number(),
-        budget: Yup.number(),
-        baseline: Yup.number(),
-        percentage_target: Yup.number().max(100).min(0),
-        unit_target: Yup.number(),
-    }
-
     periods.map(period => {
         initialValues[period] = '';
-        mode===EDIT? validationSchema[period] = Yup.number().max(100).min(0): validationSchema[period] = Yup.number().max(100).min(0).required('*Required');
+        mode === EDIT? validationSchema[period] = Yup.number().max(100).min(0): 
+            validationSchema[period] = Yup.number().max(100).min(0).required('*Required');
         return undefined;
     });
 
@@ -117,7 +113,7 @@ const ScorecardCreate = ({ periods, orgChart }) => {
         validationSchema.weight = Yup.number().max(100).min(0);
     }
 
-    if (!Boolean(orgChart?.reporting_to)) {
+    if (!Boolean(actingRole?.reporting_to)) {
         validationSchema.weight = Yup.number().max(100).min(0).required('*Required');
     }
 
@@ -142,33 +138,50 @@ const ScorecardCreate = ({ periods, orgChart }) => {
         validationSchema.weight = Yup.number().max(100).min(0);
     }
 
+    const onSubmit = async (values, { setFieldError, resetForm }) => {
+            
+        if (!arePeriodicalInputsValid(values, periods, setFieldError)) {
+            return;
+        }
+
+        if (!isWeightsFieldValid(values, 100-topObjectivesTotalWeight, setFieldError)){
+            return;
+        }
+
+        if (values.weight) {
+            const totalWeight = parseInt(values.weight) + topObjectivesTotalWeight;
+            setTopObjectivesTotalWeight(totalWeight);
+        }
+        const payload = createObjectPayload(values, initiatives, measures, periods);
+        values.percentage_target = (values.percentage_target/100).toFixed(2);
+
+        if (!Boolean(initiativeId)){
+            makeRequest(createObjectiveURL, POST, payload, true)
+                .then(data => {
+                    if (data){ 
+                        resetForm();
+                    }
+
+                });
+            
+        } else {
+            (type === SELF_CASCADED_INIT || mode === EDIT) && delete payload.initiatives;
+            makeRequest(createObjectiveFromInitURL(initiativeId, mode), PATCH, payload, true)
+            .then(data=> {
+                if (data) {
+                    resetForm();
+                    navigate(`/${role}/${SCORECARD}/${CASCADED}/`);
+                } 
+            });   
+        }
+        
+    }
 
     const formik = useFormik({
         enableReinitialize: reinitializeForm,
         initialValues: initialValues,
         validationSchema: Yup.object(validationSchema),
-        onSubmit: async (values, { setErrors, resetForm }) => {
-            const payload = createObjectPayload(values, initiatives, measures, periods);
-            values.percentage_target = (values.percentage_target/100).toFixed(2);
-
-            if (!Boolean(initiativeId)){
-                makeRequest(createObjectiveURL, POST, payload, true)
-                    .then(data => {
-                        if (data) resetForm();
-                    });
-                
-            } else {
-                (type === SELF_CASCADED_INIT || mode === EDIT) && delete payload.initiatives;
-                makeRequest(createObjectiveFromInitURL(initiativeId, mode), PATCH, payload, true)
-                .then(data=> {
-                    if (data) {
-                        resetForm();
-                        navigate(`/${role}/${SCORECARD}/${CASCADED}/`);
-                    } 
-                });   
-            }
-            
-        },
+        onSubmit: onSubmit,
     });
 
     return (
@@ -220,7 +233,7 @@ const mapDispatchToProps = {
 
 const mapStateToProps = ({ adminReducer: { periods, orgChart }, }) => ({
     periods, 
-    orgChart: orgChart[0]
+    actingRole: orgChart[0]
 });
 
 export default connect(

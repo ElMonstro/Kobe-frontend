@@ -47,7 +47,7 @@ const ViewScorecard = props => {
                 <Card className="staff_card perspectives">
                     {
                         perspectives.map(perspective => {
-                            return <ViewPerspective {...perspective} />
+                            return <ViewPerspective key={ perspective.id } { ...perspective } />
                         })
                         
                     }
