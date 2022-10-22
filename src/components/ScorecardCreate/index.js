@@ -4,7 +4,6 @@ import { CASCADED, CREATE, EDIT, GET, PATCH, PERCENTAGE, POST, SCORECARD, SELF_C
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from "react-redux";
-import { isUndefined } from "lodash";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 
 import "./index.scss";
@@ -117,13 +116,13 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         validationSchema.weight = Yup.number().max(100).min(0).required('*Required');
     }
 
-    if ( !isUndefined(name)) {
+    if ( name !== undefined) { // if mode is not create mode
         initialValues.name = initiative.name;
         initialValues.perspective = initiative.perspective;
         initialValues.units_target = initiative.target;
         initialValues.baseline = initiative.baseline;
         initialValues.data_type = initiative.data_type;
-        initialValues.weight = initiative.weight;
+        initialValues.weight = initiative.weight * 100;
         initialValues[measures[0].measureId] = initiative?.measures[0]?.name
         if (initiative.data_type === PERCENTAGE) initialValues.percentage_target = initiative.target * 100;
         initiative.period_targets?.map(period => {
@@ -139,13 +138,15 @@ const ScorecardCreate = ({ periods, actingRole }) => {
     }
 
     const onSubmit = async (values, { setFieldError, resetForm }) => {
-            
+        
         if (!arePeriodicalInputsValid(values, periods, setFieldError)) {
             return;
         }
-
-        if (!isWeightsFieldValid(values, 100-topObjectivesTotalWeight, setFieldError)){
-            return;
+        
+        if (mode === CREATE) {
+            if (!isWeightsFieldValid(values, 100-topObjectivesTotalWeight, setFieldError)){
+                return;
+            }
         }
 
         if (values.weight) {

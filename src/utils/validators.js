@@ -61,3 +61,21 @@ export const yupReviewPeriodObj = Yup.object({
     review_period: Yup.number()
             .required('* Required')
 });
+
+export const yupObjectiveValidationObj = {
+    name: Yup.string()
+        .required('*Required'),
+    perspective: Yup.string()
+        .required('*Required'),
+    data_type: Yup.string()
+        .required('*Required'),
+    weight: Yup.number().max(100)
+        .min(0),
+    target: Yup.number(),
+    upper_threshold: Yup.number(),
+    lower_threshold: Yup.number(),
+    budget: Yup.number(),
+    baseline: Yup.number(),
+    percentage_target: Yup.number().max(100).min(0),
+    unit_target: Yup.number(),
+}

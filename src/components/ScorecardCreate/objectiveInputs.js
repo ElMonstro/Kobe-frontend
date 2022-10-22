@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { CREATE, PERSPECTIVE_OBJECT } from "../../utils/constants";
 
 
-const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, orgChart }) => {
+const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, role }) => {
 
     const isDisabled = Boolean(initiativeId);
     const nameFieldProps = formik.getFieldProps('name');
@@ -19,8 +19,8 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, or
     }
 
     useEffect(() => {
-        orgChart && setDisplayWeight(!Boolean(orgChart?.reporting_to) && !Boolean(name));
-    }, [orgChart, name]);
+        role && setDisplayWeight(!Boolean(role?.reporting_to) && !Boolean(name));
+    }, [role, name]);
 
     return (
         <Card className="staff_card">
@@ -91,7 +91,7 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, or
 
 const mapStateToProps = ({ adminReducer: { settings, orgChart }, }) => ({
     settings,
-    orgChart: orgChart[0] 
+    role: orgChart[0] 
 });
 
 export default connect(

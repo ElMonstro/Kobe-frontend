@@ -223,3 +223,31 @@ export const isObjectEmpty = obj => {
         && Object.keys(obj).length === 0 
         && Object.getPrototypeOf(obj) === Object.prototype;
 }
+
+
+export const arePeriodicalInputsValid = (values, periods, setFieldError) => {
+    let total = 0;
+    periods.map(period => {
+        total += parseInt(values[period]);
+    });
+
+    if (total !== 100) {
+        periods.map(period => {
+            setFieldError(period, "All periodical targets have to add up to 100");
+        });
+
+        return false;
+    }
+
+    return true;
+}
+
+export const isWeightsFieldValid = (values, remainingObjectiveWeight, setFieldError) => {
+
+    if (parseInt(values.weight) > remainingObjectiveWeight){ 
+        setFieldError("weight", `Objective weights cannot exceed 100. Remaining maximum weight for an objective is ${remainingObjectiveWeight} `);
+        return false;
+    }
+
+    return true;
+} 
