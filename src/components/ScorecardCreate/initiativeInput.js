@@ -44,7 +44,9 @@ const InitiativeInput = ({ formik, initiativeId, weightId, cascadeId, deleteId, 
                     {
                         underlings?.map(underling => {
                             return (
-                                <option value={ underling?.id } key={ underling?.id }>{ underling?.user.first_name + ' '  + underling?.user.second_name}</option>
+                                <option value={ underling?.id } key={ underling?.id }>
+                                    { underling?.user.first_name + ' '  + underling?.user.second_name}
+                                </option>
                             )
                         })
                     }
