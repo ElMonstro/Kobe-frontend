@@ -63,7 +63,6 @@ export const makeRequest =  async (url, method, data, authenticated=true, notify
             response = await request(url, data, headerDetails);
         }
         
-        console.log(response);
         notify && notificationHandler(response, sucessMessage, errorMessage);
         return response.data;
     } catch (error) {

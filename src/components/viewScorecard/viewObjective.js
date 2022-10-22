@@ -14,6 +14,7 @@ const ViewObjective= ({name, measures, weight, target, score, status, initiative
     let objectiveClassName;
     isOpen? initiativesClassName="initiatives": initiativesClassName="hidden";
     isOpen? objectiveClassName="objective white_bg": objectiveClassName="objective";
+
     const handleClick = e => {
         setIsOpen(!isOpen);
     } 

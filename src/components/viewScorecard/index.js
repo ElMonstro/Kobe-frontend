@@ -10,7 +10,7 @@ import ViewPerspective from "./viewPerspective";
 
 const ViewScorecard = props => {
 
-    const [perspectives, setPerspective] = useState([])
+    const [perspectives, setPerspectives] = useState([])
     const { role } = useParams();
     const [spinnerState, setSpinnerState] = useState(true);
     const { setActiveComponent } = useOutletContext();
@@ -19,8 +19,8 @@ const ViewScorecard = props => {
         setActiveComponent(VIEW);
         setSpinnerState(true);
         makeRequest(fetchPerspectivesURL(role), GET, null, true, false)
-            .then(data => {
-                data && setPerspective(data);
+            .then(perspectives => {
+                perspectives && setPerspectives(perspectives);
             });
         setSpinnerState(false);
     }, [role])

@@ -6,7 +6,7 @@ import OpenCloseIcon from "../common/openCloseIcon";
 import "./index.scss";
 import ViewObjective from "./viewObjective";
 
-const ViewPerspective = ({ objectives, name, score, status}) => {
+const ViewPerspective = ({ objectives, alias, score, status}) => {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -14,7 +14,6 @@ const ViewPerspective = ({ objectives, name, score, status}) => {
     let perspectiveClassName;
     isOpen? objectivesClassName="objectives gray_lines": objectivesClassName="hidden";
     isOpen? perspectiveClassName="perspective white_bg": perspectiveClassName="perspective";
-
 
     const handleClick = e => {
         setIsOpen(!isOpen);
@@ -32,7 +31,7 @@ const ViewPerspective = ({ objectives, name, score, status}) => {
                                     handleclick={ handleClick } 
                                     defaultMode={ isOpen } 
                                     />
-                                    <span className="name">{ name }</span>
+                                    <span className="name">{ alias }</span>
                             </Col>
                             <Col><span className="type">perspective</span></Col>
                         </Row>
