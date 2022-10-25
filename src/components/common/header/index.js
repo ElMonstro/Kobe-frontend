@@ -24,7 +24,7 @@ import {
 from "../../../redux/actions";
 
 
-const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser, setOrgChart, setPeriods }) => {
+const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser, setOrgChart, setPeriods, isLoggedIn }) => {
 
     const { name: companyName, logo } = companyInfo;
     const user = JSON.parse(localStorage.getItem('user'));
@@ -47,7 +47,7 @@ const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser, setOrgChart
 
         setUser(user);
 
-    }, []);
+    }, [isLoggedIn]);
     
     return (
         <Navbar sticky="top" className="nav_bar" bg="light" variant="light">
@@ -110,8 +110,9 @@ const mapDispatchToProps = {
     setPeriods
 }
 
-const mapStateToProps = ({ adminReducer: { companyInfo }, }) => ({
+const mapStateToProps = ({ adminReducer: { companyInfo }, authReducer: { isLoggedIn }, }) => ({
     companyInfo,
+    isLoggedIn
 });
 
 export default connect(

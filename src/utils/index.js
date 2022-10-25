@@ -208,11 +208,11 @@ export const searchOrgChart = (orgChart, roleId) => {
     for (let i = 0; i < orgChart.length; i++) {
         const role = orgChart[i]; 
 
-        if (role.id.toString() === roleId) {
+        if (role?.id?.toString() === roleId) {
             
             return role;
         } else {
-            return searchOrgChart(role.underlings, roleId);
+            return searchOrgChart(role?.underlings, roleId);
         }
     }
 };

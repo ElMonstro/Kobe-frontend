@@ -29,7 +29,7 @@ const LoginModal = props => {
                 const user = parseJwt(response.data.access);
                 changeLoginStatus(true);
                 let url;
-                user.us_admin? url = '/admin': url = `/${user.role}/${SCORECARD}`
+                user.is_admin? url = '/admin': url = `/${user.role}/${SCORECARD}`
                 navigate(url);
                 // store access tokens in local storage
                 window.localStorage.setItem('tokens', JSON.stringify(response.data));
