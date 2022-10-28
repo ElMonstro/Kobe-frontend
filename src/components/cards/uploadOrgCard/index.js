@@ -8,7 +8,7 @@ import exampleOrgFile from "../../../assets/example_org_file.xlsx"
 
 import "./index.scss";
 
-const UploadOrgCard = ({ setOrgChartSpinner }) => {
+const UploadOrgCard = ({ setOrgChartSpinner, settings }) => {
     return (
         <Card className="admin_card upload_org_card">
             <div className="card_cont">
@@ -22,6 +22,7 @@ const UploadOrgCard = ({ setOrgChartSpinner }) => {
                 </div>
                 <div className="upload_btn_div">
                     <UploadButton 
+                        disabled={ settings?.are_emails_sent }
                         setSpinnerStatus={ setOrgChartSpinner }
                         uploadURL={ uploadOrgChartURL } 
                         contentText="Upload Excel" 

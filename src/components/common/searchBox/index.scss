@@ -1,0 +1,20 @@
+.search_cont {
+    margin-top: 10px;
+    height: 33px;
+    border: 1px solid #BDBDBD;
+    padding: 2px 10px 2px 11px;
+    width: 80%;
+    margin-bottom: 30px;
+    border-radius: 5px;
+
+    svg {
+        height: 20px;
+        margin-right: 2px;
+        color: #BDBDBD;
+    }
+
+    .search_box {
+        width: 90%;
+        border: none;
+    }
+}

@@ -1,0 +1,174 @@
+.score_card_create {
+
+    .inputs_cont {
+        .add_measure {
+            display: none;
+        }
+    }
+    .form-label {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 28px;
+        text-transform: capitalize;
+
+        color: #4F4F4F;
+    }
+
+    .add {
+        float: right;
+        color: #2D9CDB;
+        cursor: pointer;
+        text-transform: initial;
+
+
+        .add_btn {
+            margin-right: 10px;
+        }
+    }
+
+    .form_btns {
+        float: right!important;
+        width: fit-content;
+
+        button {
+            width: 114px;
+            height: 36px;
+            border-radius: 4px;
+        }
+
+        .submit_btn {
+            background: #2D9CDB;
+            color: #fff;
+            margin-left: 10px;
+        }
+
+        .cancel_btn {
+            background-color: inherit;
+            border: 1px solid #BDBDBD;
+            color: #000
+        }
+        
+    }
+
+    .quarter {
+        margin-left: 0;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 28px;
+        letter-spacing: 0.035em;
+        color: #828282;
+    }
+
+    .quarterly_targets {
+        margin-bottom: 20px;
+    }
+    
+    .card_btn {
+        width: 134px;
+    }
+
+    .form-control, .form-select {
+        width: 359px;
+        border: 1px solid #BDBDBD!important;
+    }
+
+    .inputs_row {
+        margin-left: 0;
+        
+        margin-bottom: 20px;
+    }
+
+    .inputs_cont {
+        padding: 0 35px;
+    }
+
+    .staff_card {
+        padding: 0 0 20px 0;
+        height: 164px auto;
+        margin-bottom: 20px;
+    }
+
+    .card_title {
+        margin-bottom: 18px;
+    }
+
+
+    .measure_inputs {
+        margin-bottom: 30px;
+    }
+
+    .initiatives {
+
+        input {
+            border: 1px solid #BDBDBD;
+            border-radius: 4px;
+            height: 36px;
+        }
+
+        .inputs_row {
+            margin-bottom: 10px;
+        }
+
+        .col-lg-4 {
+            padding: 0!important;
+            
+        }
+        .initiatives_labels {
+        
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 28px;
+            letter-spacing: 0.035em;
+            color: #4F4F4F;
+            margin-left: 0;
+            margin-bottom: 10px;
+        }
+
+        .weight_label {
+            text-align: center;
+        }
+    
+        .initiative_name {
+            width: 359px;   
+        }
+    
+        .initiative_weight {
+            width: 85px;
+            // margin-left: 55px;
+            margin: auto;
+        }
+
+        .cascade {
+            width: 206px;
+        }
+
+        .delete_btn {
+            svg{
+                height: 20px;
+                color: #828282;
+                cursor: pointer;
+                margin: auto;
+            }
+            
+        }
+
+        .thumbnail {
+            vertical-align: middle;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+        }
+
+        .underling_name {
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 28px;
+            letter-spacing: 0.035em;
+            color: #4F4F4F;
+            margin-left: 10px;
+        }
+    
+    }
+
+
+}

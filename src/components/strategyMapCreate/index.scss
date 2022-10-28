@@ -1,0 +1,86 @@
+.strategy_map_create {
+    .row {
+        margin-left: 0!important;
+    }
+
+    .header {
+
+        background-color: #fff;
+        padding: 10px 20px 10px 40px;
+        margin-bottom: 3px;
+
+        .title {
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 28px;
+            text-transform: uppercase;
+            color: #BDBDBD;
+            height: 49px;
+        }
+    }
+
+    .body {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 28px;
+        letter-spacing: 0.035em;
+        color: #4F4F4F;
+
+        .row_design {
+            border-bottom: 2px #e6ecf2 solid;
+            padding: 10px 20px 10px 40px;
+
+        }
+        .title_bar {
+            text-transform: uppercase;
+        }
+
+        background-color: #fff;
+        margin-bottom: 20px;
+
+        .objectives {
+            .name:first-letter {
+                text-transform: capitalize;
+            }
+
+            .objective {
+
+                .link{
+                    width: 150px;
+                }
+
+                .selected_objectives {
+                    .selected_objective {
+                        width: 250px;
+                        height: 28px;
+                        background: #F2F2F2;
+                        border-radius: 4px;
+                        font-size: 14px;
+                        padding-right: 5px!important;
+                        margin-left: 30px!important;
+                        margin-bottom: 10px;
+
+                        .name {
+                            width: 180px;
+                            padding: 0!important;
+                        }
+
+                        .perspective_name {
+                            font-size: 10px;
+                            line-height: 28px;
+                            letter-spacing: -0.005em;
+                            color: #828282;
+                            float: left;
+                            width: 50px;
+                            padding: 0!important;
+                            text-transform: capitalize;
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    
+}

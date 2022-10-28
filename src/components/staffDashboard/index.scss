@@ -1,0 +1,48 @@
+.staff_cont {
+
+    textarea:focus, input:focus{
+        outline: none!important;
+    }
+
+    .good {
+        background: #16C046;
+    }
+
+    .poor {
+        background: #F21212;
+    }
+
+    .satisfactory {
+        background: #FFA800;
+    }
+
+    padding: 20px 0px!important;
+    background-color: #E6ECF2!important;
+    min-height: 944px;
+
+    .col {
+        padding: 0!important;
+    }
+
+    .staff_card {
+        border: none;
+       
+        .title {
+            margin-left: 0;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 24px;
+            text-transform: uppercase;
+            color: #BDBDBD;
+        }
+    
+        .card_title {
+            border-bottom: 1px solid #E0E0E0;
+            padding: 10px 35px;
+        }
+
+    }
+
+    
+}

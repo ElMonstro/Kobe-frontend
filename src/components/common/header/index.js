@@ -1,19 +1,30 @@
 import React, { useEffect } from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import {ChevronDown} from '@styled-icons/bootstrap/ChevronDown'
+import { connect } from "react-redux";
 
 import './index.scss';
-import src from "../../../assets/josh_logo.jpg"
+import src from "../../../assets/josh_logo.jpg";
 import defaultLogo from "../../../assets/logo.svg"
 import { base_cloudinary_url } from "../../../services/baseURL";
-import { logout } from "../../../utils";
+import { getPeriods, logout } from "../../../utils";
 import { makeRequest } from "../../../utils/requestUtils";
 import { GET } from "../../../utils/constants";
-import { companyInfoURL, settingsURL } from "../../../services/urls";
+import { companyInfoURL, fetchOrgChartURL, settingsURL } from "../../../services/urls";
 import LoginForm from "../../modals/loginModal";
+import { 
+    fetchCompanyInfo, 
+    fetchSettings, 
+    setSettings, 
+    setCompanyInfo, 
+    setUser,
+    setOrgChart,
+    setPeriods
+} 
+from "../../../redux/actions";
 
 
-const Header = ({ companyInfo, setSettings, setCompanyInfo }) => {
+const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser, setOrgChart, setPeriods, isLoggedIn }) => {
 
     const { name: companyName, logo } = companyInfo;
     const user = JSON.parse(localStorage.getItem('user'));
@@ -22,19 +33,27 @@ const Header = ({ companyInfo, setSettings, setCompanyInfo }) => {
 
         !companyName && makeRequest(settingsURL, GET, null, true, false)
             .then( data => {
-                data && setSettings(data)
-            })
+                data && setSettings(data);
+                data && setPeriods(getPeriods(data.review_period));
+            });
+
         !companyName && makeRequest(companyInfoURL, GET, null, true, false)
             .then( data => {
                 data && setCompanyInfo(data)}
-            )
-    }, []);
+            );
+        
+        !companyName && makeRequest(fetchOrgChartURL, GET, null, true, false)
+            .then( data => setOrgChart(data));
+
+        setUser(user);
+
+    }, [isLoggedIn]);
     
     return (
         <Navbar sticky="top" className="nav_bar" bg="light" variant="light">
             <LoginForm />
             <Container className="header_container" fluid>
-                <Navbar.Brand href="#home" >
+                <Navbar.Brand href={ user?.is_admin? "/admin": "/"} >
                     <img className="logo" 
                         src={ logo? base_cloudinary_url + logo: defaultLogo } 
                         alt="logo"
@@ -81,4 +100,22 @@ const Header = ({ companyInfo, setSettings, setCompanyInfo }) => {
     );
 };
 
-export default Header;
+const mapDispatchToProps = {
+    fetchSettings,
+    fetchCompanyInfo,
+    setSettings,
+    setCompanyInfo,
+    setUser,
+    setOrgChart,
+    setPeriods
+}
+
+const mapStateToProps = ({ adminReducer: { companyInfo }, authReducer: { isLoggedIn }, }) => ({
+    companyInfo,
+    isLoggedIn
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+) (Header);

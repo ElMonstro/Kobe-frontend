@@ -1,0 +1,21 @@
+.strategy_map_nav {
+    a {
+        background: #FFFFFF;
+        border: 1px solid #035476;
+        height: 24px auto;
+        width: 80px;
+        text-decoration: none;
+        color: #333333;
+        display: block;
+        text-align: center;
+        padding-bottom: 2px;
+
+        &.selected_mode {
+            background: #035476;
+            color: #FFFFFF;
+        }
+    }
+
+    width: 200px;
+    margin: 12px 12px;
+}

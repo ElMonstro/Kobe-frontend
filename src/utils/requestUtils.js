@@ -44,17 +44,17 @@ export const notificationHandler = (response, successMessage, errorMessage) => {
 } 
 
 // Make a function to centralize all backend requests
-export const makeRequest =  async (url, method, data, authenticated=true, notify=true, sucessMessage, errorMessage) => {
+export const makeRequest =  async (url, method, data, authenticated=true, notify=true, isFormData=false, sucessMessage, errorMessage) => {
     let headerDetails;
     const request = requestTypeMapper[method];
     let response;
-    headerDetails = getHeaderDetails(true);
+    headerDetails = getHeaderDetails(isFormData);
 
     if (headerDetails.headers.Authorization === "Bearer undefined") {
         return;
     }
 
-    authenticated?  headerDetails = getHeaderDetails(true): headerDetails = null;
+    authenticated?  headerDetails = getHeaderDetails(isFormData): headerDetails = null;
 
     try {
         if (method === GET) {
@@ -63,7 +63,6 @@ export const makeRequest =  async (url, method, data, authenticated=true, notify
             response = await request(url, data, headerDetails);
         }
         
-        console.log(response);
         notify && notificationHandler(response, sucessMessage, errorMessage);
         return response.data;
     } catch (error) {
