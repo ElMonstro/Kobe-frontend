@@ -23,12 +23,24 @@ import UpdateScorecardCard from './components/cards/updateScorecardCard';
 import StrategyMapCont from './components/strategyMapCont';
 import StrategyMapCreate from './components/strategyMapCreate';
 import StrategyMapView from './components/viewStrategyMap';
+import { requestFirebaseNotificationPermission } from './firebaseInit';
 
 
 function App({ isLoggedIn }) {
 
   const loggedIn = isLoggedInFromLocalStorage();
-  
+
+  useEffect (() => {
+    requestFirebaseNotificationPermission()
+    .then((firebaseToken) => {
+      // eslint-disable-next-line no-console
+      console.log('ran')
+      console.log(firebaseToken);
+    })
+    .catch((err) => {
+      return err;
+    });
+  }, []);
 
   useEffect (() => {
     store.dispatch(changeLoginStatus(loggedIn));
