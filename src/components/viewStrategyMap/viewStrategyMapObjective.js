@@ -12,7 +12,7 @@ const StrategyMapObjectiveView = ({ id, name, status, links })=> {
     }
 
     const color = fillColorMapper[status]; 
-    let truncatedName = name.substring(0, Math.min(NAME_LENGTH, name.length))
+    let truncatedName = name?.substring(0, Math.min(NAME_LENGTH, name.length))
     truncatedName += "...";
 
     return (
@@ -44,7 +44,7 @@ const StrategyMapObjectiveView = ({ id, name, status, links })=> {
                 </OverlayTrigger>
             </div>
             {
-                links.map(link => {
+                links?.map(link => {
                                 return <Xarrow key={ link.id } start={ id?.toString() } end={ link.id?.toString() } color="black" />
                             })
             }

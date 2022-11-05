@@ -17,3 +17,5 @@ export const editObjectiveURL = id => `${baseURL}/scorecard/objectives/${id}/ini
 export const fetchPerspectivesURL = role =>  `${baseURL}/scorecard/role/${role}/perspectives/`;
 export const fetchStrategyMapObjectivesURL = `${baseURL}/scorecard/objectives/strategy-map/`;
 export const linkObjectiveURL = id => `${baseURL}/scorecard/objectives/${id}/link-objectives/`;
+export const fetchApprovalObject = approvalToken =>  `${baseURL}/scorecard/approvals/${approvalToken}/`;
+

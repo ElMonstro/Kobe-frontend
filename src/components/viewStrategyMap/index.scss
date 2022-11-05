@@ -15,11 +15,6 @@
             padding-top: 18px;
         }
 
-        .strategy_map_objective {
-            width: fit-content;
-            margin-left: 20px;
-        }
-
         .name_container {
             padding-top: 10px;
             position: relative;
@@ -41,4 +36,11 @@
         }
     }
 
+}
+
+
+.strategy_map_objective {
+    width: fit-content;
+    margin-left: 20px;
+    background-color: inherit!important;
 }

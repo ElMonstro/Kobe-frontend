@@ -16,3 +16,19 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.good {
+    background: #16C046;
+}
+
+.poor {
+    background: #F21212;
+}
+
+.satisfactory {
+    background: #FFA800;
+}
+
+textarea:focus, input:focus, button:focus{
+    outline: none!important;
+}

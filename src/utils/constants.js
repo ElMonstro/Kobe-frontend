@@ -24,11 +24,13 @@ export const CREATE = "create";
 export const CASCADED = "cascaded";
 export const VIEW = "view";
 export const UPDATE = "update";
-export const FINANCIAL = 'financial'
-export const CUSTOMER = 'customer'
-export const INTERNAL_PROCESSES = 'internal processes'
-export const LEARNING_GROWTH = 'learning & growth'
-export const BEHAVIORAL = 'behavioral'
+export const FINANCIAL = 'financial';
+export const CUSTOMER = 'customer';
+export const INTERNAL_PROCESSES = 'internal processes';
+export const LEARNING_GROWTH = 'learning & growth';
+export const BEHAVIORAL = 'behavioral';
+export const OBJECTIVE = 'objective';
+export const LINKS = 'links';
 
 export const PERSPECTIVE_OBJECT = {
     financial_name: FINANCIAL,
@@ -60,3 +62,4 @@ export const UNITS = 'units';
 export const PERCENTAGE = 'percentage';
 export const SELF_CASCADED_INIT = "self_cascaded_init";
 export const EDIT = "edit";
+export const APPROVAL = "approval";

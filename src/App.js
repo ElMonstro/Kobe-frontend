@@ -4,7 +4,7 @@ import { ToastContainer } from 'react-toastify';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { ORG_STRUCTURE, PERSPECTIVES, CASCADE, REVEIEW_PERIOD, SEND_EMAILS, SCORECARD, CREATE, CASCADED, VIEW, UPDATE, STRATEGY_MAP } from "./utils/constants";
+import { ORG_STRUCTURE, PERSPECTIVES, CASCADE, REVEIEW_PERIOD, SEND_EMAILS, SCORECARD, CREATE, CASCADED, VIEW, UPDATE, STRATEGY_MAP, LINKS, OBJECTIVE } from "./utils/constants";
 
 import AdminDashboard from './components/adminDashboard';
 import StaffDashboard from './components/staffDashboard';
@@ -23,7 +23,10 @@ import UpdateScorecardCard from './components/cards/updateScorecardCard';
 import StrategyMapCont from './components/strategyMapCont';
 import StrategyMapCreate from './components/strategyMapCreate';
 import StrategyMapView from './components/viewStrategyMap';
+import ApprovalModal from './components/approvalCont/';
 import { requestFirebaseNotificationPermission } from './firebaseInit';
+import ObjectiveApprovalView from './components/approvalCont/objectiveApprovalView';
+import ApprovalLinksCont from './components/approvalCont/linksCont';
 
 
 function App({ isLoggedIn }) {
@@ -59,6 +62,11 @@ function App({ isLoggedIn }) {
           <Route path="/admin/review-period" element={<Protected> <AdminDashboard activeComponent={REVEIEW_PERIOD} /> </Protected>} />
           <Route path="/admin/send-emails" element={<Protected> <AdminDashboard activeComponent={SEND_EMAILS} /> </Protected>} />
           <Route path="/admin/login" element={<AdminDashboard activeComponent={ORG_STRUCTURE} isLoggedOut={!isLoggedIn}/>} />
+          <Route path=":approvalToken/approve" element={<ApprovalModal />} >
+          <Route index element={ <ObjectiveApprovalView /> } />
+            <Route path={ OBJECTIVE } element={ <ObjectiveApprovalView /> } />
+            <Route path={ LINKS } element={ <ApprovalLinksCont /> } />
+          </Route>
           <Route path="/:role" element={<Protected> <StaffDashboard /> </Protected>} >
             <Route index element={<ScorecardCont />} />
             <Route path={ SCORECARD } element={<ScorecardCont />} >
