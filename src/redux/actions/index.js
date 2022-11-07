@@ -3,7 +3,8 @@ import {
     FETCH_SETTINGS, SET_COMPANY_INFO, SET_ORG_CHART, 
     SET_SETTINGS, SET_USER, SHOW_CONF_MODAL, USER_LOGGED_IN,
     SET_PERIODS,
-    SET_CURRENT_ROLE
+    SET_CURRENT_ROLE,
+    SET_SHOW_NOTIFICATIONS
     } from "./actionTypes";
 
 export const changeLoginStatus = isLoggedIn => ({
@@ -57,3 +58,8 @@ export const setCurrentRole = currentRole => ({
     type: SET_CURRENT_ROLE,
     currentRole,
 });
+
+export const setShowNotifications = showNotifications => ({
+    type: SET_SHOW_NOTIFICATIONS,
+    showNotifications,
+})

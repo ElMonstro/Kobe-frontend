@@ -1,5 +1,6 @@
 import {
     SET_CURRENT_ROLE,
+    SET_SHOW_NOTIFICATIONS,
     SET_USER,
     SHOW_CONF_MODAL,
     USER_LOGGED_IN,
@@ -9,7 +10,8 @@ const initialState = {
     user: {},
     isLoggedIn: false,
     showConfirmationModal: false,
-    currentRole: {}
+    currentRole: {},
+    showNotifications: false
 };
 
 const authReducer = ( state=initialState, action ) => {
@@ -29,6 +31,10 @@ const authReducer = ( state=initialState, action ) => {
         case SET_CURRENT_ROLE:
             const { currentRole } = action;
             return { ...state, currentRole };
+
+        case SET_SHOW_NOTIFICATIONS:
+            const { showNotifications } = action;
+            return { ...state, showNotifications };
             
         default:
             return state;

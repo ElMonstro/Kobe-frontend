@@ -1,32 +1,33 @@
-import { BrowserRouter, Route, Routes} from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { BrowserRouter, Route, Routes} from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 import { ORG_STRUCTURE, PERSPECTIVES, CASCADE, REVEIEW_PERIOD, SEND_EMAILS, SCORECARD, CREATE, CASCADED, VIEW, UPDATE, STRATEGY_MAP, LINKS, OBJECTIVE } from "./utils/constants";
 
-import AdminDashboard from './components/adminDashboard';
-import StaffDashboard from './components/staffDashboard';
-import Protected from './components/common/Protected';
-import { isLoggedInFromLocalStorage } from './utils';
-import store from './redux/store/store';
-import { changeLoginStatus } from './redux/actions';
-import { connect } from 'react-redux';
-import { useEffect } from 'react';
-import LoginModal from './components/modals/loginModal';
-import ScorecardCont from './components/scorecardCont';
-import ScorecardCreate from './components/ScorecardCreate';
-import CascadedCards from './components/cards/cascadedCards';
-import ViewScorecard from './components/viewScorecard';
-import UpdateScorecardCard from './components/cards/updateScorecardCard';
-import StrategyMapCont from './components/strategyMapCont';
-import StrategyMapCreate from './components/strategyMapCreate';
-import StrategyMapView from './components/viewStrategyMap';
-import ApprovalModal from './components/approvalCont/';
-import { requestFirebaseNotificationPermission } from './firebaseInit';
-import ObjectiveApprovalView from './components/approvalCont/objectiveApprovalView';
-import ApprovalLinksCont from './components/approvalCont/linksCont';
+import AdminDashboard from "./components/adminDashboard";
+import StaffDashboard from "./components/staffDashboard";
+import Protected from "./components/common/Protected";
+import { isLoggedInFromLocalStorage } from "./utils";
+import store from "./redux/store/store";
+import { changeLoginStatus } from "./redux/actions";
+import { connect } from "react-redux";
+import { useEffect } from "react";
+import LoginModal from "./components/modals/loginModal";
+import ScorecardCont from "./components/scorecardCont";
+import ScorecardCreate from "./components/ScorecardCreate";
+import CascadedCards from "./components/cards/cascadedCards";
+import ViewScorecard from "./components/viewScorecard";
+import UpdateScorecardCard from "./components/cards/updateScorecardCard";
+import StrategyMapCont from "./components/strategyMapCont";
+import StrategyMapCreate from "./components/strategyMapCreate";
+import StrategyMapView from "./components/viewStrategyMap";
+import ApprovalModal from "./components/approvalCont/";
+import { requestFirebaseNotificationPermission } from "./firebaseInit";
+import ObjectiveApprovalView from "./components/approvalCont/objectiveApprovalView";
+import ApprovalLinksCont from "./components/approvalCont/linksCont";
+import NotificationsModal from "./components/notificationsModal"
 
 
 function App({ isLoggedIn }) {
@@ -37,7 +38,7 @@ function App({ isLoggedIn }) {
     requestFirebaseNotificationPermission()
     .then((firebaseToken) => {
       // eslint-disable-next-line no-console
-      console.log('ran')
+      console.log("ran")
       console.log(firebaseToken);
     })
     .catch((err) => {
@@ -54,6 +55,7 @@ function App({ isLoggedIn }) {
     <BrowserRouter>
     <ToastContainer limit={4}/>
       {!isLoggedIn && <LoginModal isLoggedOut={!isLoggedIn}/>}
+      <NotificationsModal />
         <Routes>
           <Route index element={<Protected> <StaffDashboard /> </Protected>} />
           <Route exact path="/admin" element={<Protected> <AdminDashboard activeComponent={ORG_STRUCTURE} /> </Protected>} /> 
