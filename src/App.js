@@ -24,7 +24,6 @@ import StrategyMapCont from "./components/strategyMapCont";
 import StrategyMapCreate from "./components/strategyMapCreate";
 import StrategyMapView from "./components/viewStrategyMap";
 import ApprovalModal from "./components/approvalCont/";
-import { requestFirebaseNotificationPermission } from "./firebaseInit";
 import ObjectiveApprovalView from "./components/approvalCont/objectiveApprovalView";
 import ApprovalLinksCont from "./components/approvalCont/linksCont";
 import NotificationsModal from "./components/notificationsModal"
@@ -33,18 +32,6 @@ import NotificationsModal from "./components/notificationsModal"
 function App({ isLoggedIn }) {
 
   const loggedIn = isLoggedInFromLocalStorage();
-
-  useEffect (() => {
-    requestFirebaseNotificationPermission()
-    .then((firebaseToken) => {
-      // eslint-disable-next-line no-console
-      console.log("ran")
-      console.log(firebaseToken);
-    })
-    .catch((err) => {
-      return err;
-    });
-  }, []);
 
   useEffect (() => {
     store.dispatch(changeLoginStatus(loggedIn));

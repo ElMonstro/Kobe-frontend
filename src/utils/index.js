@@ -251,3 +251,14 @@ export const isWeightsFieldValid = (values, remainingObjectiveWeight, setFieldEr
 
     return true;
 } 
+
+export const countUnreadNotifications = (notifications) => {
+    let count = 0;
+
+    for (const notification of notifications) {
+        if (notification.is_seen === false)
+            count++;
+    }
+
+    return count;
+}

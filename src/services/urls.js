@@ -19,3 +19,4 @@ export const fetchStrategyMapObjectivesURL = `${baseURL}/scorecard/objectives/st
 export const linkObjectiveURL = id => `${baseURL}/scorecard/objectives/${id}/link-objectives/`;
 export const fetchApprovalObject = approvalToken =>  `${baseURL}/scorecard/approvals/${approvalToken}/`;
 export const fetchNotificationsURL = `${baseURL}/auth/notifications/`;
+export const setSeenNotificationsURL = `${baseURL}/auth/notifications/set-seen/`;

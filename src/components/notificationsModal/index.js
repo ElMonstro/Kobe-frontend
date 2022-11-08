@@ -3,28 +3,25 @@ import {connect} from 'react-redux';
 import { Modal } from "react-bootstrap";
 
 import "./index.scss";
-import { makeRequest } from "../../utils/requestUtils";
-import { fetchNotificationsURL } from "../../services/urls";
-import { GET } from "../../utils/constants";
 import Notification from "./notification";
 import ringingBell from "../../assets/ringingBell.svg";
-import { setShowNotifications } from "../../redux/actions";
+import { setShowNotifications, setNotifications } from "../../redux/actions";
+import { makeRequest } from "../../utils/requestUtils";
+import { setSeenNotificationsURL } from "../../services/urls";
+import { POST } from "../../utils/constants";
 
 
-const NotificationsModal = ({ showNotifications, isLoggedIn, setShowNotifications }) => {
-
-    const [notifications, setNotifications] = useState([]);
-
-    useEffect(() => {
-        makeRequest(fetchNotificationsURL, GET, null, true, false)
-            .then(data => {
-                data && setNotifications(data);
-            })
-    }, [isLoggedIn])
+const NotificationsModal = ({ showNotifications, setShowNotifications, notifications, setNotifications }) => {
 
     const handleClose = () => {
         setShowNotifications(false);
+        renderedUnseenNotifIds.length > 0 && 
+            makeRequest(setSeenNotificationsURL, POST, { notifications: renderedUnseenNotifIds }, true, false);
+        setNotifications(renderedNotifications);
     }
+
+    const renderedUnseenNotifIds = [];
+    const renderedNotifications = [];
 
     return (
         <div className="notifications">
@@ -50,6 +47,8 @@ const NotificationsModal = ({ showNotifications, isLoggedIn, setShowNotification
                     <div className="notifications">
                         {
                             notifications?.map(notification => {
+                                !notification.is_seen && renderedUnseenNotifIds.push(notification.id);
+                                renderedNotifications.push({ ...notification, is_seen: true })
                                 return <Notification key={ notification.id } {...notification} />
                             })
                         }
@@ -62,12 +61,13 @@ const NotificationsModal = ({ showNotifications, isLoggedIn, setShowNotification
 }
 
 const mapDispatchToProps = {
-    setShowNotifications
+    setShowNotifications,
+    setNotifications
 }
 
-const mapStateToProps = ({ authReducer: { showNotifications, isLoggedIn } } ) => ({
+const mapStateToProps = ({ authReducer: { showNotifications, notifications } } ) => ({
     showNotifications,
-    
+    notifications
 });
 
 export default connect(

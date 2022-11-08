@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Notification = ({ title, body, link, is_seen }) => {
     const navigate = useNavigate();
     let notificationClassName;
-    is_seen? notificationClassName = "notification": notificationClassName = "notification unread"
-
+    is_seen? notificationClassName = "notification": notificationClassName = "notification unread";
     
     return (
       <div className={ notificationClassName }>

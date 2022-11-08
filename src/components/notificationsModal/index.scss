@@ -18,10 +18,12 @@
         box-shadow: 4px 4px 25px -7px rgba(0, 0, 0, 0.25);
         border-radius: 6px;
         border: none;
+        
     }
 
     .notifications_modal_body {
         padding: 20px 40px;
+        overflow: scroll;
     }
 }
 
