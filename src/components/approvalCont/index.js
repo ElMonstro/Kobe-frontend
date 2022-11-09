@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
-import { connect } from "react-redux";
 import { confirm } from "react-bootstrap-confirmation";
 
 import "./index.scss";
@@ -11,7 +10,7 @@ import { fetchApprovalObject } from "../../services/urls";
 import RejectionMessageModal from "./rejectionMessageModal";
 
 
-const ApprovalModal = ({ orgChart }) => {
+const ApprovalModal = () => {
     const [approvalObject, setApprovalObject] = useState({});
     const [show, setShow] = useState(true);
     const { approvalToken } = useParams();
@@ -26,7 +25,7 @@ const ApprovalModal = ({ orgChart }) => {
     const reject = () => setShowRejectionModal(true);
 
     const handleClose = () => {
-        navigate(`/${approvalObject?.role}/scorecard/`);
+        navigate(`/${approvalObject?.change_approval_tracker.objective.role}/scorecard/`);
         setShow(false);
     }
 
@@ -69,14 +68,4 @@ const ApprovalModal = ({ orgChart }) => {
     )
 }
 
-const mapDispatchToProps = {
-}
-
-const mapStateToProps = ({ adminReducer: { orgChart } }) => ({
-    orgChart: orgChart[0]
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-) (ApprovalModal);
+export default ApprovalModal;

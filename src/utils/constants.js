@@ -31,6 +31,7 @@ export const LEARNING_GROWTH = 'learning & growth';
 export const BEHAVIORAL = 'behavioral';
 export const OBJECTIVE = 'objective';
 export const LINKS = 'links';
+export const INITIATIVE = 'initiative';
 
 export const PERSPECTIVE_OBJECT = {
     financial_name: FINANCIAL,
