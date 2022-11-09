@@ -84,30 +84,28 @@
         margin: 5px 0px;
         font-weight: 700;
     }
+}
 
-    .approval_buttons {
-        margin-right: 20px;
-        margin-top: 30px;
+.approval_buttons {
+    margin-right: 20px;
+    margin-top: 30px;
 
-        .response_button {
-            border: none;
-        }
-
-        .approve {
-            background-color: #01a02e;
-            margin-right: 10px;
-        }
-
-        .reject {
-            background-color: #e60101;
-        }
-
-        button:focus {
-            outline: none!important;
-        }
-
+    .response_button {
+        border: none;
     }
 
+    .approve {
+        background-color: #01a02e;
+        margin-right: 10px;
+    }
+
+    .reject {
+        background-color: #e60101;
+    }
+
+    button:focus {
+        outline: none!important;
+    }
 
 }
 

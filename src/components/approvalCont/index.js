@@ -1,25 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
+import { connect } from "react-redux";
+import { confirm } from "react-bootstrap-confirmation";
 
 import "./index.scss";
-import ApprovalNav from "./approvalNav";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { makeRequest } from "../../utils/requestUtils";
-import { GET, OBJECTIVE } from "../../utils/constants";
+import { GET, PATCH } from "../../utils/constants";
 import { fetchApprovalObject } from "../../services/urls";
-import { connect } from "react-redux";
+import RejectionMessageModal from "./rejectionMessageModal";
 
 
 const ApprovalModal = ({ orgChart }) => {
-    console.log(orgChart)
-    const [activeComponent, setActiveComponent] = useState(OBJECTIVE);
     const [approvalObject, setApprovalObject] = useState({});
     const [show, setShow] = useState(true);
     const { approvalToken } = useParams();
     const navigate = useNavigate();
+    const [ showRejectionModal, setShowRejectionModal ] = useState(false);
+
+    const approve = async () => {
+        const result = await confirm("Are you sure you want to approve?");
+        result && makeRequest(fetchApprovalObject(approvalToken), PATCH, { is_approved: true }, true, true);
+    }
+
+    const reject = () => setShowRejectionModal(true);
 
     const handleClose = () => {
-        navigate(`/${orgChart?.id}/scorecard/`);
+        navigate(`/${approvalObject?.role}/scorecard/`);
         setShow(false);
     }
 
@@ -32,6 +39,8 @@ const ApprovalModal = ({ orgChart }) => {
 
     return (
         <div className="approval_modal">
+            <RejectionMessageModal showRejectionModal={ showRejectionModal } setShowRejectionModal={ setShowRejectionModal } />
+
             <Modal
                 show={show}
                 backdrop="static"
@@ -48,10 +57,10 @@ const ApprovalModal = ({ orgChart }) => {
                     <Modal.Title>Object Approval</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="approval_modal_body">
-                    <ApprovalNav activeComponent={ activeComponent } />
                     <Outlet context={ { 
-                        setActiveComponent: setActiveComponent,
-                        objective: approvalObject?.change_approval_tracker?.objective 
+                        objective: approvalObject?.change_approval_tracker?.objective,
+                        approve,
+                        reject,
                         } } 
                     />
                 </Modal.Body>

@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useOutletContext } from "react-router-dom";
-import { OBJECTIVE } from "../../utils/constants";
+import { Button } from "react-bootstrap";
 
 import ViewObjective from "../viewScorecard/viewObjective";
 import ObjectivesHeader from "../viewScorecard/viewScorecardHeader";
@@ -8,11 +8,7 @@ import ObjectivesHeader from "../viewScorecard/viewScorecardHeader";
 
 const ApprovalObjectiveView = () => {
 
-    const { objective, setActiveComponent } = useOutletContext();
-
-    useEffect(() => {
-        setActiveComponent(OBJECTIVE);
-    }, []);
+    const { objective, approve, reject} = useOutletContext();
 
     return (
         <div className="view_objective">
@@ -21,6 +17,10 @@ const ApprovalObjectiveView = () => {
             <ViewObjective { ...objective?.approved_objective } />
             <div className="objective_header">Updated Objective</div>
             <ViewObjective { ...objective } />
+            <div className="approval_buttons">
+                <Button onClick={ approve } className="response_button approve">Approve Updates</Button>
+                <Button onClick={ reject } className="response_button reject">Reject Updates</Button>
+            </div>
             
         </div>
     )
