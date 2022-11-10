@@ -60,6 +60,12 @@
         }
     }
 
+    .objective {
+        .measure {
+            font-size: medium;
+        }
+    }
+
     .objective_header {
         font-weight: 500;
         padding-left: 16px;
@@ -67,8 +73,8 @@
         padding-bottom: 5px;
         border-bottom: #e6ecf2 solid 1px;
         font-size: 18px;
-        color: #a2a2a2;
-        margin-bottom: 10px;
+        color: #686767;
+        margin-bottom: 20px;
 
     }
 }

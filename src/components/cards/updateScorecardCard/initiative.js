@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { yupUpdateObjective } from "../../../utils/validators";
 import { makeRequest } from "../../../utils/requestUtils";
 import { PATCH } from "../../../utils/constants";
-import { updateObjectiveURL } from "../../../services/urls";
+import { updateObjectiveURL as retrieveObjectiveURL } from "../../../services/urls";
 
 const Initiative = ({ id, name, budget, score, target, cost, weight, status }) => {
 
@@ -23,11 +23,9 @@ const Initiative = ({ id, name, budget, score, target, cost, weight, status }) =
         onSubmit: async (values) => {
             values.score = (values.score/ 100).toFixed(2);
             const id = values.id;
-            makeRequest(updateObjectiveURL(id), PATCH, values, true);
+            makeRequest(retrieveObjectiveURL(id), PATCH, values, true);
             values.score = values.score * 100;
         },
-
-        
     });
 
     return (

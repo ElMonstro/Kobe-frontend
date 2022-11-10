@@ -20,12 +20,13 @@ const ApprovalModal = () => {
     const approve = async () => {
         const result = await confirm("Are you sure you want to approve?");
         result && makeRequest(fetchApprovalObject(approvalToken), PATCH, { is_approved: true }, true, true);
+        result && handleClose();
     }
 
     const reject = () => setShowRejectionModal(true);
 
     const handleClose = () => {
-        navigate(`/${approvalObject?.change_approval_tracker.objective.role}/scorecard/`);
+        navigate(-1);
         setShow(false);
     }
 
@@ -33,6 +34,7 @@ const ApprovalModal = () => {
         makeRequest(fetchApprovalObject(approvalToken), GET, null, true, false)
             .then(approval_Object => {
                 approval_Object && setApprovalObject(approval_Object);
+                console.log(approval_Object)
             });
     }, []);
 
@@ -53,7 +55,7 @@ const ApprovalModal = () => {
                 onHide={ handleClose }
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Object Approval</Modal.Title>
+                    <Modal.Title>{ `Level ${approvalObject.approval_count} ${approvalObject.change_approval_tracker?.type}` } approval</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="approval_modal_body">
                     <Outlet context={ { 

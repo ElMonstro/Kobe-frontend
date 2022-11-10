@@ -13,7 +13,7 @@ import ThresholdsInputs from "./thresholdsInputs";
 import InitiativeInputs from "./initiativesInputs";
 import { arePeriodicalInputsValid, createObjectPayload, isWeightsFieldValid } from "../../utils";
 import { makeRequest } from "../../utils/requestUtils";
-import { createObjectiveURL, updateObjectiveURL, createObjectiveFromInitURL } from "../../services/urls";
+import { createObjectiveURL, updateObjectiveURL, amendObjectiveURL } from "../../services/urls";
 import { yupObjectiveValidationObj as validationSchema } from "../../utils/validators";
 
 
@@ -21,7 +21,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
 
     const [initiative, setInitiative] = useState({});
     const [topObjectivesTotalWeight, setTopObjectivesTotalWeight] = useState(0);
-    const { perspective, name, type } = initiative;
+    const { perspective, name } = initiative;
     const { initiativeId, mode, role } = useParams();
     const navigate = useNavigate();
     const reinitializeForm = mode === EDIT;
@@ -166,8 +166,8 @@ const ScorecardCreate = ({ periods, actingRole }) => {
                 });
             
         } else {
-            (type === SELF_CASCADED_INIT || mode === EDIT) && delete payload.initiatives;
-            makeRequest(createObjectiveFromInitURL(initiativeId, mode), PATCH, payload, true)
+            (mode === EDIT || initiative?.is_self_cascaded) && delete payload.initiatives;
+            makeRequest(amendObjectiveURL(initiativeId, mode), PATCH, payload, true)
             .then(data=> {
                 if (data) {
                     resetForm();

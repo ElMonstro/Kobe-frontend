@@ -4,7 +4,16 @@ import { ToastContainer } from "react-toastify";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { ORG_STRUCTURE, PERSPECTIVES, CASCADE, REVEIEW_PERIOD, SEND_EMAILS, SCORECARD, CREATE, CASCADED, VIEW, UPDATE, STRATEGY_MAP, LINKS, OBJECTIVE } from "./utils/constants";
+import { 
+  ORG_STRUCTURE, 
+  PERSPECTIVES, 
+  CASCADE, 
+  REVEIEW_PERIOD, SEND_EMAILS,
+  SCORECARD, CREATE, CASCADED, 
+  VIEW, UPDATE, STRATEGY_MAP, 
+  LINKS, OBJECTIVE, SCORE 
+} 
+from "./utils/constants";
 
 import AdminDashboard from "./components/adminDashboard";
 import StaffDashboard from "./components/staffDashboard";
@@ -24,9 +33,10 @@ import StrategyMapCont from "./components/strategyMapCont";
 import StrategyMapCreate from "./components/strategyMapCreate";
 import StrategyMapView from "./components/viewStrategyMap";
 import ApprovalModal from "./components/approvalCont/";
-import ObjectiveApprovalView from "./components/approvalCont/objectiveApprovalView";
+import ObjectiveApprovalView from "./components/approvalCont/objectiveAmendApprovalCont";
 import ApprovalLinksCont from "./components/approvalCont/linksCont";
 import NotificationsModal from "./components/notificationsModal"
+import ScoreUpdateAprroveCont from "./components/approvalCont/scoreUpdateCont";
 
 
 function App({ isLoggedIn }) {
@@ -55,6 +65,7 @@ function App({ isLoggedIn }) {
           <Route index element={ <ObjectiveApprovalView /> } />
             <Route path={ OBJECTIVE } element={ <ObjectiveApprovalView /> } />
             <Route path={ LINKS } element={ <ApprovalLinksCont /> } />
+            <Route path={ SCORE } element={ <ScoreUpdateAprroveCont /> } />
           </Route>
           <Route path="/:role" element={<Protected> <StaffDashboard /> </Protected>} >
             <Route index element={<ScorecardCont />} />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Col, Row, Spinner } from "react-bootstrap";
+import { Card, Spinner } from "react-bootstrap";
 import { useOutletContext, useParams } from "react-router-dom";
 
 import { fetchPerspectivesURL } from "../../services/urls";

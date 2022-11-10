@@ -63,4 +63,5 @@ export const UNITS = 'units';
 export const PERCENTAGE = 'percentage';
 export const SELF_CASCADED_INIT = "self_cascaded_init";
 export const EDIT = "edit";
-export const APPROVAL = "approval";
+export const OBJECTIVE_APPROVAL = "objective_approval";
+export const SCORE = "score";

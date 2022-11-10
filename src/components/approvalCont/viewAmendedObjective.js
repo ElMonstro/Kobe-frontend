@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 
 import OpenCloseIcon from "../common/openCloseIcon";
-import "./index.scss";
-import ViewInitiative from "./viewInitiative";
+import ViewInitiative from "../viewScorecard/viewInitiative";
 
-const ViewObjective = ({ name, measures, weight, target, score, status, initiatives, budget, cost, mode }) => {
+const ViewAmendedObjective = ({ name, measures, weight, target, initiatives, budget }) => {
 
     const [isOpen, setIsOpen] = useState(false);
-    const measure_name = measures && measures[0].name
+    const measure_name = measures && measures[0]?.name
 
     let initiativesClassName;
     let objectiveClassName;
-    
+    console.log(measures)
+
     isOpen? initiativesClassName="initiatives": initiativesClassName="hidden";
     isOpen? objectiveClassName="objective white_bg": objectiveClassName="objective";
     
@@ -23,7 +23,7 @@ const ViewObjective = ({ name, measures, weight, target, score, status, initiati
     return (
         <Row className={ objectiveClassName }>
             <Row className="top_row">
-                <Col className="first_half">
+                <Col className="first_half" lg={ 4 }>
                     <Row className="objective_row">
                         <Col>
                             <OpenCloseIcon 
@@ -35,17 +35,18 @@ const ViewObjective = ({ name, measures, weight, target, score, status, initiati
                                 { name }
                             </span>
                         </Col>
-                        <Col><span>objective</span></Col>
                     </Row>
                 </Col>
                 <Col className="second_half">
                     <Row>
-                        <Col className="status">Approved</Col>
-                        <Col className="measure">{ measure_name }</Col>
-                        <Col className="weight">{ weight && weight * 100 }</Col>
+                        <Col className={ `measure`}>{ measure_name }</Col>
+                        <Col className={ `weight`}>{ weight && weight * 100 }</Col>
+                        <Col>{ budget }</Col>
                         <Col>{ target && target * 100 }</Col>
-                        <Col>{ score && score * 100 }</Col>
-                        <Col><div className={ `perfomance ${status}`}></div></Col>
+                        <Col>
+                            <div className={ `period_targets`}>
+                            </div>
+                        </Col>
                     </Row>
                 </Col>
             </Row>
@@ -60,4 +61,4 @@ const ViewObjective = ({ name, measures, weight, target, score, status, initiati
     )
 }
 
-export default ViewObjective;
+export default ViewAmendedObjective;

@@ -9,7 +9,7 @@ const CascadedInitiative = ({ name, type, id, target})=> {
 
 
     let buttonType = EDIT
-
+    console.log(target)
     if (target === "0.00"){
         buttonType = CREATE;
     }
