@@ -8,7 +8,6 @@ import ViewObjectiveScores from "./viewObjectiveScoreUpdate";
 const ScoreUpdateAprroveCont = () => {
 
     const { objective, approve, reject} = useOutletContext();
-    console.log(objective)
     return (
         <div className="view_objective">
             <Row className="header">

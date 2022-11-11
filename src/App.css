@@ -29,6 +29,19 @@
     background: #FFA800;
 }
 
+.good_color {
+    color: #16C046;
+}
+
+.poor_color {
+    color: #F21212;
+}
+
+.satisfactory_color {
+    color: #FFA800;
+}
+
+
 textarea:focus, input:focus, button:focus{
     outline: none!important;
 }

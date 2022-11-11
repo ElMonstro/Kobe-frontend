@@ -5,15 +5,13 @@ import { CREATE, EDIT, SCORECARD } from "../../../utils/constants";
 
 import "./index.scss";
 
-const CascadedInitiative = ({ name, type, id, target})=> {
+const CascadedInitiative = ({ name, id, target})=> {
 
 
     let buttonType = EDIT
-    console.log(target)
     if (target === "0.00"){
         buttonType = CREATE;
     }
-
     const navigate = useNavigate();
     const { role } = useParams();
 

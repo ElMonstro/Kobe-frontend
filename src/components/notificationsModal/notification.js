@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const Notification = ({ title, body, link, is_seen }) => {
+const Notification = ({ title, body, link, is_seen, needs_attention }) => {
     const navigate = useNavigate();
     let notificationClassName;
     is_seen? notificationClassName = "notification": notificationClassName = "notification unread";
@@ -16,7 +16,7 @@ const Notification = ({ title, body, link, is_seen }) => {
           <span className="title">{ title }</span>
           <div className="body">{ body }</div>
           { 
-            link &&
+            (link && needs_attention) &&
             <Button className="link_button" onClick={() => navigate(link)}>
               Go to Link
             </Button>

@@ -65,3 +65,14 @@ export const SELF_CASCADED_INIT = "self_cascaded_init";
 export const EDIT = "edit";
 export const OBJECTIVE_APPROVAL = "objective_approval";
 export const SCORE = "score";
+export const APPROVED = "approved";
+export const PENDING = "pending";
+export const REJECTED = "rejected";
+
+export const APPROVAL_MAPPER = {
+    true: APPROVED,
+    null: APPROVED,
+    undefined: APPROVED,
+    false: REJECTED
+};
+

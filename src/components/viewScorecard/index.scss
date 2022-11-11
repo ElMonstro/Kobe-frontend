@@ -48,11 +48,9 @@
     }
 }
 
-.perfomance {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    margin-top: 5px;
+.score {
+    font-weight: 700;
+    font-size: 18px;
 }
 
 .row {
@@ -96,7 +94,20 @@
     }
 
     .status {
+        font-size: 14px;
+        text-transform: capitalize;
+    }
+
+    .approved {
         color: rgb(4, 211, 7);
+    }
+    
+    .rejected {
+        color: rgb(243, 3, 3);
+    }
+
+    .pending {
+        color: rgb(222, 201, 6);
     }
 
 }

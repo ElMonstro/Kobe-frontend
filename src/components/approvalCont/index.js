@@ -45,7 +45,7 @@ const ApprovalModal = () => {
             <Modal
                 show={show}
                 backdrop="static"
-                keyboard={false}
+                keyboard={true}
                 fullscreen
                 // aria-labelledby="contained-modal-title-vcenter"
                 centered

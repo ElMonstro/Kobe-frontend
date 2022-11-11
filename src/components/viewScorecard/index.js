@@ -3,7 +3,7 @@ import { Card, Spinner } from "react-bootstrap";
 import { useOutletContext, useParams } from "react-router-dom";
 
 import { fetchPerspectivesURL } from "../../services/urls";
-import { GET, SCORECARD, VIEW } from "../../utils/constants";
+import { GET, VIEW } from "../../utils/constants";
 import { makeRequest } from "../../utils/requestUtils";
 import "./index.scss";
 import ViewPerspective from "./viewPerspective";
@@ -28,7 +28,7 @@ const ViewScorecard = () => {
     
     return (
         <div className="view_scorecard">
-            <ObjectivesHeader mode={ SCORECARD } />
+            <ObjectivesHeader />
             
             {
                 spinnerState? <Spinner className="spinner" animation="grow"/>:

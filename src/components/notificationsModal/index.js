@@ -28,7 +28,7 @@ const NotificationsModal = ({ showNotifications, setShowNotifications, notificat
             <Modal
                 show={ showNotifications }
                 backdrop="static"
-                keyboard={false}
+                keyboard={true}
                 size="xl"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
