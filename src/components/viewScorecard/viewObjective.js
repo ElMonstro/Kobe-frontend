@@ -10,7 +10,6 @@ const ViewObjective = ({ name, measures, weight, target, score, status, initiati
 
     const [isOpen, setIsOpen] = useState(false);
     const measure_name = null
-    console.log(measures)
     let initiativesClassName;
     let objectiveClassName;
     const approval_status = APPROVAL_MAPPER[change_approval_trackers[0]?.is_approved];

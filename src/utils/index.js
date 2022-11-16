@@ -1,9 +1,10 @@
 import forge from 'node-forge';
 import { toast } from 'react-toastify';
 import store from "../redux/store/store.js";
-import { changeLoginStatus } from "../redux/actions";
-import { BIANNUALS, CHARACTERS, QUARTERS, UNITS } from './constants.js';
+import { changeLoginStatus, setNotifications, setWebSocket } from "../redux/actions";
+import { BIANNUALS, CHARACTERS, QUARTERS, UNITS, NEW_NOTIFICATIONS } from './constants.js';
 import { round } from 'lodash';
+import { socketsMessagesURL } from '../services/urls.js';
 
 
 const notificationTypeMapper = {
@@ -261,4 +262,28 @@ export const countUnreadNotifications = (notifications) => {
     }
 
     return count;
+}
+
+const handleNotifications = data => {
+    console.log(data);
+    store.dispatch(setNotifications(data));
+}
+
+export const webSocketMessageHandler = event => {
+    const data = JSON.parse(event.data);
+    const action_mapper = {
+        new_notifications: handleNotifications,
+        undefined: () => {},
+    };
+    console.log(data.message.message_type)
+    action_mapper[data.message.message_type](data.message.data);
+}
+
+export const connectWebSocket = () => {
+    const webSocket = new WebSocket(socketsMessagesURL);
+    store.dispatch(setWebSocket(webSocket));
+    webSocket.onmessage = webSocketMessageHandler;
+    webSocket.onclose = connectWebSocket;
+    
+    return webSocket;
 }

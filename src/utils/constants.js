@@ -32,6 +32,16 @@ export const BEHAVIORAL = 'behavioral';
 export const OBJECTIVE = 'objective';
 export const LINKS = 'links';
 export const INITIATIVE = 'initiative';
+export const UNITS = 'units';
+export const PERCENTAGE = 'percentage';
+export const SELF_CASCADED_INIT = "self_cascaded_init";
+export const EDIT = "edit";
+export const OBJECTIVE_APPROVAL = "objective_approval";
+export const SCORE = "score";
+export const APPROVED = "approved";
+export const PENDING = "pending";
+export const REJECTED = "rejected";
+export const NEW_NOTIFICATIONS = "new_notifications";
 
 export const PERSPECTIVE_OBJECT = {
     financial_name: FINANCIAL,
@@ -59,15 +69,6 @@ export const BIANNUALS = [
     'biannual 1',
     'biannual 2',
 ];
-export const UNITS = 'units';
-export const PERCENTAGE = 'percentage';
-export const SELF_CASCADED_INIT = "self_cascaded_init";
-export const EDIT = "edit";
-export const OBJECTIVE_APPROVAL = "objective_approval";
-export const SCORE = "score";
-export const APPROVED = "approved";
-export const PENDING = "pending";
-export const REJECTED = "rejected";
 
 export const APPROVAL_MAPPER = {
     true: APPROVED,
@@ -75,4 +76,3 @@ export const APPROVAL_MAPPER = {
     undefined: APPROVED,
     false: REJECTED
 };
-

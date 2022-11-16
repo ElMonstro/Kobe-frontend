@@ -5,7 +5,8 @@ import {
     SET_PERIODS,
     SET_CURRENT_ROLE,
     SET_SHOW_NOTIFICATIONS,
-    SET_NOTIFICATIONS
+    SET_NOTIFICATIONS,
+    SET_WEB_SOCKET
     } from "./actionTypes";
 
 export const changeLoginStatus = isLoggedIn => ({
@@ -68,4 +69,9 @@ export const setShowNotifications = showNotifications => ({
 export const setNotifications = notifications => ({
     type: SET_NOTIFICATIONS,
     notifications,
+});
+
+export const setWebSocket = webSocket => ({
+    type: SET_WEB_SOCKET,
+    webSocket,
 });

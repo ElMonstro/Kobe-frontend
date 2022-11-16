@@ -4,3 +4,4 @@ const resolve_base_url = () => {
 }
 export const base_cloudinary_url = "https://res.cloudinary.com/elmonstro/";
 export default resolve_base_url;
+export const sockets_url = "wss://bsc-kobe.herokuapp.com/ws";

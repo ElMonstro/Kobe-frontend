@@ -1,6 +1,8 @@
-import baseUrl from './baseURL';
+import baseUrl, { sockets_url } from './baseURL';
 
+const accessToken = JSON.parse(window.localStorage.getItem('tokens'))?.access;
 const baseURL = baseUrl();
+
 export const loginURL = `${baseURL}/auth/login/`;
 export const settingsURL = `${baseURL}/administration/settings/`;
 export const companyInfoURL = `${baseURL}/administration/company-info/`;
@@ -19,3 +21,4 @@ export const linkObjectiveURL = id => `${baseURL}/scorecard/objectives/${id}/lin
 export const fetchApprovalObject = approvalToken =>  `${baseURL}/scorecard/approvals/${approvalToken}/`;
 export const fetchNotificationsURL = `${baseURL}/auth/notifications/`;
 export const setSeenNotificationsURL = `${baseURL}/auth/notifications/set-seen/`;
+export const socketsMessagesURL = `${sockets_url}/messages/?token=${accessToken}`;

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Card, Row, Col, Form, Button } from "react-bootstrap";
+import React from "react";
+import { Row, Col, Form, Button } from "react-bootstrap";
 import { useFormik } from 'formik';
 
 import { yupUpdateObjective } from "../../../utils/validators";

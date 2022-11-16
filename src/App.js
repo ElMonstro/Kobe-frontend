@@ -18,7 +18,7 @@ from "./utils/constants";
 import AdminDashboard from "./components/adminDashboard";
 import StaffDashboard from "./components/staffDashboard";
 import Protected from "./components/common/Protected";
-import { isLoggedInFromLocalStorage } from "./utils";
+import { connectWebSocket, isLoggedInFromLocalStorage } from "./utils";
 import store from "./redux/store/store";
 import { changeLoginStatus } from "./redux/actions";
 import { connect } from "react-redux";
@@ -39,12 +39,14 @@ import NotificationsModal from "./components/notificationsModal"
 import ScoreUpdateAprroveCont from "./components/approvalCont/scoreUpdateCont";
 
 
-function App({ isLoggedIn }) {
+function App({ isLoggedIn, webSocket }) {
 
   const loggedIn = isLoggedInFromLocalStorage();
+  console.log(webSocket)
 
   useEffect (() => {
     store.dispatch(changeLoginStatus(loggedIn));
+    
   }, [loggedIn]);
 
   
@@ -89,8 +91,9 @@ function App({ isLoggedIn }) {
   );
 }
 
-const mapStateToProps = ({ authReducer: { isLoggedIn } }) => ({
+const mapStateToProps = ({ authReducer: { isLoggedIn, webSocket } }) => ({
   isLoggedIn,
+  webSocket
 });
 
 export default connect(
