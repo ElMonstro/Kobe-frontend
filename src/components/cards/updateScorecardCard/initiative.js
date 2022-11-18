@@ -9,11 +9,9 @@ import { updateObjectiveURL as retrieveObjectiveURL } from "../../../services/ur
 
 const Initiative = ({ id, name, budget, score, target, cost, weight, status }) => {
 
-    const scorePercentage = score * 100;
-
     const formik = useFormik({
         initialValues: {
-            score: scorePercentage,
+            score: score,
             budget: budget,
             cost: cost,
             evidence: "",
@@ -24,7 +22,6 @@ const Initiative = ({ id, name, budget, score, target, cost, weight, status }) =
             values.score = (values.score/ 100).toFixed(2);
             const id = values.id;
             makeRequest(retrieveObjectiveURL(id), PATCH, values, true);
-            values.score = values.score * 100;
         },
     });
 
@@ -60,7 +57,7 @@ const Initiative = ({ id, name, budget, score, target, cost, weight, status }) =
                 <input 
                     id="score" 
                     placeholder="15"
-                    valuedefault={ scorePercentage } 
+                    valuedefault={ score } 
                     { ...formik.getFieldProps("score") } 
                     className="score_input"
                 />

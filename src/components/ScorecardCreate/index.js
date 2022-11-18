@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Card } from "react-bootstrap"
-import { CASCADED, CREATE, EDIT, GET, PATCH, PERCENTAGE, POST, SCORECARD, SELF_CASCADED_INIT } from "../../utils/constants";
+import { CASCADED, CREATE, EDIT, GET, PATCH, PERCENTAGE, POST, SCORECARD } from "../../utils/constants";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from "react-redux";
@@ -40,7 +40,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
             makeRequest(createObjectiveURL, GET, null, true, false)
                 .then(objectives => {
                     let totalWeight = 0;
-                    objectives?.map(objective => totalWeight += objective.weight * 100);
+                    objectives?.map(objective => totalWeight += objective.weight);
                     setTopObjectivesTotalWeight(totalWeight);
                 })
         }
@@ -119,14 +119,15 @@ const ScorecardCreate = ({ periods, actingRole }) => {
     if ( name !== undefined) { // if mode is not create mode
         initialValues.name = initiative.name;
         initialValues.perspective = initiative.perspective;
-        initialValues.units_target = initiative.target;
+        initialValues.units_target = initiative.units_target;
+        initialValues.percentage_target = initiative.percentage_target;
         initialValues.baseline = initiative.baseline;
         initialValues.data_type = initiative.data_type;
-        initialValues.weight = initiative.weight * 100;
+        initialValues.weight = initiative.weight;
         initialValues[measures[0].measureId] = initiative?.measures[0]?.name
-        if (initiative.data_type === PERCENTAGE) initialValues.percentage_target = initiative.target * 100;
+        if (initiative.data_type === PERCENTAGE) initialValues.percentage_target = initiative.target;
         initiative.period_targets?.map(period => {
-            initialValues[period.period] = period.target * 100;
+            initialValues[period.period] = period.target;
             return undefined;
         });
 
@@ -154,7 +155,6 @@ const ScorecardCreate = ({ periods, actingRole }) => {
             setTopObjectivesTotalWeight(totalWeight);
         }
         const payload = createObjectPayload(values, initiatives, measures, periods);
-        values.percentage_target = (values.percentage_target/100).toFixed(2);
 
         if (!Boolean(initiativeId)){
             makeRequest(createObjectiveURL, POST, payload, true)

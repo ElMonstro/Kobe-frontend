@@ -47,7 +47,7 @@ const ViewPerspective = ({ objectives, alias, score, status}) => {
                         <Col></Col>
                         <Col></Col>
                         <Col></Col>
-                        <Col className={ `score ${status}_color` }>{ score * 100 }</Col>
+                        <Col className={ `score ${status}_color` }>{ score }</Col>
                     </Row>
                 </Col>
             </Row>

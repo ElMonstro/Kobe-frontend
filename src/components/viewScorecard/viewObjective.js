@@ -43,9 +43,9 @@ const ViewObjective = ({ name, measures, weight, target, score, status, initiati
                     <Row>
                         <Col className={`status ${approval_status}`}>{ approval_status }</Col>
                         <Col className="measure">{ measure_name }</Col>
-                        <Col className="weight">{ weight && weight * 100 }</Col>
-                        <Col>{ target && target * 100 }</Col>
-                        <Col className={ `score ${status}_color` }>{ score * 100 }</Col>
+                        <Col className="weight">{ weight }</Col>
+                        <Col>{ target }</Col>
+                        <Col className={ `score ${status}_color` }>{ score }</Col>
                     </Row>
                 </Col>
             </Row>

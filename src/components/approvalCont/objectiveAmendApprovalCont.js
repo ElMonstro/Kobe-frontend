@@ -24,7 +24,7 @@ const ApprovalObjectiveView = () => {
                         <Col> Weight </Col>
                         <Col >Budget</Col>
                         <Col> Target </Col>
-                        <Col> Period Targets  </Col>
+                        <Col> Period Targets </Col>
                     </Row>
                 </Col>
         </Row>

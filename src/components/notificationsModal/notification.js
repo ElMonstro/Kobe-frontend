@@ -18,7 +18,7 @@ const Notification = ({ title, body, link, is_seen, needs_attention }) => {
           { 
             (link && needs_attention) &&
             <Button className="link_button" onClick={() => navigate(link)}>
-              Go to Link
+              View Ammendment
             </Button>
           }
         </div>

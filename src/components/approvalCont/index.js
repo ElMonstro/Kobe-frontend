@@ -60,6 +60,7 @@ const ApprovalModal = () => {
                 <Modal.Body className="approval_modal_body">
                     <Outlet context={ { 
                         objective: approvalObject?.change_approval_tracker?.objective,
+                        evidence: approvalObject?.change_approval_tracker?.evidence,
                         approve,
                         reject,
                         } } 

@@ -13,7 +13,6 @@
         border-radius: 6px;
         border: none;
 
-
         .approval_modal_body {
             color: #828282;
             font-weight: 400;
@@ -64,6 +63,21 @@
         .measure {
             font-size: medium;
         }
+
+        .evidence {
+            overflow: hidden;
+            cursor: pointer;
+            width: 150px!important;
+            color: blue;
+        }
+
+        .period_targets {
+            .period {
+                margin-right: 10px;
+                font-weight: 600;
+                text-transform: capitalize;
+            }
+        }
     }
 
     .objective_header {
@@ -72,6 +86,7 @@
         padding-top: 10px;
         padding-bottom: 5px;
         border-bottom: #e6ecf2 solid 1px;
+        background-color: #f0f3f6;
         font-size: 18px;
         color: #686767;
         margin-bottom: 20px;

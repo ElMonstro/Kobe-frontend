@@ -171,7 +171,7 @@ export const createObjectPayload = (data, initiatives, measures, periods) => {
     periods.map(period => {
         const periodTargetPayload = {};
         if (data[period]) {
-            periodTargetPayload['target'] = round(data[period]/100, 2)
+            periodTargetPayload['target'] = data[period]
             periodTargetPayload['period'] = period;
             periodTargetsPayload.push(periodTargetPayload);
         } 
@@ -183,23 +183,13 @@ export const createObjectPayload = (data, initiatives, measures, periods) => {
     data.measures = measuresPayload;
     data.initiatives = initiativesPayload;
     if (periodTargetsPayload.length > 0) data.period_targets = periodTargetsPayload;
-    
+    // Clear empty fields
     Object.keys(data).map(key => {
         if (data[key]==="") {
             delete data[key];
         }
         return undefined;
     });
-
-    if (data.data_type === UNITS) {
-        data.target = data.units_target;
-    } else {
-        data.target = round(data.percentage_target / 100, 2);
-    }
-
-    if (data.weight) {
-        data.weight = round( data.weight / 100, 2);
-    }
 
     return data;
   };
@@ -265,7 +255,6 @@ export const countUnreadNotifications = (notifications) => {
 }
 
 const handleNotifications = data => {
-    console.log(data);
     store.dispatch(setNotifications(data));
 }
 
