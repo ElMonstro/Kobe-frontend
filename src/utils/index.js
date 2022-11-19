@@ -215,16 +215,25 @@ export const isObjectEmpty = obj => {
         && Object.getPrototypeOf(obj) === Object.prototype;
 }
 
+const getTarget = values => {
+    let target;
+    values.data_type === UNITS? target = values.units_target: target = values.percentage_target
+    
+    return parseInt(target)
+}
 
 export const arePeriodicalInputsValid = (values, periods, setFieldError) => {
     let total = 0;
+    const target = getTarget(values);
     periods.map(period => {
         total += parseInt(values[period]);
     });
+    console.log(target)
+    console.log(total)
 
-    if (total !== 100) {
+    if (total !== target) {
         periods.map(period => {
-            setFieldError(period, "All periodical targets have to add up to 100");
+            setFieldError(period, `All periodical targets have to add up to ${target}`);
         });
 
         return false;

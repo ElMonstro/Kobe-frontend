@@ -139,7 +139,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
     }
 
     const onSubmit = async (values, { setFieldError, resetForm }) => {
-        
+        console.log(values)
         if (!arePeriodicalInputsValid(values, periods, setFieldError)) {
             return;
         }
