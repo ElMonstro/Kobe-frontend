@@ -5,11 +5,12 @@ import { CREATE, EDIT, SCORECARD } from "../../../utils/constants";
 
 import "./index.scss";
 
-const CascadedInitiative = ({ name, id, target})=> {
+const CascadedInitiative = ({ name, id, percentage_target, units_target})=> {
 
 
     let buttonType = EDIT
-    if (target === "0.00"){
+
+    if (percentage_target === 0 && units_target === 0){
         buttonType = CREATE;
     }
     const navigate = useNavigate();
