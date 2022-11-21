@@ -45,6 +45,11 @@ export const yupThresholdObj = Yup.object({
     });
 
 
+export const yupRejectionForm = Yup.object({
+    message: Yup.string()
+            .required('* Required')
+});
+
 export const yupPerspectiveCutoffObj = Yup.object({
     perspective_cutoff: Yup.number()
             .required('* Required')

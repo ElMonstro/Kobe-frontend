@@ -34,10 +34,7 @@ const CascadedCard = ({ title, type, setInitiativeId, setActiveComponent }) => {
                             initiatives?.map(initiative => {
                                 return <CascadedInitiative 
                                             key={ initiative.id } 
-                                            id={ initiative.id }
-                                            name={ initiative.name } 
-                                            type={ initiative.type }
-                                            target={ initiative.target }
+                                            { ...initiative }
                                             setInitiativeId={setInitiativeId}
                                             setActiveComponent={setActiveComponent}
                                     />

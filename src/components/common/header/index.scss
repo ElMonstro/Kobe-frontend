@@ -7,7 +7,30 @@
     .avatar_menu {
         float: right;
         margin-right: 27px;
-        display: table;
+        // width: 180px;
+    }
+
+    .notifications {
+      position: relative;
+      cursor: pointer;
+
+      svg {
+        height: 50px;
+      }
+
+      .notification_number {
+        background-color: red;
+        color: rgb(255, 255, 255);
+        font-weight: 700;
+        text-align: center;
+        font-size: 17;
+        height: 24px;
+        width: 24px;
+        border-radius: 50%;
+        position: absolute;
+        right: 14px;
+        bottom: 0px;
+      }
     }
 
     .letter_avatar {
@@ -42,10 +65,11 @@
         width: 35px;
         height: 35px;
         border-radius: 50%;
+        margin-right: 10px;
       }
       
       .avatar_container {
-        margin-right: 10px;
+        display: table;
       }
 
       .company_name {

@@ -16,3 +16,32 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.good {
+    background: #16C046;
+}
+
+.poor {
+    background: #F21212;
+}
+
+.satisfactory {
+    background: #FFA800;
+}
+
+.good_color {
+    color: #16C046;
+}
+
+.poor_color {
+    color: #F21212;
+}
+
+.satisfactory_color {
+    color: #FFA800;
+}
+
+
+textarea:focus, input:focus, button:focus{
+    outline: none!important;
+}

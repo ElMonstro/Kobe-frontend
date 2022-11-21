@@ -1,6 +1,9 @@
 import {
     SET_CURRENT_ROLE,
+    SET_NOTIFICATIONS,
+    SET_SHOW_NOTIFICATIONS,
     SET_USER,
+    SET_WEB_SOCKET,
     SHOW_CONF_MODAL,
     USER_LOGGED_IN,
 } from "../actions/actionTypes";
@@ -9,7 +12,10 @@ const initialState = {
     user: {},
     isLoggedIn: false,
     showConfirmationModal: false,
-    currentRole: {}
+    currentRole: {},
+    showNotifications: false,
+    notifications: [],
+    webSocket: null
 };
 
 const authReducer = ( state=initialState, action ) => {
@@ -29,6 +35,18 @@ const authReducer = ( state=initialState, action ) => {
         case SET_CURRENT_ROLE:
             const { currentRole } = action;
             return { ...state, currentRole };
+
+        case SET_SHOW_NOTIFICATIONS:
+            const { showNotifications } = action;
+            return { ...state, showNotifications };
+        
+        case SET_NOTIFICATIONS:
+            const { notifications } = action;
+            return { ...state, notifications };
+
+        case SET_WEB_SOCKET:
+            const { webSocket } = action;
+            return { ...state, webSocket };
             
         default:
             return state;

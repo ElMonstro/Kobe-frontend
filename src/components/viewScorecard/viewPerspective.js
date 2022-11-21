@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
+import { SCORECARD } from "../../utils/constants";
 import OpenCloseIcon from "../common/openCloseIcon";
 
 
@@ -46,15 +47,14 @@ const ViewPerspective = ({ objectives, alias, score, status}) => {
                         <Col></Col>
                         <Col></Col>
                         <Col></Col>
-                        <Col>{ score * 100 }</Col>
-                        <Col><div className={ `perfomance ${status}` }></div></Col>
+                        <Col className={ `score ${status}_color` }>{ score }</Col>
                     </Row>
                 </Col>
             </Row>
             <Row className={ objectivesClassName }>
                 {
                     objectives.map(objective => {
-                        return <ViewObjective key={ objective.id } { ...objective } />
+                        return <ViewObjective key={ objective.id } mode={ SCORECARD } { ...objective } />
                     })
                 }
             </Row>

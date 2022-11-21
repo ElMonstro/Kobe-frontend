@@ -15,7 +15,7 @@ const QuaterlyTargetInputs = ({ formik, periods, periodTargets }) => {
                         periods.slice(0, periodHalfLength).map(
                             period => {
                             return <Form.Group key={ period } controlId={ period } className="mb-3">
-                                <Form.Label>{ period } Target (%) </Form.Label>
+                                <Form.Label>{ period } Target </Form.Label>
                                 <Form.Control 
                                 type="text" 
                                 placeholder=""
@@ -34,7 +34,7 @@ const QuaterlyTargetInputs = ({ formik, periods, periodTargets }) => {
                         periods.slice(periodHalfLength).map(
                             period => {
                             return <Form.Group key={ period } controlId={ period } className="mb-3">
-                                <Form.Label>{ period } Target (%)</Form.Label>
+                                <Form.Label>{ period } Target </Form.Label>
                                 <Form.Control 
                                 type="text" 
                                 placeholder=""

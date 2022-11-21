@@ -1,128 +1,146 @@
 .view_scorecard {
 
-    .header {
-        margin-left: 0;
-        background: #fff;
-        height: 45px;
-        padding: 10px 35px;
-        margin-bottom: 20px;
-        margin-right: 0;
-
-        .measure {
-            text-align: center;
-        }
-
-        .second_half{
-            .row {
-                margin-left: 0;
-                padding-left: 0;
-                margin-right: 0;
-            }
-        }
-    }
-
     .perspectives>:nth-child(odd) {
         background: #F2F2F2;
     }
 
     .staff_card {
-
-        .thumbnail {
-            vertical-align: middle;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-        } 
-
-        .initiative {
-            .initiative_row {
-                padding-left: 40px!important;
-            }
-        }
-
-        .row {
-            margin-left: 0;
-            padding-left: 0;
-        }
         
-        .objective {
-
-            .initiatives>:nth-child(odd) {
-                background: #F2F2F2;
-            } 
-
-            .first_half {
-                .objective_row {
-                    padding-left: 20px!important;
-                }
-            }
-            
-            .measure {
-                font-weight: 400;
-                font-size: 12px;
-                text-align: center;
-                letter-spacing: 0.035em;
-                color: #828282;
-            }
-
-            .status {
-                color: rgb(4, 211, 7);
-            }
-
-        }
-        
-
         .perspective {
             margin-left: 0;
             padding: 5px 35px;
+        }
 
-            .objectives>:nth-child(odd) {
-                background: #F2F2F2;
-            } 
+        .name {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 28px;
+            letter-spacing: 0.035em;
+            color: #828282;
+        }
+        
+        .objectives>:nth-child(odd) {
+            background: #F2F2F2;
+        } 
+        
+    }
+}
 
-            .row {
-                padding-right: 0!important;
-            }
+.header {
+    margin-left: 0;
+    background: #fff;
+    height: 45px;
+    padding: 10px 35px;
+    margin-bottom: 20px;
+    margin-right: 0;
 
-            .name {
-                cursor: pointer;
-                text-transform: capitalize;
-            }
+    .measure {
+        text-align: center;
+    }
 
-            .second_half {
-                font-weight: 400;
-                font-size: 14px;
-                line-height: 28px;
-                letter-spacing: 0.035em;
-                color: #4F4F4F;
-            }
+    .second_half {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 28px;
+        letter-spacing: 0.035em;
+        color: #4F4F4F;
+    }
+}
 
-            .type {
-                font-style: normal;
-                font-weight: 400;
-                font-size: 12px;
-                line-height: 28px;
-                letter-spacing: 0.035em;
-                color: #828282;
-                margin-left: 20px;
+.score {
+    font-weight: 700;
+    font-size: 18px;
+}
 
-            }
+.row {
+    margin-left: 0;
+    padding-left: 0;
+}
 
-            .name {
-                font-style: normal;
-                font-weight: 500;
-                font-size: 14px;
-                line-height: 28px;
-                letter-spacing: 0.035em;
-                color: #828282;
-            }
+.second_half{
+    .row {
+        margin-left: 0;
+        padding-left: 0;
+        margin-right: 0;
+    }
 
-            .perfomance {
-                width: 15px;
-                height: 15px;
-                border-radius: 50%;
-                margin-top: 5px;
-            }
+    .col {
+        margin-left: 0;
+        padding-left: 0;
+        margin-right: 0;
+    }
+}
+
+
+.objective {
+
+    .initiatives>:nth-child(odd) {
+        background: #F2F2F2;
+    } 
+
+    .first_half {
+        .objective_row {
+            padding-left: 20px;
         }
     }
+    
+    .measure {
+        font-weight: 400;
+        font-size: 12px;
+        text-align: center;
+        letter-spacing: 0.035em;
+        color: #828282;
+    }
+
+    .status {
+        font-size: 14px;
+        text-transform: capitalize;
+    }
+
+    .approved {
+        color: rgb(4, 211, 7);
+    }
+    
+    .rejected {
+        color: rgb(243, 3, 3);
+    }
+
+    .pending {
+        color: rgb(222, 201, 6);
+    }
+
+}
+
+.initiative {
+    .initiative_row {
+        padding-left: 40px!important;
+    }
+}
+
+.thumbnail {
+    vertical-align: middle;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+} 
+
+.row {
+    padding-right: 0!important;
+}
+
+.name {
+    cursor: pointer;
+    text-transform: capitalize;
+}
+
+.type {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 28px;
+    letter-spacing: 0.035em;
+    color: #828282;
+    margin-left: 20px;
+
 }

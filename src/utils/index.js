@@ -1,9 +1,9 @@
 import forge from 'node-forge';
 import { toast } from 'react-toastify';
 import store from "../redux/store/store.js";
-import { changeLoginStatus } from "../redux/actions";
+import { changeLoginStatus, setNotifications, setWebSocket } from "../redux/actions";
 import { BIANNUALS, CHARACTERS, QUARTERS, UNITS } from './constants.js';
-import { round } from 'lodash';
+import { socketsMessagesURL } from '../services/urls.js';
 
 
 const notificationTypeMapper = {
@@ -16,9 +16,9 @@ const notificationTypeMapper = {
 
 export const  parseJwt = token => {
     try {
-        var base64Url = token.split('.')[1];
-        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
     
@@ -66,9 +66,9 @@ export const fireNotification = (type, message) => {
   
 
   String.format = function() {
-    var s = arguments[0];
-    for (var i = 0; i < arguments.length - 1; i++) {       
-        var reg = new RegExp("\\{" + i + "\\}", "gm");             
+    let s = arguments[0];
+    for (let i = 0; i < arguments.length - 1; i++) {       
+        const reg = new RegExp("\\{" + i + "\\}", "gm");             
         s = s.replace(reg, arguments[i + 1]);
     }
     return s;
@@ -170,7 +170,7 @@ export const createObjectPayload = (data, initiatives, measures, periods) => {
     periods.map(period => {
         const periodTargetPayload = {};
         if (data[period]) {
-            periodTargetPayload['target'] = round(data[period]/100, 2)
+            periodTargetPayload['target'] = data[period]
             periodTargetPayload['period'] = period;
             periodTargetsPayload.push(periodTargetPayload);
         } 
@@ -182,23 +182,13 @@ export const createObjectPayload = (data, initiatives, measures, periods) => {
     data.measures = measuresPayload;
     data.initiatives = initiativesPayload;
     if (periodTargetsPayload.length > 0) data.period_targets = periodTargetsPayload;
-    
+    // Clear empty fields
     Object.keys(data).map(key => {
         if (data[key]==="") {
             delete data[key];
         }
         return undefined;
     });
-
-    if (data.data_type === UNITS) {
-        data.target = data.units_target;
-    } else {
-        data.target = round(data.percentage_target / 100, 2);
-    }
-
-    if (data.weight) {
-        data.weight = round( data.weight / 100, 2);
-    }
 
     return data;
   };
@@ -224,16 +214,25 @@ export const isObjectEmpty = obj => {
         && Object.getPrototypeOf(obj) === Object.prototype;
 }
 
+const getTarget = values => {
+    let target;
+    values.data_type === UNITS? target = values.units_target: target = values.percentage_target
+    
+    return parseInt(target)
+}
 
 export const arePeriodicalInputsValid = (values, periods, setFieldError) => {
     let total = 0;
+    const target = getTarget(values);
     periods.map(period => {
         total += parseInt(values[period]);
     });
+    console.log(target)
+    console.log(total)
 
-    if (total !== 100) {
+    if (total !== target) {
         periods.map(period => {
-            setFieldError(period, "All periodical targets have to add up to 100");
+            setFieldError(period, `All periodical targets have to add up to ${target}`);
         });
 
         return false;
@@ -251,3 +250,75 @@ export const isWeightsFieldValid = (values, remainingObjectiveWeight, setFieldEr
 
     return true;
 } 
+
+export const countUnreadNotifications = (notifications) => {
+    let count = 0;
+
+    for (const notification of notifications) {
+        if (notification.is_seen === false)
+            count++;
+    }
+
+    return count;
+}
+
+const handleNotifications = data => {
+    store.dispatch(setNotifications(data));
+}
+
+export const webSocketMessageHandler = event => {
+    const data = JSON.parse(event.data);
+    const action_mapper = {
+        new_notifications: handleNotifications,
+        undefined: () => {},
+    };
+    console.log(data.message.message_type)
+    action_mapper[data.message.message_type](data.message.data);
+}
+
+export const connectWebSocket = () => {
+    const webSocket = new WebSocket(socketsMessagesURL);
+    store.dispatch(setWebSocket(webSocket));
+    webSocket.onmessage = webSocketMessageHandler;
+    webSocket.onclose = connectWebSocket;
+    
+    return webSocket;
+}
+
+export const getAgeString = createdAt => {
+    const startStrings = createdAt.split(" ");
+    const startDateStrings = startStrings[0].split("-");
+    const startTimeStrings = startStrings[1].split(":");
+    const startDate = new Date(
+        startDateStrings[0], startDateStrings[1], startDateStrings[2], 
+        startTimeStrings[0], startTimeStrings[1], startTimeStrings[2]
+        );
+
+    const endDate = new Date();
+    let diff = (endDate.getTime() - startDate.getTime()) / 1000;
+    console.log(startDate);
+    const days = Math.floor(diff / 86400);
+    diff -= days * 86400;
+    const hours = Math.floor(diff / 3600) % 24;
+    diff -= hours * 3600;
+    const minutes = Math.floor(diff / 60) % 60;
+    diff -= minutes * 60;
+    const seconds = Math.floor(diff % 60); 
+    
+    let ageString = "";
+
+    if (days > 3) {
+        ageString = `${startDate.getDay}/${startDate.getMonth()}/${startDate.getFullYear}`
+    } 
+    else if (days > 0) {
+        ageString = `${days} days`;
+        ageString += " ago.";
+    } else {
+        hours? ageString += hours + " h ": ageString += "";
+        minutes? ageString += minutes + " m ": ageString += "";
+        seconds? ageString += seconds + " s ": ageString += "";
+        ageString += "ago";
+    }
+
+    return ageString;
+}

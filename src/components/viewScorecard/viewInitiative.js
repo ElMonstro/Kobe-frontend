@@ -29,10 +29,9 @@ const ViewInitiative = ({name, weight, target, score, status }) => {
                     <Row>
                         <Col></Col>
                         <Col></Col>
-                        <Col className="weight">{ weight * 100 }</Col>
-                        <Col>{ target * 100 }</Col>
-                        <Col>{ score * 100 }</Col>
-                        <Col><div className={ `perfomance ${status}`}></div></Col>
+                        <Col className="weight">{ weight }</Col>
+                        <Col>{ target }</Col>
+                        <Col className={ `score ${status}_color` }>{ score }</Col>
                     </Row>
                 </Col>
             </Row>

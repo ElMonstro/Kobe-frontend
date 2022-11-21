@@ -1,37 +1,52 @@
-import { BrowserRouter, Route, Routes} from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { BrowserRouter, Route, Routes} from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-import { ORG_STRUCTURE, PERSPECTIVES, CASCADE, REVEIEW_PERIOD, SEND_EMAILS, SCORECARD, CREATE, CASCADED, VIEW, UPDATE, STRATEGY_MAP } from "./utils/constants";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import { 
+  ORG_STRUCTURE, 
+  PERSPECTIVES, 
+  CASCADE, 
+  REVEIEW_PERIOD, SEND_EMAILS,
+  SCORECARD, CREATE, CASCADED, 
+  VIEW, UPDATE, STRATEGY_MAP, 
+  LINKS, OBJECTIVE, SCORE 
+} 
+from "./utils/constants";
 
-import AdminDashboard from './components/adminDashboard';
-import StaffDashboard from './components/staffDashboard';
-import Protected from './components/common/Protected';
-import { isLoggedInFromLocalStorage } from './utils';
-import store from './redux/store/store';
-import { changeLoginStatus } from './redux/actions';
-import { connect } from 'react-redux';
-import { useEffect } from 'react';
-import LoginModal from './components/modals/loginModal';
-import ScorecardCont from './components/scorecardCont';
-import ScorecardCreate from './components/ScorecardCreate';
-import CascadedCards from './components/cards/cascadedCards';
-import ViewScorecard from './components/viewScorecard';
-import UpdateScorecardCard from './components/cards/updateScorecardCard';
-import StrategyMapCont from './components/strategyMapCont';
-import StrategyMapCreate from './components/strategyMapCreate';
-import StrategyMapView from './components/viewStrategyMap';
+import AdminDashboard from "./components/adminDashboard";
+import StaffDashboard from "./components/staffDashboard";
+import Protected from "./components/common/Protected";
+import { connectWebSocket, isLoggedInFromLocalStorage } from "./utils";
+import store from "./redux/store/store";
+import { changeLoginStatus } from "./redux/actions";
+import { connect } from "react-redux";
+import { useEffect } from "react";
+import LoginModal from "./components/modals/loginModal";
+import ScorecardCont from "./components/scorecardCont";
+import ScorecardCreate from "./components/ScorecardCreate";
+import CascadedCards from "./components/cards/cascadedCards";
+import ViewScorecard from "./components/viewScorecard";
+import UpdateScorecardCard from "./components/cards/updateScorecardCard";
+import StrategyMapCont from "./components/strategyMapCont";
+import StrategyMapCreate from "./components/strategyMapCreate";
+import StrategyMapView from "./components/viewStrategyMap";
+import ApprovalModal from "./components/approvalCont/";
+import ObjectiveApprovalView from "./components/approvalCont/objectiveAmendApprovalCont";
+import ApprovalLinksCont from "./components/approvalCont/linksCont";
+import NotificationsModal from "./components/notificationsModal"
+import ScoreUpdateAprroveCont from "./components/approvalCont/scoreUpdateCont";
 
 
-function App({ isLoggedIn }) {
+function App({ isLoggedIn, webSocket }) {
 
   const loggedIn = isLoggedInFromLocalStorage();
-  
+  console.log(webSocket)
 
   useEffect (() => {
     store.dispatch(changeLoginStatus(loggedIn));
+    
   }, [loggedIn]);
 
   
@@ -39,6 +54,7 @@ function App({ isLoggedIn }) {
     <BrowserRouter>
     <ToastContainer limit={4}/>
       {!isLoggedIn && <LoginModal isLoggedOut={!isLoggedIn}/>}
+      <NotificationsModal />
         <Routes>
           <Route index element={<Protected> <StaffDashboard /> </Protected>} />
           <Route exact path="/admin" element={<Protected> <AdminDashboard activeComponent={ORG_STRUCTURE} /> </Protected>} /> 
@@ -47,6 +63,12 @@ function App({ isLoggedIn }) {
           <Route path="/admin/review-period" element={<Protected> <AdminDashboard activeComponent={REVEIEW_PERIOD} /> </Protected>} />
           <Route path="/admin/send-emails" element={<Protected> <AdminDashboard activeComponent={SEND_EMAILS} /> </Protected>} />
           <Route path="/admin/login" element={<AdminDashboard activeComponent={ORG_STRUCTURE} isLoggedOut={!isLoggedIn}/>} />
+          <Route path=":approvalToken/approve" element={<ApprovalModal />} >
+          <Route index element={ <ObjectiveApprovalView /> } />
+            <Route path={ OBJECTIVE } element={ <ObjectiveApprovalView /> } />
+            <Route path={ LINKS } element={ <ApprovalLinksCont /> } />
+            <Route path={ SCORE } element={ <ScoreUpdateAprroveCont /> } />
+          </Route>
           <Route path="/:role" element={<Protected> <StaffDashboard /> </Protected>} >
             <Route index element={<ScorecardCont />} />
             <Route path={ SCORECARD } element={<ScorecardCont />} >
@@ -69,8 +91,9 @@ function App({ isLoggedIn }) {
   );
 }
 
-const mapStateToProps = ({ authReducer: { isLoggedIn } }) => ({
+const mapStateToProps = ({ authReducer: { isLoggedIn, webSocket } }) => ({
   isLoggedIn,
+  webSocket
 });
 
 export default connect(

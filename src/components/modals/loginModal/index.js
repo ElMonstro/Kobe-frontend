@@ -34,7 +34,6 @@ const LoginModal = props => {
                 // store access tokens in local storage
                 window.localStorage.setItem('tokens', JSON.stringify(response.data));
                 window.localStorage.setItem('user', JSON.stringify(user));
-                
             },
         });
 
