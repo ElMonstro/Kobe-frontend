@@ -47,6 +47,7 @@ const NotificationsModal = ({ showNotifications, setShowNotifications, notificat
                     <div className="notifications">
                         {
                             notifications?.map(notification => {
+                                console.log(notification)
                                 !notification.is_seen && renderedUnseenNotifIds.push(notification.id);
                                 renderedNotifications.push({ ...notification, is_seen: true })
                                 return <Notification key={ notification.id } {...notification} />

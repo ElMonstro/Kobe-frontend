@@ -2,8 +2,7 @@ import forge from 'node-forge';
 import { toast } from 'react-toastify';
 import store from "../redux/store/store.js";
 import { changeLoginStatus, setNotifications, setWebSocket } from "../redux/actions";
-import { BIANNUALS, CHARACTERS, QUARTERS, UNITS, NEW_NOTIFICATIONS } from './constants.js';
-import { round } from 'lodash';
+import { BIANNUALS, CHARACTERS, QUARTERS, UNITS } from './constants.js';
 import { socketsMessagesURL } from '../services/urls.js';
 
 
@@ -17,9 +16,9 @@ const notificationTypeMapper = {
 
 export const  parseJwt = token => {
     try {
-        var base64Url = token.split('.')[1];
-        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
     
@@ -67,9 +66,9 @@ export const fireNotification = (type, message) => {
   
 
   String.format = function() {
-    var s = arguments[0];
-    for (var i = 0; i < arguments.length - 1; i++) {       
-        var reg = new RegExp("\\{" + i + "\\}", "gm");             
+    let s = arguments[0];
+    for (let i = 0; i < arguments.length - 1; i++) {       
+        const reg = new RegExp("\\{" + i + "\\}", "gm");             
         s = s.replace(reg, arguments[i + 1]);
     }
     return s;
@@ -284,4 +283,42 @@ export const connectWebSocket = () => {
     webSocket.onclose = connectWebSocket;
     
     return webSocket;
+}
+
+export const getAgeString = createdAt => {
+    const startStrings = createdAt.split(" ");
+    const startDateStrings = startStrings[0].split("-");
+    const startTimeStrings = startStrings[1].split(":");
+    const startDate = new Date(
+        startDateStrings[0], startDateStrings[1], startDateStrings[2], 
+        startTimeStrings[0], startTimeStrings[1], startTimeStrings[2]
+        );
+
+    const endDate = new Date();
+    let diff = (endDate.getTime() - startDate.getTime()) / 1000;
+    console.log(startDate);
+    const days = Math.floor(diff / 86400);
+    diff -= days * 86400;
+    const hours = Math.floor(diff / 3600) % 24;
+    diff -= hours * 3600;
+    const minutes = Math.floor(diff / 60) % 60;
+    diff -= minutes * 60;
+    const seconds = Math.floor(diff % 60); 
+    
+    let ageString = "";
+
+    if (days > 3) {
+        ageString = `${startDate.getDay}/${startDate.getMonth()}/${startDate.getFullYear}`
+    } 
+    else if (days > 0) {
+        ageString = `${days} days`;
+        ageString += " ago.";
+    } else {
+        hours? ageString += hours + " h ": ageString += "";
+        minutes? ageString += minutes + " m ": ageString += "";
+        seconds? ageString += seconds + " s ": ageString += "";
+        ageString += "ago";
+    }
+
+    return ageString;
 }
