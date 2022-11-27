@@ -1,0 +1,19 @@
+.speedometer {
+    height: 340px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    .card-header {
+        background-color: #fff!important;
+    }
+
+    .percentage {
+        text-align: center;
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 28px;
+        text-transform: uppercase;
+        color: #4F4F4F;
+        margin-right: 25px;
+    }
+}
