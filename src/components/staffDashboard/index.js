@@ -19,7 +19,7 @@ const StaffDashboard = props => {
       }, []);
        
     return (
-        <div>
+        <div className="dashboard">
             <Header />
             <div className="staff_cont">
                 <Container fluid className="inner-cont">

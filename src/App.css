@@ -45,3 +45,7 @@
 textarea:focus, input:focus, button:focus{
     outline: none!important;
 }
+
+.dashboard, .nav_bar {
+    min-width: 1500px;
+}

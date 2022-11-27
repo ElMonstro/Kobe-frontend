@@ -314,9 +314,9 @@ export const getAgeString = createdAt => {
         ageString = `${days} days`;
         ageString += " ago.";
     } else {
-        hours? ageString += hours + " h ": ageString += "";
-        minutes? ageString += minutes + " m ": ageString += "";
-        seconds? ageString += seconds + " s ": ageString += "";
+        hours? ageString += hours + "h ": ageString += "";
+        minutes? ageString += minutes + "m ": ageString += "";
+        !hours && seconds? ageString += seconds + " s ": ageString += "";
         ageString += "ago";
     }
 

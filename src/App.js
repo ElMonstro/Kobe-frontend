@@ -11,7 +11,7 @@ import {
   REVEIEW_PERIOD, SEND_EMAILS,
   SCORECARD, CREATE, CASCADED, 
   VIEW, UPDATE, STRATEGY_MAP, 
-  LINKS, OBJECTIVE, SCORE 
+  LINKS, OBJECTIVE, SCORE, DASHBOARDS 
 } 
 from "./utils/constants";
 
@@ -37,6 +37,7 @@ import ObjectiveApprovalView from "./components/approvalCont/objectiveAmendAppro
 import ApprovalLinksCont from "./components/approvalCont/linksCont";
 import NotificationsModal from "./components/notificationsModal"
 import ScoreUpdateAprroveCont from "./components/approvalCont/scoreUpdateCont";
+import DashboardTab from "./components/dashboardsTab";
 
 
 function App({ isLoggedIn, webSocket }) {
@@ -79,6 +80,7 @@ function App({ isLoggedIn, webSocket }) {
               <Route path={ VIEW } element={ <ViewScorecard />} />
               <Route path={ UPDATE } element={ <UpdateScorecardCard />} />
             </Route>
+            <Route path={ DASHBOARDS } element={ <DashboardTab /> } />
             <Route element={ <Protected> <StrategyMapCont /> </Protected>} path={ STRATEGY_MAP }>
               <Route index element={ <StrategyMapView /> } />
               <Route element={ <StrategyMapCreate/> } path={ CREATE } />
