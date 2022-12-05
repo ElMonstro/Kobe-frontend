@@ -27,6 +27,7 @@ const Speedometer =  ({ arcsLength, percent, id, title, description, upper_thres
         style={ style }
         hideText
         arcWidth={0.3}
+        colors={["#F21212", "#FFA800", "#16C046" ]}
         className="gauge_chart"
       />
       <div className="percentage">{ percent * 100 }%</div>

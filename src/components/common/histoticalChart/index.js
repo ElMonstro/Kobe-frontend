@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,9 +8,9 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import { Card } from 'react-bootstrap';
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import { Card } from "react-bootstrap";
 
 import "./index.scss";
 
@@ -35,7 +35,7 @@ const HistoricalChart = ({ title }) => {
         responsive: true,
         plugins: {
           legend: {
-            position: 'top',
+            position: "top",
           },
           title: {
             display: true,
@@ -44,16 +44,16 @@ const HistoricalChart = ({ title }) => {
         },
       };
       
-      const labels = ['Quater1', 'Quater2', 'Quater3', 'Quater4'];
+      const labels = ["Quater1", "Quater2", "Quater3", "Quater4"];
       
       const data = {
         labels,
         datasets: [
           {
-            label: 'Quaterly score data',
+            label: "Quaterly score data",
             data: [10, 30, 33, 35],
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            borderColor: "#9f9f9f",
+            backgroundColor: "#F2C94C",
           }
         ],
       };
