@@ -14,7 +14,10 @@ import { makeRequest } from "../../utils/requestUtils";
 import { fetchPerspectivesURL } from "../../services/urls";
 import ChildObjects from "./childObjects";
 
-const DashboardTab = () => {
+const DashboardTab = ({ mode }) => {
+    if (!mode) {
+        mode = DASHBOARDS;
+    }
 
     const { setActiveCompMemberNav } = useOutletContext();
 
@@ -34,9 +37,12 @@ const DashboardTab = () => {
 
     return (
         <Row className="dashboards_tab">
-            <Col lg="3" className="dashboards_sidebar_cont">
-                <DashboardsSidebar perspectives={ perspectives } />
-            </Col>
+            {
+                mode === DASHBOARDS &&
+                <Col lg="3" className="dashboards_sidebar_cont">
+                    <DashboardsSidebar perspectives={ perspectives } />
+                </Col>
+            }
             <Col className="charts">
                 <Row className="speedometers">
                     <Col className="actual">
@@ -52,9 +58,12 @@ const DashboardTab = () => {
                 <Row className="historical_chart">
                     <HistoricalChart title="Historical Chart" />
                 </Row>
-                <Row>
-                    <ChildObjects objects={ perspectives } title="perspectives" />
-                </Row>
+                {
+                mode === DASHBOARDS &&
+                    <Row>
+                        <ChildObjects objects={ perspectives } title="perspectives" />
+                    </Row>
+                }
             </Col>
         </Row>
     )
