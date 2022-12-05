@@ -2,9 +2,9 @@ import { Card } from 'react-bootstrap';
 import GaugeChart from 'react-gauge-chart';
 
 import { connect } from "react-redux";
-import "./index.scss"
+import "./index.scss";
 
-const Speedometer =  ({ arcsLength, percent, id, title, upper_threshold, lower_threshold}) => {
+const Speedometer =  ({ arcsLength, percent, id, title, description, upper_threshold, lower_threshold}) => {
 
     if (arcsLength === undefined) {
         arcsLength = [lower_threshold/100, upper_threshold/100, 1-upper_threshold/100];
@@ -27,12 +27,13 @@ const Speedometer =  ({ arcsLength, percent, id, title, upper_threshold, lower_t
         style={ style }
         hideText
         arcWidth={0.3}
+        className="gauge_chart"
       />
-      <span className="percentage">{ percent * 100 } %</span>
+      <div className="percentage">{ percent * 100 }%</div>
+      <div className="description">{ description }</div>
     </Card>
   );
 }
-
 
 const mapStateToProps = ({ adminReducer: { settings: { upper_threshold, lower_threshold } } }) => ({
     upper_threshold,

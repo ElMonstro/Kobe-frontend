@@ -1,11 +1,8 @@
 .speedometer {
-    height: 340px;
-    margin-right: 10px;
     margin-bottom: 10px;
-
-    .card-header {
-        background-color: #fff!important;
-    }
+    padding-bottom: 15px;
+    width: 100%;
+    color: #4F4F4F;
 
     .percentage {
         text-align: center;
@@ -13,7 +10,20 @@
         font-size: 40px;
         line-height: 28px;
         text-transform: uppercase;
-        color: #4F4F4F;
-        margin-right: 25px;
+        margin-left: 20px;
+        margin-bottom: 10px;
+    }
+
+    .description {
+        text-align: center;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 28px;
+        letter-spacing: 0.035em;
+        text-transform: capitalize;
+    }
+
+    .gauge_chart {
+        margin: auto;
     }
 }

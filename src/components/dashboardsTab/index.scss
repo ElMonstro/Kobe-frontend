@@ -1,76 +1,61 @@
 .dashboards_tab {
     padding-top: 30px!important;
 
-    .dashboards_sidebar_cont {
-        height: 805px;
-        width: 300px;
-        background-color: #fff;
+    
+}
+
+.charts {
+    margin-left: 10px;
+    width: 100%;
+    padding-right: 0px;
+
+    .actual {
+        margin-right: 10px;
     }
 
-    .charts {
-        margin-left: 10px;
-        width: 100%;
-        padding-right: 0px;
-        margin-right: 16px;
+}
+
+.quick_overview {
+    margin-bottom: 10px;
+    padding: 0px 10px 10px 20px;
+
+    .status {
+        text-transform: capitalize;
+        font-weight: 700;
     }
 
-    .dashboards_sidebar {
-        
-        
-        padding: 25px 20px;
+    .perspective_no {
+        padding: 10px 0 10px 0;
+    }
+}
 
-        .overall_perfomance {
-            font-weight: 700;
-            font-size: 18px;
-            line-height: 28px;
-            text-transform: uppercase;
-            color: #828282;
-            padding-bottom: 20px!important;
-            cursor: pointer;
-        }
+.children {
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: 0.035em;
+    text-transform: capitalize;
 
-        .icon {
-            margin-right: 10px; 
-        }
+    .header {
+        color: #828282;
+    }
 
-        .perspectives {
+    .children_list>:nth-child(odd) {
+        background: #F2F2F2;
+    } 
+    .child {
+        height: 41px;
+        text-transform: capitalize;
+        font-weight: 400;
+        color: #4F4F4F;
+    }
 
-            font-weight: 500;
-            line-height: 28px;
-            height: auto;
-            color: #828282;
-
-            .row {
-                height: auto;
-            }
-
-            .perspective {
-                height: fit-content;
-            }
-
-            .perspective_name {
-                font-size: 18px;
-            }
-
-            .name {
-                font-size: 16px!important;
-                margin-right: 10px;
-                font-weight: 500;
-                overflow: hidden;
-                width: 160px;
-
-                &:hover {
-                    font-weight: 700;
-                }
-            }
-        }
-
-        .objectives {
-            padding-left: 20px;
-        }
-
-        .initiatives {
-            padding-left: 20px;
-        }
+    .status {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        margin-left: 13px;
+        margin-top: 8px;
     }
 }
