@@ -21,8 +21,15 @@ const DashboardTab = ({ mode }) => {
 
     const { setActiveCompMemberNav } = useOutletContext();
 
-    const [perspectives, setPerspectives] = useState([])
-    const { role } = useParams();
+    const [perspectives, setPerspectives] = useState([]);
+    let objects = perspectives;
+    let currentObject;
+
+    const { role, currentObjectID, currentObjectType } = useParams();
+
+    if (!currentObjectID || currentObjectType) {
+        
+    }
 
     useEffect(() => {
         makeRequest(fetchPerspectivesURL(role), GET, null, true, false)
@@ -52,14 +59,17 @@ const DashboardTab = ({ mode }) => {
                         <Speedometer title="Planned" percent={ 0.8 } description="planned perfomance" />
                     </Col>
                 </Row>
-                <Row className="overview">
-                    <Overview objects={ perspectives } mode={"perspectives"}/>
-                </Row>
+                {
+                    mode === DASHBOARDS &&
+                    <Row className="overview">
+                        <Overview objects={ objects } mode={"perspectives"}/>
+                    </Row>
+                }
                 <Row className="historical_chart">
                     <HistoricalChart title="Historical Chart" />
                 </Row>
                 {
-                mode === DASHBOARDS &&
+                    mode === DASHBOARDS &&
                     <Row>
                         <ChildObjects objects={ perspectives } title="perspectives" />
                     </Row>

@@ -5,6 +5,7 @@ import { OVER_VIEW } from '../../utils/constants';
 import DashboardTab from '../dashboardsTab';
 
 import "./index.scss"
+import PersonalData from './personalData';
 
 const OverviewTab =  () => {
 
@@ -16,6 +17,7 @@ const OverviewTab =  () => {
   
   return (
     <div className="overview_tab">
+        <PersonalData />
         <DashboardTab mode={ OVER_VIEW }/>
     </div>
   );
