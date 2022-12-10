@@ -1,9 +1,10 @@
 import { Card, Col, Row } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 import "./index.scss"
 
 const ChildObjects =  ({ objects, title }) => {
-
+  const navigate = useNavigate();
 
   return (
     <Card className="staff_card children">
@@ -20,8 +21,8 @@ const ChildObjects =  ({ objects, title }) => {
             </Row>
             <Row className="children_list">
               {
-                  objects?.map(({name, weight, score, status}) => {
-                      return <Row className="child">
+                  objects?.map(({name, weight, score, status, id}) => {
+                      return <Row onClick={ () => navigate(`${title}/${id}`) } key={ id } className="child">
                                   <Col lg={ 1 }><div className={`${status} status`}></div></Col>
                                   <Col lg={ 6 }>{ name }</Col>
                                   <Col>{ weight }%</Col>

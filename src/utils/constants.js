@@ -42,6 +42,9 @@ export const APPROVED = "approved";
 export const PENDING = "pending";
 export const REJECTED = "rejected";
 export const NEW_NOTIFICATIONS = "new_notifications";
+export const OVERALL = "overall";
+export const INITIATIVES = 'initiatives';
+export const OBJECTIVES = 'objectives';
 
 export const PERSPECTIVE_OBJECT = {
     financial_name: FINANCIAL,

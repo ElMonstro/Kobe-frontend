@@ -2,9 +2,8 @@ import forge from 'node-forge';
 import { toast } from 'react-toastify';
 import store from "../redux/store/store.js";
 import { changeLoginStatus, setNotifications, setWebSocket } from "../redux/actions";
-import { BIANNUALS, CHARACTERS, QUARTERS, UNITS } from './constants.js';
+import { BIANNUALS, CHARACTERS, OBJECTIVES, PERSPECTIVES, QUARTERS, UNITS } from './constants.js';
 import { socketsMessagesURL } from '../services/urls.js';
-
 
 const notificationTypeMapper = {
     success: toast.success,
@@ -321,4 +320,32 @@ export const getAgeString = createdAt => {
     }
 
     return ageString;
+}
+
+export const getCurrentDashboardObject = (perspectives, mode, currentObjectID ) => {
+    let objects = [];
+    
+   if (mode === PERSPECTIVES) {
+        objects = perspectives;
+   } else if (mode === OBJECTIVES) {
+        perspectives.map(perspective => 
+            objects = objects.concat(perspective.objectives));
+   } else {
+        perspectives.map(perspective =>
+            perspective.objectives?.map(objective => 
+                objects = objects.concat(objective.initiatives)));
+   }
+   
+   return objects.find(object => object.id === parseInt(currentObjectID));
+    
+}
+
+export const getDashboardObjects = (currentObject, mode) => {
+    if (mode === PERSPECTIVES) {
+        return currentObject?.objectives;
+    } else if (mode === OBJECTIVES) {
+        return currentObject?.initiatives;
+    } else {
+        return null;
+    }
 }

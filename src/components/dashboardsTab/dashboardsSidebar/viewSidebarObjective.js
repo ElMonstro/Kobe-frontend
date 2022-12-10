@@ -5,12 +5,14 @@ import OpenCloseIcon from "../../common/openCloseIcon";
 import "./index.scss";
 import ViewSidebarInitiative from "./viewSidebarInitiative";
 import objectiveIcon from "../../../assets/objective.svg";
+import { useNavigate } from "react-router-dom";
+import { OBJECTIVES } from "../../../utils/constants";
 
 
-const ViewSidebarObjective = ({ name, initiatives }) => {
+const ViewSidebarObjective = ({ name, initiatives, id }) => {
 
     const [isOpen, setIsOpen] = useState(false);
-
+    const navigate = useNavigate();
     let initiativesClassName;
     isOpen? initiativesClassName="initiatives": initiativesClassName="hidden";
     
@@ -22,9 +24,8 @@ const ViewSidebarObjective = ({ name, initiatives }) => {
         <Row className="sidebar_objective">
             <Row className="top_row">
                 <Col>
-                    <img className="icon" src={ objectiveIcon } alt="icon" />
-                    <span className="name" 
-                        onClick={ handleClick }>
+                    <img onClick={ () => navigate(`${OBJECTIVES}/${id}`) } className="icon" src={ objectiveIcon } alt="icon" />
+                    <span onClick={ () => navigate(`${OBJECTIVES}/${id}`) } className="name">
                         { name }
                     </span>
                     <OpenCloseIcon 

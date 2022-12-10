@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import OpenCloseIcon from "../../common/openCloseIcon";
+import { useNavigate } from "react-router-dom";
+
 
 import "./index.scss";
 import ViewSidebarObjective from "./viewSidebarObjective";
 import perspectiveIcon from "../../../assets/perspective.svg";
+import { PERSPECTIVES } from "../../../utils/constants";
 
 
-const ViewSidebarPerspective = ({ objectives, alias}) => {
+const ViewSidebarPerspective = ({ objectives, alias, id}) => {
 
     const [isOpen, setIsOpen] = useState(false);
-
+    const navigate = useNavigate();
     let objectivesClassName;
     isOpen? objectivesClassName="objectives": objectivesClassName="hidden";
 
@@ -22,8 +25,8 @@ const ViewSidebarPerspective = ({ objectives, alias}) => {
         <Row className="sidebar_perspective">
             <Row>
                 <Col>
-                    <img className="icon" src={ perspectiveIcon } alt="icon" />
-                    <span className="perspective_name name">{ alias }</span>
+                    <img onClick={ () => navigate(`${PERSPECTIVES}/${id}`) } className="icon" src={ perspectiveIcon } alt="icon" />
+                    <span onClick={ () => navigate(`${PERSPECTIVES}/${id}`) } className="perspective_name name">{ alias }</span>
                     <OpenCloseIcon 
                         handleclick={ handleClick } 
                         defaultMode={ isOpen }

@@ -12,11 +12,6 @@ import "./index.scss";
 import MemberMenuCardCont from "../MemberMenuCardCont";
 
 const StaffDashboard = props => {
-
-    
-    useEffect(() => {
-    
-      }, []);
        
     return (
         <div className="dashboard">

@@ -18,7 +18,7 @@ const OverviewTab =  () => {
   return (
     <div className="overview_tab">
         <PersonalData />
-        <DashboardTab mode={ OVER_VIEW }/>
+        <DashboardTab loadedIn={ OVER_VIEW }/>
     </div>
   );
 }
