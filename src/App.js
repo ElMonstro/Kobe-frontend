@@ -11,7 +11,7 @@ import {
   REVEIEW_PERIOD, SEND_EMAILS,
   SCORECARD, CREATE, CASCADED, 
   VIEW, UPDATE, STRATEGY_MAP, 
-  LINKS, OBJECTIVE, SCORE, DASHBOARDS, OVER_VIEW, OVERALL 
+  LINKS, OBJECTIVE, SCORE, DASHBOARDS, OVER_VIEW, OVERALL, REPORTS 
 } 
 from "./utils/constants";
 
@@ -39,6 +39,8 @@ import NotificationsModal from "./components/notificationsModal"
 import ScoreUpdateAprroveCont from "./components/approvalCont/scoreUpdateCont";
 import DashboardTab from "./components/dashboardsTab";
 import OverviewTab from "./components/overviewTab";
+import ReportsTab from "./components/reportsTab";
+import ReportSelection from "./components/reportsTab/reportSelection";
 
 
 function App({ isLoggedIn, webSocket }) {
@@ -85,7 +87,9 @@ function App({ isLoggedIn, webSocket }) {
               <Route path={ OVERALL } element={ <DashboardTab /> } />
               <Route index path={ `:mode/:currentObjectID` } element={ <DashboardTab /> } />
             </Route>
-            
+            <Route path={ REPORTS } element={ <ReportsTab /> } >
+              <Route index element={ <ReportSelection /> } />
+            </Route>
             <Route path={ OVER_VIEW } element={ <OverviewTab /> } />
             <Route element={ <Protected> <StrategyMapCont /> </Protected>} path={ STRATEGY_MAP }>
               <Route index element={ <StrategyMapView /> } />
