@@ -59,7 +59,7 @@ const DashboardTab = ({ loadedIn }) => {
             .then(perspectives => {
                 perspectives && setPerspectives(perspectives);
             });
-    }, [role])
+    }, [role]);
 
     useEffect(() => {
         setActiveCompMemberNav(DASHBOARDS);

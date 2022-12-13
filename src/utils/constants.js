@@ -45,6 +45,9 @@ export const NEW_NOTIFICATIONS = "new_notifications";
 export const OVERALL = "overall";
 export const INITIATIVES = 'initiatives';
 export const OBJECTIVES = 'objectives';
+export const LIST = "list";
+export const NESTED = "nested";
+export const NORMAL = "normal";
 
 export const PERSPECTIVE_OBJECT = {
     financial_name: FINANCIAL,

@@ -22,3 +22,4 @@ export const fetchApprovalObject = approvalToken =>  `${baseURL}/scorecard/appro
 export const fetchNotificationsURL = `${baseURL}/auth/notifications/`;
 export const setSeenNotificationsURL = `${baseURL}/auth/notifications/set-seen/`;
 export const socketsMessagesURL = `${sockets_url}/messages/?token=${accessToken}`;
+export const fetchUnderAllUnderlingsUrl = `${baseURL}/auth/underlings/`;

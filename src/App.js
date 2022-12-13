@@ -11,7 +11,7 @@ import {
   REVEIEW_PERIOD, SEND_EMAILS,
   SCORECARD, CREATE, CASCADED, 
   VIEW, UPDATE, STRATEGY_MAP, 
-  LINKS, OBJECTIVE, SCORE, DASHBOARDS, OVER_VIEW, OVERALL, REPORTS 
+  LINKS, OBJECTIVE, SCORE, DASHBOARDS, OVER_VIEW, OVERALL, REPORTS, LIST 
 } 
 from "./utils/constants";
 
@@ -41,6 +41,7 @@ import DashboardTab from "./components/dashboardsTab";
 import OverviewTab from "./components/overviewTab";
 import ReportsTab from "./components/reportsTab";
 import ReportSelection from "./components/reportsTab/reportSelection";
+import ListsReport from "./components/listReport";
 
 
 function App({ isLoggedIn, webSocket }) {
@@ -89,6 +90,7 @@ function App({ isLoggedIn, webSocket }) {
             </Route>
             <Route path={ REPORTS } element={ <ReportsTab /> } >
               <Route index element={ <ReportSelection /> } />
+              <Route path={ LIST } element={ <ListsReport /> } />
             </Route>
             <Route path={ OVER_VIEW } element={ <OverviewTab /> } />
             <Route element={ <Protected> <StrategyMapCont /> </Protected>} path={ STRATEGY_MAP }>

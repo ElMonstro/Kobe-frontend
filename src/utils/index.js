@@ -2,7 +2,7 @@ import forge from 'node-forge';
 import { toast } from 'react-toastify';
 import store from "../redux/store/store.js";
 import { changeLoginStatus, setNotifications, setWebSocket } from "../redux/actions";
-import { BIANNUALS, CHARACTERS, OBJECTIVES, PERSPECTIVES, QUARTERS, UNITS } from './constants.js';
+import { BIANNUALS, CHARACTERS, NESTED, OBJECTIVES, PERSPECTIVES, QUARTERS, UNITS } from './constants.js';
 import { socketsMessagesURL } from '../services/urls.js';
 
 const notificationTypeMapper = {
@@ -348,4 +348,20 @@ export const getDashboardObjects = (currentObject, mode) => {
     } else {
         return null;
     }
+}
+
+
+export const filterEmployees = (employee, filters) => {
+    for (const filter of filters) {
+        let passesFilter = false;
+        if (filter.type === NESTED) {
+            passesFilter = employee[filter.key].id === filter.value;
+        } else {
+            passesFilter = employee[filter.key] === filter.value;
+        }
+
+        if (!passesFilter) return false;
+    }
+
+    return true;
 }
