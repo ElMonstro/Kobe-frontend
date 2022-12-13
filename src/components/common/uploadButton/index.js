@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { generateString } from "../../../utils";
-import { POST, PUT } from "../../../utils/constants";
+import { POST } from "../../../utils/constants";
 import { makeRequest } from "../../../utils/requestUtils";
 
 import "./index.scss";
@@ -32,9 +32,9 @@ const UploadButton = props => {
             formData.append(key, extraData[key]);
         }
         formData.append(fileKey, inputFile?.files[0]);
-        setSpinnerStatus(true);
+        setSpinnerStatus && setSpinnerStatus(true);
         const data = await makeRequest(uploadURL, POST, formData, true, true, true);
-        setSpinnerStatus(false);
+        setSpinnerStatus && setSpinnerStatus(false);
         data? setFileNameClass('green_text'): setFileNameClass('red_text');
     }
 
