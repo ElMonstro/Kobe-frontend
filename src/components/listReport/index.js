@@ -1,30 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
-import { useOutletContext, useParams } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useReactToPrint } from 'react-to-print';
 
-import { GET} from "../../utils/constants";
 import "./index.scss";
-import { makeRequest } from "../../utils/requestUtils";
-import StatusCount from "./statusCounter";
-import FilterTable from "./filterTable";
-import { fetchUnderAllUnderlingsUrl } from "../../services/urls";
+import ListsReportCont from "./listReportCont";
 
 const ListsReport = () => {
 
-    const [employees, setEmployees] = useState([])
-
-    useEffect(() => {
-        makeRequest(fetchUnderAllUnderlingsUrl, GET, null, true, false)
-            .then(employees => {
-                employees && setEmployees(employees);
-            });
-    }, []);
-    
+    const componentRef = useRef();
+    const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    });
 
     return (
         <div className="list_report">
-            <StatusCount employees={ employees } />
-            <FilterTable employees={ employees }/>
+            <button onClick={handlePrint}>Print this out!</button>
+            <ListsReportCont  innerRef={ componentRef } />
         </div>
     )
 

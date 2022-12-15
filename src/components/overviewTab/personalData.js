@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import "./index.scss"
 
 const PersonalData =  ({ currentRole }) => {
-  console.log(currentRole)
   return (
     <Card className="staff_card personal_data">
       <Card.Header>

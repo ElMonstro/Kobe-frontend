@@ -25,6 +25,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.4.0",
+    "react-to-print": "^2.14.10",
     "react-toastify": "^9.0.7",
     "react-xarrows": "^2.0.2",
     "redux-devtools-extension": "^2.13.9",
