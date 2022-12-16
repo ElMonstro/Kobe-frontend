@@ -11,8 +11,7 @@ export const yupLoginObj = Yup.object({
     export const yupUpdateObjective = Yup.object({
         cost: Yup.number(),
         score: Yup.number(),
-        evidence: Yup.string()
-        .required('* Required'),
+        evidence: Yup.string(),
         });
 
 export const yupMissionFormObj = Yup.object({

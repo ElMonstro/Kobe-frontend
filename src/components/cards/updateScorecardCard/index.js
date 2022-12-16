@@ -8,7 +8,7 @@ import { GET, UPDATE } from "../../../utils/constants";
 import Initiative from "./initiative";
 import { useOutletContext } from "react-router-dom";
 
-const UpdateScorecardCard = props => {
+const UpdateScorecardCard = () => {
 
     const [initiatives, setInitiatives] = useState([]);
     const { setActiveComponent } = useOutletContext();

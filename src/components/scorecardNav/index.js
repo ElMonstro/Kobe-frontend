@@ -7,7 +7,7 @@ import { CASCADED, CREATE, UPDATE, VIEW } from "../../utils/constants";
 import './index.scss';
 
 
-const ScorecardNavCard = ({ activeComponent, setActiveComponent, orgChart }) => {
+const ScorecardNavCard = ({ activeComponent, orgChart }) => {
 
     const setSelectedClass = activeComponent => {
 

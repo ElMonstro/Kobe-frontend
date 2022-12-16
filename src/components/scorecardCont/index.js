@@ -12,7 +12,6 @@ const ScorecardCont = props => {
 
     useEffect(() => {
         setActiveCompMemberNav(SCORECARD);
-        setActiveComponent(VIEW);
     }, []);
     
     return (

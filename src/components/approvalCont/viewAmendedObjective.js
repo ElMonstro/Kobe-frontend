@@ -1,28 +1,23 @@
 import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
+import { UNITS } from "../../utils/constants";
 
 import OpenCloseIcon from "../common/openCloseIcon";
 import ViewInitiative from "../viewScorecard/viewInitiative";
 
-const ViewAmendedObjective = ({ name, measures, weight, target, initiatives, budget, period_targets }) => {
-    console.log(period_targets)
+const ViewAmendedObjective = ({ name, measures, weight, units_target, data_type, percentage_target, initiatives, budget, period_targets }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const measure_name = measures && measures[0]?.name
 
     let initiativesClassName;
     let objectiveClassName;
+    let target;
 
     isOpen? initiativesClassName="initiatives": initiativesClassName="hidden";
     isOpen? objectiveClassName="objective white_bg": objectiveClassName="objective";
+    data_type === UNITS? target = units_target: target = percentage_target
 
-    const PeriodTarget = ({ period, target }) => {
-            return <div>
-                        <span className="period">{ period }</span> 
-                        <span className="target">{ target }</span>
-                    </div>
-        }
-    
     const handleClick = e => {
         setIsOpen(!isOpen);
     } 
@@ -55,7 +50,7 @@ const ViewAmendedObjective = ({ name, measures, weight, target, initiatives, bud
                                 {
                                     period_targets?.map(period_target => {
                                         return <div>
-                                        <span className="period">{ period_target.period }:</span> 
+                                        <span className="period">{ period_target.period_object.period }:</span> 
                                         <span className="target">{ period_target.target}</span>
                                     </div>
                                     })

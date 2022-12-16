@@ -77,8 +77,8 @@ const ScorecardCreate = ({ periods, actingRole }) => {
 
     periods.map(period => {
         initialValues[period] = '';
-        mode === EDIT? validationSchema[period] = Yup.number().max(100).min(0): 
-            validationSchema[period] = Yup.number().max(100).min(0).required('*Required');
+        mode === EDIT? validationSchema[period] = Yup.number(): 
+            validationSchema[period] = Yup.number().required('*Required');
         return undefined;
     });
 
@@ -125,9 +125,8 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         initialValues.data_type = initiative.data_type;
         initialValues.weight = initiative.weight;
         initialValues[measures[0].measureId] = initiative?.measures[0]?.name
-        if (initiative.data_type === PERCENTAGE) initialValues.percentage_target = initiative.target;
         initiative.period_targets?.map(period => {
-            initialValues[period.period] = period.target;
+            initialValues[period.period_object.period] = period.target;
             return undefined;
         });
 

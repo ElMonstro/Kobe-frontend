@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import { useOutletContext, useParams } from "react-router-dom";
 import 'chart.js/auto';
 
-import { DASHBOARDS, GET, INITIATIVES, OBJECTIVES } from "../../utils/constants";
+import { DASHBOARDS, GET, INITIATIVES, OBJECTIVES, PERSPECTIVES } from "../../utils/constants";
 import Speedometer from "../common/speedometer";
 import DashboardsSidebar from "./dashboardsSidebar";
 import HistoricalChart from "../common/histoticalChart";
@@ -11,7 +11,7 @@ import "./index.scss";
 import Overview from "./overview";
 import { makeRequest } from "../../utils/requestUtils";
 import { fetchPerspectivesURL } from "../../services/urls";
-import ChildObjects from "./childObjects";
+import ReportChildObjects from "./childObjects";
 import { getCurrentDashboardObject, getDashboardObjects } from "../../utils"; 
 
 
@@ -27,13 +27,14 @@ const DashboardTab = ({ loadedIn }) => {
     const [perspectives, setPerspectives] = useState([]);
     let objects = perspectives;
     let currentObject = {
-        score: 0,
+        percentage_score: 0,
         percentage_target: 0
     }
     const { role, mode, currentObjectID } = useParams();
     const modeToObjectsMapper = {
         perspectives: OBJECTIVES,
-        objectives: INITIATIVES
+        objectives: INITIATIVES,
+        undefined: PERSPECTIVES
       }
     
     const childrenTitle = modeToObjectsMapper[mode];
@@ -44,15 +45,13 @@ const DashboardTab = ({ loadedIn }) => {
 
     if (!mode && perspectives.length > 0) {
         for (const perspective of perspectives) {
-            currentObject.score += perspective.score * perspective.weight;
+            currentObject.percentage_score += perspective.percentage_score * perspective.weight;
             currentObject.percentage_target += perspective.percentage_target * perspective.weight;
         }
     }
 
-  
-
-    const actualPercentage = currentObject?.score/100;
-    const plannedPercentage = currentObject?.percentage_target/100
+    const actualPercentage = currentObject?.percentage_score/100;
+    const plannedPercentage = currentObject?.percentage_target/100;
 
     useEffect(() => {
         makeRequest(fetchPerspectivesURL(role), GET, null, true, false)
@@ -97,7 +96,7 @@ const DashboardTab = ({ loadedIn }) => {
                 {
                     loadedIn === DASHBOARDS && mode !== INITIATIVES &&
                     <Row>
-                        <ChildObjects objects={ objects } title={ childrenTitle } />
+                        <ReportChildObjects objects={ objects } title={ childrenTitle } />
                     </Row>
                 }
             </Col>

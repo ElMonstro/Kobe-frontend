@@ -54,7 +54,7 @@ export const fireNotification = (type, message) => {
     const notification = notificationTypeMapper[type];
     notification(message, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,

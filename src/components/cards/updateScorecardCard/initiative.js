@@ -4,8 +4,9 @@ import { useFormik } from 'formik';
 
 import { yupUpdateObjective } from "../../../utils/validators";
 import { makeRequest } from "../../../utils/requestUtils";
-import { PATCH } from "../../../utils/constants";
+import { ERROR, PATCH } from "../../../utils/constants";
 import { updateObjectiveURL as retrieveObjectiveURL } from "../../../services/urls";
+import { fireNotification } from "../../../utils";
 
 const Initiative = ({ id, name, budget, score, target, cost, weight, status }) => {
 
@@ -19,7 +20,10 @@ const Initiative = ({ id, name, budget, score, target, cost, weight, status }) =
         },
         validationSchema: yupUpdateObjective,
         onSubmit: async (values) => {
-            values.score = (values.score/ 100).toFixed(2);
+            if (!values.evidence) {
+                fireNotification(ERROR, "You must enter evidence url")
+                return
+            }
             const id = values.id;
             makeRequest(retrieveObjectiveURL(id), PATCH, values, true);
         },

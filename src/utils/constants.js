@@ -48,6 +48,10 @@ export const OBJECTIVES = 'objectives';
 export const LIST = "list";
 export const NESTED = "nested";
 export const NORMAL = "normal";
+export const ERROR = "error";
+export const INFO = "info";
+export const SUCCESS = "success";
+export const WARNING = "warning";
 
 export const PERSPECTIVE_OBJECT = {
     financial_name: FINANCIAL,
