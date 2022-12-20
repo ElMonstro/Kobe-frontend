@@ -350,7 +350,6 @@ export const getDashboardObjects = (currentObject, mode) => {
     }
 }
 
-
 export const filterEmployees = (employee, filters) => {
     for (const filter of filters) {
         let passesFilter = false;

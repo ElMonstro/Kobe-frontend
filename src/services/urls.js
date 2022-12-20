@@ -23,3 +23,6 @@ export const fetchNotificationsURL = `${baseURL}/auth/notifications/`;
 export const setSeenNotificationsURL = `${baseURL}/auth/notifications/set-seen/`;
 export const socketsMessagesURL = `${sockets_url}/messages/?token=${accessToken}`;
 export const fetchUnderAllUnderlingsUrl = `${baseURL}/auth/underlings/`;
+export const roleHistoryURL = (role, year) => `${baseURL}/scorecard/role/${role}/years/${year}/`;
+export const objectiveHistoryURL = (id) => `${baseURL}/scorecard/objectives/${id}/history/`;
+export const perspectiveHistoryURL = (id, year) => `${baseURL}/scorecard/perspectives/${id}/years/${year}/`;

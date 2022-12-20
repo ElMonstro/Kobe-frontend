@@ -10,21 +10,25 @@ import HistoricalChart from "../common/histoticalChart";
 import "./index.scss";
 import Overview from "./overview";
 import { makeRequest } from "../../utils/requestUtils";
-import { fetchPerspectivesURL } from "../../services/urls";
+import { fetchPerspectivesURL, objectiveHistoryURL, perspectiveHistoryURL, roleHistoryURL } from "../../services/urls";
 import ReportChildObjects from "./childObjects";
 import { getCurrentDashboardObject, getDashboardObjects } from "../../utils"; 
 
 
-const DashboardTab = ({ loadedIn }) => {
+const DashboardTab = ({ loadedIn, year }) => {
     if (!loadedIn) {
         loadedIn = DASHBOARDS;
     }
 
+    if (!year) {
+        const date = new Date();
+        year = date.getFullYear();
+    }
+
     const pathArray = [];
-
     const { setActiveCompMemberNav } = useOutletContext();
-
     const [perspectives, setPerspectives] = useState([]);
+    const [historicalData, setHistoricalData] = useState([]);
     let objects = perspectives;
     let currentObject = {
         percentage_score: 0,
@@ -36,8 +40,14 @@ const DashboardTab = ({ loadedIn }) => {
         objectives: INITIATIVES,
         undefined: PERSPECTIVES
       }
-    
+    const historyURLModeMapper = {
+        perspectives: perspectiveHistoryURL(currentObjectID, year),
+        objectives: objectiveHistoryURL(currentObjectID),
+        undefined: roleHistoryURL(role, year)
+    }
+    const historyURL = historyURLModeMapper[mode];
     const childrenTitle = modeToObjectsMapper[mode];
+
     if (mode && perspectives.length > 0) {
         currentObject = getCurrentDashboardObject(perspectives, mode, currentObjectID);
         objects = getDashboardObjects(currentObject, mode);
@@ -58,7 +68,17 @@ const DashboardTab = ({ loadedIn }) => {
             .then(perspectives => {
                 perspectives && setPerspectives(perspectives);
             });
+            
     }, [role]);
+
+    useEffect(() => {
+
+        makeRequest(historyURL, GET, null, true, false)
+            .then(data => {
+                data && setHistoricalData(data);
+            });
+            
+    }, [historyURL]);
 
     useEffect(() => {
         setActiveCompMemberNav(DASHBOARDS);
@@ -91,7 +111,7 @@ const DashboardTab = ({ loadedIn }) => {
                     </Row>
                 }
                 <Row className="historical_chart">
-                    <HistoricalChart title="Historical Chart" />
+                    <HistoricalChart chartData={ historicalData } title="Historical Chart" />
                 </Row>
                 {
                     loadedIn === DASHBOARDS && mode !== INITIATIVES &&

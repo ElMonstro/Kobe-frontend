@@ -15,9 +15,9 @@ import { Card } from "react-bootstrap";
 import "./index.scss";
 
 
-const HistoricalChart = ({ title }) => {
+const HistoricalChart = ({ title, chartData }) => {
 
-    useEffect(() => {
+  useEffect(() => {
         ChartJS.register(
             CategoryScale,
             LinearScale,
@@ -50,8 +50,8 @@ const HistoricalChart = ({ title }) => {
         labels,
         datasets: [
           {
-            label: "Quaterly score data",
-            data: [10, 30, 33, 35],
+            label: "Quaterly History Data",
+            data: chartData,
             borderColor: "#9f9f9f",
             backgroundColor: "#F2C94C",
           }
