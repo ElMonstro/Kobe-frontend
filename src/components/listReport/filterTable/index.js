@@ -21,10 +21,11 @@ const FilterTable = ({ employees }) => {
             <div className="table_header">
                 <Row>
                     <Col>
-                        <span className="title">Data</span>
+                        <span className="title">Filter</span>
                     </Col>
                     <Col>
                         <select name="year" id="year">
+                            <option>Division</option>
                             <option value="volvo">2021</option>
                             <option value="saab">2022</option>
                             <option value="mercedes">2023</option>
@@ -32,7 +33,8 @@ const FilterTable = ({ employees }) => {
                         </select>
                     </Col>
                     <Col>
-                        <select name="year" id="year">
+                        <select name="department" id="department">
+                            <option>Department</option>
                             <option value="volvo">2021</option>
                             <option value="saab">2022</option>
                             <option value="mercedes">2023</option>
@@ -40,7 +42,9 @@ const FilterTable = ({ employees }) => {
                         </select>
                     </Col>
                     <Col>
-                        <select name="year" id="year">
+                        <select name="section" id="section">
+                            <option>Section</option>
+
                             <option value="volvo">2021</option>
                             <option value="saab">2022</option>
                             <option value="mercedes">2023</option>
@@ -48,11 +52,11 @@ const FilterTable = ({ employees }) => {
                         </select>
                     </Col>
                     <Col>
-                        <select name="year" id="year">
-                            <option value="volvo">2021</option>
-                            <option value="saab">2022</option>
-                            <option value="mercedes">2023</option>
-                            <option value="audi">2024</option>
+                        <select name="perfomance" id="perfomance">
+                            <option>Perfomance</option>
+                            <option value="good">Good</option>
+                            <option value="satisfactory">Satisfactory</option>
+                            <option value="poor">Poor</option>
                         </select>
                     </Col>
 
@@ -62,7 +66,7 @@ const FilterTable = ({ employees }) => {
             </div>
             <Row className="body">
                 <Row className="titles">
-                    <Col lg="2">Name</Col>
+                    <Col lg="3">Name</Col>
                     <Col>Division</Col>
                     <Col>Department</Col>
                     <Col>Section</Col>
@@ -73,7 +77,7 @@ const FilterTable = ({ employees }) => {
                     {
                         filteredEmployees.map(employee => {
                             return <Row className="employee">
-                                <Col lg="2">{ employee.user.first_name } { employee.user.second_name }</Col>
+                                <Col lg="3">{ employee.user.first_name } { employee.user.second_name }</Col>
     
                                 <Col>{ employee.division?.name }</Col>
                                 <Col>{ employee.department?.name }</Col>

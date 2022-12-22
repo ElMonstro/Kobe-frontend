@@ -1,4 +1,5 @@
 import { Col, Row } from "react-bootstrap";
+import "./index.scss";
 
 const StatusCount = ({ employees }) => {
     const statusCounter = {
@@ -12,7 +13,6 @@ const StatusCount = ({ employees }) => {
             statusCounter[employee.status] += 1;
         }
     }
-    console.log(statusCounter)
 
     return <Row className="overall_count">
         {Object.keys(statusCounter).map(status => {

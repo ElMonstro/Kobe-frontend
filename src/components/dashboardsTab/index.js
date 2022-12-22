@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useOutletContext, useParams } from "react-router-dom";
 import 'chart.js/auto';
 
-import { DASHBOARDS, GET, INITIATIVES, OBJECTIVES, PERSPECTIVES } from "../../utils/constants";
-import Speedometer from "../common/speedometer";
+import { DASHBOARDS, GET } from "../../utils/constants";
 import DashboardsSidebar from "./dashboardsSidebar";
-import HistoricalChart from "../common/histoticalChart";
 import "./index.scss";
-import Overview from "./overview";
 import { makeRequest } from "../../utils/requestUtils";
 import { fetchPerspectivesURL, objectiveHistoryURL, perspectiveHistoryURL, roleHistoryURL } from "../../services/urls";
-import ReportChildObjects from "./childObjects";
 import { getCurrentDashboardObject, getDashboardObjects } from "../../utils"; 
+import DashboardCharts from "./dashboardCharts";
+import ReactToPrint from "react-to-print";
+import { Printer } from "styled-icons/bootstrap";
 
 
 const DashboardTab = ({ loadedIn, year }) => {
@@ -26,6 +25,7 @@ const DashboardTab = ({ loadedIn, year }) => {
     }
 
     const pathArray = [];
+    let componentRef = useRef();
     const { setActiveCompMemberNav } = useOutletContext();
     const [perspectives, setPerspectives] = useState([]);
     const [historicalData, setHistoricalData] = useState([]);
@@ -35,18 +35,13 @@ const DashboardTab = ({ loadedIn, year }) => {
         percentage_target: 0
     }
     const { role, mode, currentObjectID } = useParams();
-    const modeToObjectsMapper = {
-        perspectives: OBJECTIVES,
-        objectives: INITIATIVES,
-        undefined: PERSPECTIVES
-      }
+    
     const historyURLModeMapper = {
         perspectives: perspectiveHistoryURL(currentObjectID, year),
         objectives: objectiveHistoryURL(currentObjectID),
         undefined: roleHistoryURL(role, year)
     }
     const historyURL = historyURLModeMapper[mode];
-    const childrenTitle = modeToObjectsMapper[mode];
 
     if (mode && perspectives.length > 0) {
         currentObject = getCurrentDashboardObject(perspectives, mode, currentObjectID);
@@ -59,9 +54,6 @@ const DashboardTab = ({ loadedIn, year }) => {
             currentObject.percentage_target += perspective.percentage_target * perspective.weight;
         }
     }
-
-    const actualPercentage = currentObject?.percentage_score/100;
-    const plannedPercentage = currentObject?.percentage_target/100;
 
     useEffect(() => {
         makeRequest(fetchPerspectivesURL(role), GET, null, true, false)
@@ -86,6 +78,16 @@ const DashboardTab = ({ loadedIn, year }) => {
 
     return (
         <Row className="dashboards_tab">
+            <div className="dashboard_btns">
+                <ReactToPrint
+                        trigger={() => <div className="print">
+                                            <span className="text"> print </span>
+                                            <Printer />
+                                        </div>
+                            }
+                        content={() => componentRef}
+                />
+            </div>
             
             {
                 loadedIn === DASHBOARDS &&
@@ -94,31 +96,15 @@ const DashboardTab = ({ loadedIn, year }) => {
                 </Col>
             }
             <Col className="charts">
-                {
-                    perspectives.length > 0 && <Row className="speedometers">
-                    <Col className="actual">
-                        <Speedometer title="Actual" percent={ actualPercentage } description="actual perfomance" />
-                    </Col>
-                    <Col className="planned">
-                        <Speedometer title="Planned" percent={ plannedPercentage } description="planned perfomance" />
-                    </Col>
-                </Row>
-                }
-                {
-                    loadedIn === DASHBOARDS && mode !== INITIATIVES &&
-                    <Row className="overview">
-                        <Overview objects={ objects } title={ childrenTitle }/>
-                    </Row>
-                }
-                <Row className="historical_chart">
-                    <HistoricalChart chartData={ historicalData } title="Historical Chart" />
-                </Row>
-                {
-                    loadedIn === DASHBOARDS && mode !== INITIATIVES &&
-                    <Row>
-                        <ReportChildObjects objects={ objects } title={ childrenTitle } />
-                    </Row>
-                }
+                <DashboardCharts 
+                    objects={ objects }
+                    mode={ mode }
+                    loadedIn={ loadedIn }
+                    perspectives={ perspectives }
+                    currentObject={ currentObject }
+                    historicalData={ historicalData }
+                    ref={(el) => (componentRef = el)}
+                />
             </Col>
         </Row>
     )

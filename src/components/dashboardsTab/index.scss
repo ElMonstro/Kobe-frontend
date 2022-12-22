@@ -1,7 +1,9 @@
 .dashboards_tab {
-    padding-top: 30px!important;
+    padding-top: 10px!important;
 
-    
+    .dashboard_btns {
+        margin-bottom: 10px;
+    }
 }
 
 .charts {
@@ -26,6 +28,18 @@
     .perspective_no {
         padding: 10px 0 10px 0;
     }
+}
+
+.charts_title {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 28px;
+    text-transform: uppercase;
+    color: #4F4F4F;
+    height: 47px;
+    background: #FFFFFF;
+    margin-bottom: 10px;
+    padding: 10px 10px 10px 16px;
 }
 
 .children {

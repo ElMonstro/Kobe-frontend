@@ -1,20 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useReactToPrint } from 'react-to-print';
+import React, { useRef } from "react";
+import ReactToPrint from "react-to-print";
+import { Printer } from "styled-icons/bootstrap";
 
 import "./index.scss";
 import ListsReportCont from "./listReportCont";
 
 const ListsReport = () => {
 
-    const componentRef = useRef();
-    const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-    });
+    let componentRef = useRef();
 
     return (
         <div className="list_report">
-            <button onClick={handlePrint}>Print this out!</button>
-            <ListsReportCont  innerRef={ componentRef } />
+            <div className="reports_btns">
+                <ReactToPrint
+                        trigger={() => <div className="print">
+                                            <span className="text"> print </span>
+                                            <Printer />
+                                        </div>
+                            }
+                        content={() => componentRef}
+                />
+            </div>
+            <ListsReportCont  ref={(el) => (componentRef = el)} />
         </div>
     )
 

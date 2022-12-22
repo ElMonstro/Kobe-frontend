@@ -10,8 +10,7 @@ const notificationTypeMapper = {
     info: toast.info,
     warning: toast.warn,
     error: toast.error
-}
-
+};
 
 export const  parseJwt = token => {
     try {
@@ -40,15 +39,13 @@ export const getHeaderDetails = (formData) => {
     }
 
     return config;
-}
-
+};
 
 export const isLoggedInFromLocalStorage = () => {
     const localStorage = window.localStorage;
     const tokens = localStorage.getItem('tokens');
     return Boolean(tokens);
 }
-
 
 export const fireNotification = (type, message) => {
     const notification = notificationTypeMapper[type];
@@ -63,7 +60,6 @@ export const fireNotification = (type, message) => {
         });
   };
   
-
   String.format = function() {
     let s = arguments[0];
     for (let i = 0; i < arguments.length - 1; i++) {       
@@ -71,8 +67,7 @@ export const fireNotification = (type, message) => {
         s = s.replace(reg, arguments[i + 1]);
     }
     return s;
-}
-
+};
 
 export function encryptData( publicKey, string){
     const pubKey = forge.pki.publicKeyFromPem(publicKey);
@@ -83,14 +78,13 @@ export function encryptData( publicKey, string){
     const base64 = forge.util.encode64(encrypted);
     return base64;
 
-}
+};
 
 export function checkSessionStatus (response) {
     if (response.status === 401) {      
         store.dispatch(changeLoginStatus(false));
     }
-}
-
+};
 
 export const createErrorObjects = (data) => {
     let errorObjects = []
@@ -105,8 +99,7 @@ export const createErrorObjects = (data) => {
 
     return errorObjects
 
-}
-
+};
 
 export const generateString = length => {
     let result = ' ';
@@ -116,14 +109,12 @@ export const generateString = length => {
     }
 
     return result.trim();
-}
-
+};
 
 export const logout = () => {
     localStorage.clear()
     store.dispatch(changeLoginStatus(false));
-}
-
+};
 
 export const getPeriods = months => {
     const mapper = {
@@ -132,7 +123,7 @@ export const getPeriods = months => {
     }
 
     return mapper[months]
-}
+};
 
 export const createObjectPayload = (data, initiatives, measures, periods) => {
     const initiativesPayload = [];
@@ -211,14 +202,14 @@ export const isObjectEmpty = obj => {
     return obj 
         && Object.keys(obj).length === 0 
         && Object.getPrototypeOf(obj) === Object.prototype;
-}
+};
 
 const getTarget = values => {
     let target;
     values.data_type === UNITS? target = values.units_target: target = values.percentage_target
     
     return parseInt(target)
-}
+};
 
 export const arePeriodicalInputsValid = (values, periods, setFieldError) => {
     let total = 0;
@@ -238,7 +229,7 @@ export const arePeriodicalInputsValid = (values, periods, setFieldError) => {
     }
 
     return true;
-}
+};
 
 export const isWeightsFieldValid = (values, remainingObjectiveWeight, setFieldError) => {
 
@@ -248,7 +239,7 @@ export const isWeightsFieldValid = (values, remainingObjectiveWeight, setFieldEr
     }
 
     return true;
-} 
+} ;
 
 export const countUnreadNotifications = (notifications) => {
     let count = 0;
@@ -259,11 +250,11 @@ export const countUnreadNotifications = (notifications) => {
     }
 
     return count;
-}
+};
 
 const handleNotifications = data => {
     store.dispatch(setNotifications(data));
-}
+};
 
 export const webSocketMessageHandler = event => {
     const data = JSON.parse(event.data);
@@ -273,7 +264,7 @@ export const webSocketMessageHandler = event => {
     };
     console.log(data.message.message_type)
     action_mapper[data.message.message_type](data.message.data);
-}
+};
 
 export const connectWebSocket = () => {
     const webSocket = new WebSocket(socketsMessagesURL);
@@ -282,7 +273,7 @@ export const connectWebSocket = () => {
     webSocket.onclose = connectWebSocket;
     
     return webSocket;
-}
+};
 
 export const getAgeString = createdAt => {
     const startStrings = createdAt.split(" ");
@@ -320,7 +311,7 @@ export const getAgeString = createdAt => {
     }
 
     return ageString;
-}
+};
 
 export const getCurrentDashboardObject = (perspectives, mode, currentObjectID ) => {
     let objects = [];
@@ -338,7 +329,7 @@ export const getCurrentDashboardObject = (perspectives, mode, currentObjectID ) 
    
    return objects.find(object => object.id === parseInt(currentObjectID));
     
-}
+};
 
 export const getDashboardObjects = (currentObject, mode) => {
     if (mode === PERSPECTIVES) {
@@ -348,7 +339,7 @@ export const getDashboardObjects = (currentObject, mode) => {
     } else {
         return null;
     }
-}
+};
 
 export const filterEmployees = (employee, filters) => {
     for (const filter of filters) {
@@ -363,4 +354,14 @@ export const filterEmployees = (employee, filters) => {
     }
 
     return true;
-}
+};
+
+export const getDivisionFromEmployees = (employees, typeKey) => { //get departments, division, or section objects 
+    const divisionsMap = {};
+
+    for (const employee of employees) {
+        divisionsMap[employee[typeKey].id] = employee[typeKey].name;
+    }
+
+    return divisionsMap;
+};
