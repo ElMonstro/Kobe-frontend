@@ -342,12 +342,15 @@ export const getDashboardObjects = (currentObject, mode) => {
 };
 
 export const filterEmployees = (employee, filters) => {
-    for (const filter of filters) {
+    console.log(filters)
+    for (const key of Object.keys(filters)) {
+        const filter = filters[key];
         let passesFilter = false;
         if (filter.type === NESTED) {
-            passesFilter = employee[filter.key].id === filter.value;
+            passesFilter = employee[key]?.id === filter.value;
         } else {
-            passesFilter = employee[filter.key] === filter.value;
+            passesFilter = employee[key] === filter.value;
+            console.log(passesFilter)
         }
 
         if (!passesFilter) return false;
@@ -356,11 +359,11 @@ export const filterEmployees = (employee, filters) => {
     return true;
 };
 
-export const getDivisionFromEmployees = (employees, typeKey) => { //get departments, division, or section objects 
+export const getDivisionsFromEmployees = (employees, typeKey) => { //get departments, division, or section objects 
     const divisionsMap = {};
 
     for (const employee of employees) {
-        divisionsMap[employee[typeKey].id] = employee[typeKey].name;
+        divisionsMap[employee[typeKey]?.id] = employee[typeKey].name;
     }
 
     return divisionsMap;

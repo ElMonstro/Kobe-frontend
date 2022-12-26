@@ -111,7 +111,8 @@ function App({ isLoggedIn, webSocket }) {
             </Route>
             <Route path={ REPORTS } element={ <ReportsTab /> } >
               <Route index element={ <ReportSelection /> } />
-              <Route path={ LIST } element={ <ListsReport /> } />
+              <Route path={ `:year/:period/${LIST}` } element={ <ListsReport /> } />
+              <Route path={ `:year/:period/${DASHBOARDS}` } element={ <DashboardTab loadedIn={ REPORTS } /> } />
             </Route>
             <Route path={ OVER_VIEW } element={ <OverviewTab /> } />
             <Route element={ <Protected> <StrategyMapCont /> </Protected>} path={ STRATEGY_MAP }>

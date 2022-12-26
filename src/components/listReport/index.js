@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { useParams } from "react-router-dom";
 import ReactToPrint from "react-to-print";
 import { Printer } from "styled-icons/bootstrap";
 
@@ -21,7 +22,7 @@ const ListsReport = () => {
                         content={() => componentRef}
                 />
             </div>
-            <ListsReportCont  ref={(el) => (componentRef = el)} />
+            <ListsReportCont { ...useParams() }  ref={(el) => (componentRef = el)} />
         </div>
     )
 

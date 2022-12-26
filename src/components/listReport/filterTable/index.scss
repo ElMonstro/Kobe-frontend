@@ -35,12 +35,22 @@
 
         .employees {
 
+            .status {
+                width: 14px;
+                height: 14px;
+                border-radius: 50%;
+                float: left;
+                margin-top: 10px;
+                margin-right: 10px;
+            }
+
             &>:nth-child(odd) {
                 background: #F2F2F2;
             } 
 
             .employee {
                 padding: 10px 0;
+                text-transform: capitalize;
             }
         }
     }
