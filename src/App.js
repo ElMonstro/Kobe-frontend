@@ -11,7 +11,7 @@ import {
   REVEIEW_PERIOD, SEND_EMAILS,
   SCORECARD, CREATE, CASCADED, 
   VIEW, UPDATE, STRATEGY_MAP, 
-  LINKS, OBJECTIVE, SCORE, DASHBOARDS, OVER_VIEW, OVERALL, REPORTS, LIST 
+  LINKS, OBJECTIVE, SCORE, DASHBOARDS, OVER_VIEW, OVERALL, REPORTS, LIST, DASHBOARD 
 } 
 from "./utils/constants";
 
@@ -112,7 +112,7 @@ function App({ isLoggedIn, webSocket }) {
             <Route path={ REPORTS } element={ <ReportsTab /> } >
               <Route index element={ <ReportSelection /> } />
               <Route path={ `:year/:period/${LIST}` } element={ <ListsReport /> } />
-              <Route path={ `:year/:period/${DASHBOARDS}` } element={ <DashboardTab loadedIn={ REPORTS } /> } />
+              <Route path={ `:year/:period/${DASHBOARD}` } element={ <DashboardTab loadedIn={ REPORTS } /> } />
             </Route>
             <Route path={ OVER_VIEW } element={ <OverviewTab /> } />
             <Route element={ <Protected> <StrategyMapCont /> </Protected>} path={ STRATEGY_MAP }>

@@ -342,7 +342,6 @@ export const getDashboardObjects = (currentObject, mode) => {
 };
 
 export const filterEmployees = (employee, filters) => {
-    console.log(filters)
     for (const key of Object.keys(filters)) {
         const filter = filters[key];
         let passesFilter = false;
@@ -350,7 +349,6 @@ export const filterEmployees = (employee, filters) => {
             passesFilter = employee[key]?.id === filter.value;
         } else {
             passesFilter = employee[key] === filter.value;
-            console.log(passesFilter)
         }
 
         if (!passesFilter) return false;

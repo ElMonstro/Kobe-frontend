@@ -19,6 +19,7 @@ export const OVER_VIEW= "overview";
 export const SCORECARD = "scorecard";
 export const STRATEGY_MAP = "strategy-map";
 export const DASHBOARDS = "dashboards";
+export const DASHBOARD = "dashboard";
 export const REPORTS = "reports";
 export const CREATE = "create";
 export const CASCADED = "cascaded";
@@ -52,6 +53,8 @@ export const ERROR = "error";
 export const INFO = "info";
 export const SUCCESS = "success";
 export const WARNING = "warning";
+export const APPRAISAL = "appraisal";
+
 
 export const PERSPECTIVE_OBJECT = {
     financial_name: FINANCIAL,

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { DASHBOARDS, INITIATIVES, OBJECTIVES, PERSPECTIVES} from "../../utils/constants";
+import { INITIATIVES, OBJECTIVES, OVER_VIEW, PERSPECTIVES} from "../../utils/constants";
 import "./index.scss";
 import { Col, Row } from "react-bootstrap";
 import Speedometer from "../common/speedometer";
@@ -41,7 +41,7 @@ class DashboardCharts extends React.Component {
                         </Row>
                     }
                     {
-                        loadedIn === DASHBOARDS && mode !== INITIATIVES &&
+                        loadedIn !== OVER_VIEW && mode !== INITIATIVES &&
                         <Row className="overview">
                             <Overview objects={ objects } title={ childrenTitle }/>
                         </Row>
@@ -50,7 +50,7 @@ class DashboardCharts extends React.Component {
                         <HistoricalChart chartData={ historicalData } title="Historical Chart" />
                     </Row>
                     {
-                        loadedIn === DASHBOARDS && mode !== INITIATIVES &&
+                        loadedIn !== OVER_VIEW && mode !== INITIATIVES &&
                         <Row>
                             <ReportChildObjects objects={ objects } title={ childrenTitle } />
                         </Row>

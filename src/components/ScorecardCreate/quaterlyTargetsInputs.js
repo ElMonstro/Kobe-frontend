@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { Form, Row, Col } from "react-bootstrap"
 
-const QuaterlyTargetInputs = ({ formik, periods, periodTargets }) => {
+const QuaterlyTargetInputs = ({ formik, periods }) => {
 
     const periodHalfLength = periods.length / 2;
 

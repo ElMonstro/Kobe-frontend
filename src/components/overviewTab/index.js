@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
 import { useOutletContext } from 'react-router-dom';
 import { OVER_VIEW } from '../../utils/constants';
 import DashboardTab from '../dashboardsTab';

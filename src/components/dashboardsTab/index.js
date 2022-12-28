@@ -3,30 +3,27 @@ import { Col, Row } from "react-bootstrap";
 import { useOutletContext, useParams } from "react-router-dom";
 import 'chart.js/auto';
 
-import { DASHBOARDS, GET } from "../../utils/constants";
+import { DASHBOARDS, GET, OVER_VIEW, REPORTS } from "../../utils/constants";
 import DashboardsSidebar from "./dashboardsSidebar";
 import "./index.scss";
 import { makeRequest } from "../../utils/requestUtils";
-import { fetchPerspectivesURL, objectiveHistoryURL, perspectiveHistoryURL, roleHistoryURL } from "../../services/urls";
+import { fetchPerspectivesURL, fetchReportPerspectives, objectiveHistoryURL, 
+        perspectiveHistoryURL, roleHistoryURL } from "../../services/urls";
 import { getCurrentDashboardObject, getDashboardObjects } from "../../utils"; 
 import DashboardCharts from "./dashboardCharts";
 import ReactToPrint from "react-to-print";
 import { Printer } from "styled-icons/bootstrap";
 
 
-const DashboardTab = ({ loadedIn, year }) => {
+const DashboardTab = ({ loadedIn }) => {
     if (!loadedIn) {
         loadedIn = DASHBOARDS;
     }
 
-    if (!year) {
-        const date = new Date();
-        year = date.getFullYear();
-    }
-
+    let { year } = useParams();
+    let perspectivesURL;
     const pathArray = [];
     let componentRef = useRef();
-    const { setActiveCompMemberNav } = useOutletContext();
     const [perspectives, setPerspectives] = useState([]);
     const [historicalData, setHistoricalData] = useState([]);
     let objects = perspectives;
@@ -34,8 +31,18 @@ const DashboardTab = ({ loadedIn, year }) => {
         percentage_score: 0,
         percentage_target: 0
     }
-    const { role, mode, currentObjectID } = useParams();
-    
+    const { role, mode, currentObjectID, period } = useParams();
+    const outletContext = useOutletContext();
+
+    if (loadedIn === REPORTS ) { // set year and perspectives url depending on dashoard container
+        perspectivesURL = fetchReportPerspectives(role, year, period);
+    } else {
+        const date = new Date();
+        year = date.getFullYear();
+        perspectivesURL = fetchPerspectivesURL(role);
+
+    }
+
     const historyURLModeMapper = {
         perspectives: perspectiveHistoryURL(currentObjectID, year),
         objectives: objectiveHistoryURL(currentObjectID),
@@ -56,7 +63,7 @@ const DashboardTab = ({ loadedIn, year }) => {
     }
 
     useEffect(() => {
-        makeRequest(fetchPerspectivesURL(role), GET, null, true, false)
+        makeRequest(perspectivesURL, GET, null, true, false)
             .then(perspectives => {
                 perspectives && setPerspectives(perspectives);
             });
@@ -73,22 +80,24 @@ const DashboardTab = ({ loadedIn, year }) => {
     }, [historyURL]);
 
     useEffect(() => {
-        setActiveCompMemberNav(DASHBOARDS);
+        loadedIn === DASHBOARDS && outletContext.setActiveCompMemberNav(DASHBOARDS);
     }, []);
 
     return (
         <Row className="dashboards_tab">
-            <div className="dashboard_btns">
-                <ReactToPrint
-                        trigger={() => <div className="print">
-                                            <span className="text"> print </span>
-                                            <Printer />
-                                        </div>
-                            }
-                        content={() => componentRef}
-                />
-            </div>
             
+                { loadedIn !== OVER_VIEW &&
+                    <div className="dashboard_btns">
+                        <ReactToPrint
+                            trigger={() => <div className="print">
+                                                <span className="text"> print </span>
+                                                <Printer />
+                                            </div>
+                                }
+                            content={() => componentRef}
+                        />
+                    </div>
+                }
             {
                 loadedIn === DASHBOARDS &&
                 <Col lg="3" className="dashboards_sidebar_cont">

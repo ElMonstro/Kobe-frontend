@@ -46,15 +46,15 @@
             color: #000000;
             
 
-            &#appraisal{
+            &#appraisal {
                 padding-top: 2px;
             }
 
-            &#lists{
+            &#list {
                 padding-top: 18px;
             }
 
-            &#dashboard{
+            &#dashboard {
                 padding-top: 13px;
             }
 
@@ -62,7 +62,7 @@
                 margin-left: 10px;
             }
 
-            &.selected {
+            &.chosen {
                 border: 0.5px solid #035476;
             }
         }

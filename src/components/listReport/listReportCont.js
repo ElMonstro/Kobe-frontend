@@ -17,7 +17,6 @@ class ListsReportCont extends React.Component {
         makeRequest(fetchUnderAllUnderlingsUrl(role, year, period), GET, null, true, false)
             .then(employees => {
                 employees && this.setState({employees, });
-                console.log(employees)
             });
     }
    

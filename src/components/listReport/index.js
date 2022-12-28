@@ -25,8 +25,6 @@ const ListsReport = () => {
             <ListsReportCont { ...useParams() }  ref={(el) => (componentRef = el)} />
         </div>
     )
-
-    
 }
 
 export default ListsReport;

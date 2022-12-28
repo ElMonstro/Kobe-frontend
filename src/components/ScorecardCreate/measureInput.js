@@ -11,7 +11,7 @@ import TargetInputs from "./targetsInputs";
 const MeasureInput = ({ formik, measureId, weightId, initiative }) => {
 
     const dataType = formik.getFieldProps('data_type').value;
-    const { measures, period_targets } = initiative;
+    const { measures } = initiative;
     const { mode } = useParams();
     const nameFieldProps = formik.getFieldProps(measureId)
 
@@ -58,7 +58,7 @@ const MeasureInput = ({ formik, measureId, weightId, initiative }) => {
             
             <TargetInputs formik={ formik }  targetDisabled={ dataType!==PERCENTAGE } initiative={ initiative }/>
             <BaselineTargetInputs targetDisabled={ dataType!==UNITS} formik={ formik } initiative={ initiative }/>
-            <QuaterlyTargetInputs formik={ formik } periodTargets={ period_targets }/>
+            <QuaterlyTargetInputs formik={ formik } />
         </>
                 
         );
