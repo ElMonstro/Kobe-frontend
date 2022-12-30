@@ -55,7 +55,6 @@ export const SUCCESS = "success";
 export const WARNING = "warning";
 export const APPRAISAL = "appraisal";
 
-
 export const PERSPECTIVE_OBJECT = {
     financial_name: FINANCIAL,
     customer_name: CUSTOMER,

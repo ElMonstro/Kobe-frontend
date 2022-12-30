@@ -32,10 +32,7 @@ const StrategyMapView = props => {
                                     perspective={ perspective }
                                 />
                     })
-                }
-
-            
-
+                } 
             </Xwrapper>
         </div>
     )
