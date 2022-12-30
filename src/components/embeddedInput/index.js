@@ -11,9 +11,8 @@ import "./index.scss";
 import { connect } from "react-redux";
 
 
-const EmbededInput = props => {
+const EmbededInput = ({ defaultValue, initialValueKey, setSettings }) => {
     const [isEditable, setEditable] = useState(false);
-    const { defaultValue, initialValueKey, setSettings } = props;
     let initialValues = {};
     initialValues[initialValueKey] = defaultValue;
 
