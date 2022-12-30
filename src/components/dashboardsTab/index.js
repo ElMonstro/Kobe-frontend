@@ -15,7 +15,7 @@ import ReactToPrint from "react-to-print";
 import { Printer } from "styled-icons/bootstrap";
 
 
-const DashboardTab = ({ loadedIn }) => {
+const DashboardTab = ({ loadedIn, personalData }) => {
     if (!loadedIn) {
         loadedIn = DASHBOARDS;
     }
@@ -86,20 +86,19 @@ const DashboardTab = ({ loadedIn }) => {
     return (
         <Row className="dashboards_tab">
             
-                { loadedIn !== OVER_VIEW &&
-                    <div className="dashboard_btns">
-                        <ReactToPrint
-                            trigger={() => <div className="print">
-                                                <span className="text"> print </span>
-                                                <Printer />
-                                            </div>
-                                }
-                            content={() => componentRef}
-                        />
-                    </div>
-                }
+            <div className="dashboard_btns">
+                <ReactToPrint
+                    trigger={() => <div className="print">
+                                        <span className="text"> print </span>
+                                        <Printer />
+                                    </div>
+                        }
+                    content={() => componentRef}
+                />
+            </div>
+                
             {
-                loadedIn === DASHBOARDS &&
+                loadedIn !== OVER_VIEW &&
                 <Col lg="3" className="dashboards_sidebar_cont">
                     <DashboardsSidebar perspectives={ perspectives } />
                 </Col>
@@ -113,6 +112,8 @@ const DashboardTab = ({ loadedIn }) => {
                     currentObject={ currentObject }
                     historicalData={ historicalData }
                     ref={(el) => (componentRef = el)}
+                    personalData={ personalData }
+                    historyChart
                 />
             </Col>
         </Row>

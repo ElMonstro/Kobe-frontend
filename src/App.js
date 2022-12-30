@@ -11,7 +11,7 @@ import {
   REVEIEW_PERIOD, SEND_EMAILS,
   SCORECARD, CREATE, CASCADED, 
   VIEW, UPDATE, STRATEGY_MAP, 
-  LINKS, OBJECTIVE, SCORE, DASHBOARDS, OVER_VIEW, OVERALL, REPORTS, LIST, DASHBOARD 
+  LINKS, OBJECTIVE, SCORE, DASHBOARDS, OVER_VIEW, OVERALL, REPORTS, LIST, DASHBOARD, APPRAISAL 
 } 
 from "./utils/constants";
 
@@ -42,6 +42,7 @@ import OverviewTab from "./components/overviewTab";
 import ReportsTab from "./components/reportsTab";
 import ReportSelection from "./components/reportsTab/reportSelection";
 import ListsReport from "./components/listReport";
+import AppraisalReport from "./components/appraisal";
 
 function App({ isLoggedIn, webSocket }) {
 
@@ -112,7 +113,11 @@ function App({ isLoggedIn, webSocket }) {
             <Route path={ REPORTS } element={ <ReportsTab /> } >
               <Route index element={ <ReportSelection /> } />
               <Route path={ `:year/:period/${LIST}` } element={ <ListsReport /> } />
-              <Route path={ `:year/:period/${DASHBOARD}` } element={ <DashboardTab loadedIn={ REPORTS } /> } />
+              <Route path={ `:year/:period/${DASHBOARD}` } element={ <DashboardTab loadedIn={ REPORTS } personalData/> } >
+                <Route path={ OVERALL } element={ <DashboardTab /> } />
+                <Route index path={ `:mode/:currentObjectID` } element={ <DashboardTab /> } />
+              </Route>
+              <Route path={ `:year/:period/${APPRAISAL}` } element={ <AppraisalReport /> } />
             </Route>
             <Route path={ OVER_VIEW } element={ <OverviewTab /> } />
             <Route element={ <Protected> <StrategyMapCont /> </Protected>} path={ STRATEGY_MAP }>

@@ -7,12 +7,13 @@ import Speedometer from "../common/speedometer";
 import Overview from "./overview";
 import HistoricalChart from "../common/histoticalChart";
 import ReportChildObjects from "./childObjects";
+import PersonalData from "./personalData";
 
 class DashboardCharts extends React.Component {
-   
+
     render() {
 
-        const { perspectives, loadedIn, currentObject, objects, historicalData, mode } = this.props;
+        const { loadedIn, currentObject, objects, historicalData, mode, personalData, historyChart } = this.props;
         const modeToObjectsMapper = {
             perspectives: OBJECTIVES,
             objectives: INITIATIVES,
@@ -26,11 +27,13 @@ class DashboardCharts extends React.Component {
         mode? title = currentObject.name: title = "Overall Perfomance";
 
         return <div>
+                { personalData &&
+                    <PersonalData />
+                }
                 <div className="charts_title">
-                    {mode && mode.substring(0,mode.length-1) + " -"} { title }
+                    {mode && mode.substring(0, mode.length-1) + " -"} { title }
                 </div>
                     {
-                        perspectives.length > 0 && 
                         <Row className="speedometers">
                             <Col className="actual">
                                 <Speedometer title="Actual" percent={ actualPercentage } description="actual perfomance" />
@@ -46,11 +49,14 @@ class DashboardCharts extends React.Component {
                             <Overview objects={ objects } title={ childrenTitle }/>
                         </Row>
                     }
-                    <Row className="historical_chart">
-                        <HistoricalChart chartData={ historicalData } title="Historical Chart" />
-                    </Row>
+                    { 
+                        historyChart &&
+                        <Row className="historical_chart">
+                            <HistoricalChart chartData={ historicalData } title="Historical Chart" />
+                        </Row>
+                    }
                     {
-                        loadedIn !== OVER_VIEW && mode !== INITIATIVES &&
+                        objects?.length > 0 && loadedIn !== OVER_VIEW && mode !== INITIATIVES &&
                         <Row>
                             <ReportChildObjects objects={ objects } title={ childrenTitle } />
                         </Row>
