@@ -11,7 +11,7 @@ import {
   REVEIEW_PERIOD, SEND_EMAILS,
   SCORECARD, CREATE, CASCADED, 
   VIEW, UPDATE, STRATEGY_MAP, 
-  LINKS, OBJECTIVE, SCORE 
+  LINKS, OBJECTIVE, SCORE, DASHBOARDS, OVER_VIEW, OVERALL, REPORTS, LIST, DASHBOARD, APPRAISAL 
 } 
 from "./utils/constants";
 
@@ -37,7 +37,12 @@ import ObjectiveApprovalView from "./components/approvalCont/objectiveAmendAppro
 import ApprovalLinksCont from "./components/approvalCont/linksCont";
 import NotificationsModal from "./components/notificationsModal"
 import ScoreUpdateAprroveCont from "./components/approvalCont/scoreUpdateCont";
-
+import DashboardTab from "./components/dashboardsTab";
+import OverviewTab from "./components/overviewTab";
+import ReportsTab from "./components/reportsTab";
+import ReportSelection from "./components/reportsTab/reportSelection";
+import ListsReport from "./components/listReport";
+import AppraisalReport from "./components/appraisal";
 
 function App({ isLoggedIn, webSocket }) {
 
@@ -57,12 +62,34 @@ function App({ isLoggedIn, webSocket }) {
       <NotificationsModal />
         <Routes>
           <Route index element={<Protected> <StaffDashboard /> </Protected>} />
-          <Route exact path="/admin" element={<Protected> <AdminDashboard activeComponent={ORG_STRUCTURE} /> </Protected>} /> 
-          <Route path="/admin/perspectives" element={<Protected> <AdminDashboard activeComponent={PERSPECTIVES} /> </Protected>} />    
-          <Route path="/admin/cascade"  element={<Protected> <AdminDashboard activeComponent={CASCADE} /> </Protected>} />
-          <Route path="/admin/review-period" element={<Protected> <AdminDashboard activeComponent={REVEIEW_PERIOD} /> </Protected>} />
-          <Route path="/admin/send-emails" element={<Protected> <AdminDashboard activeComponent={SEND_EMAILS} /> </Protected>} />
-          <Route path="/admin/login" element={<AdminDashboard activeComponent={ORG_STRUCTURE} isLoggedOut={!isLoggedIn}/>} />
+          <Route exact path="/admin" element={
+            <Protected> 
+              <AdminDashboard activeComponent={ORG_STRUCTURE} /> 
+            </Protected>} 
+          /> 
+          <Route path="/admin/perspectives" element={
+            <Protected> 
+              <AdminDashboard activeComponent={PERSPECTIVES} /> 
+            </Protected>} 
+          />    
+          <Route path="/admin/cascade"  element={
+            <Protected> 
+              <AdminDashboard activeComponent={CASCADE} /> 
+            </Protected>} 
+            />
+          <Route path="/admin/review-period" element={
+            <Protected> 
+              <AdminDashboard activeComponent={REVEIEW_PERIOD} />
+            </Protected>} 
+          />
+          <Route path="/admin/send-emails" element={
+            <Protected> 
+              <AdminDashboard activeComponent={SEND_EMAILS} /> 
+            </Protected>} 
+          />
+          <Route path="/admin/login" element={
+            <AdminDashboard activeComponent={ORG_STRUCTURE} isLoggedOut={!isLoggedIn}/>} 
+          />
           <Route path=":approvalToken/approve" element={<ApprovalModal />} >
           <Route index element={ <ObjectiveApprovalView /> } />
             <Route path={ OBJECTIVE } element={ <ObjectiveApprovalView /> } />
@@ -79,6 +106,20 @@ function App({ isLoggedIn, webSocket }) {
               <Route path={ VIEW } element={ <ViewScorecard />} />
               <Route path={ UPDATE } element={ <UpdateScorecardCard />} />
             </Route>
+            <Route path={ DASHBOARDS } element={ <DashboardTab /> }>
+              <Route path={ OVERALL } element={ <DashboardTab /> } />
+              <Route index path={ `:mode/:currentObjectID` } element={ <DashboardTab /> } />
+            </Route>
+            <Route path={ REPORTS } element={ <ReportsTab /> } >
+              <Route index element={ <ReportSelection /> } />
+              <Route path={ `:year/:period/${LIST}` } element={ <ListsReport /> } />
+              <Route path={ `:year/:period/${DASHBOARD}` } element={ <DashboardTab loadedIn={ REPORTS } personalData/> } >
+                <Route path={ OVERALL } element={ <DashboardTab /> } />
+                <Route index path={ `:mode/:currentObjectID` } element={ <DashboardTab /> } />
+              </Route>
+              <Route path={ `:year/:period/${APPRAISAL}` } element={ <AppraisalReport /> } />
+            </Route>
+            <Route path={ OVER_VIEW } element={ <OverviewTab /> } />
             <Route element={ <Protected> <StrategyMapCont /> </Protected>} path={ STRATEGY_MAP }>
               <Route index element={ <StrategyMapView /> } />
               <Route element={ <StrategyMapCreate/> } path={ CREATE } />

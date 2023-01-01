@@ -22,3 +22,9 @@ export const fetchApprovalObject = approvalToken =>  `${baseURL}/scorecard/appro
 export const fetchNotificationsURL = `${baseURL}/auth/notifications/`;
 export const setSeenNotificationsURL = `${baseURL}/auth/notifications/set-seen/`;
 export const socketsMessagesURL = `${sockets_url}/messages/?token=${accessToken}`;
+export const fetchUnderAllUnderlingsUrl = (role, year, period) => `${baseURL}/auth/underlings-scores/role/${role}/years/${year}/periods/${period}/`;
+export const roleHistoryURL = (role, year) => `${baseURL}/scorecard/role/${role}/years/${year}/`;
+export const objectiveHistoryURL = (id) => `${baseURL}/scorecard/objectives/${id}/history/`;
+export const perspectiveHistoryURL = (id, year) => `${baseURL}/scorecard/perspectives/${id}/years/${year}/`;
+export const fetchYearsURL = `${baseURL}/scorecard/years/`;
+export const fetchReportPerspectives = (role, year, period) => `${baseURL}/scorecard/history/${role}/years/${year}/periods/${period}/`;

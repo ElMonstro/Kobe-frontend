@@ -66,7 +66,7 @@ export const makeRequest =  async (url, method, data, authenticated=true, notify
         notify && notificationHandler(response, sucessMessage, errorMessage);
         return response.data;
     } catch (error) {
-        notificationHandler(error.response);
+        notify && notificationHandler(error.response);
         if (error.response.status === 401) {
             logout();
         }

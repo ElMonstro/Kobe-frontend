@@ -8,7 +8,7 @@ const Notification = ({ title, body, link, is_seen, needs_attention, created_at 
     let notificationClassName;
     is_seen? notificationClassName = "notification": notificationClassName = "notification unread";
     const ageString = getAgeString(created_at);
-    console.log(created_at)
+
     return (
       <div className={ notificationClassName }>
         <div className="blue_circle_cont">

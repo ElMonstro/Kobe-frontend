@@ -27,7 +27,13 @@ from "../../../redux/actions";
 import bell from "../../../assets/bell.svg";
 
 
-const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser, setOrgChart, setPeriods, isLoggedIn, setNotifications, setShowNotifications, notifications }) => {
+const Header = ({ 
+    companyInfo, setSettings, 
+    setCompanyInfo, setUser,
+    setOrgChart, setPeriods, 
+    isLoggedIn, setNotifications, 
+    setShowNotifications, notifications
+    }) => {
 
     const { name: companyName, logo } = companyInfo;
     const user = JSON.parse(localStorage.getItem('user'));
@@ -37,7 +43,7 @@ const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser, setOrgChart
 
     useEffect(() => {
 
-        if (!companyName) {
+        if (!companyName ) {
             makeRequest(settingsURL, GET, null, true, false)
                 .then( data => {
                     data && setSettings(data);
@@ -53,7 +59,7 @@ const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser, setOrgChart
             makeRequest(fetchOrgChartURL, GET, null, true, false)
                 .then( data => setOrgChart(data));
             
-            makeRequest(fetchNotificationsURL, GET, null, true, false)
+            !user?.is_admin &&makeRequest(fetchNotificationsURL, GET, null, true, false)
                 .then(data => {
                     data && setNotifications(data);
                 })
@@ -80,15 +86,17 @@ const Header = ({ companyInfo, setSettings, setCompanyInfo, setUser, setOrgChart
                 </Navbar.Brand>  
                 <Nav className="avatar_menu">
                     <Row>
-                        <Col lg="3" className="notifications" onClick={ handleNotificationsClick }>
-                            <img className="notification_bell" 
-                                src={ bell } 
-                                alt="notifications"
-                            />
-                            {
-                                notificationsNumber > 0 && <span className="notification_number">{ notificationsNumber }</span>
-                            }
-                        </Col> 
+                        {
+                            !user?.is_admin && <Col lg="3" className="notifications" onClick={ handleNotificationsClick }>
+                                <img className="notification_bell" 
+                                    src={ bell } 
+                                    alt="notifications"
+                                />
+                                {
+                                    notificationsNumber > 0 && <span className="notification_number">{ notificationsNumber }</span>
+                                }
+                            </Col> 
+                        }
                     <Col lg="4" className="avatar_container">   
                         {
                         user?.is_admin? 

@@ -10,9 +10,7 @@ import "./index.scss";
 const handleClick = (node) => {
   };
 
-const OrgChartCard = props => {
-    const { orgChart, spinnerState } = props;
-
+const OrgChartCard = ({ orgChart, spinnerState }) => {
 
     return (
       <div className="org_chart_cont">

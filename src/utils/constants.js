@@ -19,6 +19,7 @@ export const OVER_VIEW= "overview";
 export const SCORECARD = "scorecard";
 export const STRATEGY_MAP = "strategy-map";
 export const DASHBOARDS = "dashboards";
+export const DASHBOARD = "dashboard";
 export const REPORTS = "reports";
 export const CREATE = "create";
 export const CASCADED = "cascaded";
@@ -42,6 +43,17 @@ export const APPROVED = "approved";
 export const PENDING = "pending";
 export const REJECTED = "rejected";
 export const NEW_NOTIFICATIONS = "new_notifications";
+export const OVERALL = "overall";
+export const INITIATIVES = 'initiatives';
+export const OBJECTIVES = 'objectives';
+export const LIST = "list";
+export const NESTED = "nested";
+export const NORMAL = "normal";
+export const ERROR = "error";
+export const INFO = "info";
+export const SUCCESS = "success";
+export const WARNING = "warning";
+export const APPRAISAL = "appraisal";
 
 export const PERSPECTIVE_OBJECT = {
     financial_name: FINANCIAL,

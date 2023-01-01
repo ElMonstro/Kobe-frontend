@@ -16,7 +16,7 @@ const StrategyMapObjectiveView = ({ id, name, status, links })=> {
     truncatedName += "...";
 
     return (
-        <>
+        <div> 
             <div className="strategy_map_objective">
                 <OverlayTrigger
                     placement="bottom"
@@ -24,10 +24,10 @@ const StrategyMapObjectiveView = ({ id, name, status, links })=> {
                         <Tooltip id="objective_name">
                             { name }
                         </Tooltip>
-          }>
+                    }>
                     <svg height="140" width="243">
                         <g>
-                            <ellipse id={ id } cx="120" cy="70" rx="120" ry="50" fill={ color } />
+                            <ellipse id={ `objective_${id}` } cx="120" cy="70" rx="120" ry="50" fill={ color } />
                             <text textLength="180px" 
                                 lengthAdjust="spacingAndGlyphs" 
                                 className="truncate" 
@@ -45,10 +45,10 @@ const StrategyMapObjectiveView = ({ id, name, status, links })=> {
             </div>
             {
                 links?.map(link => {
-                                return <Xarrow key={ link.id } start={ id?.toString() } end={ link.id?.toString() } color="black" />
+                                return <Xarrow key={ link.id } start={ `objective_${id}`  } end={ `objective_${link?.id}`  } color="black" />
                             })
             }
-        </>
+        </div>
         
     );
 };

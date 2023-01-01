@@ -34,7 +34,6 @@ const ApprovalModal = () => {
         makeRequest(fetchApprovalObject(approvalToken), GET, null, true, false)
             .then(approval_Object => {
                 approval_Object && setApprovalObject(approval_Object);
-                console.log(approval_Object)
             });
     }, []);
 
