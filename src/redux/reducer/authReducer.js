@@ -2,6 +2,7 @@ import {
     SET_CURRENT_ROLE,
     SET_NOTIFICATIONS,
     SET_SHOW_NOTIFICATIONS,
+    SET_SHOW_PROFILE,
     SET_USER,
     SET_WEB_SOCKET,
     SHOW_CONF_MODAL,
@@ -15,6 +16,7 @@ const initialState = {
     currentRole: {},
     showNotifications: false,
     notifications: [],
+    showProfile: false,
     webSocket: null
 };
 
@@ -47,6 +49,10 @@ const authReducer = ( state=initialState, action ) => {
         case SET_WEB_SOCKET:
             const { webSocket } = action;
             return { ...state, webSocket };
+
+        case SET_SHOW_PROFILE:
+            const { showProfile } = action;
+            return { ...state, showProfile };
             
         default:
             return state;

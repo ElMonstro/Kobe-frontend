@@ -7,16 +7,23 @@ import { makeRequest } from "../../../utils/requestUtils";
 import "./index.scss";
 
 
-const UploadButton = props => {
+const UploadButton = ({ 
+    disabled, contentText, 
+    className, uploadURL, 
+    fileKey, extraData, 
+    setSpinnerStatus, method, 
+    ClickElement, handleRequestResult }) => {
 
-    const { disabled, contentText, className, uploadURL, fileKey, extraData, setSpinnerStatus } = props;
     const [inputFile, setInputFile] = useState(null);
     const [fileName, setFileName] = useState(null);
     const [fileNameClass, setFileNameClass] = useState('blue_text');
     const randomString = generateString(5);
     const inputElementID = `${fileKey}-${randomString}`;
-    
 
+    if (!method) {
+        method = POST;
+    }
+    
     useEffect(() => {
         setInputFile(document.getElementById(inputElementID));
     }, []);
@@ -28,12 +35,14 @@ const UploadButton = props => {
     const uploadFile = async () => {
         setFileName(inputFile?.files[0]?.name);
         const formData = new FormData();
-        for ( var key in extraData ) {
+        for ( const key in extraData ) {
             formData.append(key, extraData[key]);
         }
         formData.append(fileKey, inputFile?.files[0]);
+        console.log(inputFile.files);
         setSpinnerStatus && setSpinnerStatus(true);
-        const data = await makeRequest(uploadURL, POST, formData, true, true, true);
+        const data = await makeRequest(uploadURL, method, formData, true, true, true);
+        data && handleRequestResult && handleRequestResult(data);
         setSpinnerStatus && setSpinnerStatus(false);
         data? setFileNameClass('green_text'): setFileNameClass('red_text');
     }
@@ -41,10 +50,14 @@ const UploadButton = props => {
     return (
         <div className="upload_btn">
             <input id={inputElementID} onChange={uploadFile} className="d-none" type="file" />
-            <Button disabled={disabled} onClick={handleUpload} className={className}>
-                {contentText}
-            </Button>
-            {fileName && <span className={ fileNameClass }>
+            {   
+                
+                <Button disabled={disabled} onClick={handleUpload} className={className}>
+                    {
+                        ClickElement? <ClickElement />: contentText
+                    }
+                </Button>}
+            {fileName && <span id="file_name_text" className={ fileNameClass }>
                {fileName} 
             </span>}
         </div>

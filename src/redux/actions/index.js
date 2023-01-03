@@ -6,7 +6,9 @@ import {
     SET_CURRENT_ROLE,
     SET_SHOW_NOTIFICATIONS,
     SET_NOTIFICATIONS,
-    SET_WEB_SOCKET
+    SET_WEB_SOCKET,
+    SET_SHOW_PROFILE,
+    SET_PROFILE_PIC,
     } from "./actionTypes";
 
 export const changeLoginStatus = isLoggedIn => ({
@@ -74,4 +76,14 @@ export const setNotifications = notifications => ({
 export const setWebSocket = webSocket => ({
     type: SET_WEB_SOCKET,
     webSocket,
+});
+
+export const setShowProfile = showProfile => ({
+    type: SET_SHOW_PROFILE,
+    showProfile,
+});
+
+export const setProfilePic = role => ({
+    type: SET_PROFILE_PIC,
+    role,
 });
