@@ -34,7 +34,7 @@ const Header = ({
     setOrgChart, setPeriods, 
     isLoggedIn, setNotifications, 
     setShowNotifications, notifications,
-    userRole, setShowProfile
+    userRole, setShowProfile, fetchSettings
     }) => {
 
     const { name: companyName, logo } = companyInfo;
@@ -47,6 +47,7 @@ const Header = ({
     useEffect(() => {
 
         if (!companyName ) {
+            fetchSettings()
             makeRequest(settingsURL, GET, null, true, false)
                 .then( data => {
                     data && setSettings(data);
@@ -83,7 +84,7 @@ const Header = ({
                         alt="logo"
                     />
                     <span className="company_name">
-                        { companyName? companyName: "Eurochem Limited"}
+                        { companyName? companyName: "Kobe Limited"}
                     </span>
                     
                 </Navbar.Brand>  

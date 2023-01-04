@@ -1,9 +1,10 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
-import AdminService from '../../services/adminService';
-import { setCompanyInfo, setSettings } from '../actions';
-import { FETCH_COMPANY_INFO, FETCH_SETTINGS } from '../actions/actionTypes';
+import AdminService from '../../../services/adminService';
+import { setCompanyInfo, setSettings } from '../../actions';
+import { FETCH_COMPANY_INFO, FETCH_SETTINGS } from '../../actions/actionTypes';
 
 export function* fetchSettingsWatcher() {
+    console.log('called')
     yield takeLatest (FETCH_SETTINGS, fetchSettingsSaga);
 }
 
