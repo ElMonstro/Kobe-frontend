@@ -70,7 +70,7 @@ const Header = ({
         }         
         
         setUser(user);
-        user && setShowProfile(!(user.is_password_updated));
+        user && setShowProfile(!(user.is_password_updated) && !user.is_admin);
 
     }, [isLoggedIn]);
     

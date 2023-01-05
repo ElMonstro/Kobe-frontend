@@ -8,7 +8,7 @@ const ObjectivesHeader = () => {
 
     return (
         <Row className="header">
-                <Col>
+                <Col className="name">
                     Name
                 </Col>
                 <Col className="second_half">
