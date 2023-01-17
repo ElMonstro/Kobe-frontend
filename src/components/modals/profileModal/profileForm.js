@@ -22,8 +22,14 @@ const ProfileForm = ({ userRole }) => {
         },
         validationSchema: yupPasswordObj,
         onSubmit: async (values) => {
-            console.log(values)
-            makeRequest(updatePasswordURL, POST, values, true);
+            makeRequest(updatePasswordURL, POST, values, true)
+                .then(data => {
+                    if (data) {
+                        const user = JSON.parse(localStorage.getItem('user'));
+                        user.is_password_updated = true;
+                        window.localStorage.setItem('user', JSON.stringify(user));
+                    }
+                });
         },
     });
 

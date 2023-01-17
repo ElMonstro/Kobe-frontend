@@ -28,6 +28,11 @@ const LoginModal = props => {
 
                 if (response) {
                     const user = parseJwt(response?.data.access);
+                    delete user.iat;
+                    delete user.jti;
+                    delete user.token_type;
+                    delete user.exp;
+                    
                     changeLoginStatus(true);
                     let url;
                     user.is_admin? url = '/admin': url = `/${user.role}/${SCORECARD}`

@@ -12,6 +12,8 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
     const perspectiveFieldProps = formik.getFieldProps('perspective');
     const { mode } = useParams();
     const [displayWeight, setDisplayWeight] = useState(false);
+    const perspectives_object = PERSPECTIVE_OBJECT;
+    !settings.behaviorals_enabled && delete perspectives_object.behavioral_name
 
     if (mode === CREATE) {
         nameFieldProps.value = name;
@@ -22,6 +24,7 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
         role && setDisplayWeight(!Boolean(role?.reporting_to) && !Boolean(name));
     }, [role, name]);
 
+    
     return (
         <Card className="staff_card">
             <div className="card_title title">Objective</div>
@@ -55,7 +58,7 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
                             >
                                 <option>Perspectives</option>
                                 {
-                                    Object.keys(PERSPECTIVE_OBJECT).map(perspective => {
+                                    Object.keys(perspectives_object).map(perspective => {
                                         return <option key={ perspective } value={PERSPECTIVE_OBJECT[perspective]} className="">{ settings[perspective] }</option>
                                     })
                                 }

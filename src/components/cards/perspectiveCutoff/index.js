@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button, Card } from "react-bootstrap";
 import { useFormik } from 'formik';
 
@@ -9,7 +9,8 @@ import { POST } from "../../../utils/constants";
 import "./index.scss";
 
 
-const PerspectiveCutoffForm = props => {
+const PerspectiveCutoffForm = ({ settings }) => {
+    const [tierOptions, setTierOptions] = useState([]);
 
     const formik = useFormik({
         initialValues: {
@@ -19,9 +20,15 @@ const PerspectiveCutoffForm = props => {
         onSubmit: async (values) => {
            makeRequest(settingsURL, POST, values, true);
         },
-
-        
     });
+
+    useEffect(()=> {
+        const options = [];
+        for (let i=1; i<=settings.tiers; i++) {
+            options.push(<option key={ i } value={ i }>Tier { i }</option>);
+        }
+        setTierOptions(options);
+    }, [settings])
 
     return (
         <Card className="admin_card admin_select_form">
@@ -33,9 +40,10 @@ const PerspectiveCutoffForm = props => {
                     { ...formik.getFieldProps('perspective_cutoff') } 
                     isInvalid={ formik.touched.perspective_cutoff && formik.errors.perspective_cutoff }
                     >
-                        <option value="1">Tier One</option>
-                        <option value="2">Tier Two</option>
-                        <option value="3">Tier Three</option>
+                        <option>Tiers</option>
+                        {
+                            tierOptions.map(option => option)
+                        }
                     </Form.Select>
                     <Form.Control.Feedback type='invalid'>
                             { formik.errors.perspective_cutoff }

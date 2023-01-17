@@ -115,7 +115,7 @@ const Header = ({
                         }
 
                         <span  className="user_name">
-                            { user?.first_name?user?.first_name: "Menu"}
+                            { user?.first_name? user?.first_name: "Menu"}
                         </span>
                     </Col>
                     <Col lg="2">
@@ -123,9 +123,11 @@ const Header = ({
                             id="nav_dropdown"
                             title = {(<ChevronDown/ >)}>
                         
-                            <NavDropdown.Item eventkey={1.1} onClick={ () => setShowProfile(true) } className="nav_item">
-                                Profile
-                            </NavDropdown.Item >
+                            { !user?.is_admin &&
+                                <NavDropdown.Item eventkey={1.1} onClick={ () => setShowProfile(true) } className="nav_item">
+                                    Profile
+                                </NavDropdown.Item >
+                            }
                             <NavDropdown.Item eventkey={1.2} onClick={ () => logout() } className="nav_item">
                                 Logout
                             </NavDropdown.Item >
