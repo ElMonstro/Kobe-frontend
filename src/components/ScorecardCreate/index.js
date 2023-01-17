@@ -26,7 +26,6 @@ const ScorecardCreate = ({ periods, actingRole }) => {
     const navigate = useNavigate();
     const reinitializeForm = mode === EDIT;
     const { setActiveComponent } = useOutletContext();
-    
     useEffect(() => {
         setActiveComponent(CREATE);
         initiativeId && makeRequest(updateObjectiveURL(initiativeId), GET, null, true, false)
@@ -142,7 +141,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
             return;
         }
         
-        if (mode === CREATE) {
+        if (mode === undefined) {
             if (!isWeightsFieldValid(values, 100-topObjectivesTotalWeight, setFieldError)){
                 return;
             }

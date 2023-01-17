@@ -44,6 +44,17 @@ export const yupThresholdObj = Yup.object({
     });
 
 
+export const yupPasswordObj = Yup.object({
+    password: Yup.string()
+        .required('* Required')
+        .typeError('you must specify a number'),
+
+    new_password: Yup.string()
+        .required('* Required')
+        .typeError('you must specify a number')
+    });
+
+
 export const yupRejectionForm = Yup.object({
     message: Yup.string()
             .required('* Required')

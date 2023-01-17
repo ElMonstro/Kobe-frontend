@@ -29,7 +29,7 @@ export const notificationHandler = (response, successMessage, errorMessage) => {
             fireNotification(NOTIF_ERROR, errorMessage?errorMessage:response.data.detail)
             break;      
         case 401:
-            fireNotification(NOTIF_ERROR, AUTHENTICATION_ERROR_MESSAGE);
+            fireNotification(NOTIF_ERROR, errorMessage?errorMessage:response.data.detail);
             break;
         case 403:
             fireNotification('error', 'Error', errorMessage?errorMessage:response.data.detail);
@@ -61,11 +61,13 @@ export const makeRequest =  async (url, method, data, authenticated=true, notify
             response = await request(url, headerDetails);
         } else {
             response = await request(url, data, headerDetails);
+
         }
-        
+
         notify && notificationHandler(response, sucessMessage, errorMessage);
         return response.data;
     } catch (error) {
+        console.log(error)
         notify && notificationHandler(error.response);
         if (error.response.status === 401) {
             logout();

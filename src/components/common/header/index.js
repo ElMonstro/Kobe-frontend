@@ -4,7 +4,7 @@ import {ChevronDown} from '@styled-icons/bootstrap/ChevronDown'
 import { connect } from "react-redux";
 
 import './index.scss';
-import src from "../../../assets/josh_logo.jpg";
+import defaultAvatar from "../../../assets/defaultAvatar.png";
 import defaultLogo from "../../../assets/logo.svg"
 import { base_cloudinary_url } from "../../../services/baseURL";
 import { countUnreadNotifications, getPeriods, logout } from "../../../utils";
@@ -21,7 +21,8 @@ import {
     setOrgChart,
     setPeriods,
     setNotifications,
-    setShowNotifications
+    setShowNotifications,
+    setShowProfile
 } 
 from "../../../redux/actions";
 import bell from "../../../assets/bell.svg";
@@ -32,18 +33,21 @@ const Header = ({
     setCompanyInfo, setUser,
     setOrgChart, setPeriods, 
     isLoggedIn, setNotifications, 
-    setShowNotifications, notifications
+    setShowNotifications, notifications,
+    userRole, setShowProfile, fetchSettings
     }) => {
 
     const { name: companyName, logo } = companyInfo;
     const user = JSON.parse(localStorage.getItem('user'));
     const notificationsNumber = countUnreadNotifications(notifications);
+    const profile_pic_url = userRole?.profile_pic? base_cloudinary_url + userRole.profile_pic: defaultAvatar;
 
     const handleNotificationsClick = () => setShowNotifications(true);
 
     useEffect(() => {
 
         if (!companyName ) {
+            fetchSettings()
             makeRequest(settingsURL, GET, null, true, false)
                 .then( data => {
                     data && setSettings(data);
@@ -59,14 +63,14 @@ const Header = ({
             makeRequest(fetchOrgChartURL, GET, null, true, false)
                 .then( data => setOrgChart(data));
             
-            !user?.is_admin &&makeRequest(fetchNotificationsURL, GET, null, true, false)
+            !user?.is_admin && makeRequest(fetchNotificationsURL, GET, null, true, false)
                 .then(data => {
                     data && setNotifications(data);
-                })
+                });
         }         
         
-
         setUser(user);
+        user && setShowProfile(!(user.is_password_updated) && !user.is_admin);
 
     }, [isLoggedIn]);
     
@@ -80,7 +84,7 @@ const Header = ({
                         alt="logo"
                     />
                     <span className="company_name">
-                        { companyName? companyName: "Eurochem Limited"}
+                        { companyName? companyName: "Kobe Limited"}
                     </span>
                     
                 </Navbar.Brand>  
@@ -105,13 +109,13 @@ const Header = ({
                         </div> :
 
                         <img className="avatar" 
-                            src={ src } 
+                            src={ profile_pic_url } 
                             alt="user pic"
                         />
                         }
 
                         <span  className="user_name">
-                            { user?.first_name?user?.first_name: "Menu"}
+                            { user?.first_name? user?.first_name: "Menu"}
                         </span>
                     </Col>
                     <Col lg="2">
@@ -119,9 +123,11 @@ const Header = ({
                             id="nav_dropdown"
                             title = {(<ChevronDown/ >)}>
                         
-                            <NavDropdown.Item eventkey={1.1} className="nav_item">
-                                Profile
-                            </NavDropdown.Item >
+                            { !user?.is_admin &&
+                                <NavDropdown.Item eventkey={1.1} onClick={ () => setShowProfile(true) } className="nav_item">
+                                    Profile
+                                </NavDropdown.Item >
+                            }
                             <NavDropdown.Item eventkey={1.2} onClick={ () => logout() } className="nav_item">
                                 Logout
                             </NavDropdown.Item >
@@ -144,13 +150,15 @@ const mapDispatchToProps = {
     setOrgChart,
     setPeriods,
     setNotifications,
-    setShowNotifications
+    setShowNotifications,
+    setShowProfile
 }
 
-const mapStateToProps = ({ adminReducer: { companyInfo }, authReducer: { isLoggedIn, notifications }, }) => ({
+const mapStateToProps = ({ adminReducer: { companyInfo, orgChart }, authReducer: { isLoggedIn, notifications }, }) => ({
     companyInfo,
     isLoggedIn,
-    notifications
+    notifications, 
+    userRole: orgChart[0]
 });
 
 export default connect(

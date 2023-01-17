@@ -70,7 +70,7 @@ const TreeRecursive = ({ data, parentNode }) => {
         staff_no={item.staff_no} 
         node={item}
       >
-        <TreeRecursive parentNode={item} data={item.underlings} />
+        <TreeRecursive key={item.id} parentNode={item} data={item.underlings} />
       </Node>
     );
   });

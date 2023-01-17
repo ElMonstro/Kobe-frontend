@@ -1,17 +1,9 @@
 import { createStore, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
+// import thunk from 'redux-thunk';
+import createSagaMiddleware from '@redux-saga/core';
 import rootReducer from './../reducer';
-import rootSaga from './../middleware';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { take } from 'redux-saga/effects'
-
-
-function* logActions() {
-    while (true) {
-      const action = yield take() // correct
-      console.log(action)
-    }
-  }
+import rootSaga from '../middleware/sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 const middleware = composeWithDevTools(applyMiddleware(sagaMiddleware));
@@ -22,5 +14,4 @@ const store = createStore(
 );
 
 sagaMiddleware.run(rootSaga);
-
 export default store;

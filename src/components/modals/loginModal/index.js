@@ -12,7 +12,6 @@ import "./index.scss";
 import { parseJwt } from "../../../utils";
 import { SCORECARD } from "../../../utils/constants";
 
-
 const LoginModal = props => {
 
     const { isLoggedIn, changeLoginStatus } = props;
@@ -26,14 +25,23 @@ const LoginModal = props => {
             validationSchema: yupLoginObj,
             onSubmit: async (values) => {
                 const response = await AuthService.loginUser(values);
-                const user = parseJwt(response.data.access);
-                changeLoginStatus(true);
-                let url;
-                user.is_admin? url = '/admin': url = `/${user.role}/${SCORECARD}`
-                navigate(url);
-                // store access tokens in local storage
-                window.localStorage.setItem('tokens', JSON.stringify(response.data));
-                window.localStorage.setItem('user', JSON.stringify(user));
+
+                if (response) {
+                    const user = parseJwt(response?.data.access);
+                    delete user.iat;
+                    delete user.jti;
+                    delete user.token_type;
+                    delete user.exp;
+                    
+                    changeLoginStatus(true);
+                    let url;
+                    user.is_admin? url = '/admin': url = `/${user.role}/${SCORECARD}`
+                    navigate(url);
+                    // store access tokens in local storage
+                    window.localStorage.setItem('tokens', JSON.stringify(response.data));
+                    window.localStorage.setItem('user', JSON.stringify(user));
+                }
+                
             },
         });
 

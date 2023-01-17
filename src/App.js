@@ -43,6 +43,7 @@ import ReportsTab from "./components/reportsTab";
 import ReportSelection from "./components/reportsTab/reportSelection";
 import ListsReport from "./components/listReport";
 import AppraisalReport from "./components/appraisal";
+import ProfileModal from "./components/modals/profileModal";
 
 function App({ isLoggedIn, webSocket }) {
 
@@ -58,7 +59,8 @@ function App({ isLoggedIn, webSocket }) {
   return (
     <BrowserRouter>
     <ToastContainer limit={4}/>
-      {!isLoggedIn && <LoginModal isLoggedOut={!isLoggedIn}/>}
+      <LoginModal isLoggedOut={!isLoggedIn}/>
+      <ProfileModal />
       <NotificationsModal />
         <Routes>
           <Route index element={<Protected> <StaffDashboard /> </Protected>} />

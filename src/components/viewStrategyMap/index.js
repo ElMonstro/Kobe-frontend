@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
-import Xarrow, { Xwrapper } from "react-xarrows";
+import { Xwrapper } from "react-xarrows";
 import { fetchStrategyMapObjectivesURL } from "../../services/urls";
 import { GET, PERSPECTIVES_ORDER_ARRAY, VIEW } from "../../utils/constants";
 import { makeRequest } from "../../utils/requestUtils";

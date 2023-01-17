@@ -8,7 +8,7 @@
         
         .perspective {
             margin-left: 0;
-            padding: 5px 35px;
+            padding: 5px 0px;
         }
 
         .name {
@@ -25,6 +25,10 @@
         } 
         
     }
+
+    .weight {
+        font-size: 15px;
+    }
 }
 
 .header {
@@ -32,9 +36,12 @@
     background: #fff;
     height: 45px;
     padding: 10px 35px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     margin-right: 0;
 
+    .name {
+        margin-left: 15px!important;
+    }
     .measure {
         text-align: center;
     }
