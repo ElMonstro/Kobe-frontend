@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/static/css/main.76112ba0.css",
+    "main.js": "/static/js/main.cb0ed85a.js",
+    "static/js/787.3d08f1e3.chunk.js": "/static/js/787.3d08f1e3.chunk.js",
+    "static/media/josh_logo.jpg": "/static/media/josh_logo.f963d1e7a690b8e202f9.jpg",
+    "static/media/defaultAvatar.png": "/static/media/defaultAvatar.6c53c0a1c12e6d7eaa36.png",
+    "static/media/example_org_file.xlsx": "/static/media/example_org_file.f677c9f18da223cfe6ec.xlsx",
+    "static/media/initiative.svg": "/static/media/initiative.57c8ec91fc04e089f34b201fbf3d8478.svg",
+    "static/media/objective.svg": "/static/media/objective.27bce99fc502665e16724a70cd920857.svg",
+    "static/media/dashboards.svg": "/static/media/dashboards.bd87c7155d0972aac2a9caeb9404ce4f.svg",
+    "static/media/logo.svg": "/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "static/media/lists.svg": "/static/media/lists.c0715a198798cb62448b0e9ae27b7c2c.svg",
+    "static/media/appraisal.svg": "/static/media/appraisal.950e1c4d275b6b0234ac96685929cc12.svg",
+    "static/media/perspective.svg": "/static/media/perspective.af7915d6c811f43738699a1cb5b15084.svg",
+    "static/media/ringingBell.svg": "/static/media/ringingBell.19e5f1be7f4882366ca76273941a0f76.svg",
+    "static/media/bell.svg": "/static/media/bell.d48a73147b720c90cc92a2dd6ec433aa.svg",
+    "index.html": "/index.html",
+    "static/media/overallPerfomance.svg": "/static/media/overallPerfomance.2d14294cd52f3c7814fc3f20de3c25da.svg",
+    "static/media/plus_sign.svg": "/static/media/plus_sign.c2cafb11697f49eafea96b80e71cc3c2.svg",
+    "static/media/uploadImageIcon.svg": "/static/media/uploadImageIcon.5112cfc5dd6fdc05a13a4136a2a2e370.svg",
+    "main.76112ba0.css.map": "/static/css/main.76112ba0.css.map",
+    "main.cb0ed85a.js.map": "/static/js/main.cb0ed85a.js.map",
+    "787.3d08f1e3.chunk.js.map": "/static/js/787.3d08f1e3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.76112ba0.css",
+    "static/js/main.cb0ed85a.js"
+  ]
+}
