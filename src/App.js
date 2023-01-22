@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes, HashRouter} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
 
@@ -57,7 +57,7 @@ function App({ isLoggedIn, webSocket }) {
 
   
   return (
-    <BrowserRouter>
+    <HashRouter>
     <ToastContainer limit={4}/>
       <LoginModal isLoggedOut={!isLoggedIn}/>
       <ProfileModal />
@@ -130,7 +130,7 @@ function App({ isLoggedIn, webSocket }) {
           </Route>
           <Route path="/login" element={ <StaffDashboard /> } />
         </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
