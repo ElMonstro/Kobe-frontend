@@ -22,7 +22,9 @@ const SecurityConfirmationModal = props => {
             },
             validationSchema: yupLoginObj,
             onSubmit: async (values) => {
+                console.log(values)
                 const response = await AuthService.loginUser(values);
+                console.log(response)
                 notificationHandler(response, "Confirmation Successful", "Wrong password");
                 response?.status === 200 && await action();
                 response?.status === 200 && setShowConfirmationModal(false);             
