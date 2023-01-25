@@ -20,7 +20,7 @@ const SecurityConfirmationModal = props => {
             email: email,
             password: '',
             },
-            validationSchema: yupLoginObj,
+            // validationSchema: yupLoginObj,
             onSubmit: async (values) => {
                 console.log(values)
                 const response = await AuthService.loginUser(values);
