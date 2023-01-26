@@ -24,7 +24,7 @@ const SendInvitationsCard = ({ settings, setShowConfirmationModal } ) => {
                     You are sending emails to 
                     <span className="members"> { settings?.users } members </span>
                 </div>
-                <Button className="card_btn" onClick={() => {console.log('calle'); setShowConfirmationModal(true)}} >
+                <Button className="card_btn" onClick={() => setShowConfirmationModal(true)} >
                     Send Invitations
                 </Button>
             </div>
