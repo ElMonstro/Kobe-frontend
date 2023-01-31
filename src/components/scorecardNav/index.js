@@ -7,7 +7,7 @@ import { CASCADED, CREATE, UPDATE, VIEW } from "../../utils/constants";
 import './index.scss';
 
 
-const ScorecardNavCard = ({ activeComponent, orgChart }) => {
+const ScorecardNavCard = ({ activeComponent, orgChart, settings }) => {
 
     const setSelectedClass = activeComponent => {
 
@@ -34,15 +34,19 @@ const ScorecardNavCard = ({ activeComponent, orgChart }) => {
         setSelectedClass(activeComponent);
       }, [activeComponent]);
 
+      let createClassName = "";
+      (orgChart?.reporting_to && !settings?.behaviorals_enabled)? createClassName = " hidden": createClassName = "";
+      console.log(createClassName)
+
     return (
         <div className="scorecard_nav">
 
             <Row className="nav">
-                <Col className={ noneViewClassNames }>
+                { <Col className={ noneViewClassNames + createClassName }>
                     <Link id={ CREATE } className="selected_mode" to={ CREATE }>
                         Create
                     </Link>
-                </Col>
+                </Col>}
                 <Col className={ noneViewClassNames }>
                     <Link id={ CASCADED } to={ CASCADED }>
                         Cascaded
@@ -66,9 +70,10 @@ const ScorecardNavCard = ({ activeComponent, orgChart }) => {
 const mapDispatchToProps = {
 }
 
-const mapStateToProps = ({ authReducer: { user }, adminReducer: { orgChart } }) => ({
+const mapStateToProps = ({ authReducer: { user }, adminReducer: { orgChart, settings } }) => ({
     user,
-    orgChart: orgChart[0]
+    orgChart: orgChart[0],
+    settings
 });
 
 export default connect(

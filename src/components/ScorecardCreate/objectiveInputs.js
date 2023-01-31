@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Card, Row, Col } from "react-bootstrap"
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import { CREATE, PERSPECTIVE_OBJECT } from "../../utils/constants";
+import { CREATE, PERSPECTIVE_OBJECT, BEHAVIORAL } from "../../utils/constants";
 
 
 const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, role }) => {
@@ -12,8 +12,14 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
     const perspectiveFieldProps = formik.getFieldProps('perspective');
     const { mode } = useParams();
     const [displayWeight, setDisplayWeight] = useState(false);
-    const perspectives_object = PERSPECTIVE_OBJECT;
+    let perspectives_object = PERSPECTIVE_OBJECT;
     !settings.behaviorals_enabled && delete perspectives_object.behavioral_name
+
+    if (role?.reporting_to && settings?.behaviorals_enabled) {
+        perspectives_object = {
+            behavioral_name: BEHAVIORAL
+        }
+    }
 
     if (mode === CREATE) {
         nameFieldProps.value = name;

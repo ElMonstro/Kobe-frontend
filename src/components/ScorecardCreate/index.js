@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Card } from "react-bootstrap"
-import { CASCADED, CREATE, EDIT, GET, PATCH, PERCENTAGE, POST, SCORECARD } from "../../utils/constants";
+import { CASCADED, CREATE, EDIT, ERROR, GET, PATCH, POST, SCORECARD } from "../../utils/constants";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from "react-redux";
@@ -11,14 +11,19 @@ import ObjectiveInputs from "./objectiveInputs";
 import MeasuresInputs from "./measuresInputs";
 import ThresholdsInputs from "./thresholdsInputs";
 import InitiativeInputs from "./initiativesInputs";
-import { arePeriodicalInputsValid, createObjectPayload, isWeightsFieldValid } from "../../utils";
+import { arePeriodicalInputsValid, createObjectivePayload, isWeightsFieldValid } from "../../utils";
 import { makeRequest } from "../../utils/requestUtils";
 import { createObjectiveURL, updateObjectiveURL, amendObjectiveURL } from "../../services/urls";
 import { yupObjectiveValidationObj as validationSchema } from "../../utils/validators";
 
 
 const ScorecardCreate = ({ periods, actingRole }) => {
-
+    const firstInitiative = {
+        initiativeId: 'initiative-name-1', 
+        weightId: 'initiative-weight-1', 
+        cascadeId: 'cascade-role-1',
+        deleteId: 'delete-1'
+    };
     const [initiative, setInitiative] = useState({});
     const [topObjectivesTotalWeight, setTopObjectivesTotalWeight] = useState(0);
     const { perspective, name } = initiative;
@@ -26,13 +31,14 @@ const ScorecardCreate = ({ periods, actingRole }) => {
     const navigate = useNavigate();
     const reinitializeForm = mode === EDIT;
     const { setActiveComponent } = useOutletContext();
+
     useEffect(() => {
         setActiveComponent(CREATE);
         initiativeId && makeRequest(updateObjectiveURL(initiativeId), GET, null, true, false)
             .then(data => {
                 data && setInitiative(data);
             });
-    }, [])
+    }, []);
 
     useEffect(() => {
         if (actingRole && !actingRole?.reporting_to) {
@@ -46,12 +52,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
     }, [actingRole])
 
     const [initiatives, setInitiatives] = useState([
-        {
-            initiativeId: 'initiative-name-1', 
-            weightId: 'initiative-weight-1', 
-            cascadeId: 'cascade-role-1',
-            deleteId: 'delete-1'
-        },
+        firstInitiative,
     ]);
 
     const [measures, setMeasures] = useState([
@@ -87,7 +88,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         initialValues[initiative.cascadeId] = '';
         validationSchema[initiative.initiativeId] = Yup.string();
         validationSchema[initiative.weightId] = Yup.number();
-        validationSchema[initiative.cascadeId] = Yup.number();
+        validationSchema[initiative.cascadeId] = Yup.number().required();
         return undefined;
     })
 
@@ -151,12 +152,16 @@ const ScorecardCreate = ({ periods, actingRole }) => {
             const totalWeight = parseInt(values.weight) + topObjectivesTotalWeight;
             setTopObjectivesTotalWeight(totalWeight);
         }
-        const payload = createObjectPayload(values, initiatives, measures, periods);
+
+        const payload = createObjectivePayload(values, initiatives, measures, periods);
 
         if (!Boolean(initiativeId)){
             makeRequest(createObjectiveURL, POST, payload, true)
                 .then(data => {
                     if (data){ 
+                        setInitiatives( [ 
+                            {...firstInitiative} 
+                        ]);
                         resetForm();
                     }
 

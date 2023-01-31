@@ -125,12 +125,23 @@ export const getPeriods = months => {
     return mapper[months]
 };
 
-export const createObjectPayload = (data, initiatives, measures, periods) => {
+export const areInitiativesValid = (initiativesSchema, data) => {
+    for (let i=0; i<initiativesSchema.length; i++) {
+        console.log(initiativesSchema[i])
+        if (!data[initiativesSchema[i]]?.cascadeId || !data[initiativesSchema[i]].initiativeId ) {
+            return false;
+        }
+
+        return true;
+    }
+};
+
+export const createObjectivePayload = (data, initiativesSchema, measures, periods) => {
     const initiativesPayload = [];
     const measuresPayload = [];
     const periodTargetsPayload = [];
   
-    initiatives.map(initiative => {
+    initiativesSchema.map(initiative => {
       const initiativePayload = {};
       initiativePayload['name'] = data[initiative.initiativeId];
       if (data[initiative.weightId] !== "") initiativePayload['weight'] = data[initiative.weightId];
