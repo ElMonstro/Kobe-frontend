@@ -19,15 +19,15 @@ const StrategyMapPerspectiveView = ({ objectives, perspective }) => {
                 
             </Col>
             <Col>
-                    <Row className="objectives">
-                        { 
-                            objectives?.map(objective => {
-                                if (objective.perspective !== perspective) {
-                                    return null
-                                }
-                                return <StrategyMapObjectiveView key={ objective.id } { ...objective }/>
-                        })}
-                    </Row>
+                <Row className="objectives">
+                    { 
+                        objectives?.map(objective => {
+                            if (objective.perspective !== perspective) {
+                                return null
+                            }
+                            return <StrategyMapObjectiveView key={ objective.id } { ...objective }/>
+                    })}
+                </Row>
             </Col>
         </Row>
     )

@@ -7,12 +7,13 @@
 
     .strategy_view_perspective {
         margin: 0 0 20px 0!important;
-        height: 180px;
+        min-height: 180px;
         width: 100%!important;
         background: #FFFFFF;
 
         .objectives {
             padding-top: 18px;
+            height: auto;
         }
 
         .name_container {
@@ -38,6 +39,9 @@
 
 }
 
+.objective_cont {
+    width: fit-content;
+}
 
 .strategy_map_objective {
     width: fit-content;

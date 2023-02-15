@@ -16,7 +16,7 @@ const StrategyMapObjectiveView = ({ id, name, status, links })=> {
     truncatedName += "...";
 
     return (
-        <div> 
+        <div className="objective_cont"> 
             <div className="strategy_map_objective">
                 <OverlayTrigger
                     placement="bottom"
@@ -45,7 +45,7 @@ const StrategyMapObjectiveView = ({ id, name, status, links })=> {
             </div>
             {
                 links?.map(link => {
-                                return <Xarrow key={ link.id } start={ `objective_${id}`  } end={ `objective_${link?.id}`  } color="black" />
+                                return <Xarrow curveness={true} key={ link.id } start={ `objective_${id}`  } end={ `objective_${link?.id}`  } color="black" />
                             })
             }
         </div>

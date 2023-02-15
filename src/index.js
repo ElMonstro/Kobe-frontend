@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import store from './redux/store/store';
 import { connectWebSocket } from './utils';
 
-connectWebSocket();
+// connectWebSocket();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(

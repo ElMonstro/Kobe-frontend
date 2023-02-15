@@ -48,7 +48,7 @@ import ProfileModal from "./components/modals/profileModal";
 function App({ isLoggedIn, webSocket }) {
 
   const loggedIn = isLoggedInFromLocalStorage();
-  console.log(webSocket)
+  // console.log(webSocket)
 
   useEffect (() => {
     store.dispatch(changeLoginStatus(loggedIn));
