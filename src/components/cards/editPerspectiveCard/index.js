@@ -7,17 +7,17 @@ import "./index.scss";
 
 
 const EditPerspectivesCard = props => {
-   const {setSettings, settings: { behaviorals_enabled } } = props;
+   const {setSettings, settings } = props;
 
     return (
         <Card className="admin_card edit_perpectives" id="edit_perspective">
             <div className="card_title">Edit Perspectives</div>
                {
                   Object.keys(PERSPECTIVE_OBJECT).map(key => {
-                     if (key==="behavioral_name" && !behaviorals_enabled) {
+                     if (key==="behavioral_name" && !settings?.behaviorals_enabled) {
                         return <></>;
                      }
-                     return <EmbededInput setSettings={ setSettings } defaultValue={ PERSPECTIVE_OBJECT[key]} key={ key } initialValueKey={ key }/>
+                        return <EmbededInput setSettings={ setSettings } defaultValue={ settings[key]} key={ key } initialValueKey={ key }/>
                   })
                }
         </Card>

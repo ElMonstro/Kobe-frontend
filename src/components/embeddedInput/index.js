@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { Close } from "@styled-icons/material-twotone/Close";
 
@@ -13,8 +13,13 @@ import { connect } from "react-redux";
 
 const EmbededInput = ({ defaultValue, initialValueKey, setSettings }) => {
     const [isEditable, setEditable] = useState(false);
+
     let initialValues = {};
     initialValues[initialValueKey] = defaultValue;
+
+    useEffect(() => {
+        setEditable(false)
+    }, [defaultValue])
 
     const formik = useFormik({
         initialValues,
@@ -29,7 +34,6 @@ const EmbededInput = ({ defaultValue, initialValueKey, setSettings }) => {
         <Form className="perspective_input" id={ `${initialValueKey}-form` } onSubmit={ formik.handleSubmit }>
             <input 
                 type="text" 
-                valuedefault ={ defaultValue } 
                 disabled={!isEditable}
                 { ...formik.getFieldProps(initialValueKey) }
                 id={ initialValueKey } 

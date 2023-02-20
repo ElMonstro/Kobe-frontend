@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 import UploadButton from "../../common/uploadButton";
 import { uploadOrgChartURL } from "../../../services/urls";
@@ -8,7 +8,7 @@ import exampleOrgFile from "../../../assets/example_org_file.xlsx"
 
 import "./index.scss";
 
-const UploadOrgCard = ({ setOrgChartSpinner, settings }) => {
+const UploadOrgCard = ({ setOrgChartSpinner, settings, setOrgChart }) => {
     return (
         <Card className="admin_card upload_org_card">
             <div className="card_cont">
@@ -28,6 +28,7 @@ const UploadOrgCard = ({ setOrgChartSpinner, settings }) => {
                         contentText="Upload Excel" 
                         className="card_btn" 
                         fileKey="file"
+                        handleRequestResult={ setOrgChart }
                     />
                       
                 </div>

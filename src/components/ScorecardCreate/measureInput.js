@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
@@ -14,6 +14,16 @@ const MeasureInput = ({ formik, measureId, weightId, initiative }) => {
     const { measures } = initiative;
     const { mode } = useParams();
     const nameFieldProps = formik.getFieldProps(measureId)
+
+    
+    useEffect(() => {
+        const resetUnitTargets = () => {
+            formik.setFieldValue('units_target', 0);
+            formik.setFieldValue('baseline', 0)
+        }
+        dataType === UNITS? formik.setFieldValue('percentage_target', 0): resetUnitTargets();
+
+    }, [dataType])
 
     if (mode === "edit" && measures === []) {
         const { name } = measures[0];

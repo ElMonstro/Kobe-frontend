@@ -21,7 +21,12 @@ const DivisionNamesForm = props => {
         },
         validationSchema: yupDivisionNamesObj,
         onSubmit: async (values) => {
-           makeRequest(settingsURL, POST, values, true);
+            for (const key of Object.keys(values)) {
+                if (!values[key]) {
+                    delete values[key]
+                }
+            }
+            makeRequest(settingsURL, POST, values, true);
         },
     });
 

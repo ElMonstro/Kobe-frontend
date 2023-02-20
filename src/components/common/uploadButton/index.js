@@ -39,7 +39,6 @@ const UploadButton = ({
             formData.append(key, extraData[key]);
         }
         formData.append(fileKey, inputFile?.files[0]);
-        console.log(inputFile.files);
         setSpinnerStatus && setSpinnerStatus(true);
         const data = await makeRequest(uploadURL, method, formData, true, true, true);
         data && handleRequestResult && handleRequestResult(data);

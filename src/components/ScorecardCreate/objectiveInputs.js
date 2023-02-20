@@ -79,7 +79,7 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
                     <Col>
                     {   displayWeight &&
                         <Form.Group className="mb-1" controlId="weight">
-                            <Form.Label>Weight</Form.Label>
+                            <Form.Label>Weight (%)</Form.Label>
                             <Form.Control 
                             type="text" 
                             placeholder=""

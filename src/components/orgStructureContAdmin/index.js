@@ -19,6 +19,7 @@ const AdminOrgStructureCont = props => {
             <MissionVisionForm { ...props }/>
             <UploadOrgCard 
                 setOrgChartSpinner={ setOrgChartSpinner }
+                setOrgChart={ props.setOrgChart }
                 settings={props.settings}
                 />
             <OrgChartCard 

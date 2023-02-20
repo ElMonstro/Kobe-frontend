@@ -183,6 +183,7 @@ export const createObjectivePayload = (data, initiativesSchema, measures, period
     data.measures = measuresPayload;
     data.initiatives = initiativesPayload;
     if (periodTargetsPayload.length > 0) data.period_targets = periodTargetsPayload;
+    data.data_type === UNITS? delete data["percentage_target"]: delete data["units_target"]
     // Clear empty fields
     Object.keys(data).map(key => {
         if (data[key]==="") {
@@ -217,7 +218,7 @@ export const isObjectEmpty = obj => {
 
 const getTarget = values => {
     let target;
-    values.data_type === UNITS? target = values.units_target: target = values.percentage_target
+    values.data_type === UNITS? target = Math.abs(values.units_target - values.baseline): target = values.percentage_target
     
     return parseInt(target)
 };
