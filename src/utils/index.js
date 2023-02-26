@@ -378,3 +378,9 @@ export const getDivisionsFromEmployees = (employees, typeKey) => { //get departm
 
     return divisionsMap;
 };
+
+export const getPercentage = (value, otherValue) => {
+    let result
+    value && otherValue? result = Math.round(value/ otherValue * 100): result = 0;
+    return result;
+};

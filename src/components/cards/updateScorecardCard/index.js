@@ -4,7 +4,7 @@ import { Card, Row, Col } from "react-bootstrap";
 import { makeRequest } from "../../../utils/requestUtils";
 import "./index.scss";
 import { fetchSelfCascadedInitURL } from "../../../services/urls";
-import { GET, UPDATE } from "../../../utils/constants";
+import { GET, OBJECTIVE, UPDATE } from "../../../utils/constants";
 import Initiative from "./initiative";
 import { useOutletContext } from "react-router-dom";
 
@@ -38,7 +38,8 @@ const UpdateScorecardCard = () => {
                 </Row>
                 {
                     initiatives?.map(initiative => {
-                        return <Initiative key={ initiative.id } { ...initiative }/>
+                        if (initiative.type === OBJECTIVE)
+                            return <Initiative key={ initiative.id } { ...initiative }/>
                     })
                 } 
             </div>

@@ -6,8 +6,6 @@ import { INITIATIVES, OBJECTIVES, PERSPECTIVES, REPORTS } from "../../utils/cons
 import "./index.scss";
 
 import DashboardCharts from "../dashboardsTab/dashboardCharts";
-import { connect } from "react-redux";
-
 
 
 class AppraisalCharts extends React.Component {

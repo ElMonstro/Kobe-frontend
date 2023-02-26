@@ -11,7 +11,7 @@ import ObjectiveInputs from "./objectiveInputs";
 import MeasuresInputs from "./measuresInputs";
 import ThresholdsInputs from "./thresholdsInputs";
 import InitiativeInputs from "./initiativesInputs";
-import { arePeriodicalInputsValid, createObjectivePayload, isWeightsFieldValid } from "../../utils";
+import { arePeriodicalInputsValid, createObjectivePayload } from "../../utils";
 import { makeRequest } from "../../utils/requestUtils";
 import { createObjectiveURL, updateObjectiveURL, amendObjectiveURL } from "../../services/urls";
 import { yupObjectiveValidationObj as validationSchema } from "../../utils/validators";
@@ -25,7 +25,6 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         deleteId: 'delete-1'
     };
     const [initiative, setInitiative] = useState({});
-    const [topObjectivesTotalWeight, setTopObjectivesTotalWeight] = useState(0);
     const { perspective, name } = initiative;
     const { initiativeId, mode, role } = useParams();
     const navigate = useNavigate();
@@ -39,17 +38,6 @@ const ScorecardCreate = ({ periods, actingRole }) => {
                 data && setInitiative(data);
             });
     }, []);
-
-    useEffect(() => {
-        if (actingRole && !actingRole?.reporting_to) {
-            makeRequest(createObjectiveURL, GET, null, true, false)
-                .then(objectives => {
-                    let totalWeight = 0;
-                    objectives?.map(objective => totalWeight += objective.weight);
-                    setTopObjectivesTotalWeight(totalWeight);
-                })
-        }
-    }, [actingRole])
 
     const [initiatives, setInitiatives] = useState([
         firstInitiative,
@@ -72,7 +60,6 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         baseline: '',
         percentage_target: '',
         units_target: '',
-        weight: ''
         }
 
     periods.map(period => {
@@ -109,11 +96,6 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         validationSchema[initiatives[0].initiativeId] = Yup.string();
         validationSchema[initiatives[0].cascadeId] = Yup.string();
         validationSchema.data_type = Yup.string();
-        validationSchema.weight = Yup.number().max(100).min(0);
-    }
-
-    if (!Boolean(actingRole?.reporting_to)) {
-        validationSchema.weight = Yup.number().max(100).min(0).required('*Required');
     }
 
     if ( name !== undefined) { // if mode is not create mode
@@ -123,7 +105,6 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         initialValues.percentage_target = initiative.percentage_target;
         initialValues.baseline = initiative.baseline;
         initialValues.data_type = initiative.data_type;
-        initialValues.weight = initiative.weight;
         initialValues[measures[0].measureId] = initiative?.measures[0]?.name
         initiative.period_targets?.map(period => {
             initialValues[period.period_object.period] = period.target;
@@ -134,23 +115,11 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         validationSchema.perspective = Yup.string();
         validationSchema[initiatives[0].initiativeId] = Yup.string();
         validationSchema[initiatives[0].cascadeId] = Yup.string();
-        validationSchema.weight = Yup.number().max(100).min(0);
     }
 
     const onSubmit = async (values, { setFieldError, resetForm }) => {
         if (!arePeriodicalInputsValid(values, periods, setFieldError)) {
             return;
-        }
-        
-        if (mode === undefined) {
-            if (!isWeightsFieldValid(values, 100-topObjectivesTotalWeight, setFieldError)){
-                return;
-            }
-        }
-
-        if (values.weight) {
-            const totalWeight = parseInt(values.weight) + topObjectivesTotalWeight;
-            setTopObjectivesTotalWeight(totalWeight);
         }
 
         const payload = createObjectivePayload(values, initiatives, measures, periods);

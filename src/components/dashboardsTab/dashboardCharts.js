@@ -8,6 +8,7 @@ import Overview from "./overview";
 import HistoricalChart from "../common/histoticalChart";
 import ReportChildObjects from "./childObjects";
 import PersonalData from "./personalData";
+import { getPercentage } from "../../utils";
 
 class DashboardCharts extends React.Component {
 
@@ -20,7 +21,7 @@ class DashboardCharts extends React.Component {
             undefined: PERSPECTIVES
           }
         const childrenTitle = modeToObjectsMapper[mode];
-        const actualPercentage = currentObject?.percentage_score/100;
+        let actualPercentage = getPercentage(currentObject?.percentage_score, currentObject?.percentage_target)/100;
         const plannedPercentage = currentObject?.percentage_target/100;
         let title;
 

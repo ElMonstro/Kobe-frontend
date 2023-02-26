@@ -56,9 +56,9 @@ const DashboardTab = ({ loadedIn, personalData }) => {
     }
 
     if (!mode && perspectives.length > 0) {
-        for (const perspective of perspectives) {
-            currentObject.percentage_score += perspective.percentage_score * perspective.weight;
-            currentObject.percentage_target += perspective.percentage_target * perspective.weight;
+        for (let perspective of perspectives) {
+            currentObject.percentage_score += perspective.percentage_score * perspective.weight/100;
+            currentObject.percentage_target += perspective.percentage_target * perspective.weight/100;
         }
     }
 

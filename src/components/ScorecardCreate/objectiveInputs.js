@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Form, Card, Row, Col } from "react-bootstrap"
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -11,7 +11,6 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
     const nameFieldProps = formik.getFieldProps('name');
     const perspectiveFieldProps = formik.getFieldProps('perspective');
     const { mode } = useParams();
-    const [displayWeight, setDisplayWeight] = useState(false);
     let perspectives_object = PERSPECTIVE_OBJECT;
     !settings.behaviorals_enabled && delete perspectives_object.behavioral_name
 
@@ -25,11 +24,6 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
         nameFieldProps.value = name;
         perspectiveFieldProps.value = perspective;
     }
-
-    useEffect(() => {
-        role && setDisplayWeight(!Boolean(role?.reporting_to) && !Boolean(name));
-    }, [role, name]);
-
     
     return (
         <Card className="staff_card">
@@ -75,7 +69,7 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
                         </Form.Group>
                     </Col>
                 </Row>
-                <Row className="inputs_row">
+                {/* <Row className="inputs_row">
                     <Col>
                     {   displayWeight &&
                         <Form.Group className="mb-1" controlId="weight">
@@ -92,7 +86,7 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
                             </Form.Control.Feedback>
                         </Form.Group>}
                     </Col>
-                </Row>
+                </Row> */}
             </div>
     </Card>
     );

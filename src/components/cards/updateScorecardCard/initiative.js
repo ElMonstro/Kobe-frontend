@@ -4,12 +4,15 @@ import { useFormik } from 'formik';
 
 import { yupUpdateObjective } from "../../../utils/validators";
 import { makeRequest } from "../../../utils/requestUtils";
-import { ERROR, PATCH } from "../../../utils/constants";
+import { ERROR, PATCH, UNITS } from "../../../utils/constants";
 import { updateObjectiveURL as retrieveObjectiveURL } from "../../../services/urls";
 import { fireNotification } from "../../../utils";
 
-const Initiative = ({ id, name, budget, score, target, cost, weight, status }) => {
+const Initiative = ({ id, name, budget, score, percentage_target, units_target, cost, weight, status, data_type}) => {
 
+    let target;
+    data_type === UNITS? target = units_target: target = percentage_target;
+    console.log(units_target)
     const formik = useFormik({
         initialValues: {
             score: score,
@@ -24,7 +27,9 @@ const Initiative = ({ id, name, budget, score, target, cost, weight, status }) =
                 fireNotification(ERROR, "You must enter evidence url")
                 return
             }
+            
             const id = values.id;
+            console.log(values)
             makeRequest(retrieveObjectiveURL(id), PATCH, values, true);
         },
     });
