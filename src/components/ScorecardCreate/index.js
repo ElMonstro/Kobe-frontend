@@ -15,6 +15,7 @@ import { arePeriodicalInputsValid, createObjectivePayload } from "../../utils";
 import { makeRequest } from "../../utils/requestUtils";
 import { createObjectiveURL, updateObjectiveURL, amendObjectiveURL } from "../../services/urls";
 import { yupObjectiveValidationObj as validationSchema } from "../../utils/validators";
+import BudgetInputs from "./budgetInput";
 
 
 const ScorecardCreate = ({ periods, actingRole }) => {
@@ -105,6 +106,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         initialValues.percentage_target = initiative.percentage_target;
         initialValues.baseline = initiative.baseline;
         initialValues.data_type = initiative.data_type;
+        initialValues.budget_description = initiative.budget_description
         initialValues[measures[0].measureId] = initiative?.measures[0]?.name
         initiative.period_targets?.map(period => {
             initialValues[period.period_object.period] = period.target;
@@ -115,6 +117,8 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         validationSchema.perspective = Yup.string();
         validationSchema[initiatives[0].initiativeId] = Yup.string();
         validationSchema[initiatives[0].cascadeId] = Yup.string();
+    } else {
+        initialValues.evidence_description = ''
     }
 
     const onSubmit = async (values, { setFieldError, resetForm }) => {
@@ -180,6 +184,10 @@ const ScorecardCreate = ({ periods, actingRole }) => {
                         />
                         
                         <ThresholdsInputs formik={ formik } />
+                        {
+                        initiative?.is_self_cascaded && 
+                            <BudgetInputs formik={ formik } actingRole={ actingRole } initiative={ initiative } />
+                        }
                         <InitiativeInputs 
                             formik={ formik }
                             initiatives={ initiatives }
