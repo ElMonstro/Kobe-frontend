@@ -6,7 +6,7 @@ import OpenCloseIcon from "../common/openCloseIcon";
 import "./index.scss";
 import ViewInitiative from "./viewInitiative";
 
-const ViewObjective = ({ name, measures, weight, target, score, status, initiatives, change_approval_trackers }) => {
+const ViewObjective = ({ name, measures, weight, target, percentage_target, percentage_score, status, initiatives, change_approval_trackers }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const measure_name = null
@@ -44,8 +44,8 @@ const ViewObjective = ({ name, measures, weight, target, score, status, initiati
                         <Col className={`status ${approval_status}`}>{ approval_status }</Col>
                         <Col className="measure">{ measure_name }</Col>
                         <Col className="weight">{ weight }</Col>
-                        <Col>{ target }</Col>
-                        <Col className={ `score ${status}_color` }>{ score }</Col>
+                        <Col>{ percentage_target }</Col>
+                        <Col className={ `score ${status}_color` }>{ percentage_score }</Col>
                     </Row>
                 </Col>
             </Row>

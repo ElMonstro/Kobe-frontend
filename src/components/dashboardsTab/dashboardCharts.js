@@ -22,6 +22,7 @@ class DashboardCharts extends React.Component {
           }
         const childrenTitle = modeToObjectsMapper[mode];
         let actualPercentage = getPercentage(currentObject?.percentage_score, currentObject?.percentage_target)/100;
+        console.log(currentObject)
         const plannedPercentage = currentObject?.percentage_target/100;
         let title;
 

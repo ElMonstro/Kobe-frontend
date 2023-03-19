@@ -1,12 +1,14 @@
 import React from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, Col, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
 
 import thumbnail from "../../assets/josh_logo.jpg";
+import { base_cloudinary_url } from "../../services/baseURL";
 import OpenCloseIcon from "../common/openCloseIcon";
 import "./index.scss";
 
-const ViewInitiative = ({name, weight, target, score, status }) => {
+const ViewInitiative = ({name, weight, target, percentage_target, score, percentage_score, status, role }) => {
 
+    const profileUrl = base_cloudinary_url + role?.profile_pic
     return (
         <Row className="initiative">
             <Row>
@@ -18,9 +20,20 @@ const ViewInitiative = ({name, weight, target, score, status }) => {
                         </Col>
                         <Col><span className="type">initiative</span></Col>
                         <Col>
-                            <span>
-                                <img className="thumbnail" src={ thumbnail } alt="J"/>
-                            </span>            
+                            <OverlayTrigger
+                                placement="bottom"
+                                overlay={
+                                    <Tooltip id="role_name">
+                                        { role?.user?.first_name + " " + role?.user?.second_name  }
+                                    </Tooltip>
+                                }
+                            > 
+                                <span>
+                                    <img className="thumbnail" src={ role.profile_pic? profileUrl: thumbnail } alt="profile pic"/>
+                                </span>
+
+                            </OverlayTrigger>
+                                     
                         </Col>
                         <Col></Col>
                     </Row>
@@ -30,12 +43,11 @@ const ViewInitiative = ({name, weight, target, score, status }) => {
                         <Col></Col>
                         <Col></Col>
                         <Col className="weight">{ weight }</Col>
-                        <Col>{ target }</Col>
-                        <Col className={ `score ${status}_color` }>{ score }</Col>
+                        <Col>{ percentage_target }</Col>
+                        <Col className={ `score ${status}_color` }>{ percentage_score }</Col>
                     </Row>
                 </Col>
             </Row>
-            
         </Row>
     )
 }

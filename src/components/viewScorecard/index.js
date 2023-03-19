@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Card, Spinner } from "react-bootstrap";
+import { connect } from "react-redux";
 import { useOutletContext, useParams } from "react-router-dom";
 
 import { fetchPerspectivesURL } from "../../services/urls";
-import { GET, VIEW } from "../../utils/constants";
+import { GET, PERSPECTIVE_OBJECT, VIEW } from "../../utils/constants";
 import { makeRequest } from "../../utils/requestUtils";
 import "./index.scss";
 import ViewPerspective from "./viewPerspective";
 import ObjectivesHeader from "./viewScorecardHeader";
 
-const ViewScorecard = () => {
+const ViewScorecard = ({ settings }) => {
 
     const [perspectives, setPerspectives] = useState([])
     const { role } = useParams();
@@ -35,7 +36,9 @@ const ViewScorecard = () => {
                 <Card className="staff_card perspectives">
                     {
                         perspectives.map(perspective => {
-                            return <ViewPerspective key={ perspective.id } { ...perspective } />
+                            if (perspective.name === PERSPECTIVE_OBJECT.behavioral_name && !settings.behaviorals_enabled) return;
+
+                            return <ViewPerspective key={ perspective.id } { ...perspective } />;
                         })
                         
                     }
@@ -45,4 +48,14 @@ const ViewScorecard = () => {
     )
 }
 
-export default ViewScorecard;
+const mapDispatchToProps = {
+}
+
+const mapStateToProps = ({ adminReducer: { settings }, }) => ({
+    settings,
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+) (ViewScorecard);
