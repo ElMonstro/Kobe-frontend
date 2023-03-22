@@ -78,8 +78,8 @@ export const QUARTERS = [
 ]
 
 export const BIANNUALS = [
-    'biannual 1',
-    'biannual 2',
+    'half 1',
+    'half 2',
 ];
 
 export const APPROVAL_MAPPER = {
@@ -88,3 +88,6 @@ export const APPROVAL_MAPPER = {
     undefined: APPROVED,
     false: REJECTED
 };
+
+export const YEAR_TO_DATE = "year_to_date"
+export const QUATERLY = "quaterly"

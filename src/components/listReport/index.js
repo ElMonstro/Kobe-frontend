@@ -14,7 +14,7 @@ const ListsReport = () => {
         <div className="list_report">
             <div className="reports_btns">
                 <ReactToPrint
-                        trigger={() => <div className="print">
+                        trigger={() => <div className="print_btn dashboard_btn">
                                             <span className="text"> print </span>
                                             <Printer />
                                         </div>

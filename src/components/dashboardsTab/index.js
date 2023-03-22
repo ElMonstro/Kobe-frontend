@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import { useOutletContext, useParams } from "react-router-dom";
 import 'chart.js/auto';
 
-import { DASHBOARDS, GET, OVER_VIEW, REPORTS } from "../../utils/constants";
+import { DASHBOARDS, GET, OVER_VIEW, QUATERLY, REPORTS, YEAR_TO_DATE } from "../../utils/constants";
 import DashboardsSidebar from "./dashboardsSidebar";
 import "./index.scss";
 import { makeRequest } from "../../utils/requestUtils";
@@ -13,13 +13,15 @@ import { getCurrentDashboardObject, getDashboardObjects } from "../../utils";
 import DashboardCharts from "./dashboardCharts";
 import ReactToPrint from "react-to-print";
 import { Printer } from "styled-icons/bootstrap";
+import { connect } from "react-redux";
 
 
-const DashboardTab = ({ loadedIn, personalData }) => {
+const DashboardTab = ({ loadedIn, personalData, review_period }) => {
     if (!loadedIn) {
         loadedIn = DASHBOARDS;
     }
-
+    let period_name;
+    review_period === 3? period_name = "Quaterly": period_name = "Biannually"
     let { year } = useParams();
     let perspectivesURL;
     const pathArray = [];
@@ -29,9 +31,12 @@ const DashboardTab = ({ loadedIn, personalData }) => {
     let objects = perspectives;
     let currentObject = {
         percentage_score: 0,
-        percentage_target: 0
+        percentage_target: 0,
+        current_period_target: 0,
+        last_period_score: 0
     }
     const { role, mode, currentObjectID, period } = useParams();
+    const [dataContext, setDataContext] = useState(YEAR_TO_DATE)
     const outletContext = useOutletContext();
 
     if (loadedIn === REPORTS ) { // set year and perspectives url depending on dashoard container
@@ -59,6 +64,8 @@ const DashboardTab = ({ loadedIn, personalData }) => {
         for (let perspective of perspectives) {
             currentObject.percentage_score += perspective.percentage_score * perspective.weight/100;
             currentObject.percentage_target += perspective.percentage_target * perspective.weight/100;
+            currentObject.current_period_target += perspective.current_period_target * perspective.weight/100;
+            currentObject.last_period_score += perspective.last_period_score * perspective.weight/100;
         }
     }
 
@@ -86,15 +93,23 @@ const DashboardTab = ({ loadedIn, personalData }) => {
     return (
         <Row className="dashboards_tab">
             
-            <div className="dashboard_btns">
-                <ReactToPrint
-                    trigger={() => <div className="print">
-                                        <span className="text"> print </span>
-                                        <Printer />
-                                    </div>
-                        }
-                    content={() => componentRef}
-                />
+            <div className="dashboard_btns_cont">
+                <div className="dashboard_btns">
+                    <div className="performance_context_switch dashboard_btn">
+                        <select id="performance_context_switch" onChange={ e => setDataContext(e.target.value) }>
+                            <option key={ YEAR_TO_DATE } value={ YEAR_TO_DATE }>Year to date</option>
+                            <option key={ QUATERLY } value={ QUATERLY }>{ period_name }</option>
+                        </select>
+                    </div>
+                    <ReactToPrint
+                        trigger={() => <div className="print_btn dashboard_btn">
+                                            <span className="text"> print </span>
+                                            <Printer />
+                                        </div>
+                            }
+                        content={() => componentRef}
+                    />
+                </div>
             </div>
                 
             {
@@ -114,10 +129,17 @@ const DashboardTab = ({ loadedIn, personalData }) => {
                     ref={(el) => (componentRef = el)}
                     personalData={ personalData }
                     historyChart
+                    dataContext={ dataContext }
                 />
             </Col>
         </Row>
     )
 }
 
-export default DashboardTab;
+const mapStateToProps = ({ adminReducer: { settings: { review_period } } }) => ({
+    review_period,
+  });
+  
+export default connect(
+    mapStateToProps,
+  ) (DashboardTab);

@@ -26,24 +26,42 @@
 
     }
 
-    .print {
+    .dashboard_btn {
         cursor: pointer;
         float: right;
-        width: 74px;
         background: #FFFFFF;
         border: 1px solid #035476;
+        height: 30px;
+        margin-left: 10px;
+        padding: 0px 2px;
+        text-transform: capitalize;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 28px;
+        letter-spacing: 0.035em;
+        color: #333333;
+    }
+
+    .performance_context_switch {
+        select {
+            border: none;
+
+            &:focus {
+                outline: none
+            }
+        }
+    }
+
+    .print_btn {
+        
+        width: 74px;
         padding: 0px 0px 0px 7px;
 
         .text {
             margin-right: 7px;
-            text-transform: capitalize;
-            font-weight: 400;
-            font-size: 13px;
-            line-height: 28px;
-            letter-spacing: 0.035em;
-            color: #333333;
-
+            
         }
+
 
         svg {
             height: 15px;

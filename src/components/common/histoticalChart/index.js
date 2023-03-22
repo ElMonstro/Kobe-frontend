@@ -15,7 +15,8 @@ import { Card } from "react-bootstrap";
 import "./index.scss";
 
 
-const HistoricalChart = ({ title, chartData }) => {
+const HistoricalChart = ({ title, chartData, currentObject }) => {
+  chartData = [ ...chartData, currentObject?.percentage_score]
 
   useEffect(() => {
         ChartJS.register(
@@ -29,8 +30,7 @@ const HistoricalChart = ({ title, chartData }) => {
           );
 
     }, [])
-    
-      
+          
       const options = {
         responsive: true,
         plugins: {

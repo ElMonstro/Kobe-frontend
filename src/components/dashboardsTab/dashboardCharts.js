@@ -1,6 +1,6 @@
 import React from "react";
 
-import { INITIATIVES, OBJECTIVES, OVER_VIEW, PERSPECTIVES} from "../../utils/constants";
+import { INITIATIVES, OBJECTIVES, OVER_VIEW, PERSPECTIVES, QUATERLY} from "../../utils/constants";
 import "./index.scss";
 import { Col, Row } from "react-bootstrap";
 import Speedometer from "../common/speedometer";
@@ -14,18 +14,18 @@ class DashboardCharts extends React.Component {
 
     render() {
 
-        const { loadedIn, currentObject, objects, historicalData, mode, personalData, historyChart } = this.props;
+        const { loadedIn, currentObject, objects, historicalData, mode, personalData, historyChart, dataContext } = this.props;
         const modeToObjectsMapper = {
             perspectives: OBJECTIVES,
             objectives: INITIATIVES,
             undefined: PERSPECTIVES
           }
         const childrenTitle = modeToObjectsMapper[mode];
-        let actualPercentage = getPercentage(currentObject?.percentage_score, currentObject?.percentage_target)/100;
-        console.log(currentObject)
-        const plannedPercentage = currentObject?.percentage_target/100;
+        const actualPercentage = getPercentage(currentObject?.percentage_score, currentObject?.percentage_target)/100;
+        let plannedPercentage = currentObject?.current_period_target/100;
         let title;
-
+        let percentage
+        dataContext === QUATERLY? percentage = actualPercentage - currentObject?.last_period_score/100: percentage = actualPercentage;
         mode? title = currentObject.name: title = "Overall Perfomance";
 
         return <div>
@@ -38,7 +38,7 @@ class DashboardCharts extends React.Component {
                     {
                         <Row className="speedometers">
                             <Col className="actual">
-                                <Speedometer title="Actual" percent={ actualPercentage } description="actual perfomance" />
+                                <Speedometer title="Actual" percent={ percentage } description="actual perfomance" />
                             </Col>
                             <Col className="planned">
                                 <Speedometer title="Planned" percent={ plannedPercentage } description="planned perfomance" />
@@ -54,7 +54,7 @@ class DashboardCharts extends React.Component {
                     { 
                         historyChart &&
                         <Row className="historical_chart">
-                            <HistoricalChart chartData={ historicalData } title="Historical Chart" />
+                            <HistoricalChart chartData={ historicalData } currentObject={ currentObject } title="Historical Chart" />
                         </Row>
                     }
                     {

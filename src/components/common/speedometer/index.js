@@ -14,6 +14,8 @@ const Speedometer =  ({ arcsLength, percent, id, title, description, upper_thres
       width: "500px",
     }
 
+    const percentage_text = (percent * 100).toFixed(0)
+
   return (
     <Card className="speedometer staff_card">
       <Card.Header>
@@ -30,7 +32,7 @@ const Speedometer =  ({ arcsLength, percent, id, title, description, upper_thres
         colors={["#F21212", "#FFA800", "#16C046" ]}
         className="gauge_chart"
       />
-      <div className="percentage">{ percent * 100 }%</div>
+      <div className="percentage">{ percentage_text }%</div>
       <div className="description">{ description }</div>
     </Card>
   );
