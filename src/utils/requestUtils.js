@@ -50,7 +50,7 @@ export const makeRequest =  async (url, method, data, authenticated=true, notify
     let response;
     headerDetails = getHeaderDetails(isFormData);
 
-    if (headerDetails.headers.Authorization === "Bearer undefined") {
+    if (authenticated && headerDetails.headers.Authorization === "Bearer undefined") {
         return;
     }
 
@@ -63,7 +63,6 @@ export const makeRequest =  async (url, method, data, authenticated=true, notify
             response = await request(url, data, headerDetails);
 
         }
-
         notify && notificationHandler(response, sucessMessage, errorMessage);
         return response.data;
     } catch (error) {

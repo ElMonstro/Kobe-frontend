@@ -11,7 +11,10 @@ import {
   REVEIEW_PERIOD, SEND_EMAILS,
   SCORECARD, CREATE, CASCADED, 
   VIEW, UPDATE, STRATEGY_MAP, 
-  LINKS, OBJECTIVE, SCORE, DASHBOARDS, OVER_VIEW, OVERALL, REPORTS, LIST, DASHBOARD, APPRAISAL 
+  LINKS, OBJECTIVE, SCORE, 
+  DASHBOARDS, OVER_VIEW, OVERALL, 
+  REPORTS, LIST, DASHBOARD, 
+  APPRAISAL, RESET_PASSWORD 
 } 
 from "./utils/constants";
 
@@ -23,7 +26,7 @@ import store from "./redux/store/store";
 import { changeLoginStatus } from "./redux/actions";
 import { connect } from "react-redux";
 import { useEffect } from "react";
-import LoginModal from "./components/modals/loginModal";
+import AuthModal from "./components/modals/authModal";
 import ScorecardCont from "./components/scorecardCont";
 import ScorecardCreate from "./components/ScorecardCreate";
 import CascadedCards from "./components/cards/cascadedCards";
@@ -54,16 +57,16 @@ function App({ isLoggedIn, webSocket }) {
     store.dispatch(changeLoginStatus(loggedIn));
     
   }, [loggedIn]);
-
   
   return (
     <HashRouter>
     <ToastContainer limit={4}/>
-      <LoginModal isLoggedOut={!isLoggedIn}/>
+      <AuthModal show={!isLoggedIn}/>
       <ProfileModal />
       <NotificationsModal />
         <Routes>
           <Route index element={<Protected> <StaffDashboard /> </Protected>} />
+          <Route path="/reset-password/:resetToken" element={<AuthModal show={true} form={ RESET_PASSWORD }/>} ></Route>
           <Route exact path="/admin" element={
             <Protected> 
               <AdminDashboard activeComponent={ORG_STRUCTURE} /> 

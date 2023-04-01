@@ -54,7 +54,7 @@ class DashboardCharts extends React.Component {
                     { 
                         historyChart &&
                         <Row className="historical_chart">
-                            <HistoricalChart chartData={ historicalData } currentObject={ currentObject } title="Historical Chart" />
+                            <HistoricalChart chartData={ historicalData } currentObject={ currentObject } title="Historical Chart" loadedIn={loadedIn} />
                         </Row>
                     }
                     {

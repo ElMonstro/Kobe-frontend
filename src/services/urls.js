@@ -29,4 +29,6 @@ export const perspectiveHistoryURL = (id, year) => `${baseURL}/scorecard/perspec
 export const fetchYearsURL = `${baseURL}/scorecard/years/`;
 export const fetchReportPerspectives = (role, year, period) => `${baseURL}/scorecard/history/${role}/years/${year}/periods/${period}/`;
 export const updatePasswordURL =  `${baseURL}/auth/update-password/`;
+export const resetPasswordURL = (resetToken) => `${baseURL}/auth/reset-password/${resetToken}/`;
+export const resetPasswordRequestURL =  `${baseURL}/auth/reset-password-request/`;
 export const updateRoleURL =  `${baseURL}/auth/update-role/`;

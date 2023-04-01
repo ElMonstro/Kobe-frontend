@@ -8,6 +8,19 @@ export const yupLoginObj = Yup.object({
         .required('* Required'),
     });
 
+export const yupResetPasswordObj = Yup.object({
+    password: Yup.string()
+        .required('* Required'),
+    confirm_password: Yup.string()
+        .oneOf([Yup.ref('password'), null], 'Passwords must match')
+    });
+
+export const yupPasswordRequestObj = Yup.object({
+    email: Yup.string()
+        .email('* Invalid email address')
+        .required('* Required')
+    });
+
     export const yupUpdateObjective = Yup.object({
         cost: Yup.number(),
         score: Yup.number(),

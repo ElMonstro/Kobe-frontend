@@ -20,12 +20,12 @@ const ReportChildObjects =  ({ objects, title }) => {
             </Row>
             <Row className="children_list">
               {
-                  objects?.map(({name, weight, percentage_score, status, id}) => {
+                  objects?.map(({name, weight, percentage_progress, status, id}) => {
                       return <Row onClick={ () => navigate(`${title}/${id}`) } key={ id } className="child">
                                   <Col lg={ 1 }><div className={`${status} status`}></div></Col>
                                   <Col lg={ 6 }>{ name }</Col>
                                   <Col>{ weight }%</Col>
-                                  <Col>{ percentage_score }%</Col>
+                                  <Col>{ percentage_progress }%</Col>
                               </Row>
                   })
               }

@@ -13,10 +13,12 @@ import { Line } from "react-chartjs-2";
 import { Card } from "react-bootstrap";
 
 import "./index.scss";
+import {  REPORTS } from "../../../utils/constants";
 
 
-const HistoricalChart = ({ title, chartData, currentObject }) => {
-  chartData = [ ...chartData, currentObject?.percentage_score]
+const HistoricalChart = ({ title, chartData, currentObject, loadedIn }) => {
+  // if (loadedIn !== REPORTS)
+    chartData = [ ...chartData, currentObject?.percentage_progress]
 
   useEffect(() => {
         ChartJS.register(

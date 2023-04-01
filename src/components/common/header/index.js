@@ -11,7 +11,7 @@ import { countUnreadNotifications, getPeriods, logout } from "../../../utils";
 import { makeRequest } from "../../../utils/requestUtils";
 import { GET } from "../../../utils/constants";
 import { companyInfoURL, fetchNotificationsURL, fetchOrgChartURL, settingsURL } from "../../../services/urls";
-import LoginForm from "../../modals/loginModal";
+import LoginForm from "../../modals/authModal";
 import { 
     fetchCompanyInfo, 
     fetchSettings, 

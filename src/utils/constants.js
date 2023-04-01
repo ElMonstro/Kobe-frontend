@@ -89,5 +89,8 @@ export const APPROVAL_MAPPER = {
     false: REJECTED
 };
 
-export const YEAR_TO_DATE = "year_to_date"
-export const QUATERLY = "quaterly"
+export const YEAR_TO_DATE = "year_to_date";
+export const QUATERLY = "quaterly";
+export const LOGIN = "login";
+export const RESET_REQUEST = "reset_request";
+export const RESET_PASSWORD = "reset_password";

@@ -1,5 +1,6 @@
 import {
     SET_CURRENT_ROLE,
+    SHOW_FORGOT_PASSWORD_MODAL,
     SET_NOTIFICATIONS,
     SET_SHOW_NOTIFICATIONS,
     SET_SHOW_PROFILE,
@@ -17,7 +18,7 @@ const initialState = {
     showNotifications: false,
     notifications: [],
     showProfile: false,
-    webSocket: null
+    webSocket: null,
 };
 
 const authReducer = ( state=initialState, action ) => {
