@@ -19,7 +19,6 @@ const AppraisalReport = ({ settings }) => {
 
 
     let { year } = useParams();
-    const pathArray = [];
     let componentRef = useRef();
     const [perspectives, setPerspectives] = useState([]);
     const [objectives, setObjectives] = useState([]);
@@ -36,7 +35,6 @@ const AppraisalReport = ({ settings }) => {
         currentObject.percentage_score += perspective.percentage_score * perspective.weight;
         currentObject.percentage_target += perspective.percentage_target * perspective.weight;
     }
-
 
     useEffect(() => {
         makeRequest(fetchPerspectivesURL(role), GET, null, true, false)
@@ -75,13 +73,13 @@ const AppraisalReport = ({ settings }) => {
 
             <div className="dashboard_btns">
                 <ReactToPrint
-                    trigger={() => <div className="print">
-                        <span className="text"> print </span>
-                        <Printer />
-                    </div>
-                    }
-                    content={() => componentRef}
-                />
+                        trigger={() => <div className="print_btn dashboard_btn">
+                                            <span className="text"> print </span>
+                                            <Printer />
+                                        </div>
+                            }
+                        content={() => componentRef}
+                    />
             </div>
             <AppraisalCharts 
                 perspectives={ perspectives } 

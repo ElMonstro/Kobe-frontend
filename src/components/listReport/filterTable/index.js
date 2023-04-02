@@ -107,7 +107,7 @@ const FilterTable = ({ employees, divisions_enabled, departments_enabled, sectio
                 <Row className="employees">
                     {
                         filteredEmployees.map(employee => {
-                            return <Row className="employee">
+                            return <Row key={employee?.id} className="employee">
                                 <Col lg="3">{ employee.user.first_name } { employee.user.second_name }</Col>
     
                                 <Col>{ employee.division?.name }</Col>

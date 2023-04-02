@@ -41,7 +41,7 @@ class AppraisalCharts extends React.Component {
                                     historicalData={historicalData} 
                                     key={ perspective.id }
                                 />
-                                )
+                            )
                         }
                     </div>
                 }
