@@ -1,6 +1,5 @@
-import { BrowserRouter, Route, Routes, HashRouter} from "react-router-dom";
+import { Route, Routes, HashRouter} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";

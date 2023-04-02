@@ -2,7 +2,6 @@ import axios from "axios";
 import { fireNotification, getHeaderDetails, logout } from "../utils";
 import { 
     ACTION_SUCCESSFUL_MESSAGE, 
-    AUTHENTICATION_ERROR_MESSAGE, 
     RESOURCE_NOT_FOUND_MESSAGE, 
     NOTIF_SUCCESS, NOTIF_ERROR, GET
  } from "./constants";

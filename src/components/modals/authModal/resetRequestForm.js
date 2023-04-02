@@ -1,6 +1,5 @@
 import React from "react";
 import { useFormik } from 'formik';
-import {connect} from 'react-redux';
 import { Form, Button } from "react-bootstrap";
 
 import { yupPasswordRequestObj } from "../../../utils/validators";
