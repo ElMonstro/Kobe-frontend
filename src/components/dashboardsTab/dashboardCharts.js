@@ -22,7 +22,6 @@ class DashboardCharts extends React.Component {
           }
         const childrenTitle = modeToObjectsMapper[mode];
         const actualPercentage = getPercentage(currentObject?.percentage_score, currentObject?.percentage_target)/100;
-        let plannedPercentage = currentObject?.current_period_target/100;
         let title;
         let percentage
         dataContext === QUATERLY? percentage = actualPercentage - currentObject?.last_period_score/100: percentage = actualPercentage;
@@ -38,10 +37,7 @@ class DashboardCharts extends React.Component {
                     {
                         <Row className="speedometers">
                             <Col className="actual">
-                                <Speedometer title="Actual" percent={ percentage } description="actual perfomance" />
-                            </Col>
-                            <Col className="planned">
-                                <Speedometer title="Planned" percent={ plannedPercentage } description="planned perfomance" />
+                                <Speedometer title="Perfomance Speedometer" percent={ percentage } description={ dataContext.split("_").join(" ") } />
                             </Col>
                         </Row>
                     }
