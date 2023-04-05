@@ -3,7 +3,6 @@ import { Card, Col, Row } from "react-bootstrap";
 import { SCORECARD } from "../../utils/constants";
 import OpenCloseIcon from "../common/openCloseIcon";
 
-
 import "./index.scss";
 import ViewObjective from "./viewObjective";
 

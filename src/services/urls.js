@@ -32,3 +32,4 @@ export const updatePasswordURL =  `${baseURL}/auth/update-password/`;
 export const resetPasswordURL = (resetToken) => `${baseURL}/auth/reset-password/${resetToken}/`;
 export const resetPasswordRequestURL =  `${baseURL}/auth/reset-password-request/`;
 export const updateRoleURL =  `${baseURL}/auth/update-role/`;
+export const fetchApproversURL =  `${baseURL}/auth/fetch-approvers/`;

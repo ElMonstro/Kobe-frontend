@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Card, Spinner } from "react-bootstrap";
+import React, { useEffect, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { useOutletContext, useParams } from "react-router-dom";
+import ReactToPrint from "react-to-print";
+import { Printer } from "styled-icons/bootstrap";
 
 import { fetchPerspectivesURL } from "../../services/urls";
-import { GET, PERSPECTIVE_OBJECT, VIEW } from "../../utils/constants";
+import { GET, VIEW } from "../../utils/constants";
 import { makeRequest } from "../../utils/requestUtils";
 import "./index.scss";
-import ViewPerspective from "./viewPerspective";
-import ObjectivesHeader from "./viewScorecardHeader";
+import PrintableViewScorecard from "./viewScorecard";
 
 const ViewScorecard = ({ settings }) => {
 
@@ -16,6 +16,7 @@ const ViewScorecard = ({ settings }) => {
     const { role } = useParams();
     const [spinnerState, setSpinnerState] = useState(true);
     const { setActiveComponent } = useOutletContext();
+    let componentRef = useRef();
 
     useEffect(() => {
         setActiveComponent(VIEW);
@@ -28,22 +29,21 @@ const ViewScorecard = ({ settings }) => {
     }, [role])
     
     return (
-        <div className="view_scorecard">
-            <ObjectivesHeader />
-            
-            {
-                spinnerState? <Spinner className="spinner" animation="grow"/>:
-                <Card className="staff_card perspectives">
-                    {
-                        perspectives.map(perspective => {
-                            if (perspective.name === PERSPECTIVE_OBJECT.behavioral_name && !settings.behaviorals_enabled) return;
-
-                            return <ViewPerspective key={ perspective.id } { ...perspective } />;
-                        })
-                        
-                    }
-                </Card>
-            }
+        <div className="scorecard_view">
+            <PrintableViewScorecard 
+                perspectives={ perspectives } 
+                spinnerState={ spinnerState } 
+                setActiveComponent={ setActiveComponent } 
+                ref={(el) => (componentRef = el)}
+            />
+        <ReactToPrint
+            trigger={() => <div className="print_btn dashboard_btn">
+                                <span className="text"> print </span>
+                                <Printer />
+                            </div>
+                }
+            content={() => componentRef}
+        />
         </div>
     )
 }

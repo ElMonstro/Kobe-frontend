@@ -6,8 +6,9 @@ import { base_cloudinary_url } from "../../services/baseURL";
 import OpenCloseIcon from "../common/openCloseIcon";
 import "./index.scss";
 
-const ViewInitiative = ({name, weight, target, percentage_target, score, percentage_score, status, role }) => {
+const ViewInitiative = ({name, weight, percentage_target, measures, percentage_score, status, role }) => {
 
+    const measure_name = measures[0]?.name
     const profileUrl = base_cloudinary_url + role?.profile_pic
     return (
         <Row className="initiative">
@@ -28,11 +29,11 @@ const ViewInitiative = ({name, weight, target, percentage_target, score, percent
                                     </Tooltip>
                                 }
                             > 
-                                <span>
-                                    <img className="thumbnail" src={ role.profile_pic? profileUrl: thumbnail } alt="profile pic"/>
-                                </span>
-
+                            <span>
+                                <img className="thumbnail" src={ role.profile_pic? profileUrl: thumbnail } alt="profile pic"/>
+                            </span>
                             </OverlayTrigger>
+                            <span>{role?.user.first_name[0]} {role?.user.second_name[0]}</span>
                                      
                         </Col>
                         <Col></Col>
@@ -41,7 +42,7 @@ const ViewInitiative = ({name, weight, target, percentage_target, score, percent
                 <Col className="second_half">
                     <Row>
                         <Col></Col>
-                        <Col></Col>
+                        <Col className="measure">{ measure_name }</Col>
                         <Col className="weight">{ weight }</Col>
                         <Col>{ percentage_target }</Col>
                         <Col className={ `score ${status}_color` }>{ percentage_score }</Col>

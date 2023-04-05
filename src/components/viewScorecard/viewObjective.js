@@ -9,7 +9,7 @@ import ViewInitiative from "./viewInitiative";
 const ViewObjective = ({ name, measures, weight, target, percentage_target, percentage_score, status, initiatives, change_approval_trackers }) => {
 
     const [isOpen, setIsOpen] = useState(false);
-    const measure_name = null
+    const measure_name = measures[0]?.name
     let initiativesClassName;
     let objectiveClassName;
     const approval_status = APPROVAL_MAPPER[change_approval_trackers[0]?.is_approved];

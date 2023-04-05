@@ -36,7 +36,6 @@ const ScorecardNavCard = ({ activeComponent, orgChart, settings }) => {
 
       let createClassName = "";
       (orgChart?.reporting_to && !settings?.behaviorals_enabled)? createClassName = " hidden": createClassName = "";
-      console.log(createClassName)
 
     return (
         <div className="scorecard_nav">
