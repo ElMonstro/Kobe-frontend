@@ -45,7 +45,7 @@ const StrategyMapObjectiveView = ({ id, name, status, links })=> {
             </div>
             {
                 links?.map(link => {
-                                return <Xarrow curveness={true} key={ link.id } start={ `objective_${id}`  } end={ `objective_${link?.id}`  } color="black" />
+                                return <Xarrow curveness={2} key={ link.id } start={ `objective_${id}`  } end={ `objective_${link?.id}`  } color="black" />
                             })
             }
         </div>

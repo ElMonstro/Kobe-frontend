@@ -17,8 +17,9 @@ import {  REPORTS } from "../../../utils/constants";
 
 
 const HistoricalChart = ({ title, chartData, currentObject, loadedIn }) => {
-  // if (loadedIn !== REPORTS)
-    chartData = [ ...chartData, currentObject?.percentage_progress]
+
+  if (loadedIn !== REPORTS)
+    chartData = [ ...chartData, Math.ceil(currentObject?.percentage_progress)];
 
   useEffect(() => {
         ChartJS.register(
@@ -35,6 +36,12 @@ const HistoricalChart = ({ title, chartData, currentObject, loadedIn }) => {
           
       const options = {
         responsive: true,
+        scales: {
+          y: {
+              beginAtZero: true,
+              max: 100
+          }
+        },
         plugins: {
           legend: {
             position: "top",

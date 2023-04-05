@@ -30,7 +30,7 @@ const DashboardTab = ({ loadedIn, personalData, review_period }) => {
     const [historicalData, setHistoricalData] = useState([]);
     let objects = perspectives;
     let currentObject = {
-        percentage_score: 0,
+        percentage_progress: 0,
         percentage_target: 0,
         current_period_target: 0,
         last_period_score: 0
@@ -62,8 +62,7 @@ const DashboardTab = ({ loadedIn, personalData, review_period }) => {
 
     if (!mode && perspectives.length > 0) {
         for (let perspective of perspectives) {
-            currentObject.percentage_score += perspective.percentage_score * perspective.weight/100;
-            currentObject.percentage_target += perspective.percentage_target * perspective.weight/100;
+            currentObject.percentage_progress += perspective.percentage_progress * perspective.weight/100;
             currentObject.current_period_target += perspective.current_period_target * perspective.weight/100;
             currentObject.last_period_score += perspective.last_period_score * perspective.weight/100;
         }
@@ -82,6 +81,7 @@ const DashboardTab = ({ loadedIn, personalData, review_period }) => {
         makeRequest(historyURL, GET, null, true, false)
             .then(data => {
                 data && setHistoricalData(data);
+                console.log(data)
             });
             
     }, [historyURL]);
