@@ -6,7 +6,7 @@ import OpenCloseIcon from "../common/openCloseIcon";
 import "./index.scss";
 import ViewObjective from "./viewObjective";
 
-const ViewPerspective = ({ objectives, alias, score, status, weight }) => {
+const ViewPerspective = ({ objectives, alias, score, status, weight, percentage_progress }) => {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -46,7 +46,7 @@ const ViewPerspective = ({ objectives, alias, score, status, weight }) => {
                         <Col></Col>
                         <Col>{ weight }</Col>
                         <Col></Col>
-                        <Col className={ `score ${status}_color` }>{ score }</Col>
+                        <Col className={ `score ${status}_color` }>{ percentage_progress }</Col>
                     </Row>
                 </Col>
             </Row>

@@ -27,7 +27,7 @@ const SignOff = ({role}) => {
             {
                 approvers.map(approver => {
                     return (
-                    <div className="approver">
+                    <div key={approver.name} className="approver">
                         <span className="label">Approver:</span>
                         <span className="name">{ approver.name } <span>({ approver.position })</span></span>
                         <span className="label">Signature: </span>

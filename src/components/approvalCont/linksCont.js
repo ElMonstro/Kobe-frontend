@@ -16,8 +16,8 @@ const ApprovalLinksCont = () => {
                 <ApprovalLinksView { ...objective } title="Updated Links"/>
             </Xwrapper>
             <div className="approval_buttons">
-                <Button onClick={ approve } className="response_button approve">Approve Updates</Button>
-                <Button onClick={ reject } className="response_button reject">Reject Updates</Button>
+                <Button onClick={ approve } className="response_button approve">Approve</Button>
+                <Button onClick={ reject } className="response_button reject">Reject</Button>
             </div>
         </div>
     )

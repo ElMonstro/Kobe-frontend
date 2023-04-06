@@ -32,9 +32,7 @@ const ViewInitiative = ({name, weight, percentage_target, measures, percentage_s
                             <span>
                                 <img className="thumbnail" src={ role.profile_pic? profileUrl: thumbnail } alt="profile pic"/>
                             </span>
-                            </OverlayTrigger>
-                            <span>{role?.user.first_name[0]} {role?.user.second_name[0]}</span>
-                                     
+                            </OverlayTrigger>                                     
                         </Col>
                         <Col></Col>
                     </Row>

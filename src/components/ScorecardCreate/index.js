@@ -76,7 +76,6 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         initialValues[initiative.cascadeId] = '';
         validationSchema[initiative.initiativeId] = Yup.string();
         validationSchema[initiative.weightId] = Yup.number();
-        validationSchema[initiative.cascadeId] = Yup.number().required();
         return undefined;
     })
 
@@ -106,7 +105,8 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         initialValues.percentage_target = initiative.percentage_target;
         initialValues.baseline = initiative.baseline;
         initialValues.data_type = initiative.data_type;
-        initialValues.budget_description = initiative.budget_description
+        initialValues.budget = initiative.budget;
+        initialValues.evidence_description = initiative.evidence_description;
         initialValues[measures[0].measureId] = initiative?.measures[0]?.name
         initiative.period_targets?.map(period => {
             initialValues[period.period_object.period] = period.target;
@@ -118,7 +118,8 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         validationSchema[initiatives[0].initiativeId] = Yup.string();
         validationSchema[initiatives[0].cascadeId] = Yup.string();
     } else {
-        initialValues.evidence_description = ''
+        initialValues.evidence_description = '';
+        initialValues.budget = '';
     }
 
     const onSubmit = async (values, { setFieldError, resetForm }) => {
