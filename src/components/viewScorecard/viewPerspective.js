@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { SCORECARD } from "../../utils/constants";
 import OpenCloseIcon from "../common/openCloseIcon";
 

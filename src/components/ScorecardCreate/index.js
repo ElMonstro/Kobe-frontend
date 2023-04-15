@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Card } from "react-bootstrap"
-import { CASCADED, CREATE, EDIT, ERROR, GET, PATCH, POST, SCORECARD } from "../../utils/constants";
+import { CASCADED, CREATE, EDIT, GET, PATCH, POST, SCORECARD } from "../../utils/constants";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from "react-redux";
@@ -160,8 +160,6 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         validationSchema: Yup.object(validationSchema),
         onSubmit: onSubmit,
     });
-
-    console.log(formik.errors)
 
     return (
         <div className="score_card_create">

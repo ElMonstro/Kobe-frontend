@@ -12,7 +12,7 @@ const Initiative = ({ id, name, budget, score, percentage_target, units_target, 
 
     let target;
     data_type === UNITS? target = units_target: target = percentage_target;
-    console.log(units_target)
+
     const formik = useFormik({
         initialValues: {
             score: score,
@@ -27,10 +27,7 @@ const Initiative = ({ id, name, budget, score, percentage_target, units_target, 
                 fireNotification(ERROR, "You must enter evidence url")
                 return
             }
-            
-            const id = values.id;
-            console.log(values)
-            makeRequest(retrieveObjectiveURL(id), PATCH, values, true);
+            makeRequest(retrieveObjectiveURL(values.id), PATCH, values, true);
         },
     });
 
