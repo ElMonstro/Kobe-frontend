@@ -11,7 +11,7 @@ import ObjectivesHeader from "./viewScorecardHeader";
 class PrintableViewScorecard extends React.Component {
 
     render() {
-        const { spinnerState, perspectives, settings } = this.props;
+        const { spinnerState, perspectives } = this.props;
 
         return (
             <div className="view_scorecard">
@@ -22,8 +22,6 @@ class PrintableViewScorecard extends React.Component {
                     <Card className="staff_card perspectives">
                         {
                             perspectives.map(perspective => {
-                                if (perspective.name === PERSPECTIVE_OBJECT.behavioral_name && !settings.behaviorals_enabled) return;
-
                                 return <ViewPerspective key={ perspective.id } { ...perspective } />;
                             })
                             

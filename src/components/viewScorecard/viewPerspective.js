@@ -19,6 +19,8 @@ const ViewPerspective = ({ objectives, alias, score, status, weight, percentage_
         setIsOpen(!isOpen);
     }
 
+    console.log(objectives)
+
     return (
         <Row className={ perspectiveClassName }>
             <Row>
