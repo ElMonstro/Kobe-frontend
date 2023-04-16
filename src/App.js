@@ -13,7 +13,7 @@ import {
   LINKS, OBJECTIVE, SCORE, 
   DASHBOARDS, OVER_VIEW, OVERALL, 
   REPORTS, LIST, DASHBOARD, 
-  APPRAISAL, RESET_PASSWORD 
+  APPRAISAL, RESET_PASSWORD, DELETE 
 } 
 from "./utils/constants";
 
@@ -46,6 +46,7 @@ import ReportSelection from "./components/reportsTab/reportSelection";
 import ListsReport from "./components/listReport";
 import AppraisalReport from "./components/appraisal";
 import ProfileModal from "./components/modals/profileModal";
+import InitiativeDeleteRequest from "./components/approvalCont/viewDeletedInitiative";
 
 function App({ isLoggedIn, webSocket }) {
 
@@ -99,6 +100,7 @@ function App({ isLoggedIn, webSocket }) {
             <Route path={ OBJECTIVE } element={ <ObjectiveApprovalView /> } />
             <Route path={ LINKS } element={ <ApprovalLinksCont /> } />
             <Route path={ SCORE } element={ <ScoreUpdateAprroveCont /> } />
+            <Route path={ DELETE } element={ <InitiativeDeleteRequest /> } />
           </Route>
           <Route path="/:role" element={<Protected> <StaffDashboard /> </Protected>} >
             <Route index element={<ScorecardCont />} />

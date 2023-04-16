@@ -36,11 +36,6 @@ const ApprovalObjectiveView = () => {
             }
             <div className="objective_header">{ changeWording } Objective</div>
             <ViewAmendedObjective { ...objective }/>
-            <div className="approval_buttons">
-                <Button onClick={ approve } className="response_button approve">Approve</Button>
-                <Button onClick={ reject } className="response_button reject">Reject</Button>
-            </div>
-            
         </div>
     )
 }

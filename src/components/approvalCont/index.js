@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Modal } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { confirm } from "react-bootstrap-confirmation";
 
 import "./index.scss";
@@ -60,10 +60,12 @@ const ApprovalModal = () => {
                     <Outlet context={ { 
                         objective: approvalObject?.change_approval_tracker?.objective,
                         evidence: approvalObject?.change_approval_tracker?.evidence,
-                        approve,
-                        reject,
                         } } 
                     />
+                    <div className="approval_buttons">
+                        <Button onClick={ approve } className="response_button approve">Approve</Button>
+                        <Button onClick={ reject } className="response_button reject">Reject</Button>
+                    </div>
                 </Modal.Body>
             </Modal>
         </div>

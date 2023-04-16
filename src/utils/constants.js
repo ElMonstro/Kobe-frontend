@@ -54,6 +54,7 @@ export const INFO = "info";
 export const SUCCESS = "success";
 export const WARNING = "warning";
 export const APPRAISAL = "appraisal";
+export const DELETE = "delete"
 
 export const PERSPECTIVE_OBJECT = {
     financial_name: FINANCIAL,

@@ -7,7 +7,7 @@ import ViewObjectiveScores from "./viewObjectiveScoreUpdate";
 
 const ScoreUpdateAprroveCont = () => {
 
-    const { objective, approve, reject, evidence} = useOutletContext();
+    const { objective, evidence} = useOutletContext();
     return (
         <div className="view_objective">
             <Row className="header">
@@ -30,11 +30,6 @@ const ScoreUpdateAprroveCont = () => {
             </div>
             <div className="objective_header">Updated Scores</div>
             <ViewObjectiveScores { ...objective } evidence={ evidence } />
-            <div className="approval_buttons">
-                <Button onClick={ approve } className="response_button approve">Approve</Button>
-                <Button onClick={ reject } className="response_button reject">Reject</Button>
-            </div>
-            
         </div>
     )
 }
