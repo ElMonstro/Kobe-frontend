@@ -16,22 +16,22 @@ const requestTypeMapper = {
 export const notificationHandler = (response, successMessage, errorMessage) => {
     switch (response.status){
         case 200:
-            fireNotification(NOTIF_SUCCESS, successMessage?successMessage:ACTION_SUCCESSFUL_MESSAGE);
+            fireNotification(NOTIF_SUCCESS, successMessage || ACTION_SUCCESSFUL_MESSAGE);
             break;
         case 201:
-            fireNotification(NOTIF_SUCCESS, successMessage?successMessage:ACTION_SUCCESSFUL_MESSAGE);
+            fireNotification(NOTIF_SUCCESS, successMessage || ACTION_SUCCESSFUL_MESSAGE);
             break;
         case 204:
-            fireNotification(NOTIF_SUCCESS, successMessage?successMessage:ACTION_SUCCESSFUL_MESSAGE);
+            fireNotification(NOTIF_SUCCESS, successMessage || ACTION_SUCCESSFUL_MESSAGE);
             break;
         case 400:
-            fireNotification(NOTIF_ERROR, errorMessage?errorMessage:response.data.detail)
+            fireNotification(NOTIF_ERROR, errorMessage || response.data.detail)
             break;      
         case 401:
-            fireNotification(NOTIF_ERROR, errorMessage?errorMessage:response.data.detail);
+            fireNotification(NOTIF_ERROR, errorMessage || response.data.detail);
             break;
         case 403:
-            fireNotification('error', 'Error', errorMessage?errorMessage:response.data.detail);
+            fireNotification('error', 'Error', errorMessage || response.data.detail);
             break;
         case 404:
             fireNotification('error', 'Error', RESOURCE_NOT_FOUND_MESSAGE);
