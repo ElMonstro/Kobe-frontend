@@ -4,7 +4,7 @@ const resolve_base_url = () => {
 
     return base_url;
 }
-export const base_cloudinary_url = "https://res.cloudinary.com/elmonstro/";
+export const BASE_CLOUDINARY_URL = "https://res.cloudinary.com/elmonstro/";
 export default resolve_base_url;
 export const sockets_url = "ws://144.126.192.148:8000/ws";
 // export const sockets_url = "ws://127.0.0.1:8000/ws";

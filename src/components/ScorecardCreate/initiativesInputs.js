@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
-import { useParams } from "react-router-dom";
 
 import addBtn from "../../assets/plus_sign.svg";
 import { fetchUnderlingsURL } from "../../services/urls";
 import { GET } from "../../utils/constants";
 import { makeRequest } from "../../utils/requestUtils";
 import InitiativeInput from "./initiativeInput";
+import CreatedInitative from "./createdInitative";
 
 
 const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives }) => {
 
     const [underlings, setUnderlings] = useState([]);
+    const [createdInitiatives, setCreatedInitiatives] = useState([]);
     const { is_self_cascaded } = initiative;
-    const { mode } = useParams();
     let contClassName;
 
-    if (mode === "edit" || is_self_cascaded) {
+    if (is_self_cascaded) {
         contClassName = "initiatives hidden";
     } else {
         contClassName = "initiatives";
@@ -29,7 +29,21 @@ const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives }) =
         });
     }, []);
 
-    
+    useEffect(() => {
+        setCreatedInitiatives(initiative?.initiatives)
+    }, [initiative])
+
+    const deleteFromObjectlist = (initiatives, key, deleteId) => {
+        for (let index=0; index < initiatives.length; index++ ) {
+            if (initiatives[index][key] === deleteId) {
+                initiatives.splice(index, 1);
+                
+                break;
+            }
+        }
+
+        return [...initiatives];
+    }
 
     const [initiativesIndex, setInitiativesIndex] = useState(1);
 
@@ -37,17 +51,16 @@ const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives }) =
         if (initiatives.length === 1) {
             return;
         }
-
-        for (let index=0; index < initiatives.length; index++ ) {
-            if (initiatives[index].deleteId === deleteId) {
-                initiatives.splice(index, 1);
-                
-                break;
-            }
-        }
+        const newInitiatives = deleteFromObjectlist(initiatives, 'deleteId', deleteId);
+        
         setInitiatives([
-            ...initiatives
+            ...newInitiatives
         ]);
+    }
+
+    const deleteCreatedInitiative = deleteId => {
+        const newInitiatives = deleteFromObjectlist(createdInitiatives, 'id', deleteId);
+        setCreatedInitiatives([...newInitiatives]);
     }
 
     const addInitiative = e => {
@@ -84,6 +97,17 @@ const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives }) =
                 <Col>Cascade</Col>
                 <Col></Col>
             </Row>
+
+        { 
+            createdInitiatives?.map( createdInitiative => {
+                return (<CreatedInitative 
+                            key={ createdInitiative.id } 
+                            deleteInitiative={ deleteCreatedInitiative }
+                            initiative={ createdInitiative }
+                            deleteId={ createdInitiative.id }
+                        />)
+            })
+        }   
 
         { 
             initiatives.map( initiative => {

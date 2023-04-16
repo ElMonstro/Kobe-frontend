@@ -143,6 +143,8 @@
         }
 
         .delete_btn {
+            margin-left: 20px;
+
             svg{
                 height: 20px;
                 color: #828282;
@@ -152,10 +154,16 @@
             
         }
 
+        .red {
+            svg {
+                color: red;
+            }
+        }
+
         .thumbnail {
             vertical-align: middle;
-            width: 35px;
-            height: 35px;
+            width: 25px;
+            height: 25px;
             border-radius: 50%;
         }
 

@@ -6,12 +6,12 @@ import defaultAvatar from "../../../assets/defaultAvatar.png";
 import { connect } from "react-redux";
 import { PATCH } from "../../../utils/constants";
 import { setProfilePic } from "../../../redux/actions";
-import { base_cloudinary_url } from "../../../services/baseURL";
+import { BASE_CLOUDINARY_URL } from "../../../services/baseURL";
 
 const ProfilePicUpload = ({ userRole, setProfilePic }) => {
 
     const icon = () => <div className="upload_icon"><img alt="upload" src={ uploadIcon } /></div>
-    const profile_pic_url = userRole?.profile_pic? base_cloudinary_url + userRole.profile_pic: defaultAvatar;
+    const profile_pic_url = userRole?.profile_pic? BASE_CLOUDINARY_URL + userRole.profile_pic: defaultAvatar;
 
     return (
         <div className="profile_pic_cont">

@@ -33,3 +33,4 @@ export const resetPasswordURL = (resetToken) => `${baseURL}/auth/reset-password/
 export const resetPasswordRequestURL =  `${baseURL}/auth/reset-password-request/`;
 export const updateRoleURL =  `${baseURL}/auth/update-role/`;
 export const fetchApproversURL =  `${baseURL}/auth/fetch-approvers/`;
+export const deleteinitiativeURL = id => `${baseURL}/scorecard/objectives/${id}/delete/`;

@@ -144,7 +144,9 @@ export const createObjectivePayload = (data, initiativesSchema, measures, period
     initiativesSchema.map(initiative => {
       const initiativePayload = {};
       initiativePayload['name'] = data[initiative.initiativeId];
-      if (data[initiative.weightId] !== "") initiativePayload['weight'] = data[initiative.weightId];
+      if (data[initiative.weightId] !== "") {
+        initiativePayload['weight'] = data[initiative.weightId];
+      }
       initiativePayload['role'] = data[initiative.cascadeId];
 
       delete data[initiative.initiativeId];
@@ -182,7 +184,9 @@ export const createObjectivePayload = (data, initiativesSchema, measures, period
   
     data.measures = measuresPayload;
     data.initiatives = initiativesPayload;
-    if (periodTargetsPayload.length > 0) data.period_targets = periodTargetsPayload;
+    if (periodTargetsPayload.length > 0) {
+      data.period_targets = periodTargetsPayload;
+    }
     data.data_type === UNITS? delete data["percentage_target"]: delete data["units_target"]
     // Clear empty fields
     Object.keys(data).map(key => {

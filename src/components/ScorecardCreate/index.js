@@ -73,7 +73,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
     initiatives.map(initiative => {
         initialValues[initiative.initiativeId] = '';
         initialValues[initiative.weightId] = '';
-        initialValues[initiative.cascadeId] = '';
+        initialValues[initiative.cascadeId] = actingRole?.id;
         validationSchema[initiative.initiativeId] = Yup.string();
         validationSchema[initiative.weightId] = Yup.number();
         return undefined;
@@ -142,7 +142,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
                 });
             
         } else {
-            (mode === EDIT || initiative?.is_self_cascaded) && delete payload.initiatives;
+            (initiative?.is_self_cascaded) && delete payload.initiatives;
             makeRequest(amendObjectiveURL(initiativeId, mode), PATCH, payload, true)
             .then(data=> {
                 if (data) {

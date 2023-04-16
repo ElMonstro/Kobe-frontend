@@ -2,64 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Form, Row, Col } from "react-bootstrap"
 import { DeleteBin5 } from "@styled-icons/remix-fill/DeleteBin5";
 
-import thumbnail from "../../assets/josh_logo.jpg";
 import { connect } from "react-redux";
 
 
 const InitiativeInput = ({ formik, initiativeId, weightId, cascadeId, deleteId, deleteInitiative, underlings, orgChart }) => {
 
-    const [selectedUser, setSelectedUser] = useState(null);
 
     const onDeleteInit = e => {
         const deleteId = e.target.parentElement.parentElement.id;
-        deleteId && deleteInitiative(deleteId)
+        deleteId && deleteInitiative(deleteId);
+
     }
-
-    const Cascaded = (
-    <div className="cascaded">
-        <span>
-            <img className="thumbnail" src={ thumbnail } alt="J"/>
-        </span>
-
-        <span className="underling_name">
-            {selectedUser?.user.first_name} {selectedUser?.user.second_name}
-        </span>
-    
-    </div>
-    )
-
-    const Cascade = (
-        <Form.Group controlId={ cascadeId }>
-                {
-                 <Form.Select
-                    className="cascade"
-                    type="text" 
-                    placeholder="Select Role"
-                    valuedefault=""
-                    { ...formik.getFieldProps(cascadeId) } 
-                    isInvalid={ formik.touched[cascadeId] && formik.errors[cascadeId] }
-                >
-                    <option>Cascade</option>
-                    <option value={ orgChart?.id } key={ orgChart?.id }>Cascade to Self</option>
-                    {
-                        underlings?.map(underling => {
-                            return (
-                                <option value={ underling?.id } key={ underling?.id }>
-                                    { underling?.user.first_name + ' '  + underling?.user.second_name}
-                                </option>
-                            )
-                        })
-                    }
-
-
-                </Form.Select>
-                }
-                <Form.Control.Feedback type='invalid'>
-                    { formik.errors[cascadeId] }
-                </Form.Control.Feedback>
-                
-            </Form.Group>
-    )
 
     return (
         <Row className="inputs_row" id={ initiativeId }>
@@ -95,7 +48,35 @@ const InitiativeInput = ({ formik, initiativeId, weightId, cascadeId, deleteId, 
             </Form.Group>
         </Col>
         <Col>
-            {selectedUser? Cascaded: Cascade}
+            <Form.Group controlId={ cascadeId }>
+                {
+                 <Form.Select
+                    className="cascade"
+                    type="text" 
+                    placeholder="Select Role"
+                    valuedefault={orgChart?.id}
+                    { ...formik.getFieldProps(cascadeId) } 
+                    isInvalid={ formik.touched[cascadeId] && formik.errors[cascadeId] }
+                >
+                    <option value={ orgChart?.id } key={ orgChart?.id }>Cascade to Self</option>
+                    {
+                        underlings?.map(underling => {
+                            return (
+                                <option value={ underling?.id } key={ underling?.id }>
+                                    { underling?.user.first_name + ' '  + underling?.user.second_name}
+                                </option>
+                            )
+                        })
+                    }
+
+
+                </Form.Select>
+                }
+                <Form.Control.Feedback type='invalid'>
+                    { formik.errors[cascadeId] }
+                </Form.Control.Feedback>
+                
+            </Form.Group>
         </Col>
         <Col className="delete_btn">
             <span id={ deleteId } onClick={ onDeleteInit }><DeleteBin5 /></span>

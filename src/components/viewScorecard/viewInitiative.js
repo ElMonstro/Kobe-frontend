@@ -2,13 +2,13 @@ import React from "react";
 import { Col, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
 
 import thumbnail from "../../assets/josh_logo.jpg";
-import { base_cloudinary_url } from "../../services/baseURL";
+import { BASE_CLOUDINARY_URL } from "../../services/baseURL";
 import OpenCloseIcon from "../common/openCloseIcon";
 import "./index.scss";
 
 const ViewInitiative = ({name, weight, percentage_target, measures, percentage_score, status, role }) => {
     const measure_name = measures[0]?.name
-    const profileUrl = base_cloudinary_url + role?.profile_pic
+    const profileUrl = BASE_CLOUDINARY_URL + role?.profile_pic
     return (
         <Row className="initiative">
             <Row>

@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import './index.scss';
 import defaultAvatar from "../../../assets/defaultAvatar.png";
 import defaultLogo from "../../../assets/logo.svg"
-import { base_cloudinary_url } from "../../../services/baseURL";
+import { BASE_CLOUDINARY_URL } from "../../../services/baseURL";
 import { countUnreadNotifications, getPeriods, logout } from "../../../utils";
 import { makeRequest } from "../../../utils/requestUtils";
 import { GET } from "../../../utils/constants";
@@ -40,7 +40,7 @@ const Header = ({
     const { name: companyName, logo } = companyInfo;
     const user = JSON.parse(localStorage.getItem('user'));
     const notificationsNumber = countUnreadNotifications(notifications);
-    const profile_pic_url = userRole?.profile_pic? base_cloudinary_url + userRole.profile_pic: defaultAvatar;
+    const profile_pic_url = userRole?.profile_pic? BASE_CLOUDINARY_URL + userRole.profile_pic: defaultAvatar;
 
     const handleNotificationsClick = () => setShowNotifications(true);
 
@@ -80,11 +80,11 @@ const Header = ({
             <Container className="header_container" fluid>
                 <Navbar.Brand href={ user?.is_admin? "/admin": "/"} >
                     <img className="logo" 
-                        src={ logo? base_cloudinary_url + logo: defaultLogo } 
+                        src={ logo? BASE_CLOUDINARY_URL + logo: defaultLogo } 
                         alt="logo"
                     />
                     <span className="company_name">
-                        { companyName? companyName: "Kobe Limited"}
+                        { companyName || "Kobe Limited"}
                     </span>
                     
                 </Navbar.Brand>  
@@ -115,7 +115,7 @@ const Header = ({
                         }
 
                         <span  className="user_name">
-                            { user?.first_name? user?.first_name: "Menu"}
+                            { user?.first_name || "Menu"}
                         </span>
                     </Col>
                     <Col lg="2">
