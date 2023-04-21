@@ -6,7 +6,7 @@ import OpenCloseIcon from "../common/openCloseIcon";
 import "./index.scss";
 import ViewObjective from "./viewObjective";
 
-const ViewPerspective = ({ objectives, alias, score, status, weight, percentage_progress }) => {
+const ViewPerspective = ({ objectives, alias, status, weight, percentage_progress }) => {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -18,8 +18,6 @@ const ViewPerspective = ({ objectives, alias, score, status, weight, percentage_
     const handleClick = e => {
         setIsOpen(!isOpen);
     }
-
-    console.log(objectives)
 
     return (
         <Row className={ perspectiveClassName }>

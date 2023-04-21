@@ -60,7 +60,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         quaterly_target: '',
         baseline: '',
         percentage_target: '',
-        units_target: '',
+        endline: '',
         }
 
     periods.map(period => {
@@ -101,7 +101,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
     if ( name !== undefined) { // if mode is not create mode
         initialValues.name = initiative.name;
         initialValues.perspective = initiative.perspective;
-        initialValues.units_target = initiative.units_target;
+        initialValues.endline = initiative.units_target + initiative.baseline;
         initialValues.percentage_target = initiative.percentage_target;
         initialValues.baseline = initiative.baseline;
         initialValues.data_type = initiative.data_type;
@@ -128,6 +128,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         }
 
         const payload = createObjectivePayload(values, initiatives, measures, periods);
+        console.log(payload);
 
         if (!Boolean(initiativeId)){
             makeRequest(createObjectiveURL, POST, payload, true)
@@ -200,7 +201,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
                 </Card>
 
                 <div className="form_btns">
-                        <Button className="cancel_btn" onClick={() => navigate(-1)}>Cancel</Button>
+                        <Button className="cancel_btn" onClick={() => navigate()}>Cancel</Button>
                         <Button className="submit_btn" type="">Submit</Button>
                     
                     </div>

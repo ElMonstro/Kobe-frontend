@@ -225,7 +225,7 @@ export const isObjectEmpty = obj => {
 
 const getTarget = values => {
     let target;
-    values.data_type === UNITS? target = Math.abs(values.units_target - values.baseline): target = values.percentage_target
+    values.data_type === UNITS? target = Math.abs(values.endline - values.baseline): target = values.percentage_target
     
     return parseInt(target)
 };
@@ -236,8 +236,6 @@ export const arePeriodicalInputsValid = (values, periods, setFieldError) => {
     periods.map(period => {
         total += parseInt(values[period]);
     });
-    console.log(target)
-    console.log(total)
 
     if (total !== target) {
         periods.map(period => {
@@ -264,8 +262,9 @@ export const countUnreadNotifications = (notifications) => {
     let count = 0;
 
     for (const notification of notifications) {
-        if (notification.is_seen === false)
-            count++;
+        if (notification.is_seen === false) {
+          count++;
+        }
     }
 
     return count;
@@ -370,7 +369,9 @@ export const filterEmployees = (employee, filters) => {
             passesFilter = employee[key] === filter.value;
         }
 
-        if (!passesFilter) return false;
+        if (!passesFilter) {
+          return false;
+        }
     }
 
     return true;

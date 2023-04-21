@@ -6,9 +6,18 @@ import { BASE_CLOUDINARY_URL } from "../../services/baseURL";
 import OpenCloseIcon from "../common/openCloseIcon";
 import "./index.scss";
 
-const ViewInitiative = ({name, weight, percentage_target, measures, percentage_score, status, role }) => {
+const ViewInitiative = ({
+    name, weight, percentage_target, score, data_type, units_target, measures,
+    percentage_score, status, role
+    }) => {
     const measure_name = measures[0]?.name
     const profileUrl = BASE_CLOUDINARY_URL + role?.profile_pic
+    const score_display_mapper = {
+        units: [units_target, score, ""],
+        percentage: [percentage_target, percentage_score, "%"]
+    }
+    const [target, displayScore, symbol] = score_display_mapper[data_type];
+
     return (
         <Row className="initiative">
             <Row>
@@ -41,8 +50,8 @@ const ViewInitiative = ({name, weight, percentage_target, measures, percentage_s
                         <Col></Col>
                         <Col className="measure">{ measure_name }</Col>
                         <Col className="weight">{ weight }</Col>
-                        <Col>{ percentage_target }</Col>
-                        <Col className={ `score ${status}_color` }>{ percentage_score }</Col>
+                        <Col>{ target }{ symbol }</Col>
+                        <Col className={ `score ${status}_color` }>{ displayScore }{ symbol }</Col>
                     </Row>
                 </Col>
             </Row>
