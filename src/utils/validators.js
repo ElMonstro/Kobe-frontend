@@ -88,6 +88,10 @@ export const yupCascadeCutoffObj = Yup.object({
             .required('* Required')
 });
 
+export const yupApprovalLevels = Yup.object({
+    approval_levels: Yup.number()
+            .required('* Required')
+});
 
 export const yupReviewPeriodObj = Yup.object({
     review_period: Yup.number()
