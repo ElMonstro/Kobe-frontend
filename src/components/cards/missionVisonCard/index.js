@@ -9,15 +9,16 @@ import { POST } from "../../../utils/constants";
 import "./index.scss";
 
 
-const MissionVisionForm = ({ setCompanyInfo }) => {
+const MissionVisionForm = ({ setCompanyInfo, companyInfo }) => {
 
     const formik = useFormik({
         initialValues: {
-        vision: '',
-        mission: '',
-        name: ''
+            vision: companyInfo?.vision,
+            mission: companyInfo?.mission,
+            name: companyInfo?.name,
         },
         validationSchema: yupMissionFormObj,
+        enableReinitialize: true,
         onSubmit: async (values) => {
            makeRequest(companyInfoURL, POST, values, true)
             .then(data => setCompanyInfo(data));

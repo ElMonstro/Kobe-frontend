@@ -23,6 +23,7 @@ const EmbededInput = ({ defaultValue, initialValueKey, setSettings }) => {
 
     const formik = useFormik({
         initialValues,
+        enableReinitialize: true,
         onSubmit: async (values) => {
             const responseData =  await makeRequest(settingsURL, POST, values, true);
             responseData && setSettings(responseData);
@@ -38,11 +39,10 @@ const EmbededInput = ({ defaultValue, initialValueKey, setSettings }) => {
                 { ...formik.getFieldProps(initialValueKey) }
                 id={ initialValueKey } 
                 />
-            { !isEditable? <span className="switch_btn" onClick={ e => setEditable(true) }>Edit</span>
-            : <button className="save_btn" type="submit">
-                Save
-                <span className="cancel_btn" onClick={e => setEditable(false)}><Close/></span>
-            </button>}
+            { isEditable ? <button className="save_btn" type="submit">
+                              Save
+                              <span className="cancel_btn" onClick={e => setEditable(false)}><Close/></span>
+                          </button> : <span className="switch_btn" onClick={ e => setEditable(true) }>Edit</span>}
         </Form>
     )
 }

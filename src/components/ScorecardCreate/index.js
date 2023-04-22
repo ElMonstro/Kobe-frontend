@@ -128,7 +128,6 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         }
 
         const payload = createObjectivePayload(values, initiatives, measures, periods);
-        console.log(payload);
 
         if (!Boolean(initiativeId)){
             makeRequest(createObjectiveURL, POST, payload, true)

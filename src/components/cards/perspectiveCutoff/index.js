@@ -14,9 +14,10 @@ const PerspectiveCutoffForm = ({ settings }) => {
 
     const formik = useFormik({
         initialValues: {
-            perspective_cutoff: '',
+            perspective_cutoff: settings?.perspective_cutoff,
         },
         validationSchema: yupPerspectiveCutoffObj,
+        enableReinitialize: true,
         onSubmit: async (values) => {
            makeRequest(settingsURL, POST, values, true);
         },

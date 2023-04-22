@@ -13,9 +13,10 @@ const CascadeCutoffForm = ({ settings }) => {
 
     const formik = useFormik({
         initialValues: {
-            cascade_cutoff: '',
+            cascade_cutoff: settings?.cascade_cutoff,
         },
         validationSchema: yupCascadeCutoffObj,
+        enableReinitialize: true,
         onSubmit: async (values) => {
            makeRequest(settingsURL, POST, values, true);
         },

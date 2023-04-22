@@ -7,6 +7,7 @@ import UploadOrgCard from "../cards/uploadOrgCard";
 import DivisionsNamesForm from "../cards/orgNamesCard";
 import ThresholdsForm from "../cards/threshholdsCard";
 import OrgChartCard from "../cards/orgCard";
+import ApprovalLevelCard from "../cards/appprovalLevelCard";
 
 
 const AdminOrgStructureCont = props => {
@@ -28,6 +29,7 @@ const AdminOrgStructureCont = props => {
             />
             <DivisionsNamesForm { ...props }/>
             <ThresholdsForm { ...props }/>
+            <ApprovalLevelCard { ...props }/>
         </div>
     )
 }

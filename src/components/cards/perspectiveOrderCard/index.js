@@ -9,13 +9,14 @@ import { CUSTOMER_FIRST, FINANCIAL_FIRST, POST } from "../../../utils/constants"
 import "./index.scss";
 
 
-const PerspectiveOrderForm = ({ perspective_order }) => {
+const PerspectiveOrderForm = ({ settings }) => {
 
     const formik = useFormik({
         initialValues: {
-            perspective_order: perspective_order,
+            perspective_order: settings?.perspective_order,
         },
         validationSchema: yupPerspectiveOrder,
+        enableReinitialize: true,
         onSubmit: async (values) => {
            makeRequest(settingsURL, POST, values, true);
         },
@@ -44,9 +45,7 @@ const PerspectiveOrderForm = ({ perspective_order }) => {
                 </Button>
             </Form>
         </Card>
-        
     );
 };
-
 
 export default PerspectiveOrderForm;
