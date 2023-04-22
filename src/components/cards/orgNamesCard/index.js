@@ -11,15 +11,16 @@ import "./index.scss";
 
 
 
-const DivisionNamesForm = props => {
+const DivisionNamesForm = ({ settings }) => {
 
     const formik = useFormik({
         initialValues: {
-        division_name: '',
-        department_name: '',
-        section_name: '',
+            division_name: settings.division_name,
+            department_name: settings.department_name,
+            section_name: settings.section_name,
         },
         validationSchema: yupDivisionNamesObj,
+        enableReinitialize: true,
         onSubmit: async (values) => {
             for (const key of Object.keys(values)) {
                 if (!values[key]) {

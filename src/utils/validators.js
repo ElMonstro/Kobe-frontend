@@ -21,11 +21,19 @@ export const yupPasswordRequestObj = Yup.object({
         .required('* Required')
     });
 
-    export const yupUpdateObjective = Yup.object({
-        cost: Yup.number(),
-        score: Yup.number(),
-        evidence: Yup.string(),
-        });
+export const yupUpdateObjective = Yup.object({
+    cost: Yup.number(),
+    score: Yup.number(),
+    evidence: Yup.string(),
+    });
+
+export const yupEditPerspectivesWeightObj = Yup.object({
+    financial_weight: Yup.number(),
+    customer_weight: Yup.number(),
+    internal_processes_weight: Yup.number(),
+    learning_growth_weight: Yup.number(),
+    behavioral_weight: Yup.number(),
+});
 
 export const yupMissionFormObj = Yup.object({
     mission: Yup.string()

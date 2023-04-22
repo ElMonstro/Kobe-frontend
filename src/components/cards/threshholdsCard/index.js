@@ -9,14 +9,15 @@ import { makeRequest } from "../../../utils/requestUtils";
 import "./index.scss";
 
 
-const ThresholdsForm = props => {
+const ThresholdsForm = ({settings})=> {
 
     const formik = useFormik({
         initialValues: {
-        upper_threshold: '',
-        lower_threshold: '',
+        upper_threshold: settings.upper_threshold,
+    lower_threshold: settings.lower_threshold,
         },
         validationSchema: yupThresholdObj,
+        enableReinitialize: true,
         onSubmit: async (values) => {
             makeRequest(settingsURL, POST, values, true);
         },
