@@ -6,6 +6,7 @@ import BehavioralSwitchForm from "../cards/enableBehavioralsCard";
 import EditPerspectivesCard from "../cards/editPerspectiveCard";
 import PerspectiveCutoffForm from "../cards/perspectiveCutoff";
 import EditPerspectivesWeightCard from "../cards/perspectiveWeightsCard";
+import PerspectiveOrderForm from "../cards/perspectiveOrderCard";
 
 const PerspectivesCont = props => {
     
@@ -13,9 +14,11 @@ const PerspectivesCont = props => {
         <div className="admin_cont">
             <PesrpectiveSwitchForm { ...props }/>
             <EditPerspectivesCard { ...props }/>
+            <PerspectiveOrderForm { ...props}/>
             <BehavioralSwitchForm { ...props }/>
             <EditPerspectivesWeightCard { ...props } />
             <PerspectiveCutoffForm { ...props }/>
+        
         </div>
     )
 }
