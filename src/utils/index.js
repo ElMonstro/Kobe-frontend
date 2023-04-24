@@ -223,9 +223,9 @@ export const isObjectEmpty = obj => {
 
 const getTarget = values => {
     let target;
-    values.data_type === UNITS? target = Math.abs(values.endline - values.baseline): target = values.percentage_target
+    values.data_type === UNITS? target = values.units_target: target = values.percentage_target
     
-    return parseInt(target)
+    return parseInt(target);
 };
 
 export const arePeriodicalInputsValid = (values, periods, setFieldError) => {

@@ -7,7 +7,7 @@ import { PERCENTAGE, UNITS } from "../../utils/constants";
 const BaselineTargetInputs = ({ formik, targetDisabled }) => {
 
     const baselineTypeProps = formik.getFieldProps('baseline');
-    const targetFieldProps = formik.getFieldProps('endline')
+    const targetFieldProps = formik.getFieldProps('units_target')
 
     return (
         <Row className="inputs_row">
@@ -28,17 +28,17 @@ const BaselineTargetInputs = ({ formik, targetDisabled }) => {
                 
             </Col>
             <Col>
-                <Form.Group className="mb-1" controlId="endline">
-                    <Form.Label>Endline</Form.Label>
+                <Form.Group className="mb-1" controlId="units_target">
+                    <Form.Label>Unit Target</Form.Label>
                     <Form.Control 
-                    type="text" 
-                    placeholder=""
-                    { ...targetFieldProps } 
-                    isInvalid={ formik.touched.endline && formik.errors.endline }
-                    disabled={ targetDisabled }
+                        type="text" 
+                        placeholder=""
+                        { ...targetFieldProps } 
+                        isInvalid={ formik.touched.units_target && formik.errors.units_target }
+                        disabled={ targetDisabled }
                     />
                     <Form.Control.Feedback type='invalid'>
-                        { formik.errors.endline }
+                        { formik.errors.units_target }
                     </Form.Control.Feedback>
                 </Form.Group>
             </Col>

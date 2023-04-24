@@ -18,7 +18,7 @@ const MeasureInput = ({ formik, measureId, weightId, initiative }) => {
     
     useEffect(() => {
         const resetUnitTargets = () => {
-            formik.setFieldValue('endline', 0);
+            formik.setFieldValue('units_target', 0);
             formik.setFieldValue('baseline', 0)
         }
         dataType === UNITS? formik.setFieldValue('percentage_target', 0): resetUnitTargets();

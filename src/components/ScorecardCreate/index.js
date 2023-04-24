@@ -60,7 +60,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         quaterly_target: '',
         baseline: '',
         percentage_target: '',
-        endline: '',
+        units_target: '',
         }
 
     periods.forEach(period => {
@@ -99,7 +99,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
     if ( name !== undefined) { // if mode is not create mode
         initialValues.name = initiative.name;
         initialValues.perspective = initiative.perspective;
-        initialValues.endline = initiative.units_target + initiative.baseline;
+        initialValues.units_target = initiative.units_target + initiative.baseline;
         initialValues.percentage_target = initiative.percentage_target;
         initialValues.baseline = initiative.baseline;
         initialValues.data_type = initiative.data_type;
