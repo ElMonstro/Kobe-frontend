@@ -12,12 +12,10 @@ import SelectedObjective from "./selectedObjective";
 const StrategyObjective = ({objective: currentObjective, linkableObjectives, perspective }) => {
 
     const createOptions = objectives => {
-        const options = objectives?.filter(objective => currentObjective?.id !== objective.id ).map(objective => {
-
-            return {value: objective.id, label: `${objective.name} (${objective.perspective})`}
-        });
-
-        return options;
+        return objectives?.filter(objective => currentObjective?.id !== objective.id ).map(objective => {
+        
+                    return {value: objective.id, label: `${objective.name} (${objective.perspective})`}
+                });
     }
     const options = createOptions(linkableObjectives);
     const customStyles = {

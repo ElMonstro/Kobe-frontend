@@ -63,14 +63,13 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         endline: '',
         }
 
-    periods.map(period => {
+    periods.forEach(period => {
         initialValues[period] = '';
         mode === EDIT? validationSchema[period] = Yup.number(): 
             validationSchema[period] = Yup.number().required('*Required');
-        return undefined;
     });
 
-    initiatives.map(initiative => {
+    initiatives.forEach(initiative => {
         initialValues[initiative.initiativeId] = '';
         initialValues[initiative.weightId] = '';
         initialValues[initiative.cascadeId] = actingRole?.id;
@@ -79,12 +78,11 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         return undefined;
     })
 
-    measures.map(measure => {
+    measures.forEach(measure => {
         initialValues[measure.measureId] = '';
         initialValues[measure.weightId] = '';
         validationSchema[measure.measureId] = Yup.string();
         validationSchema[measure.weightId] = Yup.number();
-        return undefined;
     })
 
     validationSchema[measures[0].measureId] = Yup.string().required('*Measure name is required');
@@ -108,9 +106,8 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         initialValues.budget = initiative.budget;
         initialValues.evidence_description = initiative.evidence_description;
         initialValues[measures[0].measureId] = initiative?.measures[0]?.name
-        initiative.period_targets?.map(period => {
+        initiative.period_targets?.forEach(period => {
             initialValues[period.period_object.period] = period.target;
-            return undefined;
         });
 
         validationSchema.name = Yup.string();

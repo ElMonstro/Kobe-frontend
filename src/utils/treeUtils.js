@@ -10,7 +10,9 @@ export const findNodeById = (nodes, id) => {
         final = n;
         return;
       }
-      if (n.files) findNode(n.files, id);
+      if (n.files) {
+        findNode(n.files, id);
+      }
     });
   }
 

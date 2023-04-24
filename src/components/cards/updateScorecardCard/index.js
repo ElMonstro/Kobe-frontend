@@ -38,8 +38,9 @@ const UpdateScorecardCard = () => {
                 </Row>
                 {
                     initiatives?.map(initiative => {
-                        if (initiative.type === OBJECTIVE)
-                            return <Initiative key={ initiative.id } { ...initiative }/>
+                        if (initiative.type === OBJECTIVE) {
+                          return <Initiative key={ initiative.id } { ...initiative }/>
+                        }
                     })
                 } 
             </div>

@@ -28,7 +28,7 @@ export const  parseJwt = token => {
 };
 
 export const getHeaderDetails = (formData) => {
-    const localStorage = window.localStorage;
+    const {localStorage} = window;
     const accessToken = JSON.parse(localStorage.getItem('tokens'))?.access;
     const config = {
         headers: { Authorization: `Bearer ${accessToken}` }
@@ -42,7 +42,7 @@ export const getHeaderDetails = (formData) => {
 };
 
 export const isLoggedInFromLocalStorage = () => {
-    const localStorage = window.localStorage;
+    const {localStorage} = window;
     const tokens = localStorage.getItem('tokens');
     return Boolean(tokens);
 }
@@ -75,8 +75,7 @@ export function encryptData( publicKey, string){
         md: forge.md.sha256.create(),
         mgf1: forge.mgf1.create()
     });
-    const base64 = forge.util.encode64(encrypted);
-    return base64;
+    return forge.util.encode64(encrypted);
 
 };
 
@@ -89,7 +88,7 @@ export function checkSessionStatus (response) {
 export const createErrorObjects = (data) => {
     let errorObjects = []
     if (data) {
-        Object.keys(data).map(key => {
+        Object.keys(data).forEach(key => {
                 errorObjects.push({
                     name: key,
                     errors: data[key]
@@ -127,7 +126,6 @@ export const getPeriods = months => {
 
 export const areInitiativesValid = (initiativesSchema, data) => {
     for (let i=0; i<initiativesSchema.length; i++) {
-        console.log(initiativesSchema[i])
         if (!data[initiativesSchema[i]]?.cascadeId || !data[initiativesSchema[i]].initiativeId ) {
             return false;
         }
@@ -141,7 +139,7 @@ export const createObjectivePayload = (data, initiativesSchema, measures, period
     const measuresPayload = [];
     const periodTargetsPayload = [];
   
-    initiativesSchema.map(initiative => {
+    initiativesSchema.forEach(initiative => {
       const initiativePayload = {};
       initiativePayload['name'] = data[initiative.initiativeId];
       if (!initiativePayload['name']) {
@@ -160,7 +158,7 @@ export const createObjectivePayload = (data, initiativesSchema, measures, period
       return undefined;
     });
 
-    measures.map(measure => {
+    measures.forEach(measure => {
       const measurePayload = {};
       measurePayload['name'] = data[measure.measureId];
       measurePayload['weight'] = data[measure.weightId];
@@ -173,7 +171,7 @@ export const createObjectivePayload = (data, initiativesSchema, measures, period
       return undefined;
     });
   
-    periods.map(period => {
+    periods.forEach(period => {
         const periodTargetPayload = {};
         if (data[period]) {
             periodTargetPayload['target'] = data[period]
@@ -192,7 +190,7 @@ export const createObjectivePayload = (data, initiativesSchema, measures, period
     }
     data.data_type === UNITS? delete data["percentage_target"]: delete data["units_target"]
     // Clear empty fields
-    Object.keys(data).map(key => {
+    Object.keys(data).forEach(key => {
         if (data[key].length===0) {
             delete data[key];
         }
@@ -233,12 +231,12 @@ const getTarget = values => {
 export const arePeriodicalInputsValid = (values, periods, setFieldError) => {
     let total = 0;
     const target = getTarget(values);
-    periods.map(period => {
+    periods.forEach(period => {
         total += parseInt(values[period]);
     });
 
     if (total !== target) {
-        periods.map(period => {
+        periods.forEach(period => {
             setFieldError(period, `All periodical targets have to add up to ${target}`);
         });
 
@@ -337,11 +335,11 @@ export const getCurrentDashboardObject = (perspectives, mode, currentObjectID ) 
    if (mode === PERSPECTIVES) {
         objects = perspectives;
    } else if (mode === OBJECTIVES) {
-        perspectives.map(perspective => 
+        perspectives.forEach(perspective => 
             objects = objects.concat(perspective.objectives));
    } else {
-        perspectives.map(perspective =>
-            perspective.objectives?.map(objective => 
+        perspectives.forEach(perspective =>
+            perspective.objectives?.forEach(objective => 
                 objects = objects.concat(objective.initiatives)));
    }
    

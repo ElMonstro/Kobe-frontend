@@ -55,7 +55,9 @@ const TreeRecursive = ({ data, parentNode }) => {
     if (!parentNode) {
       item.parentNode = data;
     }
-    if (!item.id) item.id = v4();
+    if (!item.id) {
+      item.id = v4();
+    }
 
     const name = item?.user?.first_name + " " + item?.user?.second_name
 

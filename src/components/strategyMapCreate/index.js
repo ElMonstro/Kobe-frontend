@@ -29,8 +29,9 @@ const StrategyMapCreate = props => {
                 PERSPECTIVES_ORDER_ARRAY.map((perspective, index) => {
                     perspectiveObjectives = objectives.filter(objective => objective?.perspective.toLowerCase() === perspective )
                     linkableObjectives = objectives.filter(objective => {
-                        if (index === 0)
-                            return objective?.perspective === perspective;
+                        if (index === 0) {
+                          return objective?.perspective === perspective;
+                        }
                         abovePerspective = PERSPECTIVES_ORDER_ARRAY[index - 1];
                         return objective?.perspective.toLowerCase() === perspective || objective?.perspective.toLowerCase() === abovePerspective;
                     });

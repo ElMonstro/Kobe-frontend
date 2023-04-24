@@ -44,14 +44,15 @@ const AppraisalReport = ({ settings }) => {
 
                     const objectives = [];
                     const initiatives = [];
-                    perspectives.map(perspective =>
+                    perspectives.forEach(perspective =>
                         perspective.objectives && objectives.concat(perspective.objectives)
                     )
                     setObjectives(objectives);
 
-                    objectives.map(objective =>
+                    objectives.forEach(objective =>
                         objective.initiatives && initiatives.concat(objective.initiatives)
                     );
+                    
                     setInitiatives(initiatives);
                 }
 
