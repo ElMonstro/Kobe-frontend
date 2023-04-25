@@ -8,7 +8,7 @@ import BaselineTargetInputs from "./baselineTargetInputs";
 import TargetInputs from "./targetsInputs";
 
 
-const MeasureInput = ({ formik, measureId, weightId, initiative }) => {
+const MeasureInput = ({ formik, measureId, weightId, initiative, setReinitializeForm }) => {
 
     const dataType = formik.getFieldProps('data_type').value;
     const { measures } = initiative;
@@ -66,7 +66,7 @@ const MeasureInput = ({ formik, measureId, weightId, initiative }) => {
                 </Col>
             </Row>
             
-            <TargetInputs formik={ formik }  targetDisabled={ dataType!==PERCENTAGE } initiative={ initiative }/>
+            <TargetInputs formik={ formik }  targetDisabled={ dataType!==PERCENTAGE } initiative={ initiative } setReinitializeForm={setReinitializeForm}/>
             <BaselineTargetInputs targetDisabled={ dataType!==UNITS} formik={ formik } initiative={ initiative }/>
             <QuaterlyTargetInputs formik={ formik } />
         </>

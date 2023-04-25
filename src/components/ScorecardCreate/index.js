@@ -29,14 +29,16 @@ const ScorecardCreate = ({ periods, actingRole }) => {
     const { perspective, name } = initiative;
     const { initiativeId, mode, role } = useParams();
     const navigate = useNavigate();
-    const reinitializeForm = Boolean(mode);
+    const [reinitializeForm, setReinitializeForm] = useState(Boolean(mode));
     const { setActiveComponent } = useOutletContext();
 
     useEffect(() => {
         setActiveComponent(CREATE);
         initiativeId && makeRequest(updateObjectiveURL(initiativeId), GET, null, true, false)
             .then(data => {
-                data && setInitiative(data);
+                if (data) {
+                    setInitiative(data);
+                }
             });
     }, []);
 
@@ -97,7 +99,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         validationSchema.data_type = Yup.string();
     }
 
-    if (Object.keys(initiative).length > 0) { // if mode is not the default create mode
+    if (Object.keys(initiative).length > 0) { // if mode is create or edit
         initialValues.name = initiative.name;
         initialValues.perspective = initiative.perspective;
         initialValues.units_target = initiative.units_target;
@@ -177,6 +179,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
                             measures={ measures } 
                             setMeasures={ setMeasures }
                             initiative = { initiative }
+                            setReinitializeForm = { setReinitializeForm }
                         />
                         
                         <ThresholdsInputs formik={ formik } />

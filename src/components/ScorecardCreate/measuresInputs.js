@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import addBtn from "../../assets/plus_sign.svg"
 import MeasureInput from "./measureInput";
 
-const MeasuresInputs = ({ formik, measures, setMeasures, initiative }) => {
+const MeasuresInputs = ({ formik, measures, setMeasures, initiative, setReinitializeForm }) => {
 
     const [measureIndex, setMeasureIndex] = useState(1);
 
@@ -41,6 +41,7 @@ const MeasuresInputs = ({ formik, measures, setMeasures, initiative }) => {
                         formik={ formik }
                         key={ measure.measureId }
                         initiative={ initiative }
+                        setReinitializeForm={ setReinitializeForm }
                     />
                     )
                 })
