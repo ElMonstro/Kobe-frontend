@@ -19,7 +19,6 @@ const BaselineTargetInputs = ({ formik, targetDisabled }) => {
                         placeholder=""
                         { ...baselineTypeProps } 
                         isInvalid={ formik.touched.baseline && formik.errors.baseline }
-                        disabled={ targetDisabled }
                     />
                     <Form.Control.Feedback type='invalid'>
                         { formik.errors.baseline }

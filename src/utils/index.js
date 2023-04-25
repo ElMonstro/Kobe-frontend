@@ -278,7 +278,6 @@ export const webSocketMessageHandler = event => {
         new_notifications: handleNotifications,
         undefined: () => {},
     };
-    console.log(data.message.message_type)
     action_mapper[data.message.message_type](data.message.data);
 };
 
@@ -302,7 +301,6 @@ export const getAgeString = createdAt => {
 
     const endDate = new Date();
     let diff = (endDate.getTime() - startDate.getTime()) / 1000;
-    console.log(startDate);
     const days = Math.floor(diff / 86400);
     diff -= days * 86400;
     const hours = Math.floor(diff / 3600) % 24;

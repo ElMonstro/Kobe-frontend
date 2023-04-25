@@ -120,6 +120,6 @@ export const yupObjectiveValidationObj = {
     lower_threshold: Yup.number(),
     budget: Yup.number(),
     baseline: Yup.number(),
-    percentage_target: Yup.number().max(100).min(0),
+    percentage_target: Yup.number().min(0),
     unit_target: Yup.number(),
 }

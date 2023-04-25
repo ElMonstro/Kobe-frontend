@@ -29,7 +29,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
     const { perspective, name } = initiative;
     const { initiativeId, mode, role } = useParams();
     const navigate = useNavigate();
-    const reinitializeForm = mode === EDIT;
+    const reinitializeForm = Boolean(mode);
     const { setActiveComponent } = useOutletContext();
 
     useEffect(() => {
@@ -61,6 +61,8 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         baseline: '',
         percentage_target: '',
         units_target: '',
+        evidence_description: '',
+        budget: ''
         }
 
     periods.forEach(period => {
@@ -75,7 +77,6 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         initialValues[initiative.cascadeId] = actingRole?.id;
         validationSchema[initiative.initiativeId] = Yup.string();
         validationSchema[initiative.weightId] = Yup.number();
-        return undefined;
     })
 
     measures.forEach(measure => {
@@ -89,34 +90,30 @@ const ScorecardCreate = ({ periods, actingRole }) => {
     validationSchema[initiatives[0].initiativeId] = Yup.string().required('*Initiative is required');
     validationSchema[initiatives[0].cascadeId] = Yup.string().required('*Required');
 
-    if (mode === "edit") {
+    if (mode === EDIT) {
         validationSchema[measures[0].measureId] = Yup.string();
         validationSchema[initiatives[0].initiativeId] = Yup.string();
         validationSchema[initiatives[0].cascadeId] = Yup.string();
         validationSchema.data_type = Yup.string();
     }
 
-    if ( name !== undefined) { // if mode is not create mode
+    if (Object.keys(initiative).length > 0) { // if mode is not the default create mode
         initialValues.name = initiative.name;
         initialValues.perspective = initiative.perspective;
-        initialValues.units_target = initiative.units_target + initiative.baseline;
+        initialValues.units_target = initiative.units_target;
         initialValues.percentage_target = initiative.percentage_target;
         initialValues.baseline = initiative.baseline;
         initialValues.data_type = initiative.data_type;
         initialValues.budget = initiative.budget;
         initialValues.evidence_description = initiative.evidence_description;
         initialValues[measures[0].measureId] = initiative?.measures[0]?.name
+        initialValues.data_type = initiative?.data_type;
         initiative.period_targets?.forEach(period => {
             initialValues[period.period_object.period] = period.target;
         });
 
         validationSchema.name = Yup.string();
         validationSchema.perspective = Yup.string();
-        validationSchema[initiatives[0].initiativeId] = Yup.string();
-        validationSchema[initiatives[0].cascadeId] = Yup.string();
-    } else {
-        initialValues.evidence_description = '';
-        initialValues.budget = '';
     }
 
     const onSubmit = async (values, { setFieldError, resetForm }) => {
@@ -157,6 +154,9 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         validationSchema: Yup.object(validationSchema),
         onSubmit: onSubmit,
     });
+
+    console.log(formik.errors)
+
 
     return (
         <div className="score_card_create">
