@@ -1,15 +1,15 @@
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import { CREATE, EDIT, SCORECARD } from "../../../utils/constants";
+import { CREATE, EDIT, INITIATIVE, SCORECARD } from "../../../utils/constants";
 
 import "./index.scss";
 
-const CascadedInitiative = ({ name, id, percentage_target, units_target})=> {
+const CascadedInitiative = ({ name, id, type})=> {
 
     let buttonType = EDIT
 
-    if (percentage_target === 0 && units_target === 0){
+    if (type === INITIATIVE){
         buttonType = CREATE;
     }
     const navigate = useNavigate();

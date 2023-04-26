@@ -65,7 +65,7 @@ const Header = ({
             
             !user?.is_admin && makeRequest(fetchNotificationsURL, GET, null, true, false)
                 .then(data => {
-                    data && setNotifications(data);
+                    data && setNotifications(data.results);
                 });
         }         
         

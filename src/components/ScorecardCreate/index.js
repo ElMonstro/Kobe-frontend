@@ -92,7 +92,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
     validationSchema[initiatives[0].initiativeId] = Yup.string().required('*Initiative is required');
     validationSchema[initiatives[0].cascadeId] = Yup.string().required('*Required');
 
-    if (mode === EDIT) {
+    if (mode === EDIT || initiative?.is_self_cascaded === true) {
         validationSchema[measures[0].measureId] = Yup.string();
         validationSchema[initiatives[0].initiativeId] = Yup.string();
         validationSchema[initiatives[0].cascadeId] = Yup.string();

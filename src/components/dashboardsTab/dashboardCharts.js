@@ -24,7 +24,7 @@ class DashboardCharts extends React.Component {
         let title;
         let percentage
         dataContext === QUATERLY? percentage = actualPercentage - currentObject?.last_period_score/100: percentage = actualPercentage;
-        mode? title = currentObject.name: title = "Overall Perfomance";
+        mode? title = currentObject?.name: title = "Overall Perfomance";
 
         return <div>
                 { personalData &&
