@@ -290,42 +290,26 @@ export const connectWebSocket = () => {
     return webSocket;
 };
 
-export const getAgeString = createdAt => {
-    const startStrings = createdAt.split(" ");
-    const startDateStrings = startStrings[0].split("-");
-    const startTimeStrings = startStrings[1].split(":");
-    const startDate = new Date(
-        startDateStrings[0], startDateStrings[1], startDateStrings[2], 
-        startTimeStrings[0], startTimeStrings[1], startTimeStrings[2]
-        );
+export const getTimeDifference = (dateString) => {
+    const date = new Date(dateString);
+    const options = { timeZone: 'Africa/Nairobi' };
+    const now = new Date();
+    const dateTimeString = now.toLocaleString('en-US', options);
 
-    const endDate = new Date();
-    let diff = (endDate.getTime() - startDate.getTime()) / 1000;
-    const days = Math.floor(diff / 86400);
-    diff -= days * 86400;
-    const hours = Math.floor(diff / 3600) % 24;
-    diff -= hours * 3600;
-    const minutes = Math.floor(diff / 60) % 60;
-    diff -= minutes * 60;
-    const seconds = Math.floor(diff % 60); 
-    
-    let ageString = "";
-
-    if (days > 3) {
-        ageString = `${startDate.getDay}/${startDate.getMonth()}/${startDate.getFullYear}`
-    } 
-    else if (days > 0) {
-        ageString = `${days} days`;
-        ageString += " ago.";
+    const localizedNow = new Date(Date.parse(dateTimeString));
+    const diff = localizedNow - date;
+  
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  
+    if (days < 2) {
+      return `${hours} hours, ${minutes} minutes ago`;
     } else {
-        hours? ageString += hours + "h ": ageString += "";
-        minutes? ageString += minutes + "m ": ageString += "";
-        !hours && seconds? ageString += seconds + " s ": ageString += "";
-        ageString += "ago";
+      return `${days} days ago`;
     }
-
-    return ageString;
-};
+  }
+  
 
 export const getCurrentDashboardObject = (perspectives, mode, currentObjectID ) => {
     let objects = [];

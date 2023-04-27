@@ -48,7 +48,7 @@ import AppraisalReport from "./components/appraisal";
 import ProfileModal from "./components/modals/profileModal";
 import InitiativeDeleteRequest from "./components/approvalCont/viewDeletedInitiative";
 
-function App({ isLoggedIn, webSocket }) {
+function App({ isLoggedIn, webSocket, showNotifications }) {
 
   const loggedIn = isLoggedInFromLocalStorage();
   // console.log(webSocket)
@@ -63,7 +63,7 @@ function App({ isLoggedIn, webSocket }) {
     <ToastContainer limit={4}/>
       <AuthModal show={!isLoggedIn}/>
       <ProfileModal />
-      <NotificationsModal />
+      { showNotifications && <NotificationsModal /> }
         <Routes>
           <Route index element={<Protected> <StaffDashboard /> </Protected>} />
           <Route path="/reset-password/:resetToken" element={<AuthModal show={true} form={ RESET_PASSWORD }/>} ></Route>
@@ -138,9 +138,10 @@ function App({ isLoggedIn, webSocket }) {
   );
 }
 
-const mapStateToProps = ({ authReducer: { isLoggedIn, webSocket } }) => ({
+const mapStateToProps = ({ authReducer: { isLoggedIn, webSocket, showNotifications } }) => ({
   isLoggedIn,
-  webSocket
+  webSocket, 
+  showNotifications
 });
 
 export default connect(

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {connect} from 'react-redux';
 import { Modal } from "react-bootstrap";
 
@@ -12,16 +12,25 @@ import { POST } from "../../utils/constants";
 
 
 const NotificationsModal = ({ showNotifications, setShowNotifications, notifications, setNotifications }) => {
-
+    const renderedNotifications = [];
     const handleClose = () => {
         setShowNotifications(false);
-        renderedUnseenNotifIds.length > 0 && 
-            makeRequest(setSeenNotificationsURL, POST, { notifications: renderedUnseenNotifIds }, true, false);
         setNotifications(renderedNotifications);
     }
+    
+    useEffect(() => {
+        const renderedUnseenNotifIds = notifications?.filter(notification => !notification.is_seen).map(notification => notification.id);
+        renderedUnseenNotifIds.length > 0 && 
+        setTimeout(() => {
+            makeRequest(setSeenNotificationsURL, POST, { notifications: renderedUnseenNotifIds }, true, false)
+            .then(data => {
+                data && setNotifications(renderedNotifications);
+            });
+        }, 4000);
+            
+    }, [])
 
-    const renderedUnseenNotifIds = [];
-    const renderedNotifications = [];
+    
 
     return (
         <div className="notifications">
@@ -47,7 +56,7 @@ const NotificationsModal = ({ showNotifications, setShowNotifications, notificat
                     <div className="notifications">
                         {
                             notifications?.map(notification => {
-                                !notification.is_seen && renderedUnseenNotifIds.push(notification.id);
+                                
                                 renderedNotifications.push({ ...notification, is_seen: true })
                                 return <Notification key={ notification.id } {...notification} />
                             })

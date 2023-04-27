@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { getAgeString } from "../../utils";
+import { getAgeString, getTimeDifference } from "../../utils";
 
 const Notification = ({ title, body, link, is_seen, needs_attention, created_at }) => {
     const navigate = useNavigate();
     let notificationClassName;
     is_seen? notificationClassName = "notification": notificationClassName = "notification unread";
-    const ageString = getAgeString(created_at);
+    const ageString = getTimeDifference(created_at);
+    const [showButton, setShowButton] = useState(link && needs_attention);
+
+    const handleNotificationClick = () => {
+      navigate(link);
+      setShowButton(false);
+    }
 
     return (
       <div className={ notificationClassName }>
@@ -21,8 +27,8 @@ const Notification = ({ title, body, link, is_seen, needs_attention, created_at 
           </span>
           <div className="body">{ body }</div>
           { 
-            (link && needs_attention) &&
-            <Button className="link_button" onClick={() => navigate(link)}>
+            (showButton) &&
+            <Button className="link_button" onClick={ handleNotificationClick }>
               View Objective
             </Button>
           }
