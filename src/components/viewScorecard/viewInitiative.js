@@ -7,8 +7,9 @@ import OpenCloseIcon from "../common/openCloseIcon";
 import "./index.scss";
 
 const ViewInitiative = ({
-    name, weight, percentage_target, score, data_type, units_target, measures,
-    percentage_score, status, role
+        name, weight, percentage_target, score, 
+        data_type, units_target, measures,
+        percentage_score, status, role
     }) => {
     const measure_name = measures[0]?.name
     const profileUrl = BASE_CLOUDINARY_URL + role?.profile_pic

@@ -12,23 +12,21 @@ import { POST } from "../../utils/constants";
 
 
 const NotificationsModal = ({ showNotifications, setShowNotifications, notifications, setNotifications }) => {
-    const renderedNotifications = [];
     const handleClose = () => {
         setShowNotifications(false);
-        setNotifications(renderedNotifications);
     }
+    const renderedUnseenNotifIds = notifications?.filter(notification => !notification.is_seen).map(notification => notification.id);
     
     useEffect(() => {
-        const renderedUnseenNotifIds = notifications?.filter(notification => !notification.is_seen).map(notification => notification.id);
         renderedUnseenNotifIds.length > 0 && 
         setTimeout(() => {
             makeRequest(setSeenNotificationsURL, POST, { notifications: renderedUnseenNotifIds }, true, false)
             .then(data => {
-                data && setNotifications(renderedNotifications);
+                data && setNotifications(data);
             });
-        }, 4000);
+        }, 20000);
             
-    }, [])
+    }, [renderedUnseenNotifIds])
 
     
 
@@ -56,8 +54,6 @@ const NotificationsModal = ({ showNotifications, setShowNotifications, notificat
                     <div className="notifications">
                         {
                             notifications?.map(notification => {
-                                
-                                renderedNotifications.push({ ...notification, is_seen: true })
                                 return <Notification key={ notification.id } {...notification} />
                             })
                         }

@@ -51,7 +51,7 @@ const ViewObjective = ({
                         <Col className={`status ${approval_status}`}>{ approval_status }</Col>
                         <Col className="measure">{ measure_name }</Col>
                         <Col className="weight">{ weight }</Col>
-                        <Col>{ target } { symbol }</Col>
+                        <Col>{ target }{ symbol }</Col>
                         <Col className={ `score ${status}_color` }>{ displayScore }{ symbol }</Col>
                     </Row>
                 </Col>
