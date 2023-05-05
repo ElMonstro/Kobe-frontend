@@ -141,6 +141,10 @@ export const createObjectivePayload = (data, initiativesSchema, measures, period
   
     initiativesSchema.forEach(initiative => {
       const initiativePayload = {};
+      if (!data[initiative.cascadeId]) {
+        return;
+      }
+
       initiativePayload['name'] = data[initiative.initiativeId];
       if (!initiativePayload['name']) {
         return
@@ -191,7 +195,7 @@ export const createObjectivePayload = (data, initiativesSchema, measures, period
     data.data_type === UNITS? delete data["percentage_target"]: delete data["units_target"]
     // Clear empty fields
     Object.keys(data).forEach(key => {
-        if (data[key].length===0) {
+        if (data[key]?.length===0) {
             delete data[key];
         }
         return undefined;
@@ -231,9 +235,11 @@ const getTarget = values => {
 export const arePeriodicalInputsValid = (values, periods, setFieldError) => {
     let total = 0;
     const target = getTarget(values);
+
     periods.forEach(period => {
-        total += parseInt(values[period]);
+        total += parseFloat(values[period]);
     });
+
 
     if (total !== target) {
         periods.forEach(period => {

@@ -157,8 +157,6 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         onSubmit: onSubmit,
     });
 
-    console.log(formik.errors)
-
 
     return (
         <div className="score_card_create">

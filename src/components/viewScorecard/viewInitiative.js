@@ -18,6 +18,7 @@ const ViewInitiative = ({
         percentage: [percentage_target, percentage_score, "%"]
     }
     const [target, displayScore, symbol] = score_display_mapper[data_type];
+    weight = parseInt(weight)
 
     return (
         <Row className="initiative">

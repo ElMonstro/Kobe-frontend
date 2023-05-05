@@ -12,7 +12,7 @@ const Initiative = ({ id, name, budget, score, percentage_target, units_target, 
 
     let target;
     data_type === UNITS? target = units_target: target = percentage_target;
-
+    weight = parseInt(weight);
     const formik = useFormik({
         initialValues: {
             score: score,
@@ -72,7 +72,7 @@ const Initiative = ({ id, name, budget, score, percentage_target, units_target, 
                 </Form.Control.Feedback>
 
             </Col>
-            <Col>
+            <Col lg={ 2 } className="status_col">
                 <span className={`status_color ${ status }`}></span>
                 <span className="status_text">{ status }</span>
             </Col>
