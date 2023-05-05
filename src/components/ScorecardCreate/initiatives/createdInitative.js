@@ -2,12 +2,12 @@ import React from "react";
 import { Form, Row, Col } from "react-bootstrap"
 import { DeleteBin5 } from "@styled-icons/remix-fill/DeleteBin5";
 
-import thumbnail from "../../assets/josh_logo.jpg";
+import thumbnail from "../../../assets/josh_logo.jpg";
 import { connect } from "react-redux";
-import { makeRequest } from "../../utils/requestUtils";
-import { deleteinitiativeURL } from "../../services/urls";
-import { PATCH } from "../../utils/constants";
-import { BASE_CLOUDINARY_URL } from "../../services/baseURL";
+import { makeRequest } from "../../../utils/requestUtils";
+import { deleteinitiativeURL } from "../../../services/urls";
+import { PATCH } from "../../../utils/constants";
+import { BASE_CLOUDINARY_URL } from "../../../services/baseURL";
 
 
 const CreatedInitiativeInput = ({ deleteId, deleteInitiative, initiative }) => {

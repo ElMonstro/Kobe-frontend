@@ -8,9 +8,9 @@ import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 
 import "./index.scss";
 import ObjectiveInputs from "./objectiveInputs";
-import MeasuresInputs from "./measuresInputs";
+import MeasuresInputs from "./measures/measuresInputs";
 import ThresholdsInputs from "./thresholdsInputs";
-import InitiativeInputs from "./initiativesInputs";
+import InitiativeInputs from "./initiatives/initiativesInputs";
 import { arePeriodicalInputsValid, createObjectivePayload } from "../../utils";
 import { makeRequest } from "../../utils/requestUtils";
 import { createObjectiveURL, updateObjectiveURL, amendObjectiveURL } from "../../services/urls";

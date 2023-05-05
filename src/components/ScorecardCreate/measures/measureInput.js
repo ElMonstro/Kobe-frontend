@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Form, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
-import { PERCENTAGE, UNITS } from "../../utils/constants";
+import { PERCENTAGE, UNITS } from "../../../utils/constants";
 import QuaterlyTargetInputs from "./quaterlyTargetsInputs";
 import BaselineTargetInputs from "./baselineTargetInputs";
 import TargetInputs from "./targetsInputs";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import addBtn from "../../assets/plus_sign.svg"
+import addBtn from "../../../assets/plus_sign.svg"
 import MeasureInput from "./measureInput";
 
 const MeasuresInputs = ({ formik, measures, setMeasures, initiative, setReinitializeForm }) => {
