@@ -16,8 +16,7 @@ import { connect } from "react-redux";
 
 
 const AppraisalReport = ({ settings }) => {
-
-
+    
     let { year } = useParams();
     let componentRef = useRef();
     const [perspectives, setPerspectives] = useState([]);

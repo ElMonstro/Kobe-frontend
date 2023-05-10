@@ -7,6 +7,7 @@ import { GET } from "../../../utils/constants";
 import { makeRequest } from "../../../utils/requestUtils";
 import InitiativeInput from "./initiativeInput";
 import CreatedInitative from "./createdInitative";
+import { deleteFromObjectlist } from "../../../utils";
 
 
 const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives }) => {
@@ -32,18 +33,6 @@ const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives }) =
     useEffect(() => {
         setCreatedInitiatives(initiative?.initiatives)
     }, [initiative])
-
-    const deleteFromObjectlist = (initiatives, key, deleteId) => {
-        for (let index=0; index < initiatives.length; index++ ) {
-            if (initiatives[index][key] === deleteId) {
-                initiatives.splice(index, 1);
-                
-                break;
-            }
-        }
-
-        return [...initiatives];
-    }
 
     const [initiativesIndex, setInitiativesIndex] = useState(1);
 

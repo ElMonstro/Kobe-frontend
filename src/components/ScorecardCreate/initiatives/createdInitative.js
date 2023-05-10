@@ -3,7 +3,6 @@ import { Form, Row, Col } from "react-bootstrap"
 import { DeleteBin5 } from "@styled-icons/remix-fill/DeleteBin5";
 
 import thumbnail from "../../../assets/josh_logo.jpg";
-import { connect } from "react-redux";
 import { makeRequest } from "../../../utils/requestUtils";
 import { deleteinitiativeURL } from "../../../services/urls";
 import { PATCH } from "../../../utils/constants";
@@ -62,14 +61,4 @@ const CreatedInitiativeInput = ({ deleteId, deleteInitiative, initiative }) => {
     );
 }
 
-const mapDispatchToProps = {
-}
-
-const mapStateToProps = ({ adminReducer: { orgChart }, }) => ({
-    orgChart: orgChart[0]
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-) (CreatedInitiativeInput);
+export default CreatedInitiativeInput

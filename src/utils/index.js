@@ -134,10 +134,11 @@ export const areInitiativesValid = (initiativesSchema, data) => {
     }
 };
 
-export const createObjectivePayload = (data, initiativesSchema, measures, periods) => {
+export const createObjectivePayload = (data, initiativesSchema, measures, periods, milestones) => {
     const initiativesPayload = [];
     const measuresPayload = [];
     const periodTargetsPayload = [];
+    const milestonesPayload = [];
   
     initiativesSchema.forEach(initiative => {
       const initiativePayload = {};
@@ -159,22 +160,34 @@ export const createObjectivePayload = (data, initiativesSchema, measures, period
       delete data[initiative.cascadeId];
   
       initiativesPayload.push(initiativePayload);
-      return undefined;
+    });
+
+    milestones?.forEach(milestone => {
+        if (!data[milestone.milestoneId]) {
+            return;
+        }
+        const milestonePayload = {};
+        milestonePayload['description'] = data[milestone.milestoneId];
+        milestonePayload['percentage'] = data[milestone.percentageId];
+        delete data[milestone.milestoneId];
+        delete data[milestone.percentageId];
+
+        milestonesPayload.push(milestonePayload);
+    
     });
 
     measures.forEach(measure => {
-      const measurePayload = {};
-      measurePayload['name'] = data[measure.measureId];
-      measurePayload['weight'] = data[measure.weightId];
-      
-      delete data[measure.weightId];
-      delete data[measure.measureId];
+        const measurePayload = {};
+        measurePayload['name'] = data[measure.measureId];
+        measurePayload['weight'] = data[measure.weightId];
+        
+        delete data[measure.weightId];
+        delete data[measure.measureId];
 
-      measuresPayload.push(measurePayload);
+        measuresPayload.push(measurePayload);
   
-      return undefined;
     });
-  
+
     periods.forEach(period => {
         const periodTargetPayload = {};
         if (data[period]) {
@@ -184,11 +197,13 @@ export const createObjectivePayload = (data, initiativesSchema, measures, period
         } 
 
         delete data[period];
-        return undefined;
     })
   
     data.measures = measuresPayload;
     data.initiatives = initiativesPayload;
+    data.milestones = milestonesPayload;
+
+    console.log(data);
     if (periodTargetsPayload.length > 0) {
       data.period_targets = periodTargetsPayload;
     }
@@ -203,7 +218,6 @@ export const createObjectivePayload = (data, initiativesSchema, measures, period
 
     return data;
   };
-
 
 export const searchOrgChart = (orgChart, roleId) => {
     for (let i = 0; i < orgChart.length; i++) {
@@ -378,3 +392,14 @@ export const getPercentage = (value, otherValue) => {
     value && otherValue? result = Math.round(value/ otherValue * 100): result = 0;
     return result;
 };
+
+export const deleteFromObjectlist = (items, key, deleteId) => {
+    for (let index=0; index < items.length; index++ ) {
+        if (items[index][key] === deleteId) {
+            items.splice(index, 1);
+            break;
+        }
+    }
+
+    return [...items];
+}

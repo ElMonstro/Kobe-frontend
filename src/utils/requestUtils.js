@@ -10,7 +10,8 @@ const requestTypeMapper = {
     post: axios.post,
     get: axios.get,
     patch: axios.patch,
-    put: axios.put
+    put: axios.put,
+    delete: axios.delete
 }
 
 export const notificationHandler = (response, successMessage, errorMessage) => {
@@ -58,7 +59,12 @@ export const makeRequest =  async (url, method, data, authenticated=true, notify
     try {
         if (method === GET) {
             response = await request(url, headerDetails);
-        } else {
+        
+        }
+        else if (method === 'delete') {
+            response = await request(url, headerDetails);
+        }
+         else {
             response = await request(url, data, headerDetails);
 
         }

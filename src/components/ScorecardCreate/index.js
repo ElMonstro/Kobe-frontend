@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Card } from "react-bootstrap"
-import { CASCADED, CREATE, EDIT, GET, PATCH, POST, SCORECARD } from "../../utils/constants";
+import { CASCADED, CREATE, EDIT, GET, PATCH, PERCENTAGE, POST, SCORECARD } from "../../utils/constants";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from "react-redux";
@@ -16,6 +16,7 @@ import { makeRequest } from "../../utils/requestUtils";
 import { createObjectiveURL, updateObjectiveURL, amendObjectiveURL } from "../../services/urls";
 import { yupObjectiveValidationObj as validationSchema } from "../../utils/validators";
 import BudgetInputs from "./budgetInput";
+import Milestones from "./milestones/milestoneInputs";
 
 
 const ScorecardCreate = ({ periods, actingRole }) => {
@@ -25,8 +26,13 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         cascadeId: 'cascade-role-1',
         deleteId: 'delete-1'
     };
+    const firstMilestone = {
+        milestoneId: `milestone-name-1`,
+        percentageId: `milestone-percentage-1`,
+        deleteId: `delete-milestone-1`
+    };
     const [initiative, setInitiative] = useState({});
-    const { perspective, name } = initiative;
+    const { perspective, name, is_self_cascaded, data_type } = initiative;
     const { initiativeId, mode, role } = useParams();
     const navigate = useNavigate();
     const [reinitializeForm, setReinitializeForm] = useState(Boolean(mode));
@@ -44,6 +50,10 @@ const ScorecardCreate = ({ periods, actingRole }) => {
 
     const [initiatives, setInitiatives] = useState([
         firstInitiative,
+    ]);
+
+    const [milestones, setMilestones] = useState([
+        firstMilestone,
     ]);
 
     const [measures, setMeasures] = useState([
@@ -92,11 +102,28 @@ const ScorecardCreate = ({ periods, actingRole }) => {
     validationSchema[initiatives[0].initiativeId] = Yup.string().required('*Initiative is required');
     validationSchema[initiatives[0].cascadeId] = Yup.string().required('*Required');
 
+    if (is_self_cascaded && data_type === PERCENTAGE)  {
+        milestones.forEach(milestone => {
+            initialValues[milestone.milestoneId] = '';
+            initialValues[milestone.percentageId] = '';
+            validationSchema[milestone.milestoneId] = Yup.string().required('*Required');
+            validationSchema[milestone.percentageId] = Yup.number().required('*Required');
+        })
+    
+    }
+
     if (mode === EDIT || initiative?.is_self_cascaded === true) {
         validationSchema[measures[0].measureId] = Yup.string();
         validationSchema[initiatives[0].initiativeId] = Yup.string();
         validationSchema[initiatives[0].cascadeId] = Yup.string();
         validationSchema.data_type = Yup.string();
+
+        milestones.forEach(milestone => {
+            initialValues[milestone.milestoneId] = '';
+            initialValues[milestone.percentageId] = '';
+            validationSchema[milestone.milestoneId] = Yup.string();
+            validationSchema[milestone.percentageId] = Yup.number();
+        });
     }
 
     if (Object.keys(initiative).length > 0) { // if mode is create or edit
@@ -123,7 +150,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
             return;
         }
 
-        const payload = createObjectivePayload(values, initiatives, measures, periods);
+        const payload = createObjectivePayload(values, initiatives, measures, periods, milestones);
 
         if (!Boolean(initiativeId)){
             makeRequest(createObjectiveURL, POST, payload, true)
@@ -138,7 +165,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
                 });
             
         } else {
-            (initiative?.is_self_cascaded) && delete payload.initiatives;
+            (is_self_cascaded) && delete payload.initiatives;
             makeRequest(amendObjectiveURL(initiativeId, mode), PATCH, payload, true)
             .then(data=> {
                 if (data) {
@@ -157,6 +184,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         onSubmit: onSubmit,
     });
 
+    console.log(formik.errors);
 
     return (
         <div className="score_card_create">
@@ -192,6 +220,17 @@ const ScorecardCreate = ({ periods, actingRole }) => {
                             setInitiatives={ setInitiatives }
                             mode={ mode }
                         />
+
+                        {
+                            initiative?.is_self_cascaded && data_type === PERCENTAGE &&
+                            <Milestones
+                                formik={ formik }
+                                milestones={ milestones }
+                                initiative={ initiative }
+                                mode={ mode }
+                                setMilestones={ setMilestones }
+                             />
+                        }
                     
                     </div>
 
@@ -200,7 +239,6 @@ const ScorecardCreate = ({ periods, actingRole }) => {
                 <div className="form_btns">
                         <Button className="cancel_btn" onClick={() => navigate()}>Cancel</Button>
                         <Button className="submit_btn" type="">Submit</Button>
-                    
                     </div>
             </Form>
         </div>
