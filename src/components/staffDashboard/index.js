@@ -19,10 +19,10 @@ const StaffDashboard = props => {
             <div className="staff_cont">
                 <Container fluid className="inner-cont">
                     <Row> 
-                        <Col xs sm="3">
+                        <Col className="sidebar_col" xs sm="3">
                             <StaffSidebar />
                         </Col>
-                        <Col xs lg="15">
+                        <Col className="main_col" xs lg="15">
                             <MemberMenuCardCont { ...props } />
                         </Col>
                     </Row>

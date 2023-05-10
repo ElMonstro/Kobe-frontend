@@ -39,7 +39,6 @@ const ScorecardNavCard = ({ activeComponent, orgChart, settings }) => {
 
     return (
         <div className="scorecard_nav">
-
             <Row className="nav">
                 { <Col className={ noneViewClassNames + createClassName }>
                     <Link id={ CREATE } className="selected_mode" to={ CREATE }>

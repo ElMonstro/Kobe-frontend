@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Container, Nav, Navbar, NavDropdown, Row, Col } from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import {ChevronDown} from '@styled-icons/bootstrap/ChevronDown'
 import { connect } from "react-redux";
 
@@ -94,9 +94,9 @@ const Header = ({
                     
                 </Navbar.Brand>  
                 <Nav className="avatar_menu">
-                    <Row>
+                    <div className="avatar_row">
                         {
-                            !user?.is_admin && <Col lg="3" className="notifications" onClick={ handleNotificationsClick }>
+                            !user?.is_admin && <div className="notifications avatar_child" onClick={ handleNotificationsClick }>
                                 <img className="notification_bell" 
                                     src={ bell } 
                                     alt="notifications"
@@ -104,9 +104,9 @@ const Header = ({
                                 {
                                     notificationsNumber > 0 && <span className="notification_number">{ notificationsNumber }</span>
                                 }
-                            </Col> 
+                            </div> 
                         }
-                    <Col lg="4" className="avatar_container">   
+                    <div lg="4" className="avatar_container avatar_child">   
                         {
                         user?.is_admin? 
                         <div className="avatar letter_avatar">
@@ -122,8 +122,8 @@ const Header = ({
                         <span  className="user_name">
                             { user?.first_name || "Menu"}
                         </span>
-                    </Col>
-                    <Col lg="2">
+                    </div>
+                    <div lg="2" className="avatar_child">
                         <NavDropdown eventkey={1} 
                             id="nav_dropdown"
                             title = {(<ChevronDown/ >)}>
@@ -137,8 +137,8 @@ const Header = ({
                                 Logout
                             </NavDropdown.Item >
                         </NavDropdown>
-                    </Col>
-                    </Row>
+                    </div>
+                    </div>
                 </Nav>
 
             </Container>

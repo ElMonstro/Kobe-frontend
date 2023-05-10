@@ -10,12 +10,14 @@ const MemberMenuCont = props => {
     const [activeComponent, setActiveComponent] = useState(SCORECARD);
     
     return (
-        <div className="members_nav_cont">
+        <div className="members_nav_container">
             <MemberNavCard 
                 activeComponent={ activeComponent } 
                 setActiveComponent={ setActiveComponent }
             />
-            <Outlet context={ { setActiveCompMemberNav: setActiveComponent }}/>
+            <div className="members_nav_content">
+                <Outlet context={ { setActiveCompMemberNav: setActiveComponent }}/>
+            </div>
         </div>
     )
 }
