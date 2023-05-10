@@ -29,7 +29,6 @@ const Node = ({ id, name, children, node, job_grade, department, staff_no, desig
   const { onNodeClick } = useTreeContext();
   const [isOpen, setIsOpen] = useState(false);
   const [childs, setChilds] = useState([]);
-  const navigate = useNavigate();  
 
   useEffect(() => {
     setChilds([children]);

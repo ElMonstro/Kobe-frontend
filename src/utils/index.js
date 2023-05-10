@@ -403,3 +403,13 @@ export const deleteFromObjectlist = (items, key, deleteId) => {
 
     return [...items];
 }
+
+export const convertFromNestedToFlat = (nestedObject, key) => {
+    const flatList = nestedObject[key];
+
+    for (const item of flatList) {
+        flatList.concat(item[key], flatList);
+    }
+
+    return flatList;
+}
