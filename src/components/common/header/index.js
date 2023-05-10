@@ -80,7 +80,7 @@ const Header = ({
     }, [isLoggedIn]);
     
     return (
-        <Navbar sticky="top" className="nav_bar" bg="light" variant="light">
+        <Navbar className="nav_bar fixed-top" bg="light" variant="light">
             <LoginForm />
             <Container className="header_container" fluid>
                 <Navbar.Brand href={ user?.is_admin? "/admin": "/"} >

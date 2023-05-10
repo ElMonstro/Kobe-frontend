@@ -1,4 +1,20 @@
-.members_nav_container {
+.members_container {
     margin: 0 20px;
-    overflow: hidden;    
+    overflow: hidden;
+    position: relative;
+    margin-top: 170px;
+
+    
+    .members_nav_cont {
+        position: fixed;
+        top: 61px;
+        width: 72%;
+        min-width: 1020px;
+        z-index: 999;
+        height: 120px;
+        padding-top: 20px; 
+        background-color: #E6ECF2;
+        border-bottom: #E6ECF2 2px solid;
+    }
+
 }
