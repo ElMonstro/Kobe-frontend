@@ -14,3 +14,4 @@ export const SET_NOTIFICATIONS = "SET_NOTIFICATIONS";
 export const SET_WEB_SOCKET = "SET_WEB_SOCKET";
 export const SET_SHOW_PROFILE = "SET_SHOW_PROFILE";
 export const SET_PROFILE_PIC = "SET_PROFILE_PIC";
+export const LOGOUT = "LOGOUT";

@@ -9,8 +9,7 @@ import {
     SET_WEB_SOCKET,
     SET_SHOW_PROFILE,
     SET_PROFILE_PIC,
-    SHOW_FORGOT_PASSWORD_MODAL,
-    SHOW_LOGIN_MODAL,
+    LOGOUT
     } from "./actionTypes";
 
 export const changeLoginStatus = isLoggedIn => ({

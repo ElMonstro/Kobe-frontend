@@ -4,6 +4,7 @@ import store from "../redux/store/store.js";
 import { changeLoginStatus, setNotifications, setWebSocket } from "../redux/actions";
 import { BIANNUALS, CHARACTERS, NESTED, OBJECTIVES, PERSPECTIVES, QUARTERS, UNITS } from './constants.js';
 import { socketsMessagesURL } from '../services/urls.js';
+import { LOGOUT } from '../redux/actions/actionTypes.js';
 
 const notificationTypeMapper = {
     success: toast.success,
@@ -113,6 +114,7 @@ export const generateString = length => {
 export const logout = () => {
     localStorage.clear()
     store.dispatch(changeLoginStatus(false));
+    store.dispatch({type: LOGOUT});
 };
 
 export const getPeriods = months => {
@@ -280,7 +282,7 @@ export const countUnreadNotifications = (notifications) => {
     let count = 0;
 
     for (const notification of notifications) {
-        if (notification.is_seen === false) {
+        if (notification.is_seen === false || notification.needs_attention) {
           count++;
         }
     }
