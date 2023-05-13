@@ -43,7 +43,7 @@ const Header = ({
     const profile_pic_url = userRole?.profile_pic? BASE_CLOUDINARY_URL + userRole.profile_pic: defaultAvatar;
     const fetchNotifications = () => {
         console.log("fetching notifications");
-        makeRequest(fetchNotificationsURL, GET, null, true, false)
+        !user?.is_admin && makeRequest(fetchNotificationsURL, GET, null, true, false)
                     .then(data => {
                         data && setNotifications(data.results);
                     });
@@ -159,7 +159,7 @@ const mapDispatchToProps = {
     setShowProfile
 }
 
-const mapStateToProps = ({ adminReducer: { companyInfo, orgChart }, authReducer: { isLoggedIn, notifications }, }) => ({
+const mapStateToProps = ({ adminReducer: { companyInfo, orgChart }, authReducer: { isLoggedIn, notifications, user }, }) => ({
     companyInfo,
     isLoggedIn,
     notifications, 
