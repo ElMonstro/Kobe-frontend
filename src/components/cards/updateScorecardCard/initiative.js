@@ -8,7 +8,11 @@ import { ERROR, PATCH, UNITS } from "../../../utils/constants";
 import { updateObjectiveURL as retrieveObjectiveURL } from "../../../services/urls";
 import { fireNotification } from "../../../utils";
 
-const Initiative = ({ id, name, budget, score, percentage_target, units_target, cost, weight, status, data_type}) => {
+const Initiative = ({ 
+    id, name, budget,
+    score, percentage_target, units_target, 
+    cost, weight, status, data_type, score_being_approved
+}) => {
 
     let target;
     data_type === UNITS? target = units_target: target = percentage_target;
@@ -48,6 +52,7 @@ const Initiative = ({ id, name, budget, score, percentage_target, units_target, 
                     { ...formik.getFieldProps("cost") } 
                     placeholder="130.00" 
                     className="cost_input" 
+                    disabled={score_being_approved}
                  />
                  <Form.Control.Feedback type='invalid'>
                     { formik.errors.cost }
@@ -66,6 +71,7 @@ const Initiative = ({ id, name, budget, score, percentage_target, units_target, 
                     valuedefault={ score } 
                     { ...formik.getFieldProps("score") } 
                     className="score_input"
+                    disabled={score_being_approved}
                 />
                 <Form.Control.Feedback type='invalid'>
                     { formik.errors.score }
@@ -81,6 +87,7 @@ const Initiative = ({ id, name, budget, score, percentage_target, units_target, 
                     id="evidence"
                     className="evidence_input"
                     placeholder="https://www.google.com" 
+                    disabled={score_being_approved}
                     { ...formik.getFieldProps("evidence") }  
                 />
                 <Form.Control.Feedback type='invalid'>

@@ -35,7 +35,10 @@ const ScorecardNavCard = ({ activeComponent, orgChart, settings }) => {
       }, [activeComponent]);
 
       let createClassName = "";
-      (orgChart?.reporting_to && !settings?.behaviorals_enabled)? createClassName = " hidden": createClassName = "";
+        !orgChart?.reporting_to 
+        || settings?.behaviorals_enabled
+        || orgChart?.tier >  settings?.cascade_cutoff
+        ? createClassName = "": createClassName = " hidden";
 
     return (
         <div className="scorecard_nav">
