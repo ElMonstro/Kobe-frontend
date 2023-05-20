@@ -209,10 +209,8 @@ const ScorecardCreate = ({ periods, actingRole }) => {
                         />
                         
                         <ThresholdsInputs formik={ formik } />
-                        {
-                        initiative?.is_self_cascaded && 
-                            <BudgetInputs formik={ formik } actingRole={ actingRole } initiative={ initiative } />
-                        }
+                        
+                        <BudgetInputs formik={ formik } actingRole={ actingRole } initiative={ initiative } />
                         <InitiativeInputs 
                             formik={ formik }
                             initiatives={ initiatives }
@@ -244,7 +242,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         </div>
     )
 }
-
+// TODO: dont submit edit if nothing in the form has changed
 const mapDispatchToProps = {
 }
 

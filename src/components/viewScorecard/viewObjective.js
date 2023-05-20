@@ -7,8 +7,8 @@ import "./index.scss";
 import ViewInitiative from "./viewInitiative";
 
 const ViewObjective = ({ 
-    name, measures, weight, data_type, units_target, score, percentage_target, 
-    percentage_score, status, initiatives, change_approval_trackers 
+    name, measures, weight, data_type, units_target, percentage_target, 
+    percentage_score, status, initiatives, change_approval_trackers, percentage_progress
 }) => {
     const [isOpen, setIsOpen] = useState(false);
     const measure_name = measures[0]?.name
@@ -16,10 +16,10 @@ const ViewObjective = ({
     let objectiveClassName;
     const approval_status = APPROVAL_MAPPER[change_approval_trackers[0]?.is_approved];
     const score_display_mapper = {
-        units: [units_target, score, ""],
-        percentage: [percentage_target, percentage_score, "%"]
+        units: [units_target, ""],
+        percentage: [percentage_target, "%"]
     }
-    const [target, displayScore, symbol] = score_display_mapper[data_type];
+    const [target, symbol] = score_display_mapper[data_type];
     
     isOpen? initiativesClassName="initiatives": initiativesClassName="hidden";
     isOpen? objectiveClassName="objective white_bg": objectiveClassName="objective";
@@ -53,7 +53,7 @@ const ViewObjective = ({
                         <Col className="measure">{ measure_name }</Col>
                         <Col className="weight">{ weight }</Col>
                         <Col>{ target }{ symbol }</Col>
-                        <Col className={ `score ${status}_color` }>{ displayScore }{ symbol }</Col>
+                        <Col className={ `score ${status}_color` }>{ percentage_progress }</Col>
                     </Row>
                 </Col>
             </Row>

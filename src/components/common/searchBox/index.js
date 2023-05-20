@@ -40,7 +40,7 @@ const SearchBox = ({orgChart}) => {
         <div className="search_box_cont">
             <div className="search_cont">
                 <Search />
-                <input onChange={handleOnChange} value={searchTerm} className="search_box" placeholder="Enter Employee"></input>
+                <input onChange={handleOnChange} value={searchTerm} className="search_box" placeholder="Search Employee"></input>
                 <span className="close_icon" onClick={() => setSearchTerm("")}><CloseOutline  /></span>
             </div>
             {

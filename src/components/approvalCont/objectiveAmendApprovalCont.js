@@ -39,5 +39,5 @@ const ApprovalObjectiveView = () => {
         </div>
     )
 }
-
+//TODO add milestones
 export default ApprovalObjectiveView;

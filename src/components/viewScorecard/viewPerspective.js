@@ -57,9 +57,6 @@ const ViewPerspective = ({ objectives, alias, status, weight, percentage_progres
                     })
                 }
             </Row>
-        
-        
-            
         </Row>
     )
 }

@@ -14,21 +14,19 @@ import { POST } from "../../utils/constants";
 const NotificationsModal = ({ showNotifications, setShowNotifications, notifications, setNotifications }) => {
     const handleClose = () => {
         setShowNotifications(false);
+        setSeenNotifications();
     }
+    
+    const setSeenNotifications = async () => makeRequest(setSeenNotificationsURL, POST, 
+                                                { notifications: renderedUnseenNotifIds }, true, false)
+                                                .then(data => data && setNotifications(data));
+
     const renderedUnseenNotifIds = notifications?.filter(notification => !notification.is_seen).map(notification => notification.id);
     
     useEffect(() => {
         renderedUnseenNotifIds.length > 0 && 
-        setTimeout(() => {
-            makeRequest(setSeenNotificationsURL, POST, { notifications: renderedUnseenNotifIds }, true, false)
-            .then(data => {
-                data && setNotifications(data);
-            });
-        }, 20000);
-            
+        setTimeout(setSeenNotifications, 20000);
     }, [renderedUnseenNotifIds])
-
-    
 
     return (
         <div className="notifications">

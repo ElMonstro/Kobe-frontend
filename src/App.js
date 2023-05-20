@@ -76,7 +76,7 @@ function App({ isLoggedIn, webSocket, showNotifications }) {
             <Protected> 
               <AdminDashboard activeComponent={PERSPECTIVES} /> 
             </Protected>} 
-          />    
+          />
           <Route path="/admin/cascade"  element={
             <Protected> 
               <AdminDashboard activeComponent={CASCADE} /> 

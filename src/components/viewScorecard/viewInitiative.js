@@ -9,15 +9,15 @@ import "./index.scss";
 const ViewInitiative = ({
         name, weight, percentage_target, score, 
         data_type, units_target, measures,
-        percentage_score, status, role
+        status, role, percentage_progress
     }) => {
     const measure_name = measures[0]?.name
     const profileUrl = BASE_CLOUDINARY_URL + role?.profile_pic
     const score_display_mapper = {
-        units: [units_target, score, ""],
-        percentage: [percentage_target, percentage_score, "%"]
+        units: [units_target, ""],
+        percentage: [percentage_target, "%"]
     }
-    const [target, displayScore, symbol] = score_display_mapper[data_type];
+    const [target, symbol] = score_display_mapper[data_type];
     weight = parseInt(weight)
 
     return (
@@ -53,7 +53,7 @@ const ViewInitiative = ({
                         <Col className="measure">{ measure_name }</Col>
                         <Col className="weight">{ weight }</Col>
                         <Col>{ target }{ symbol }</Col>
-                        <Col className={ `score ${status}_color` }>{ displayScore }{ symbol }</Col>
+                        <Col className={ `score ${status}_color` }>{ percentage_progress }</Col>
                     </Row>
                 </Col>
             </Row>

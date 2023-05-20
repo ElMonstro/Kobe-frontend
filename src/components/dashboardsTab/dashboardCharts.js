@@ -36,7 +36,7 @@ class DashboardCharts extends React.Component {
                     {
                         <Row className="speedometers">
                             <Col className="actual">
-                                <Speedometer title="Perfomance Speedometer" percent={ percentage } description={ dataContext?.split("_").join(" ") } />
+                                <Speedometer title="Perfomance Status" percent={ percentage } description={ dataContext?.split("_").join(" ") } />
                             </Col>
                         </Row>
                     }

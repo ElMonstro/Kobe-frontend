@@ -31,7 +31,7 @@ const UpdateScorecardCard = () => {
                     <Col>Cost</Col>
                     <Col>Weight</Col>
                     <Col>Target</Col>
-                    <Col>Score</Col>
+                    <Col>Achieved</Col>
                     <Col lg={ 2 }>Status</Col>
                     <Col>Evidence</Col>
                     <Col></Col>

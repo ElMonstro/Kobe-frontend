@@ -57,6 +57,8 @@ const ReportSelection = ({ periods }) => {
 
         setPeriod(periods[0]);
     }, [periods])
+
+    //TODO: error if report has not been created
        
     return (
         <div className="report_selection">

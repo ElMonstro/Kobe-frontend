@@ -23,6 +23,9 @@ const StrategyMapCreate = props => {
             })
     }, []);
 
+// TODO use alias names instead of perspective names
+
+
     return (
         <div className="strategy_map_create">
             {
