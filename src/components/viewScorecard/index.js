@@ -35,14 +35,14 @@ const ViewScorecard = () => {
                 setActiveComponent={ setActiveComponent } 
                 ref={(el) => (componentRef = el)}
             />
-        <ReactToPrint
-            trigger={() => <div className="print_btn dashboard_btn">
-                                <span className="text"> print </span>
-                                <Printer />
-                            </div>
-                }
-            content={() => componentRef}
-        />
+            <ReactToPrint
+                trigger={() => <div className="print_btn dashboard_btn">
+                                    <span className="text"> print </span>
+                                    <Printer />
+                                </div>
+                    }
+                content={() => componentRef}
+            />
         </div>
     )
 }

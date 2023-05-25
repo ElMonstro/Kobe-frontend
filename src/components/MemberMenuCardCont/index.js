@@ -5,7 +5,7 @@ import MemberNavCard from "../cards/MemberNavCard";
 
 import "./index.scss";
 
-const MemberMenuCont = props => {
+const MemberMenuCont = () => {
 
     const [activeComponent, setActiveComponent] = useState(SCORECARD);
     

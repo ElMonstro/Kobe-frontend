@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 
 import { fetchStrategyMapObjectivesURL } from "../../services/urls";
-import { CREATE, GET, PERSPECTIVES_ORDER_ARRAY } from "../../utils/constants";
+import { CREATE, GET } from "../../utils/constants";
 import { makeRequest } from "../../utils/requestUtils";
 import "./index.scss";
 import StrategyMapPerspective from "./strategyPerspective";
+import { connect } from "react-redux";
 
-const StrategyMapCreate = props => {
+const StrategyMapCreate = ({ perspectiveOrder }) => {
 
     const [objectives, setObjectives] = useState([]);
     let perspectiveObjectives;
@@ -29,17 +30,20 @@ const StrategyMapCreate = props => {
     return (
         <div className="strategy_map_create">
             {
-                PERSPECTIVES_ORDER_ARRAY.map((perspective, index) => {
+                perspectiveOrder?.map((perspective, index) => {
                     perspectiveObjectives = objectives.filter(objective => objective?.perspective.toLowerCase() === perspective )
                     linkableObjectives = objectives.filter(objective => {
                         if (index === 0) {
                           return objective?.perspective === perspective;
                         }
-                        abovePerspective = PERSPECTIVES_ORDER_ARRAY[index - 1];
+                        abovePerspective = perspective[index - 1];
                         return objective?.perspective.toLowerCase() === perspective || objective?.perspective.toLowerCase() === abovePerspective;
                     });
                     
-                    return <StrategyMapPerspective key={ perspective } linkableObjectives={ linkableObjectives } perspectiveObjectives={ perspectiveObjectives } perspective={ perspective }/>
+                    return <StrategyMapPerspective 
+                            key={ perspective } linkableObjectives={ linkableObjectives }
+                            perspectiveObjectives={ perspectiveObjectives } perspective={ perspective }
+                         />
                 })
                 
             }
@@ -47,4 +51,15 @@ const StrategyMapCreate = props => {
     )
 }
 
-export default StrategyMapCreate;
+const mapDispatchToProps = {
+}
+
+const mapStateToProps = ({adminReducer: { perspectiveOrder }}) => ({
+    perspectiveOrder,
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+) (StrategyMapCreate);
+

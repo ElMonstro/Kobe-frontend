@@ -9,7 +9,8 @@ import {
     SET_WEB_SOCKET,
     SET_SHOW_PROFILE,
     SET_PROFILE_PIC,
-    LOGOUT
+    LOGOUT,
+    SET_PERSPECTIVE_ORDER
     } from "./actionTypes";
 
 export const changeLoginStatus = isLoggedIn => ({
@@ -87,4 +88,9 @@ export const setShowProfile = showProfile => ({
 export const setProfilePic = role => ({
     type: SET_PROFILE_PIC,
     role,
+});
+
+export const setPerspectiveOrder = perspectiveOrder => ({
+    type: SET_PERSPECTIVE_ORDER,
+    perspectiveOrder,
 });

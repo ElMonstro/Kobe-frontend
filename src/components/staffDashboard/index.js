@@ -5,13 +5,24 @@ import { connect } from 'react-redux';
 
 import Header from "../common/header";
 import StaffSidebar from "../staffSidebar";
-
-
 import 'react-toastify/dist/ReactToastify.css';
 import "./index.scss";
 import MemberMenuCardCont from "../MemberMenuCardCont";
+import { setPerspectiveOrder } from "../../redux/actions";
+import { CUST_FIRST_PERSPECTIVES_ORDER_ARRAY, 
+        FINANCIAL_FIRST, 
+        FIN_FIRST_PERSPECTIVES_ORDER_ARRAY 
+    } from "../../utils/constants";
 
-const StaffDashboard = props => {
+const StaffDashboard = ({ settings, setPerspectiveOrder }) => {
+
+    useEffect(() => {
+        let persOrder;
+        settings.perspective_order === FINANCIAL_FIRST? persOrder = FIN_FIRST_PERSPECTIVES_ORDER_ARRAY: 
+            persOrder = CUST_FIRST_PERSPECTIVES_ORDER_ARRAY
+            setPerspectiveOrder([...persOrder]);
+
+    }, [settings]);
        
     return (
         <div className="dashboard">
@@ -23,7 +34,7 @@ const StaffDashboard = props => {
                             <StaffSidebar />
                         </Col>
                         <Col className="main_col" xs lg="15">
-                            <MemberMenuCardCont { ...props } />
+                            <MemberMenuCardCont />
                         </Col>
                     </Row>
                 </Container>
@@ -33,11 +44,11 @@ const StaffDashboard = props => {
 };
 
 const mapDispatchToProps = {
+    setPerspectiveOrder,
 }
 
-const mapStateToProps = ({ adminReducer, authReducer }) => ({
-    ...adminReducer,
-    ...authReducer
+const mapStateToProps = ({ adminReducer: { settings }}) => ({
+    settings,
 });
 
 export default connect(

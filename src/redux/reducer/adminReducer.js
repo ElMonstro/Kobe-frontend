@@ -2,6 +2,7 @@ import {
     SET_COMPANY_INFO,
     SET_ORG_CHART,
     SET_PERIODS,
+    SET_PERSPECTIVE_ORDER,
     SET_PROFILE_PIC,
     SET_SETTINGS,
 } from "../actions/actionTypes";
@@ -10,7 +11,8 @@ const initialState = {
     settings: {},
     companyInfo: {},
     orgChart: [],
-    periods: []
+    periods: [],
+    perspectiveOrder: []
 };
 
 const adminReducer = ( state=initialState, action ) => {
@@ -36,6 +38,10 @@ const adminReducer = ( state=initialState, action ) => {
             let newOrgChart = { ...state.orgChart[0], ...role};
             newOrgChart = [newOrgChart];
             return {...state, orgChart: newOrgChart};
+
+        case SET_PERSPECTIVE_ORDER:
+            const { perspectiveOrder } = action;
+            return {...state, perspectiveOrder};
             
         default:
             return state;

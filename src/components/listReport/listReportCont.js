@@ -33,8 +33,4 @@ class ListsReportCont extends React.Component {
     
 }
 
-const mapStateToProps = ({ adminReducer: { orgChart } }) => ({
-    employee: orgChart[0]
-});
-
 export default ListsReportCont;
