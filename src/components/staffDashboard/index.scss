@@ -1,7 +1,8 @@
 .staff_cont {
 
     padding: 20px 0px 20px 25%!important;
-
+    background-color: #E6ECF2;
+    min-height: 865px;
 
     textarea:focus, input:focus {
         outline: none!important;
@@ -74,6 +75,10 @@
         svg {
             height: 15px;
         }
+    }
+
+    .print_content_display {
+        display: none;
     }
 }
 

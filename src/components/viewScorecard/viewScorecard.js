@@ -6,6 +6,7 @@ import SignOff from "../common/signOff";
 import "./index.scss";
 import ViewPerspective from "./viewPerspective";
 import ObjectivesHeader from "./viewScorecardHeader";
+import PersonalData from "../dashboardsTab/personalData";
 
 
 class PrintableViewScorecard extends React.Component {
@@ -15,6 +16,9 @@ class PrintableViewScorecard extends React.Component {
 
         return (
             <div className="view_scorecard">
+                <div className="print_content_display">
+                    <PersonalData />
+                </div>
                 <ObjectivesHeader />
                 
                 {

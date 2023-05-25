@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { connect } from "react-redux";
 import { useOutletContext, useParams } from "react-router-dom";
 import ReactToPrint from "react-to-print";
 import { Printer } from "styled-icons/bootstrap";
@@ -10,7 +9,7 @@ import { makeRequest } from "../../utils/requestUtils";
 import "./index.scss";
 import PrintableViewScorecard from "./viewScorecard";
 
-const ViewScorecard = ({ settings }) => {
+const ViewScorecard = () => {
 
     const [perspectives, setPerspectives] = useState([])
     const { role } = useParams();
@@ -48,14 +47,4 @@ const ViewScorecard = ({ settings }) => {
     )
 }
 
-const mapDispatchToProps = {
-}
-
-const mapStateToProps = ({ adminReducer: { settings }, }) => ({
-    settings,
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-) (ViewScorecard);
+export default ViewScorecard;

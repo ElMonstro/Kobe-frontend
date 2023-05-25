@@ -6,6 +6,7 @@ import { makeRequest } from "../../utils/requestUtils";
 import StatusCount from "./statusCounter";
 import FilterTable from "./filterTable";
 import { fetchUnderAllUnderlingsUrl } from "../../services/urls";
+import PersonalData from "../dashboardsTab/personalData";
 
 class ListsReportCont extends React.Component {
     state = {
@@ -22,11 +23,18 @@ class ListsReportCont extends React.Component {
    
     render() {
         return <div className="list_report_cont">
+                    <div className="print_content_display">
+                        <PersonalData />
+                    </div>
                     <StatusCount employees={ this.state.employees } />
                     <FilterTable employees={ this.state.employees }/>
                 </div>
     }
     
 }
+
+const mapStateToProps = ({ adminReducer: { orgChart } }) => ({
+    employee: orgChart[0]
+});
 
 export default ListsReportCont;

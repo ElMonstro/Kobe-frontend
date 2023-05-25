@@ -30,6 +30,11 @@ class DashboardCharts extends React.Component {
                 { personalData &&
                     <PersonalData />
                 }
+                { !personalData &&
+                    <div className="print_content_display">
+                        <PersonalData />
+                    </div>
+                }
                 <div className="charts_title">
                     {mode && mode.substring(0, mode.length-1) + " -"} { title }
                 </div>

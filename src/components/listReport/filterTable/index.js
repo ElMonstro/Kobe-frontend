@@ -29,7 +29,7 @@ const FilterTable = ({ employees, divisions_enabled, departments_enabled, sectio
         let type;
         e.target.id === "performance"? type = NORMAL: type = NESTED;
         const voidValues = ["Performance", "Divisions", "Departments", "sections"]
-        let value = e.target.value;
+        let {value} = e.target;
 
         if (voidValues.includes(value)) {
             delete filters[e.target.id];

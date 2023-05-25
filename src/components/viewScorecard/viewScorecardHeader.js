@@ -17,7 +17,7 @@ const ObjectivesHeader = () => {
                         <Col className="measure"> Measure </Col>
                         <Col> Weight </Col>
                         <Col> Target </Col>
-                        <Col> Score (%)  </Col>
+                        <Col> Score(%)  </Col>
                     </Row>
                 </Col>
         </Row>
