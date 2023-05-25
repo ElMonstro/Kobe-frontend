@@ -39,7 +39,11 @@ const ApprovalModal = () => {
 
     return (
         <div className="approval_modal">
-            <RejectionMessageModal showRejectionModal={ showRejectionModal } setShowRejectionModal={ setShowRejectionModal } />
+            <RejectionMessageModal 
+                showRejectionModal={ showRejectionModal } 
+                setShowRejectionModal={ setShowRejectionModal }   
+                closeApprovalModal={ handleClose } 
+            />
 
             <Modal
                 show={show}

@@ -13,7 +13,9 @@ const StrategyMapObjectiveView = ({ id, name, status, links })=> {
 
     const color = fillColorMapper[status]; 
     let truncatedName = name?.substring(0, Math.min(NAME_LENGTH, name.length))
-    truncatedName += "...";
+    if (name.length > NAME_LENGTH) {
+        truncatedName += "...";
+    }
 
     return (
         <div className="objective_cont"> 

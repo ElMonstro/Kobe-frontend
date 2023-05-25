@@ -9,7 +9,7 @@ import { PATCH } from "../../utils/constants";
 import { makeRequest } from "../../utils/requestUtils";
 import { yupRejectionForm } from "../../utils/validators";
 
-const RejectionMessageModal = ({ showRejectionModal, setShowRejectionModal }) => {
+const RejectionMessageModal = ({ showRejectionModal, setShowRejectionModal, closeApprovalModal }) => {
 
     const { approvalToken } = useParams();
     const handleClose = () => setShowRejectionModal(false);
@@ -17,6 +17,7 @@ const RejectionMessageModal = ({ showRejectionModal, setShowRejectionModal }) =>
     const reject = async values => {
         await makeRequest(fetchApprovalObject(approvalToken), PATCH, values, true, true);
         handleClose();
+        closeApprovalModal();
     }
 
     const formik = useFormik({

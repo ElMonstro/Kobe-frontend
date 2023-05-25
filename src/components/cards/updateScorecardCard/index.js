@@ -5,7 +5,7 @@ import { makeRequest } from "../../../utils/requestUtils";
 import "./index.scss";
 import { fetchSelfCascadedInitURL } from "../../../services/urls";
 import { GET, OBJECTIVE, UPDATE } from "../../../utils/constants";
-import Initiative from "./initiative";
+import InitiativeUpdate from "./initiative";
 import { useOutletContext } from "react-router-dom";
 
 const UpdateScorecardCard = () => {
@@ -39,7 +39,7 @@ const UpdateScorecardCard = () => {
                 {
                     initiatives?.map(initiative => {
                         if (initiative.type === OBJECTIVE && initiative.is_approved) {
-                          return <Initiative key={ initiative.id } { ...initiative }/>
+                          return <InitiativeUpdate key={ initiative.id } { ...initiative }/>
                         }
                     })
                 } 

@@ -32,9 +32,9 @@ const StrategyObjective = ({objective: currentObjective, linkableObjectives, per
     const [selectedOptions, setSelectedOptions] = useState([]);
     
     const onSelect = (selected) => {
-        selected =  selected.map(({value}) => value)
+        const newSelected =  selected.map(({value}) => value)
         const payload = {
-            links_ids: selected
+            links_ids: newSelected
         };
 
         makeRequest(linkObjectiveURL(currentObjective?.id), PATCH, payload, true, false )
