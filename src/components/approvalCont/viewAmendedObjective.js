@@ -5,7 +5,9 @@ import { UNITS } from "../../utils/constants";
 import OpenCloseIcon from "../common/openCloseIcon";
 import ViewInitiative from "../viewScorecard/viewInitiative";
 
-const ViewAmendedObjective = ({ name, measures, weight, units_target, data_type, percentage_target, initiatives, budget, period_targets }) => {
+const ViewAmendedObjective = ({ name, measures, weight, 
+    units_target, data_type, percentage_target, 
+    initiatives, budget, period_targets, milestones, is_self_cascaded }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const measure_name = measures && measures[0]?.name
@@ -57,6 +59,21 @@ const ViewAmendedObjective = ({ name, measures, weight, units_target, data_type,
                                 }
                             </div>
                         </Col>
+                        { is_self_cascaded &&
+                            <Col>
+                                <div className="period_targets">
+                                    {
+                                        milestones?.map(milestone => {
+                                            return <div>
+                                            <span className="period">{ milestone.description }:</span> 
+                                            <span className="target">{ milestone.percentage }</span>
+                                        </div>
+                                        })
+                                    }
+                                </div>
+                            </Col>
+                        }
+
                     </Row>
                 </Col>
             </Row>

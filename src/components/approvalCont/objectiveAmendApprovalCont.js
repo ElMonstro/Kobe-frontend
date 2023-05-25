@@ -7,7 +7,7 @@ import ViewAmendedObjective from "./viewAmendedObjective";
 
 const ApprovalObjectiveView = () => {
 
-    const { objective, approve, reject} = useOutletContext();
+    const { objective } = useOutletContext();
     const isObjectiveNew = objective?.approved_objective?.target === "0.00" ||  objective?.approved_objective?.target === undefined;
     let changeWording;
     isObjectiveNew? changeWording = "Created": changeWording = "Amended";
@@ -25,6 +25,7 @@ const ApprovalObjectiveView = () => {
                         <Col >Budget</Col>
                         <Col> Target </Col>
                         <Col> Period Targets </Col>
+                        {objective?.is_self_cascaded &&  <Col> Milestones </Col> }
                     </Row>
                 </Col>
         </Row>

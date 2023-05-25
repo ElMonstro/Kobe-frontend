@@ -75,7 +75,7 @@ const Milestones = ({ formik, milestones, initiative, setMilestones }) => {
             <Row className="initiatives_labels">
                 <Col lg={4}>Description</Col>
                 <Col className="weight_label"></Col>
-                <Col>Percentage</Col>
+                <Col>Percentage Weight</Col>
                 <Col></Col>
             </Row> 
             {
