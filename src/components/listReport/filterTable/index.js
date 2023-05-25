@@ -101,6 +101,7 @@ const FilterTable = ({ employees, divisions_enabled, departments_enabled, sectio
                     <Col>Division</Col>
                     <Col>Department</Col>
                     <Col>Section</Col>
+                    <Col>Designation</Col>
                     <Col>Score</Col>
                     <Col>Perfomance</Col>
                 </Row>
@@ -113,6 +114,7 @@ const FilterTable = ({ employees, divisions_enabled, departments_enabled, sectio
                                 <Col>{ employee.division?.name }</Col>
                                 <Col>{ employee.department?.name }</Col>
                                 <Col>{ employee.section?.name }</Col>
+                                <Col>{ employee.name }</Col>
                                 <Col>{ employee.score }</Col>
                                 <Col>
                                     <div className={`${employee.performance} status`}></div> 
