@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { CREATE, PERSPECTIVE_OBJECT, BEHAVIORAL } from "../../utils/constants";
 
 
-const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, role }) => {
+const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, role, is_self_cascaded }) => {
 
     const isDisabled = Boolean(initiativeId);
     const nameFieldProps = formik.getFieldProps('name');
@@ -24,15 +24,18 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
         nameFieldProps.value = name;
         perspectiveFieldProps.value = perspective;
     }
+
+    let ObjectiveTitle;
+    is_self_cascaded? ObjectiveTitle = 'Initiative': ObjectiveTitle = 'Objective'
     
     return (
         <Card className="staff_card">
-            <div className="card_title title">Objective</div>
+            <div className="card_title title">{ ObjectiveTitle }</div>
             <div className="inputs_cont">
                 <Row className={ `inputs_row` }>
                     <Col>
                         <Form.Group className="mb-1" controlId="name">
-                            <Form.Label>Objective</Form.Label>
+                            <Form.Label>{ ObjectiveTitle }</Form.Label>
                             <Form.Control 
                             type="text" 
                             placeholder=""

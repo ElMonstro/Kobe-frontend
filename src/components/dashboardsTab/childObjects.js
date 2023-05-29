@@ -2,9 +2,19 @@ import { Card, Col, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 import "./index.scss"
+import { REPORTS } from '../../utils/constants';
 
-const ReportChildObjects =  ({ objects, title }) => {
+const ReportChildObjects =  ({ objects, title, loadedIn }) => {
   const navigate = useNavigate();
+
+  const handleClick = (id) => {
+    return () => {
+      if (loadedIn === REPORTS) {
+        return
+      }
+      navigate(`${title}/${id}`);
+    }
+  }
   return (
     <Card className="staff_card children">
       <Card.Header>
@@ -21,7 +31,7 @@ const ReportChildObjects =  ({ objects, title }) => {
             <Row className="children_list">
               {
                   objects?.map(({name, weight, percentage_progress, status, id}) => {
-                      return <Row onClick={ () => navigate(`${title}/${id}`) } key={ id } className="child">
+                      return <Row onClick={ handleClick(id) } key={ id } className="child">
                                   <Col lg={ 1 }><div className={`${status} status`}></div></Col>
                                   <Col lg={ 6 }>{ name }</Col>
                                   <Col>{ weight }%</Col>

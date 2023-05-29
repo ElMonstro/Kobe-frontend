@@ -59,8 +59,8 @@ class DashboardCharts extends React.Component {
                     }
                     {
                         objects?.length > 0 && loadedIn !== OVER_VIEW && mode !== INITIATIVES &&
-                        <Row>
-                            <ReportChildObjects objects={ objects } title={ childrenTitle } />
+                        <Row className="dashboard_children">
+                            <ReportChildObjects loadedIn={ loadedIn } objects={ objects } title={ childrenTitle } />
                         </Row>
                     }
                 </div>

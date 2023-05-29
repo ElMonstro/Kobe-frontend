@@ -1,17 +1,18 @@
 .employee_name {
     svg {
-        fill: black!important;
-        height: 13px;
-        width: 13px;
-        background-color: #D9D9D9;
+        fill: #828282!important;
+        height: 15px;
+        width: 15px;
+        font-size: 20px;
+        background-color: white;
         vertical-align: middle;
         border-radius: 50%;
+        border: 2px solid #828282;
     }
 
     font-weight: 650;
     font-size: 17px;
     line-height: 28px;
     letter-spacing: 0.035em;
-    color: #828282;
     
 }

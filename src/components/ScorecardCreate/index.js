@@ -195,6 +195,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
                     initiativeId={ initiativeId }
                     name = { name }
                     perspective = { perspective } 
+                    is_self_cascaded={ initiative.is_self_cascaded }
                     />
                 <Card className="staff_card">
                     

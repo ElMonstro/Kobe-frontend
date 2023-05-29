@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { getAgeString, getTimeDifference } from "../../utils";
+import { getTimeDifference } from "../../utils";
 
 const Notification = ({ title, body, link, is_seen, needs_attention, created_at }) => {
     const navigate = useNavigate();

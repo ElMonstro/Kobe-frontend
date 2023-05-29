@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import {ChevronRight} from "@styled-icons/evaicons-solid/ChevronRight";
-import {ChevronDown} from "@styled-icons/evaicons-solid/ChevronDown";
+import {CaretDown} from "@styled-icons/boxicons-regular/CaretDown";
+import {CaretRight} from "@styled-icons/boxicons-regular/CaretRight";
 import { Col, Row } from "react-bootstrap";
 
 import {
@@ -12,12 +12,10 @@ import {
 import { StyledNode } from "./TreeNode.style";
 
 import { useTreeContext } from "../state/TreeContext";
-import { useNavigate } from "react-router-dom";
-
 
 const NodeName = ({ isOpen, name, openCloseNode, handleNameClick }) => (
   <StyledName className="employee_name">
-    {isOpen ? <ChevronDown onClick={openCloseNode} /> : <ChevronRight onClick={openCloseNode} />}
+    {isOpen ? <CaretDown onClick={openCloseNode} /> : <CaretRight onClick={openCloseNode} />}
     &nbsp;&nbsp;
     <span onClick={handleNameClick}>
        {name} 
@@ -61,7 +59,7 @@ const Node = ({ id, name, children, node, job_grade, department, staff_no, desig
                 <Col className="employee_detail"><span>{ designation }</span></Col>
                 <Col className="employee_detail"><span>{ job_grade }</span></Col>
                 <Col className="employee_detail"><span>{ staff_no }</span></Col>
-                <Col className="employee_detail"><span>{department?department: '\"'}</span></Col>
+                <Col className="employee_detail"><span>{department || '\"'}</span></Col>
               </Row>
               
             </Col>
