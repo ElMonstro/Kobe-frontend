@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Row, Col } from "react-bootstrap"
 import { DeleteBin5 } from "@styled-icons/remix-fill/DeleteBin5";
+import { confirm } from "react-bootstrap-confirmation";
 
 import thumbnail from "../../../assets/josh_logo.jpg";
 import { makeRequest } from "../../../utils/requestUtils";
@@ -11,9 +12,10 @@ import { BASE_CLOUDINARY_URL } from "../../../services/baseURL";
 
 const CreatedInitiativeInput = ({ deleteId, deleteInitiative, initiative }) => {
 
-    const onDeleteInit = e => {
-        makeRequest(deleteinitiativeURL(deleteId), PATCH, {}, true, true);
-        deleteInitiative(deleteId);
+    const onDeleteInit = async e => {
+        const result = await confirm("Are you sure you want to delete this initiative?");
+        result && makeRequest(deleteinitiativeURL(deleteId), PATCH, {}, true, true);
+        result && deleteInitiative(deleteId);
     };
 
     let profile_pic;
