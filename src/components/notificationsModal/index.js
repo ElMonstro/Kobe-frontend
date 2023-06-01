@@ -52,7 +52,11 @@ const NotificationsModal = ({ showNotifications, setShowNotifications, notificat
                     <div className="notifications">
                         {
                             notifications?.map(notification => {
-                                return <Notification key={ notification.id } {...notification} />
+                                return <Notification 
+                                            key={ notification.id } 
+                                            {...notification} 
+                                            setShowNotifications={setShowNotifications}
+                                        />
                             })
                         }
                     </div>

@@ -3,16 +3,20 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { getTimeDifference } from "../../utils";
 
-const Notification = ({ title, body, link, is_seen, needs_attention, created_at }) => {
+const Notification = ({ title, body, link, is_seen, needs_attention, created_at, setShowNotifications }) => {
     const navigate = useNavigate();
     let notificationClassName;
     is_seen? notificationClassName = "notification": notificationClassName = "notification unread";
+    const isRejectionNotification =  title.includes("rejected");
     const ageString = getTimeDifference(created_at);
-    const [showButton, setShowButton] = useState(link && needs_attention);
+    const [showButton, setShowButton] = useState((link && needs_attention) || isRejectionNotification);
 
     const handleNotificationClick = () => {
       navigate(link);
       setShowButton(false);
+
+      isRejectionNotification && setShowNotifications(false);
+      
     }
 
     return (
@@ -29,7 +33,7 @@ const Notification = ({ title, body, link, is_seen, needs_attention, created_at 
           { 
             (showButton) &&
             <Button className="link_button" onClick={ handleNotificationClick }>
-              View Objective
+              {isRejectionNotification ? "Edit" : "View"} Objective
             </Button>
           }
         </div>
