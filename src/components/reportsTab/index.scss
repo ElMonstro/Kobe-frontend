@@ -1,12 +1,39 @@
 .reports_tab {
     background-color: #E6ECF2!important;
+    position: relative;
+
+    .path {
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 28px;
+        text-transform: uppercase;
+        color: #4F4F4F;
+        position: absolute;
+        top: 8px;
+
+        .path_string {
+            cursor: pointer;
+            text-decoration-line: underline;
+        }
+
+        .home {
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        
+    }
+
+}
+
+.selection_container {
+    padding-top: 40px;
 }
 
 .report_selection {
     width: 729px;
     height: 527px;
     margin: auto;
-    margin-top: 50px;
     background: #FFFFFF;
     border-radius: 16px!important;
 

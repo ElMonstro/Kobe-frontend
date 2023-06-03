@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 import dashboardIcon from "../../assets/dashboards.svg";
 import listsIcon from "../../assets/lists.svg";
 import appraisalIcon from "../../assets/appraisal.svg";
 import { makeRequest } from "../../utils/requestUtils";
-import { APPRAISAL, DASHBOARD, GET, LIST } from "../../utils/constants";
+import { APPRAISAL, DASHBOARD, GET, LIST, REPORTS } from "../../utils/constants";
 import { fetchYearsURL } from "../../services/urls";
 
 
@@ -17,6 +17,7 @@ const ReportSelection = ({ periods }) => {
     const [period, setPeriod] = useState();
     const [reportType, setReportType] = useState(DASHBOARD);
     const navigate = useNavigate();
+    const { setReportPath } = useOutletContext();
 
     const handleYearChange = (e) => {
         setYear(e.target.value);
@@ -28,6 +29,7 @@ const ReportSelection = ({ periods }) => {
 
     const viewReportHandler = () => {
         navigate(`${year}/${period}/${reportType}/`);
+        setReportPath([REPORTS, year, period, reportType])
     };
 
     const handleReportClick = report_type => {
@@ -61,6 +63,7 @@ const ReportSelection = ({ periods }) => {
     //TODO: error if report has not been created
        
     return (
+        <div className="selection_container">
         <div className="report_selection">
             <div className="header">
                 <span>Select Report</span>
@@ -107,6 +110,7 @@ const ReportSelection = ({ periods }) => {
                 </div>
             </div>
             
+        </div>
         </div>
     )
 };
