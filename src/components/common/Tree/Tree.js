@@ -8,9 +8,10 @@ import { TreeContext, reducer } from "./state";
 import { StyledTree } from "../Tree/Tree.style";
 import { Node } from "../Tree/Node/TreeNode";
 import "./tree.scss";
+import { C } from "styled-icons/simple-icons";
 
 
-const Tree = ({ children, data, onNodeClick, onUpdate }) => {
+const Tree = ({ children, data, onNodeClick, onUpdate, currentNode }) => {
   const [state, dispatch] = useReducer(reducer, data);
   useLayoutEffect(() => {
     dispatch({ type: "SET_DATA", payload: data });
@@ -36,7 +37,7 @@ const Tree = ({ children, data, onNodeClick, onUpdate }) => {
       >
         <StyledTree>
           {isImparative ? (
-            <TreeRecursive data={state} parentNode={state} />
+            <TreeRecursive data={state} parentNode={state} currentNode={currentNode} />
           ) : (
             children
           )}
@@ -46,15 +47,19 @@ const Tree = ({ children, data, onNodeClick, onUpdate }) => {
   );
 };
 
-const TreeRecursive = ({ data, parentNode }) => {
+const TreeRecursive = ({ data, parentNode, currentNode }) => {
   return data?.map((item) => {
     if (!item) {
       return <></>;
     }
+    
+    const isHighligted = item?.user?.email === currentNode?.user?.email;
     item.parentNode = parentNode;
+
     if (!parentNode) {
       item.parentNode = data;
     }
+
     if (!item.id) {
       item.id = v4();
     }
@@ -71,8 +76,9 @@ const TreeRecursive = ({ data, parentNode }) => {
         name={name}
         staff_no={item.staff_no} 
         node={item}
+        isHighligted={isHighligted}
       >
-        <TreeRecursive key={item.id} parentNode={item} data={item.underlings} />
+        <TreeRecursive key={item.id} parentNode={item} data={item.underlings} currentNode={currentNode}/>
       </Node>
     );
   });

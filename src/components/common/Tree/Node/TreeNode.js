@@ -13,17 +13,24 @@ import { StyledNode } from "./TreeNode.style";
 
 import { useTreeContext } from "../state/TreeContext";
 
-const NodeName = ({ isOpen, name, openCloseNode, handleNameClick }) => (
-  <StyledName className="employee_name">
+const NodeName = ({ isOpen, name, openCloseNode, handleNameClick, isHighligted }) => {
+
+  useEffect(() => {
+      console.log(isHighligted)
+  }, [isHighligted])
+  let className;
+  isHighligted? className = "employee_name highlighted": className="employee_name";
+
+  return <StyledName className={className}>
     {isOpen ? <CaretDown onClick={openCloseNode} /> : <CaretRight onClick={openCloseNode} />}
     &nbsp;&nbsp;
     <span onClick={handleNameClick}>
        {name} 
     </span>
   </StyledName>
-);
+};
 
-const Node = ({ id, name, children, node, job_grade, department, staff_no, designation }) => {
+const Node = ({ id, name, children, node, job_grade, department, staff_no, designation, isHighligted }) => {
   const { onNodeClick } = useTreeContext();
   const [isOpen, setIsOpen] = useState(false);
   const [childs, setChilds] = useState([]);
@@ -51,6 +58,7 @@ const Node = ({ id, name, children, node, job_grade, department, staff_no, desig
                 isOpen={isOpen}
                 openCloseNode={() => setIsOpen(!isOpen)}
                 handleNameClick={handleNodeClick}
+                isHighligted={isHighligted}
               />
             </Col>
 

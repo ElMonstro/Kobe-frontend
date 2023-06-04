@@ -9,7 +9,7 @@ import "./index.scss";
 
 
 
-const StaffSidebar = ({ orgChart, setCurrentRole }) => {
+const StaffSidebar = ({ orgChart, setCurrentRole, currentRole }) => {
 
     const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ const StaffSidebar = ({ orgChart, setCurrentRole }) => {
                     Organization Chart
                 </div>
                 <SearchBox />
-                <Tree data={orgChart} onNodeClick={handleClick}/>
+                <Tree data={ orgChart } onNodeClick={ handleClick } currentNode={ currentRole }/>
             </div>
 
         </div>
@@ -36,8 +36,9 @@ const mapDispatchToProps = {
     setCurrentRole
 }
 
-const mapStateToProps = ({ adminReducer: { orgChart } }) => ({
+const mapStateToProps = ({ adminReducer: { orgChart }, authReducer: { currentRole } }) => ({
     orgChart,
+    currentRole
 });
 
 export default connect(

@@ -2,7 +2,6 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-
 import "./index.scss";
 import ViewSidebarPerspective from "./viewSidebarPerspective";
 import overallIcon from "../../../assets/overallPerfomance.svg";
