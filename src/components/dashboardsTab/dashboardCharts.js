@@ -24,7 +24,7 @@ class DashboardCharts extends React.Component {
         let title;
         let percentage
         dataContext === QUATERLY? percentage = actualPercentage - currentObject?.last_period_score/100: percentage = actualPercentage;
-        mode? title = currentObject?.name: title = "Overall Perfomance";
+        mode? title = currentObject?.alias || currentObject?.name : title = "Overall Perfomance";
 
         return <div>
                 { personalData &&
@@ -36,7 +36,7 @@ class DashboardCharts extends React.Component {
                     </div>
                 }
                 <div className="charts_title">
-                    {mode && mode.substring(0, mode.length-1) + " -"} { title }
+                    {mode && mode.substring(0, mode.length-1) + " -"} { title?.substring(0, 50) }
                 </div>
                     {
                         <Row className="speedometers">

@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 
 import "./index.scss";
 
-const ViewObjectiveScores = ({ name, score, cost, target, budget, evidence, evidence_description, is_approved_obj }) => {
+const ViewObjectiveScores = ({ name, score, cost, percentage_target, units_target, budget, evidence, evidence_description, is_approved_obj }) => {
 
     return (
         <Row className="objective">
@@ -21,7 +21,7 @@ const ViewObjectiveScores = ({ name, score, cost, target, budget, evidence, evid
                     <Row>
                         <Col className="budget">{ budget }</Col>
                         <Col className="cost">{ cost }</Col>
-                        <Col>{ target }</Col>
+                        <Col>{ units_target || percentage_target }</Col>
                         <Col>{ score }</Col>
                         <Col>
                         {

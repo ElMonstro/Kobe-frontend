@@ -6,13 +6,15 @@
     } 
 
     .initiative {
-        height: 44px;
+        min-height: 44px;
         margin: 0;
-        padding: 10px 35px;
+        padding: 8px 35px 13px 35px;
 
         .initiative_name {
-            display: inline;
+            display: inline-block;
             align-items: center;
+            max-width: 845px!important;
+            
         }
 
         .action_btn {

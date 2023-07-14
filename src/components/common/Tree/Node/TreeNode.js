@@ -16,7 +16,6 @@ import { useTreeContext } from "../state/TreeContext";
 const NodeName = ({ isOpen, name, openCloseNode, handleNameClick, isHighligted }) => {
 
   useEffect(() => {
-      console.log(isHighligted)
   }, [isHighligted])
   let className;
   isHighligted? className = "employee_name highlighted": className="employee_name";

@@ -16,7 +16,7 @@ export const fetchCascadedObjectiveURL = `${baseURL}/scorecard/objectives/?is_se
 export const updateObjectiveURL = id => `${baseURL}/scorecard/objectives/${id}/`;
 export const amendObjectiveURL = (id, mode) => `${baseURL}/scorecard/objectives/${id}/amend/?mode=${mode}`;
 export const fetchPerspectivesURL = role =>  `${baseURL}/scorecard/role/${role}/perspectives/`;
-export const fetchStrategyMapObjectivesURL = `${baseURL}/scorecard/objectives/strategy-map/`;
+export const fetchStrategyMapPerspectivesURL = `${baseURL}/scorecard/objectives/strategy-map/`;
 export const linkObjectiveURL = id => `${baseURL}/scorecard/objectives/${id}/link-objectives/`;
 export const fetchApprovalObject = approvalToken =>  `${baseURL}/scorecard/approvals/${approvalToken}/`;
 export const fetchNotificationsURL = `${baseURL}/auth/notifications/`;

@@ -81,7 +81,6 @@ const DashboardTab = ({ loadedIn, personalData, review_period }) => {
         makeRequest(historyURL, GET, null, true, false)
             .then(data => {
                 data && setHistoricalData(data);
-                console.log(data)
             });
             
     }, [historyURL]);

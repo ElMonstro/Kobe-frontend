@@ -4,13 +4,13 @@ import { Col, Row } from "react-bootstrap";
 import "./index.scss";
 import StrategyObjective from "./strategyObjective";
 
-const StrategyMapPerspective = ({ linkableObjectives, perspectiveObjectives, perspective }) => {
+const StrategyMapPerspective = ({ linkableObjectives, objectives, alias }) => {
 
     return (
         <div className="strategy_map_perspective">
             <div className="header">
                 <span className="title">
-                    { perspective }
+                    { alias }
                 </span>
             </div>
             <div className="body">
@@ -26,12 +26,12 @@ const StrategyMapPerspective = ({ linkableObjectives, perspectiveObjectives, per
                 </Row>
                 <div className="objectives">
                     {
-                        perspectiveObjectives?.map(objective => {
+                        objectives?.map(objective => {
                             return <StrategyObjective 
                                         key={ objective.id } 
                                         objective={objective} 
                                         linkableObjectives={ linkableObjectives } 
-                                        perspective={ perspective }
+                                        perspective={ alias }
                                     />
                         })
                         

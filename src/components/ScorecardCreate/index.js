@@ -236,9 +236,9 @@ const ScorecardCreate = ({ periods, actingRole }) => {
                 </Card>
 
                 <div className="form_btns">
-                        <Button className="cancel_btn" onClick={() => navigate()}>Cancel</Button>
-                        <Button className="submit_btn" type="">Submit</Button>
-                    </div>
+                    <Button className="cancel_btn" onClick={() => navigate(-1)}>Cancel</Button>
+                    <Button className="submit_btn" type="">Submit</Button>
+                </div>
             </Form>
         </div>
     )

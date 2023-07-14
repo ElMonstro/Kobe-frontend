@@ -122,4 +122,6 @@ export const yupObjectiveValidationObj = {
     baseline: Yup.number(),
     percentage_target: Yup.number().min(0),
     unit_target: Yup.number(),
+    evidence_description: Yup.string().
+        test('len', 'Must be less than 100 characters', val => val.length < 100)
 }

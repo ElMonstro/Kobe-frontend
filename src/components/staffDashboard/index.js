@@ -20,7 +20,7 @@ const StaffDashboard = ({ settings, setPerspectiveOrder }) => {
         let persOrder;
         settings.perspective_order === FINANCIAL_FIRST? persOrder = FIN_FIRST_PERSPECTIVES_ORDER_ARRAY: 
             persOrder = CUST_FIRST_PERSPECTIVES_ORDER_ARRAY
-            setPerspectiveOrder([...persOrder]);
+        setPerspectiveOrder([...persOrder]);
 
     }, [settings]);
        
