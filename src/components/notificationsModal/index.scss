@@ -83,6 +83,12 @@
             background: #2D9CDB;
             border-radius: 4px;
             margin-top: 10px;
+            border: #2D9CDB;
+
+            &.edit {
+                background-color: #ffa800;
+                border: #ffa800;
+            }
         }
     }
 

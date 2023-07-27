@@ -40,10 +40,10 @@ const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives }) =
         if (initiatives.length === 1) {
             return;
         }
-        const newInitiatives = deleteFromObjectlist(initiatives, 'deleteId', deleteId);
+        initiatives.pop();
         
         setInitiatives([
-            ...newInitiatives
+            ...initiatives
         ]);
     }
 

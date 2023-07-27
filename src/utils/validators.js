@@ -8,10 +8,20 @@ export const yupLoginObj = Yup.object({
         .required('* Required'),
     });
 
+const getCharacterValidationError = (str) => {
+    return `Your password must have at least 1 ${str} character`;
+    };
+
 export const yupResetPasswordObj = Yup.object({
     password: Yup.string()
-        .required('* Required'),
+        .required('* Please enter password')
+        .min(8, "Password must have at least 8 characters")
+        .matches(/[0-9]/, getCharacterValidationError("digit"))
+        .matches(/[a-z]/, getCharacterValidationError("lowercase"))
+        .matches(/[A-Z]/, getCharacterValidationError("uppercase")),
+
     confirm_password: Yup.string()
+        .required("Please re-type your password")
         .oneOf([Yup.ref('password'), null], 'Passwords must match')
     });
 
@@ -67,12 +77,13 @@ export const yupThresholdObj = Yup.object({
 
 export const yupPasswordObj = Yup.object({
     password: Yup.string()
-        .required('* Required')
-        .typeError('you must specify a number'),
-
+        .required('* Required'),
     new_password: Yup.string()
-        .required('* Required')
-        .typeError('you must specify a number')
+        .required('* Please enter password')
+        .min(8, "Password must have at least 8 characters")
+        .matches(/[0-9]/, getCharacterValidationError("digit"))
+        .matches(/[a-z]/, getCharacterValidationError("lowercase"))
+        .matches(/[A-Z]/, getCharacterValidationError("uppercase"))
     });
 
 
@@ -108,11 +119,11 @@ export const yupReviewPeriodObj = Yup.object({
 
 export const yupObjectiveValidationObj = {
     name: Yup.string()
-        .required('*Required'),
+        .required('* Required'),
     perspective: Yup.string()
-        .required('*Required'),
+        .required('* Required'),
     data_type: Yup.string()
-        .required('*Required'),
+        .required('* Required'),
     weight: Yup.number().max(100)
         .min(0),
     target: Yup.number(),
@@ -122,6 +133,7 @@ export const yupObjectiveValidationObj = {
     baseline: Yup.number(),
     percentage_target: Yup.number().min(0),
     unit_target: Yup.number(),
-    evidence_description: Yup.string().
-        test('len', 'Must be less than 100 characters', val => val.length < 100)
+    evidence_description: Yup.string()
+        .required('* Required')
+        .test('len', 'Must be less than 100 characters', val => val?.length < 100)
 }

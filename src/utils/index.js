@@ -256,7 +256,6 @@ export const arePeriodicalInputsValid = (values, periods, setFieldError) => {
         total += parseFloat(values[period]);
     });
 
-
     if (total !== target) {
         periods.forEach(period => {
             setFieldError(period, `All periodical targets have to add up to ${target}`);

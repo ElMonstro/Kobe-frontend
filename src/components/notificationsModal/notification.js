@@ -32,7 +32,7 @@ const Notification = ({ title, body, link, is_seen, needs_attention, created_at,
           <div className="body">{ body }</div>
           { 
             (showButton) &&
-            <Button className="link_button" onClick={ handleNotificationClick }>
+            <Button className={`link_button ${isRejectionNotification && 'edit'}`} onClick={ handleNotificationClick }>
               {isRejectionNotification ? "Edit" : "View"} Objective
             </Button>
           }

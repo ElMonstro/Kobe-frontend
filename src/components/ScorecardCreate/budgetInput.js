@@ -13,6 +13,7 @@ const BudgetInputs = ({ formik, actingRole, initiative }) => {
                     placeholder=""
                     { ...formik.getFieldProps('budget') } 
                     isInvalid={ formik.touched.budget && formik.errors.budget }
+                    disabled={!initiative.is_self_cascaded}
                     />
                     <Form.Control.Feedback type='invalid'>
                         { formik.errors.budget }

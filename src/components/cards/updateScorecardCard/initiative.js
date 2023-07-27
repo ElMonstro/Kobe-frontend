@@ -31,12 +31,12 @@ const InitiativeUpdate = ({
         },
         validationSchema: yupUpdateObjective,
         onSubmit: async (values) => {
-            if (isScoreBeingApproved) {
-                fireNotification(ERROR, "You previous update is being approved. Please wait until the process is completed.")
-                return
-            }
+            // if (isScoreBeingApproved) {
+            //     fireNotification(ERROR, "You previous update is being approved. Please wait until the process is completed.")
+            //     return
+            // }
 
-            if (parseInt(score) === parseInt(values.score) && parseInt(cost) == parseInt(values.cost)) {
+            if (parseInt(score) === parseInt(values.score) && parseInt(cost) === parseInt(values.cost)) {
                 fireNotification(ERROR, "You must change score or cost to create a valid update")
                 return
             }
