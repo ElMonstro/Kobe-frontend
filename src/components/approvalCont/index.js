@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { confirm } from "react-bootstrap-confirmation";
 
 import "./index.scss";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
@@ -8,6 +7,7 @@ import { makeRequest } from "../../utils/requestUtils";
 import { GET, PATCH } from "../../utils/constants";
 import { fetchApprovalObject } from "../../services/urls";
 import RejectionMessageModal from "./rejectionMessageModal";
+import DialogBox from "../common/dialogBox";
 
 
 const ApprovalModal = () => {
@@ -16,11 +16,14 @@ const ApprovalModal = () => {
     const { approvalToken } = useParams();
     const navigate = useNavigate();
     const [ showRejectionModal, setShowRejectionModal ] = useState(false);
+    const [showApprovalDialog, setAoprovalDialog] = useState(false);
 
+    const approveRequest = () => {
+        makeRequest(fetchApprovalObject(approvalToken), PATCH, { is_approved: true }, true, true);
+        handleClose();
+    }
     const approve = async () => {
-        const result = await confirm("Are you sure you want to approve?");
-        result && makeRequest(fetchApprovalObject(approvalToken), PATCH, { is_approved: true }, true, true);
-        result && handleClose();
+        setAoprovalDialog(true);
     }
 
     const reject = () => setShowRejectionModal(true);
@@ -39,6 +42,14 @@ const ApprovalModal = () => {
 
     return (
         <div className="approval_modal">
+            <DialogBox
+                showDialog={showApprovalDialog}
+                confirm={approveRequest}
+                cancel={()=> {setAoprovalDialog(false)}}
+                title={'Info'}
+                message={'Approval Modal'}
+                prompt={'Are you sure you want to approve?'}
+            />
             <RejectionMessageModal 
                 showRejectionModal={ showRejectionModal } 
                 setShowRejectionModal={ setShowRejectionModal }   

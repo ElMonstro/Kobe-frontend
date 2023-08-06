@@ -9,7 +9,6 @@ import {
     SET_WEB_SOCKET,
     SET_SHOW_PROFILE,
     SET_PROFILE_PIC,
-    LOGOUT,
     SET_PERSPECTIVE_ORDER
     } from "./actionTypes";
 

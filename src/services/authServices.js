@@ -1,6 +1,5 @@
 import { loginURL } from './urls';
-import { POST } from '../utils/constants';
-import { makeRequest, notificationHandler } from '../utils/requestUtils';
+import { notificationHandler } from '../utils/requestUtils';
 import axios from 'axios';
 
 export default class AuthService {
@@ -9,9 +8,7 @@ export default class AuthService {
         try{
             const { email, password } = userDetails;
             const newUser = { email, password }
-            const response = await axios.post(loginURL, newUser);
-
-            return response;
+            return await axios.post(loginURL, newUser);
             
         }catch (error) {
             notificationHandler(error.response, null, error.response.data.detail)
