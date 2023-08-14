@@ -19,6 +19,7 @@ import BudgetInputs from "./budgetInput";
 import Milestones from "./milestones/milestoneInputs";
 import { useCallbackPrompt } from "../../hooks/useCallbackPrompt";
 import DialogBox from "../common/dialogBox";
+import ImpactInputs from "./impactInputs";
 
 const ScorecardCreate = ({ periods, actingRole }) => {
     const firstInitiative = {
@@ -140,6 +141,19 @@ const ScorecardCreate = ({ periods, actingRole }) => {
 
         validationSchema.name = Yup.string();
         validationSchema.perspective = Yup.string();
+        validationSchema.impact_target = Yup.number()
+        validationSchema.impact_baseline = Yup.number()
+        validationSchema.impact_description = Yup.string().max(100, 'Must be below 100')
+    }
+
+    if (!actingRole?.reporting_to) {
+        initialValues.impact_target = ''
+        initialValues.impact_baseline = ''
+        initialValues.impact_description = ''
+        validationSchema.impact_target = Yup.number().required('* Required')
+        validationSchema.impact_baseline = Yup.number().required('* Required')
+        validationSchema.impact_description = Yup.string().max(100, 'Must be below 100')
+                                                          .required('* Required')
     }
 
     const onSubmit = async (values, { setFieldError, resetForm }) => {
@@ -224,6 +238,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
                             initiative = { objective }
                             setReinitializeForm = { setReinitializeForm }
                         />
+                        { !actingRole?.reporting_to && <ImpactInputs formik={formik} /> }
                         
                         <ThresholdsInputs formik={ formik } />
                         
