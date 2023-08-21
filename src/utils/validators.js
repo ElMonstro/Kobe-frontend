@@ -107,6 +107,11 @@ export const yupCascadeCutoffObj = Yup.object({
             .required('* Required')
 });
 
+export const yupSelectPeriodObj = Yup.object({
+    current_period: Yup.number()
+            .required('* Required')
+});
+
 export const yupApprovalLevels = Yup.object({
     approval_levels: Yup.number()
             .required('* Required')

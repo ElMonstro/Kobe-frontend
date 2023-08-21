@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 
 import Header from "../common/header";
 import AdminSidebar from "../adminSidebar"
-import AdminOrgStructureCont from "../orgStructureContAdmin";
-import PerspectivesCont from "../perspectivesContAdmin";
-import ReviewPeriodCont from "../reviewPeriodCont";
-import CascadeCutoffCont from "../cascadeCutoffCont";
+import AdminOrgStructureCont from "./orgStructure";
+import ReviewPeriodCont from "./reviewPeriod";
+import CascadeCutoffCont from "./cascadeCutoffCont";
+import PerspectivesCont from "./perspectivesContAdmin";
 
 import { 
     fetchCompanyInfo, 
@@ -22,8 +22,7 @@ import {
 
 import 'react-toastify/dist/ReactToastify.css';
 import "./index.scss";
-import SendEmailCont from "../sendEmailsCont";
-
+import SendEmailCont from "./sendEmails";
 
 const AdminDashboard = props => {
 
