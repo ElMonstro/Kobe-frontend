@@ -1,7 +1,5 @@
 import React from "react";
 import { Form, Row, Col } from "react-bootstrap"
-import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
 
 
 const ImpactInputs = ({ formik }) => {

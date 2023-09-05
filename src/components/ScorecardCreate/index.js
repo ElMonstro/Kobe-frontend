@@ -146,7 +146,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         validationSchema.impact_description = Yup.string().max(100, 'Must be below 100')
     }
 
-    if (!actingRole?.reporting_to) {
+    if (!actingRole?.reporting_to && !is_self_cascaded) {
         initialValues.impact_target = ''
         initialValues.impact_baseline = ''
         initialValues.impact_description = ''
@@ -238,7 +238,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
                             initiative = { objective }
                             setReinitializeForm = { setReinitializeForm }
                         />
-                        { !actingRole?.reporting_to && <ImpactInputs formik={formik} /> }
+                        { (!actingRole?.reporting_to && !is_self_cascaded) && <ImpactInputs formik={formik} /> }
                         
                         <ThresholdsInputs formik={ formik } />
                         
