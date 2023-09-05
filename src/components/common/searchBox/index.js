@@ -13,7 +13,7 @@ const SearchBox = ({orgChart}) => {
     const people = useRef([]);
 
     useEffect(() => {
-        if(orgChart) {
+        if(orgChart !== undefined) {
             people.current = convertFromNestedToFlat(orgChart, "underlings");
         }
     
@@ -22,7 +22,6 @@ const SearchBox = ({orgChart}) => {
     useEffect(() => {
         if(searchTerm) {
             const newPeople = people.current.filter(role => {
-                console.log(role?.user.first_name.toLowerCase())
                 return role?.user.first_name.toLowerCase().includes(searchTerm.toLowerCase())
                     || role?.user.second_name.toLowerCase().includes(searchTerm.toLowerCase())
             });
