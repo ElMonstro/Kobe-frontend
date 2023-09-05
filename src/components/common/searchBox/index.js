@@ -14,7 +14,7 @@ const SearchBox = ({orgChart}) => {
 
     useEffect(() => {
         if(orgChart !== undefined) {
-            people.current = convertFromNestedToFlat(orgChart, "underlings");
+            // people.current = convertFromNestedToFlat(orgChart, "underlings");
         }
     
     }, [orgChart]);
