@@ -37,7 +37,7 @@ const AuthModal = ({ show, form })  => {
                 centered
                 dialogClassName="auth_modal"
                 contentClassName="auth_model_content"
-                backdropClassName="modal_backdrop"
+                backdropClassName="modal_backdrop auth_modal_backdrop"
             >
                 <div className="auth_title">{ title }</div>
                 <Modal.Body className="auth_modal_body">

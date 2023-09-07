@@ -1,10 +1,12 @@
-.modal_backdrop {
-    padding-right: 10px;
-    .modal {
-        padding-left: 0px!important;
-    }
-}
+
 .approval_modal {
+    .modal_backdrop {
+        padding-right: 10px!important;
+        opacity: 0.5;
+        .modal {
+            padding-left: 0px!important;
+        }
+    }
    
     .approval_model_content {
 

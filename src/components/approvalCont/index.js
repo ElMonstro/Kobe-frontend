@@ -16,14 +16,14 @@ const ApprovalModal = () => {
     const { approvalToken } = useParams();
     const navigate = useNavigate();
     const [ showRejectionModal, setShowRejectionModal ] = useState(false);
-    const [showApprovalDialog, setAoprovalDialog] = useState(false);
+    const [showApprovalDialog, setApprovalDialog] = useState(false);
 
     const approveRequest = () => {
         makeRequest(fetchApprovalObject(approvalToken), PATCH, { is_approved: true }, true, true);
         handleClose();
     }
     const approve = async () => {
-        setAoprovalDialog(true);
+        setApprovalDialog(true);
     }
 
     const reject = () => setShowRejectionModal(true);
@@ -45,7 +45,7 @@ const ApprovalModal = () => {
             <DialogBox
                 showDialog={showApprovalDialog}
                 confirm={approveRequest}
-                cancel={()=> {setAoprovalDialog(false)}}
+                cancel={()=> {setApprovalDialog(false)}}
                 title={'Info'}
                 message={'Approval Modal'}
                 prompt={'Are you sure you want to approve?'}
