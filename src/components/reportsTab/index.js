@@ -30,7 +30,7 @@ const ReportsTab = () => {
 
                 {
                     path.slice(1).map((pathString, index )=> 
-                            <span className="path_string" onClick={() => handlePathClick(pathString)}> 
+                            <span key={index} className="path_string" onClick={() => handlePathClick(pathString)}> 
                                 &gt; {pathString} &nbsp;
                             </span>
                         )
