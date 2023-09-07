@@ -9,7 +9,8 @@ import ResetRequestForm from "./resetRequestForm";
 import PasswordResetForm from "./passwordResetForm";
 
 const AuthModal = ({ show, form })  => {
-    if (form === undefined) form = LOGIN;
+    if (form === undefined){ form = LOGIN; }
+    
     const [currentForm, setCurrentForm] = useState(form);
     const formMapper = {
         "login": LoginForm,

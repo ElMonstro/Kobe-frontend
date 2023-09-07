@@ -18,7 +18,9 @@ const PasswordResetForm = ( { setCurrentForm } ) => {
         },
         validationSchema: yupResetPasswordObj,
         onSubmit: async (values) => {
-            makeRequest(resetPasswordURL(resetToken), PATCH, values, false, true);
+            makeRequest(resetPasswordURL(resetToken), PATCH, values, false, true).then( data => {
+                data && setCurrentForm(LOGIN);
+            })
         },
     });
 
