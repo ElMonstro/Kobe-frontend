@@ -25,14 +25,14 @@ const AppraisalReport = ({ settings }) => {
     const [historicalData, setHistoricalData] = useState([]);
     let objects = perspectives;
     let currentObject = {
-        percentage_score: 0,
+        percentage_progress: 0,
         percentage_target: 0
     }
     const { role } = useParams();
 
     for (const perspective of perspectives) {
-        currentObject.percentage_score += perspective.percentage_score * perspective.weight;
-        currentObject.percentage_target += perspective.percentage_target * perspective.weight;
+        currentObject.percentage_progress += perspective.percentage_progress * perspective.weight/100;
+        currentObject.percentage_target += perspective.percentage_target * perspective.weight / 100;
     }
 
     useEffect(() => {
