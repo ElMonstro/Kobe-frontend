@@ -13,6 +13,7 @@ import ReactToPrint from "react-to-print";
 import { Printer } from "styled-icons/bootstrap";
 import AppraisalCharts from "./appraisalCharts";
 import { connect } from "react-redux";
+import { createOverallCurrentObject } from "../../utils";
 
 
 const AppraisalReport = ({ settings }) => {
@@ -23,17 +24,12 @@ const AppraisalReport = ({ settings }) => {
     const [objectives, setObjectives] = useState([]);
     const [initiatives, setInitiatives] = useState([]);
     const [historicalData, setHistoricalData] = useState([]);
-    let objects = perspectives;
-    let currentObject = {
-        percentage_progress: 0,
-        percentage_target: 0
-    }
+    const objects = perspectives;
+    const currentObject = createOverallCurrentObject(perspectives)
     const { role } = useParams();
 
-    for (const perspective of perspectives) {
-        currentObject.percentage_progress += perspective.percentage_progress * perspective.weight/100;
-        currentObject.percentage_target += perspective.percentage_target * perspective.weight / 100;
-    }
+
+    
 
     useEffect(() => {
         makeRequest(fetchPerspectivesURL(role), GET, null, true, false)

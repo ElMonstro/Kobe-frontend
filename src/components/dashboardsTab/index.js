@@ -3,13 +3,13 @@ import { Col, Row } from "react-bootstrap";
 import { useOutletContext, useParams } from "react-router-dom";
 import 'chart.js/auto';
 
-import { DASHBOARDS, GET, OVER_VIEW, QUATERLY, REPORTS, YEAR_TO_DATE } from "../../utils/constants";
+import { DASHBOARDS, GET, OVER_VIEW, QUARTER_TO_DATE, REPORTS, YEAR_TO_DATE } from "../../utils/constants";
 import DashboardsSidebar from "./dashboardsSidebar";
 import "./index.scss";
 import { makeRequest } from "../../utils/requestUtils";
 import { fetchPerspectivesURL, fetchReportPerspectives, objectiveHistoryURL, 
         perspectiveHistoryURL, roleHistoryURL } from "../../services/urls";
-import { getCurrentDashboardObject, getDashboardObjects } from "../../utils"; 
+import { createOverallCurrentObject, getCurrentDashboardObject, getDashboardObjects } from "../../utils"; 
 import DashboardCharts from "./dashboardCharts";
 import ReactToPrint from "react-to-print";
 import { Printer } from "styled-icons/bootstrap";
@@ -21,7 +21,7 @@ const DashboardTab = ({ loadedIn, personalData, review_period }) => {
         loadedIn = DASHBOARDS;
     }
     let period_name;
-    review_period === 3? period_name = "Quaterly": period_name = "Biannually"
+    review_period === 3? period_name = "Quarter to date": period_name = "Biannual to date"
     let { year } = useParams();
     let perspectivesURL;
     const pathArray = [];
@@ -29,12 +29,7 @@ const DashboardTab = ({ loadedIn, personalData, review_period }) => {
     const [perspectives, setPerspectives] = useState([]);
     const [historicalData, setHistoricalData] = useState([]);
     let objects = perspectives;
-    let currentObject = {
-        percentage_progress: 0,
-        percentage_target: 0,
-        current_period_target: 0,
-        last_period_score: 0
-    }
+    let currentObject;
     const { role, mode, currentObjectID, period } = useParams();
     const [dataContext, setDataContext] = useState(YEAR_TO_DATE)
     const outletContext = useOutletContext();
@@ -61,11 +56,7 @@ const DashboardTab = ({ loadedIn, personalData, review_period }) => {
     }
 
     if (!mode && perspectives.length > 0) {
-        for (let perspective of perspectives) {
-            currentObject.percentage_progress += perspective.percentage_progress * perspective.weight/100;
-            currentObject.current_period_target += perspective.current_period_target * perspective.weight/100;
-            currentObject.last_period_score += perspective.last_period_score * perspective.weight/100;
-        }
+        currentObject = createOverallCurrentObject(perspectives)
     }
 
     useEffect(() => {
@@ -97,7 +88,7 @@ const DashboardTab = ({ loadedIn, personalData, review_period }) => {
                     <div className="performance_context_switch dashboard_btn">
                         <select id="performance_context_switch" onChange={ e => setDataContext(e.target.value) }>
                             <option key={ YEAR_TO_DATE } value={ YEAR_TO_DATE }>Year to date</option>
-                            <option key={ QUATERLY } value={ QUATERLY }>{ period_name }</option>
+                            <option key={ QUARTER_TO_DATE } value={ QUARTER_TO_DATE }>{ period_name }</option>
                         </select>
                     </div>
                     <ReactToPrint

@@ -100,6 +100,7 @@ export const APPROVAL_MAPPER = {
 };
 
 export const YEAR_TO_DATE = "year_to_date";
+export const QUARTER_TO_DATE = "quarter_to_date";
 export const QUATERLY = "quaterly";
 export const LOGIN = "login";
 export const RESET_REQUEST = "reset_request";

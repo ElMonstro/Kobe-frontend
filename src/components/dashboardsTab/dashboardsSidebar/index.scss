@@ -17,6 +17,10 @@
         color: #828282;
         padding-bottom: 20px!important;
         cursor: pointer;
+
+        &:hover {
+            color: #2a2929;
+        }
     }
 
     .perspectives {
@@ -46,7 +50,7 @@
             width: 160px;
     
             &:hover {
-                font-weight: 700;
+                color: #2a2929;
             }
         }
     }

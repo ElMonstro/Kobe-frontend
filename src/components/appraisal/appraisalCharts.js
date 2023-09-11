@@ -2,7 +2,7 @@ import React from "react";
 import { Col } from "react-bootstrap";
 import 'chart.js/auto';
 
-import { INITIATIVES, OBJECTIVES, PERSPECTIVES, REPORTS } from "../../utils/constants";
+import { INITIATIVES, OBJECTIVES, PERSPECTIVES, QUARTER_TO_DATE, REPORTS } from "../../utils/constants";
 import "./index.scss";
 
 import DashboardCharts from "../dashboardsTab/dashboardCharts";
@@ -21,7 +21,8 @@ class AppraisalCharts extends React.Component {
                     mode={undefined} 
                     loadedIn={REPORTS} 
                     currentObject={currentObject} 
-                    historicalData={historicalData} 
+                    historicalData={historicalData}
+                    dataContext={QUARTER_TO_DATE}
                     personalData 
                     historyChart 
                 />
@@ -39,6 +40,7 @@ class AppraisalCharts extends React.Component {
                                     loadedIn={REPORTS} 
                                     currentObject={perspective} 
                                     historicalData={historicalData} 
+                                    dataContext={QUARTER_TO_DATE}
                                     key={ perspective.id }
                                 />
                             )
@@ -59,6 +61,8 @@ class AppraisalCharts extends React.Component {
                                 currentObject={objective} 
                                 historicalData={historicalData} 
                                 key={ objective.id }
+                                dataContext={QUARTER_TO_DATE}
+
                             />
                         )
                     }
@@ -78,6 +82,7 @@ class AppraisalCharts extends React.Component {
                                 currentObject={initiative} 
                                 historicalData={historicalData} 
                                 key={ initiative.id }
+                                dataContext={QUARTER_TO_DATE}
                             />
                             )
                         }

@@ -414,3 +414,31 @@ export const convertFromNestedToFlat = (nestedObject, key) => {
 
     return flatList;
 }
+
+export const calculatePeriodPerfomance = (currentObject) => {
+    const last_period_score = currentObject?.last_period_score
+    const actualPercentage = currentObject?.percentage_progress;
+    const percentage_diff = actualPercentage - last_period_score;
+
+    if (!last_period_score) {
+        return actualPercentage
+    }
+
+    return (percentage_diff / currentObject?.current_period_target);
+}
+
+
+export const createOverallCurrentObject = (perspectives) => {
+    const currentObject = {
+        percentage_progress: 0,
+        percentage_target: 0,
+        current_period_target: 0,
+        last_period_score: 0
+    }
+    for (let perspective of perspectives) {
+        currentObject.percentage_progress += perspective.percentage_progress * perspective.weight/100;
+        currentObject.current_period_target += perspective.current_period_target * perspective.weight/100;
+        currentObject.last_period_score += perspective.last_period_score * perspective.weight/100;
+    }
+    return currentObject;
+}

@@ -23,7 +23,7 @@ const ApprovalLevelCard = ({ settings }) => {
 
     return (
         <Card className="admin_card admin_select_form">
-            <div className="card_title">Select Cascade Cutoff</div>
+            <div className="card_title">Select Approval Levels</div>
 
             <Form onSubmit={ formik.handleSubmit }>
                 <Form.Group className="mb-3" controlId="approval_levels">
