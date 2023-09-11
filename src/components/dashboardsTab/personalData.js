@@ -3,7 +3,20 @@ import { connect } from 'react-redux';
 
 import "./index.scss"
 
-const PersonalData =  ({ currentRole }) => {
+const PersonalData =  ({ currentRole, settings }) => {
+  let divisionLabel, divisionName;
+
+  if (currentRole.section) {
+    divisionLabel = settings.section_name;
+    divisionName = currentRole.section.name
+  } else if  (currentRole.department) {
+    divisionLabel = settings.department_name;
+    divisionName = currentRole.department.name
+  } else if ( currentRole.division) {
+    divisionLabel = settings.division_name;
+    divisionName = currentRole.division.name
+  }
+
   return (
     <Card className="staff_card personal_data">
       <Card.Header>
@@ -26,8 +39,8 @@ const PersonalData =  ({ currentRole }) => {
                 <Col>{ currentRole?.name }</Col>
               </Row>
               <Row>
-                <Col className="label">Department</Col>
-                <Col>{ currentRole?.department?.name }</Col>
+                <Col className="label">{ divisionLabel }</Col>
+                <Col>{ divisionName }</Col>
             </Row>
           </Col>
         </Row>  
@@ -35,8 +48,9 @@ const PersonalData =  ({ currentRole }) => {
   );
 }
 
-const mapStateToProps = ({ authReducer: { currentRole }  }) => ({
-  currentRole
+const mapStateToProps = ({ authReducer: { currentRole }, adminReducer: { settings }  }) => ({
+  currentRole,
+  settings
 });
 
 export default connect(
