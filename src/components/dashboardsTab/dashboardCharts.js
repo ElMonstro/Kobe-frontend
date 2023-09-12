@@ -9,12 +9,19 @@ import HistoricalChart from "../common/histoticalChart";
 import ReportChildObjects from "./childObjects";
 import PersonalData from "./personalData";
 import { calculatePeriodPerfomance } from "../../utils";
+import PrintTitle from "../common/printTitle";
 
 class DashboardCharts extends React.Component {
 
     render() {
 
-        const { loadedIn, currentObject, objects, historicalData, mode, personalData, historyChart, dataContext } = this.props;
+        const { 
+                loadedIn, currentObject,
+                objects,
+                historicalData, 
+                mode, personalData,
+                historyChart, dataContext,
+                year, period, printTitle  } = this.props;
         const modeToObjectsMapper = {
             perspectives: OBJECTIVES,
             objectives: INITIATIVES,
@@ -29,6 +36,8 @@ class DashboardCharts extends React.Component {
         mode? title = currentObject?.alias || currentObject?.name : title = "Overall Perfomance";
 
         return <div>
+                {printTitle &&
+                    <PrintTitle loadedIn={ loadedIn } year={ year } period={ period } />}
                 { personalData &&
                     <PersonalData />
                 }
@@ -37,6 +46,7 @@ class DashboardCharts extends React.Component {
                         <PersonalData />
                     </div>
                 }
+                
                 <div className="charts_title">
                     {mode && mode.substring(0, mode.length-1) + " -"} { title?.substring(0, 50) }
                 </div>

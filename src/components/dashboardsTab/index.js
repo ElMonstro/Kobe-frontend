@@ -125,6 +125,9 @@ const DashboardTab = ({ loadedIn, personalData, review_period }) => {
                     personalData={ personalData }
                     historyChart
                     dataContext={ dataContext }
+                    year = { year }
+                    period = { period }
+                    printTitle
                 />
             </Col>
         </Row>

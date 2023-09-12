@@ -18,7 +18,7 @@ import { createOverallCurrentObject } from "../../utils";
 
 const AppraisalReport = ({ settings }) => {
     
-    let { year } = useParams();
+    let { year, role, period } = useParams();
     let componentRef = useRef();
     const [perspectives, setPerspectives] = useState([]);
     const [objectives, setObjectives] = useState([]);
@@ -26,10 +26,7 @@ const AppraisalReport = ({ settings }) => {
     const [historicalData, setHistoricalData] = useState([]);
     const objects = perspectives;
     const currentObject = createOverallCurrentObject(perspectives)
-    const { role } = useParams();
-
-
-    
+ 
 
     useEffect(() => {
         makeRequest(fetchPerspectivesURL(role), GET, null, true, false)
@@ -86,6 +83,8 @@ const AppraisalReport = ({ settings }) => {
                 currentObject={ currentObject }
                 ref={(el) => (componentRef = el)}
                 settings={ settings }
+                year = { year }
+                period = { period }
             />
         </Row>
     )

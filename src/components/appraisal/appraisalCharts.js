@@ -6,16 +6,23 @@ import { INITIATIVES, OBJECTIVES, PERSPECTIVES, QUARTER_TO_DATE, REPORTS } from 
 import "./index.scss";
 
 import DashboardCharts from "../dashboardsTab/dashboardCharts";
+import PrintTitle from "../common/printTitle";
 
 
 class AppraisalCharts extends React.Component {
 
     render() {
 
-        const { objects, loadedIn, currentObject, historicalData, perspectives, objectives, initiatives, settings } = this.props;
+        const { objects, loadedIn, currentObject,
+             historicalData, perspectives, objectives,
+            initiatives, settings, year, period
+         } = this.props;
 
         return (
+            
             <Col className="charts">
+                <PrintTitle loadedIn={ REPORTS } year={ year } period={ period } />
+
                 <DashboardCharts 
                     objects={objects} 
                     mode={undefined} 
@@ -25,6 +32,8 @@ class AppraisalCharts extends React.Component {
                     dataContext={QUARTER_TO_DATE}
                     personalData 
                     historyChart 
+                    year={year} 
+                    period={period} 
                 />
 
                 {

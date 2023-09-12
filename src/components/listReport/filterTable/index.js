@@ -102,7 +102,7 @@ const FilterTable = ({ employees, divisions_enabled, departments_enabled, sectio
                     <Col>Department</Col>
                     <Col>Section</Col>
                     <Col>Designation</Col>
-                    <Col>Score</Col>
+                    <Col>Score (%)</Col>
                     <Col>Perfomance</Col>
                 </Row>
                 <Row className="employees">
