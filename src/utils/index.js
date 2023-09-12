@@ -421,7 +421,7 @@ export const calculatePeriodPerfomance = (currentObject) => {
     const percentage_diff = actualPercentage - last_period_score;
 
     if (!last_period_score) {
-        return actualPercentage
+        return actualPercentage / 100
     }
 
     return (percentage_diff / currentObject?.current_period_target);

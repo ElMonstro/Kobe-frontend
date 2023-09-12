@@ -29,7 +29,12 @@ const DashboardTab = ({ loadedIn, personalData, review_period }) => {
     const [perspectives, setPerspectives] = useState([]);
     const [historicalData, setHistoricalData] = useState([]);
     let objects = perspectives;
-    let currentObject;
+    let currentObject = {
+        percentage_progress: 0,
+        percentage_target: 0,
+        current_period_target: 0,
+        last_period_score: 0
+    }
     const { role, mode, currentObjectID, period } = useParams();
     const [dataContext, setDataContext] = useState(YEAR_TO_DATE)
     const outletContext = useOutletContext();
