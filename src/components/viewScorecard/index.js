@@ -3,7 +3,7 @@ import { useOutletContext, useParams } from "react-router-dom";
 import ReactToPrint from "react-to-print";
 import { Printer } from "styled-icons/bootstrap";
 
-import { fetchPerspectivesURL } from "../../services/urls";
+import getURLs from "../../services/urls";
 import { GET, VIEW } from "../../utils/constants";
 import { makeRequest } from "../../utils/requestUtils";
 import "./index.scss";
@@ -20,7 +20,7 @@ const ViewScorecard = () => {
     useEffect(() => {
         setActiveComponent(VIEW);
         setSpinnerState(true);
-        makeRequest(fetchPerspectivesURL(role), GET, null, true, false)
+        makeRequest(getURLs().fetchPerspectivesURL(role), GET, null, true, false)
             .then(perspectives => {
                 perspectives && setPerspectives(perspectives);
             });

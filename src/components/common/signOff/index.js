@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { fetchApproversURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 import { GET } from "../../../utils/constants";
 import { makeRequest } from "../../../utils/requestUtils";
 
@@ -11,7 +11,7 @@ const SignOff = ({role}) => {
     const [approvers, setApprovers] = useState([]);
 
     useEffect(() => {
-        makeRequest(fetchApproversURL, GET, null, true, false).then(data =>
+        makeRequest(getURLs().fetchApproversURL, GET, null, true, false).then(data =>
             data && setApprovers(data));
     }, []);
 

@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 
 import { yupDivisionNamesObj } from "../../../utils/validators";
 import { makeRequest } from "../../../utils/requestUtils";
-import { settingsURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 import { POST } from "../../../utils/constants";
 
 import "./index.scss";
@@ -27,7 +27,7 @@ const DivisionNamesForm = ({ settings }) => {
                     delete values[key]
                 }
             }
-            makeRequest(settingsURL, POST, values, true);
+            makeRequest(getURLs().settingsURL, POST, values, true);
         },
     });
 

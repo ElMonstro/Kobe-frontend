@@ -10,7 +10,6 @@ import { BASE_CLOUDINARY_URL } from "../../../services/baseURL";
 import { countUnreadNotifications, getPeriods, logout } from "../../../utils";
 import { makeRequest } from "../../../utils/requestUtils";
 import { GET } from "../../../utils/constants";
-import { companyInfoURL, fetchNotificationsURL, fetchOrgChartURL, settingsURL } from "../../../services/urls";
 import LoginForm from "../../modals/authModal";
 import { 
     fetchCompanyInfo, 
@@ -26,6 +25,7 @@ import {
 } 
 from "../../../redux/actions";
 import bell from "../../../assets/bell.svg";
+import getURLs from "../../../services/urls";
 
 
 const Header = ({ 
@@ -43,7 +43,7 @@ const Header = ({
     const profile_pic_url = userRole?.profile_pic? BASE_CLOUDINARY_URL + userRole.profile_pic: defaultAvatar;
     const fetchNotifications = () => {
         console.log("fetching notifications");
-        !user?.is_admin && makeRequest(fetchNotificationsURL, GET, null, true, false)
+        !user?.is_admin && makeRequest(getURLs().fetchNotificationsURL, GET, null, true, false)
                     .then(data => {
                         data && setNotifications(data.results);
                     });
@@ -52,6 +52,8 @@ const Header = ({
     const handleNotificationsClick = () => setShowNotifications(true);
 
     useEffect(() => {
+
+        const { companyInfoURL, fetchOrgChartURL, settingsURL } = getURLs();
 
         if (!companyName ) {
             fetchSettings()

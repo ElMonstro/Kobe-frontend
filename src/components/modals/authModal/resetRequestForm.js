@@ -6,7 +6,7 @@ import { yupPasswordRequestObj } from "../../../utils/validators";
 import "./index.scss";
 import { LOGIN, POST } from "../../../utils/constants";
 import { makeRequest } from "../../../utils/requestUtils";
-import { resetPasswordRequestURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 
 const ResetRequestForm = ( { setCurrentForm } ) => {
 
@@ -16,7 +16,7 @@ const ResetRequestForm = ( { setCurrentForm } ) => {
         },
         validationSchema: yupPasswordRequestObj,
         onSubmit: async (values) => {
-            const data = await makeRequest(resetPasswordRequestURL, POST, values, false, true);
+            const data = await makeRequest(getURLs().resetPasswordRequestURL, POST, values, false, true);
             console.log(data)
 
         },

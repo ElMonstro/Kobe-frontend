@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 
 import { makeRequest } from "../../../utils/requestUtils";
 import { yupPerspectiveCutoffObj } from "../../../utils/validators";
-import { settingsURL } from "../../../services/urls";
+import getURLs, { settingsURL } from "../../../services/urls";
 import { POST } from "../../../utils/constants";
 import "./index.scss";
 
@@ -19,7 +19,7 @@ const PerspectiveCutoffForm = ({ settings }) => {
         validationSchema: yupPerspectiveCutoffObj,
         enableReinitialize: true,
         onSubmit: async (values) => {
-           makeRequest(settingsURL, POST, values, true);
+           makeRequest(getURLs().settingsURL, POST, values, true);
         },
     });
 

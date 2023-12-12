@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import { Close } from "@styled-icons/material-twotone/Close";
 
 import { makeRequest } from "../../utils/requestUtils";
-import { settingsURL } from "../../services/urls";
+import getURLs from "../../services/urls";
 import { setSettings } from "../../redux/actions";
 import { POST } from "../../utils/constants";
 import { useFormik } from 'formik';
@@ -25,7 +25,7 @@ const EmbededInput = ({ defaultValue, initialValueKey, setSettings }) => {
         initialValues,
         enableReinitialize: true,
         onSubmit: async (values) => {
-            const responseData =  await makeRequest(settingsURL, POST, values, true);
+            const responseData =  await makeRequest(getURLs().settingsURL, POST, values, true);
             responseData && setSettings(responseData);
             responseData && setEditable(false);
         },

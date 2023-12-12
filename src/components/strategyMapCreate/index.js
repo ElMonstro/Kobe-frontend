@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 
-import { fetchStrategyMapPerspectivesURL } from "../../services/urls";
+import getURLs from "../../services/urls";
 import { CREATE, GET } from "../../utils/constants";
 import { makeRequest } from "../../utils/requestUtils";
 import "./index.scss";
@@ -11,14 +11,13 @@ import { connect } from "react-redux";
 const StrategyMapCreate = ({ perspectiveOrder }) => {
 
     const [perspectives, setPerspectives] = useState([]);
-    let perspectiveObjectives;
     let linkableObjectives;
     let abovePerspective;
     const { setActiveComponent } = useOutletContext();
 
     useEffect(() => {
         setActiveComponent(CREATE);
-        makeRequest(fetchStrategyMapPerspectivesURL, GET, null, true, false)
+        makeRequest(getURLs().fetchStrategyMapPerspectivesURL, GET, null, true, false)
             .then(data => {
                 data && setPerspectives(data);
             })

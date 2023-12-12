@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Card } from "react-bootstrap";
-import { sendEmailsURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 import { PATCH } from "../../../utils/constants";
 import { makeRequest } from "../../../utils/requestUtils";
 import SecurityConfirmationModal from "../../modals/securityConfirmationModal";
@@ -10,7 +10,7 @@ import "./index.scss";
 const SendInvitationsCard = ({ settings, setShowConfirmationModal } ) => {
     
     const sendEmails = async () => {
-        return makeRequest(sendEmailsURL, PATCH, {}, true, true, "Emails Sent");
+        return makeRequest(getURLs().sendEmailsURL, PATCH, {}, true, true, "Emails Sent");
     }
 
     return (

@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 
 import { useParams } from "react-router-dom";
 
-import { fetchApprovalObject } from "../../services/urls";
+import getURLs from "../../services/urls";
 import { PATCH } from "../../utils/constants";
 import { makeRequest } from "../../utils/requestUtils";
 import { yupRejectionForm } from "../../utils/validators";
@@ -15,7 +15,7 @@ const RejectionMessageModal = ({ showRejectionModal, setShowRejectionModal, clos
     const handleClose = () => setShowRejectionModal(false);
     
     const reject = async values => {
-        await makeRequest(fetchApprovalObject(approvalToken), PATCH, values, true, true);
+        await makeRequest(getURLs().fetchApprovalObject(approvalToken), PATCH, values, true, true);
         handleClose();
         closeApprovalModal();
     }

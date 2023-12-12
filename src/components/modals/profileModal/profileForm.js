@@ -3,7 +3,7 @@ import { Form, Button, Row, Col } from "react-bootstrap"
 import { useFormik } from 'formik';
 
 import { yupPasswordObj } from "../../../utils/validators";
-import { updatePasswordURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 import { POST } from "../../../utils/constants";
 import { makeRequest } from "../../../utils/requestUtils";
 import "./index.scss";
@@ -22,7 +22,7 @@ const ProfileForm = ({ userRole }) => {
         },
         validationSchema: yupPasswordObj,
         onSubmit: async (values) => {
-            makeRequest(updatePasswordURL, POST, values, true)
+            makeRequest(getURLs().updatePasswordURL, POST, values, true)
                 .then(data => {
                     if (data) {
                         const user = JSON.parse(localStorage.getItem('user'));

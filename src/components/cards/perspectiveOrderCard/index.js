@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 
 import { makeRequest } from "../../../utils/requestUtils";
 import { yupPerspectiveOrder } from "../../../utils/validators";
-import { settingsURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 import { CUSTOMER_FIRST, FINANCIAL_FIRST, POST } from "../../../utils/constants";
 import "./index.scss";
 
@@ -18,7 +18,7 @@ const PerspectiveOrderForm = ({ settings }) => {
         validationSchema: yupPerspectiveOrder,
         enableReinitialize: true,
         onSubmit: async (values) => {
-           makeRequest(settingsURL, POST, values, true);
+           makeRequest( getURLs().settingsURL, POST, values, true);
         },
     });
 

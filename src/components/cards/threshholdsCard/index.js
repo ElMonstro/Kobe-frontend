@@ -3,7 +3,7 @@ import { Form, Button, Card, Row, Col } from "react-bootstrap"
 import { useFormik } from 'formik';
 
 import { yupThresholdObj } from "../../../utils/validators";
-import { settingsURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 import { POST } from "../../../utils/constants";
 import { makeRequest } from "../../../utils/requestUtils";
 import "./index.scss";
@@ -19,7 +19,7 @@ const ThresholdsForm = ({settings})=> {
         validationSchema: yupThresholdObj,
         enableReinitialize: true,
         onSubmit: async (values) => {
-            makeRequest(settingsURL, POST, values, true);
+            makeRequest(getURLs().settingsURL, POST, values, true);
         },
     });
 

@@ -5,7 +5,7 @@ import "./index.scss";
 import { makeRequest } from "../../utils/requestUtils";
 import StatusCount from "./statusCounter";
 import FilterTable from "./filterTable";
-import { fetchUnderAllUnderlingsUrl } from "../../services/urls";
+import getURLs from "../../services/urls";
 import PersonalData from "../dashboardsTab/personalData";
 
 class ListsReportCont extends React.Component {
@@ -15,7 +15,7 @@ class ListsReportCont extends React.Component {
 
     componentDidMount() {
         const { role, year, period } = this.props;
-        makeRequest(fetchUnderAllUnderlingsUrl(role, year, period), GET, null, true, false)
+        makeRequest(getURLs().fetchUnderAllUnderlingsUrl(role, year, period), GET, null, true, false)
             .then(employees => {
                 employees && this.setState({employees, });
             });

@@ -7,7 +7,7 @@ import { yupResetPasswordObj } from "../../../utils/validators";
 import "./index.scss";
 import { LOGIN, PATCH } from "../../../utils/constants";
 import { makeRequest } from "../../../utils/requestUtils";
-import { resetPasswordURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 
 const PasswordResetForm = ( { setCurrentForm } ) => {
     const { resetToken } = useParams();
@@ -18,7 +18,7 @@ const PasswordResetForm = ( { setCurrentForm } ) => {
         },
         validationSchema: yupResetPasswordObj,
         onSubmit: async (values) => {
-            makeRequest(resetPasswordURL(resetToken), PATCH, values, false, true).then( data => {
+            makeRequest(getURLs().resetPasswordURL(resetToken), PATCH, values, false, true).then( data => {
                 data && setCurrentForm(LOGIN);
             })
         },

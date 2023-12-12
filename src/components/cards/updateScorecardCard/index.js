@@ -3,7 +3,7 @@ import { Card, Row, Col } from "react-bootstrap";
 
 import { makeRequest } from "../../../utils/requestUtils";
 import "./index.scss";
-import { fetchSelfCascadedInitURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 import { GET, OBJECTIVE, UPDATE } from "../../../utils/constants";
 import InitiativeUpdate from "./initiative";
 import { useOutletContext } from "react-router-dom";
@@ -15,7 +15,7 @@ const UpdateScorecardCard = () => {
 
     useEffect(() => {
         setActiveComponent(UPDATE);
-        makeRequest(fetchSelfCascadedInitURL, GET, null, true, false)
+        makeRequest(getURLs().fetchSelfCascadedInitURL, GET, null, true, false)
         .then(data => {
             setInitiatives(data);
         });

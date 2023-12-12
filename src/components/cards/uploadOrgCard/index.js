@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 
 import UploadButton from "../../common/uploadButton";
-import { uploadOrgChartURL } from "../../../services/urls";
+import getURLs, { uploadOrgChartURL } from "../../../services/urls";
 import exampleOrgFile from "../../../assets/example_org_file.xlsx"
 
 
@@ -24,7 +24,7 @@ const UploadOrgCard = ({ setOrgChartSpinner, settings, setOrgChart }) => {
                     <UploadButton 
                         disabled={ settings?.are_emails_sent }
                         setSpinnerStatus={ setOrgChartSpinner }
-                        uploadURL={ uploadOrgChartURL } 
+                        uploadURL={ getURLs().uploadOrgChartURL } 
                         contentText="Upload Excel" 
                         className="card_btn" 
                         fileKey="file"

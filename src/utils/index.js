@@ -303,7 +303,7 @@ export const webSocketMessageHandler = event => {
 };
 
 export const connectWebSocket = () => {
-    const webSocket = new WebSocket(socketsMessagesURL);
+    const webSocket = new WebSocket('socketsMessagesURL');
     store.dispatch(setWebSocket(webSocket));
     webSocket.onmessage = webSocketMessageHandler;
     webSocket.onclose = connectWebSocket;

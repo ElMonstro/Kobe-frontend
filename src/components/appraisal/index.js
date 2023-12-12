@@ -6,9 +6,7 @@ import 'chart.js/auto';
 import { GET } from "../../utils/constants";
 import "./index.scss";
 import { makeRequest } from "../../utils/requestUtils";
-import {
-    fetchPerspectivesURL, roleHistoryURL
-} from "../../services/urls";
+import getURLs from "../../services/urls";
 import ReactToPrint from "react-to-print";
 import { Printer } from "styled-icons/bootstrap";
 import AppraisalCharts from "./appraisalCharts";
@@ -29,7 +27,7 @@ const AppraisalReport = ({ settings }) => {
  
 
     useEffect(() => {
-        makeRequest(fetchPerspectivesURL(role), GET, null, true, false)
+        makeRequest(getURLs().fetchPerspectivesURL(role), GET, null, true, false)
             .then(perspectives => {
                 if (perspectives) {
                     setPerspectives(perspectives);
@@ -54,7 +52,7 @@ const AppraisalReport = ({ settings }) => {
 
     useEffect(() => {
 
-        makeRequest(roleHistoryURL(role, year), GET, null, true, false)
+        makeRequest(getURLs().roleHistoryURL(role, year), GET, null, true, false)
             .then(data => {
                 data && setHistoricalData(data);
             });

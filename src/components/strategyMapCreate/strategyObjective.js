@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import Select from 'react-select';
 
-import { linkObjectiveURL } from "../../services/urls";
+import getURLs from "../../services/urls";
 import { PATCH } from "../../utils/constants";
 import { makeRequest } from "../../utils/requestUtils";
 import "./index.scss";
@@ -37,7 +37,7 @@ const StrategyObjective = ({objective: currentObjective, linkableObjectives, per
             links_ids: newSelected
         };
 
-        makeRequest(linkObjectiveURL(currentObjective?.id), PATCH, payload, true, false )
+        makeRequest(getURLs.linkObjectiveURL(currentObjective?.id), PATCH, payload, true, false )
             .then(data => {
                 data && setSelectedOptions(createOptions(data?.links));
             });

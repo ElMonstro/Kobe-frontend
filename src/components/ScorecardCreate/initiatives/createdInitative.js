@@ -4,7 +4,7 @@ import { DeleteBin5 } from "@styled-icons/remix-fill/DeleteBin5";
 
 import thumbnail from "../../../assets/josh_logo.jpg";
 import { makeRequest } from "../../../utils/requestUtils";
-import { deleteinitiativeURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 import { PATCH } from "../../../utils/constants";
 import { BASE_CLOUDINARY_URL } from "../../../services/baseURL";
 import DialogBox from "../../common/dialogBox";
@@ -14,7 +14,7 @@ const CreatedInitiativeInput = ({ deleteId, deleteInitiative, initiative }) => {
 
     const [showDialog, setShowDialog] = useState(false);
     const deleteInitBackend = () => {
-        makeRequest(deleteinitiativeURL(deleteId), PATCH, {}, true, true);
+        makeRequest(getURLs().deleteinitiativeURL(deleteId), PATCH, {}, true, true);
         deleteInitiative(deleteId);
     }
 

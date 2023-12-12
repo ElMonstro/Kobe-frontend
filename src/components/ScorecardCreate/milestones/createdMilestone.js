@@ -3,13 +3,13 @@ import { Form, Row, Col } from "react-bootstrap"
 import { DeleteBin5 } from "@styled-icons/remix-fill/DeleteBin5";
 
 import { makeRequest } from "../../../utils/requestUtils";
-import { deletemilestoneURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 import { DELETE } from "../../../utils/constants";
 
 
 const CreatedMilestone = ({ deleteMilestone, description, percentage, id }) => {
     const onDeleteMilestone = e => {
-        makeRequest(deletemilestoneURL(id), DELETE,  null, true, true);
+        makeRequest(getURLs().deletemilestoneURL(id), DELETE,  null, true, true);
         deleteMilestone(id);
     };
 

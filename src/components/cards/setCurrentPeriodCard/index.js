@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 
 import { makeRequest } from "../../../utils/requestUtils";
 import { yupSelectPeriodObj } from "../../../utils/validators";
-import { fetchPeriodsURL, settingsURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 import { GET, POST } from "../../../utils/constants";
 
 const SetCurrentPeriodForm = ({ settings }) => {
@@ -17,12 +17,12 @@ const SetCurrentPeriodForm = ({ settings }) => {
         validationSchema: yupSelectPeriodObj,
         enableReinitialize: true,
         onSubmit: async (values) => {
-           makeRequest(settingsURL, POST, values, true);
+           makeRequest(getURLs().settingsURL, POST, values, true);
         },
     });
 
     useEffect(()=> {
-        makeRequest(fetchPeriodsURL, GET, null, true, false)
+        makeRequest(getURLs().fetchPeriodsURL, GET, null, true, false)
         .then(data => { data && setPeriods(data) });
     }, [settings])
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Card, Col, Row } from "react-bootstrap";
 
 import { makeRequest } from "../../../utils/requestUtils";
-import { settingsURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 import { POST } from "../../../utils/constants";
 import "./index.scss";
 
@@ -14,7 +14,7 @@ const AppraisalSettingsCard = props => {
     const onChange = async event => {
         const data = {};
         data[event.target.id] = event.target.checked;
-        const responseData = await makeRequest(settingsURL, POST, data, true);
+        const responseData = await makeRequest(getURLs().settingsURL, POST, data, true);
         responseData && setSettings(responseData);
 
     }

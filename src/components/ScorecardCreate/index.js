@@ -13,7 +13,7 @@ import ThresholdsInputs from "./thresholdsInputs";
 import InitiativeInputs from "./initiatives/initiativesInputs";
 import { arePeriodicalInputsValid, createObjectivePayload, fireNotification } from "../../utils";
 import { makeRequest } from "../../utils/requestUtils";
-import { createObjectiveURL, updateObjectiveURL, amendObjectiveURL } from "../../services/urls";
+import getURLs from "../../services/urls";
 import { yupObjectiveValidationObj as validationSchema } from "../../utils/validators";
 import BudgetInputs from "./budgetInput";
 import Milestones from "./milestones/milestoneInputs";
@@ -66,7 +66,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
 
     useEffect(() => {
         setActiveComponent(CREATE);
-        initiativeId && makeRequest(updateObjectiveURL(initiativeId), GET, null, true, false)
+        initiativeId && makeRequest(getURLs().updateObjectiveURL(initiativeId), GET, null, true, false)
             .then(data => {
                 if (data) {
                     setObjective(data);
@@ -157,6 +157,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
     }
 
     const onSubmit = async (values, { setFieldError, resetForm }) => {
+        
         if (!arePeriodicalInputsValid(values, periods, setFieldError)) {
             return;
         }
@@ -167,6 +168,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
         }
 
         const payload = createObjectivePayload(values, initiatives, measures, periods, milestones);
+        const { createObjectiveURL, amendObjectiveURL } = getURLs();
 
         if (!Boolean(initiativeId)){
             makeRequest(createObjectiveURL, POST, payload, true)

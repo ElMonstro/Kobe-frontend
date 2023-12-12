@@ -1,5 +1,5 @@
 import React from "react";
-import { updateRoleURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 import UploadButton from "../../common/uploadButton";
 import uploadIcon from "../../../assets/uploadImageIcon.svg";
 import defaultAvatar from "../../../assets/defaultAvatar.png";
@@ -24,7 +24,7 @@ const ProfilePicUpload = ({ userRole, setProfilePic }) => {
             
             <div className="profile_btn">
                 <UploadButton 
-                    uploadURL={ updateRoleURL }
+                    uploadURL={ getURLs().updateRoleURL }
                     ClickElement={ icon }
                     className="edit_icon"
                     fileKey="profile_pic"

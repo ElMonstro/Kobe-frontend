@@ -7,8 +7,7 @@ import { DASHBOARDS, GET, OVER_VIEW, QUARTER_TO_DATE, REPORTS, YEAR_TO_DATE } fr
 import DashboardsSidebar from "./dashboardsSidebar";
 import "./index.scss";
 import { makeRequest } from "../../utils/requestUtils";
-import { fetchPerspectivesURL, fetchReportPerspectives, objectiveHistoryURL, 
-        perspectiveHistoryURL, roleHistoryURL } from "../../services/urls";
+import getURLs from "../../services/urls";
 import { createOverallCurrentObject, getCurrentDashboardObject, getDashboardObjects } from "../../utils"; 
 import DashboardCharts from "./dashboardCharts";
 import ReactToPrint from "react-to-print";
@@ -24,7 +23,7 @@ const DashboardTab = ({ loadedIn, personalData, review_period }) => {
     review_period === 3? period_name = "Quarter to date": period_name = "Biannual to date"
     let { year } = useParams();
     let perspectivesURL;
-    const pathArray = [];
+
     let componentRef = useRef();
     const [perspectives, setPerspectives] = useState([]);
     const [historicalData, setHistoricalData] = useState([]);
@@ -38,7 +37,9 @@ const DashboardTab = ({ loadedIn, personalData, review_period }) => {
     const { role, mode, currentObjectID, period } = useParams();
     const [dataContext, setDataContext] = useState(YEAR_TO_DATE)
     const outletContext = useOutletContext();
-
+    const  { fetchPerspectivesURL, fetchReportPerspectives, objectiveHistoryURL, 
+        perspectiveHistoryURL, roleHistoryURL } = getURLs();
+        
     if (loadedIn === REPORTS ) { // set year and perspectives url depending on dashoard container
         perspectivesURL = fetchReportPerspectives(role, year, period);
     } else {

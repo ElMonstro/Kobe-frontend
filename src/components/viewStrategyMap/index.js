@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import { Xwrapper } from "react-xarrows";
-import { fetchStrategyMapPerspectivesURL } from "../../services/urls";
+import getURLs from "../../services/urls";
 import { GET, VIEW } from "../../utils/constants";
 import { makeRequest } from "../../utils/requestUtils";
 
@@ -16,7 +16,7 @@ const StrategyMapView = ({ perspectiveOrder }) => {
     
     useEffect(() => {
         setActiveComponent(VIEW);
-        makeRequest(fetchStrategyMapPerspectivesURL, GET, null, true, false)
+        makeRequest(getURLs().fetchStrategyMapPerspectivesURL, GET, null, true, false)
             .then(data => {
                 data && setPerspectives(data);
             })

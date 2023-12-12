@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 
 import addBtn from "../../../assets/plus_sign.svg";
-import { fetchUnderlingsURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 import { GET } from "../../../utils/constants";
 import { makeRequest } from "../../../utils/requestUtils";
 import InitiativeInput from "./initiativeInput";
@@ -24,7 +24,7 @@ const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives }) =
     }
 
     useEffect(() => {
-        makeRequest(fetchUnderlingsURL, GET, null, true, false)
+        makeRequest(getURLs().fetchUnderlingsURL, GET, null, true, false)
         .then( data => {
             data && setUnderlings(data);
         });

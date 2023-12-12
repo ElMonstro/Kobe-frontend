@@ -7,7 +7,7 @@ import Notification from "./notification";
 import ringingBell from "../../assets/ringingBell.svg";
 import { setShowNotifications, setNotifications } from "../../redux/actions";
 import { makeRequest } from "../../utils/requestUtils";
-import { setSeenNotificationsURL } from "../../services/urls";
+import getURLs from "../../services/urls";
 import { POST } from "../../utils/constants";
 
 
@@ -17,7 +17,7 @@ const NotificationsModal = ({ showNotifications, setShowNotifications, notificat
         setSeenNotifications();
     }
     
-    const setSeenNotifications = async () => makeRequest(setSeenNotificationsURL, POST, 
+    const setSeenNotifications = async () => makeRequest(getURLs().setSeenNotificationsURL, POST, 
                                                 { notifications: renderedUnseenNotifIds }, true, false)
                                                 .then(data => data && setNotifications(data));
 

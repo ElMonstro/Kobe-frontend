@@ -6,7 +6,7 @@ import { yupEditPerspectivesWeightObj } from "../../../utils/validators";
 import { makeRequest } from "../../../utils/requestUtils";
 import { POST } from "../../../utils/constants";
 import "./index.scss";
-import { settingsURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 
 const EditPerspectivesForm = ({ setSettings, settings }) => {
 
@@ -37,7 +37,7 @@ const EditPerspectivesForm = ({ setSettings, settings }) => {
             });
             return;
         }
-           makeRequest(settingsURL, POST, values, true)
+           makeRequest(getURLs().settingsURL, POST, values, true)
             .then(data => setSettings(data));
         },
     });

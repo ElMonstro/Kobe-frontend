@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
-import { fetchSelfCascadedInitURL, fetchCascadedObjectiveURL } from "../../../services/urls";
 import { GET } from "../../../utils/constants";
 import { makeRequest } from "../../../utils/requestUtils";
 import CascadedInitiative from "./cascadedInitiative";
+import getURLs from "../../../services/urls";
 
 import "./index.scss";
 
 const CascadedCard = ({ title, type, setInitiativeId, setActiveComponent }) => {
 
-    const urlMapper = {
-        selfCascaded: fetchSelfCascadedInitURL,
-        cascaded: fetchCascadedObjectiveURL
-    }
+    
 
     const [initiatives, setInitiatives] = useState([])
 
-    const url = urlMapper[type];
+    
 
     useEffect(() => {
+        const { fetchSelfCascadedInitURL, fetchCascadedObjectiveURL } = getURLs();
+        const urlMapper = {
+            selfCascaded: fetchSelfCascadedInitURL,
+            cascaded: fetchCascadedObjectiveURL
+        }
+        const url = urlMapper[type];
+
         makeRequest(url, GET, null, true, false)
             .then(data => {
                 setInitiatives(data);

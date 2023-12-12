@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 
 import { yupMissionFormObj } from "../../../utils/validators";
 import { makeRequest } from "../../../utils/requestUtils";
-import { companyInfoURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 import { POST } from "../../../utils/constants";
 import "./index.scss";
 
@@ -20,7 +20,7 @@ const MissionVisionForm = ({ setCompanyInfo, companyInfo }) => {
         validationSchema: yupMissionFormObj,
         enableReinitialize: true,
         onSubmit: async (values) => {
-           makeRequest(companyInfoURL, POST, values, true)
+           makeRequest(getURLs().companyInfoURL, POST, values, true)
             .then(data => setCompanyInfo(data));
         },
     });

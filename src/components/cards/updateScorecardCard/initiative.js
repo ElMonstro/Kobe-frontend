@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { yupUpdateObjective } from "../../../utils/validators";
 import { makeRequest } from "../../../utils/requestUtils";
 import { ERROR, PATCH, UNITS } from "../../../utils/constants";
-import { updateObjectiveURL as retrieveObjectiveURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 import { fireNotification } from "../../../utils";
 import { connect } from "react-redux";
 
@@ -47,7 +47,7 @@ const InitiativeUpdate = ({
             }
 
             role?.reporting_to && setScoreBeingApproved(true);
-            makeRequest(retrieveObjectiveURL(values.id), PATCH, values, true);
+            makeRequest(getURLs().updateObjectiveURL(values.id), PATCH, values, true);
         },
     });
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import { companyInfoURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 import UploadButton from "../../common/uploadButton";
 
 import "./index.scss";
@@ -13,7 +13,7 @@ const UploadLogoCard = props => {
                     Upload Organization Logo
                 </div>
                 <UploadButton 
-                    uploadURL={companyInfoURL} 
+                    uploadURL={ getURLs().companyInfoURL} 
                     contentText="Upload Logo" 
                     className="card_btn" 
                     fileKey="logo"

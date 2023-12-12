@@ -5,7 +5,7 @@ import "./index.scss";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { makeRequest } from "../../utils/requestUtils";
 import { GET, PATCH } from "../../utils/constants";
-import { fetchApprovalObject } from "../../services/urls";
+import getURLs from "../../services/urls";
 import RejectionMessageModal from "./rejectionMessageModal";
 import DialogBox from "../common/dialogBox";
 
@@ -19,7 +19,7 @@ const ApprovalModal = () => {
     const [showApprovalDialog, setApprovalDialog] = useState(false);
 
     const approveRequest = () => {
-        makeRequest(fetchApprovalObject(approvalToken), PATCH, { is_approved: true }, true, true);
+        makeRequest(getURLs().fetchApprovalObject(approvalToken), PATCH, { is_approved: true }, true, true);
         handleClose();
     }
     const approve = async () => {
@@ -34,7 +34,7 @@ const ApprovalModal = () => {
     }
 
     useEffect(() => {
-        makeRequest(fetchApprovalObject(approvalToken), GET, null, true, false)
+        makeRequest(getURLs().fetchApprovalObject(approvalToken), GET, null, true, false)
             .then(approval_Object => {
                 approval_Object && setApprovalObject(approval_Object);
             });

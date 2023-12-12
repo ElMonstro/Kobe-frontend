@@ -8,7 +8,7 @@ import listsIcon from "../../assets/lists.svg";
 import appraisalIcon from "../../assets/appraisal.svg";
 import { makeRequest } from "../../utils/requestUtils";
 import { APPRAISAL, DASHBOARD, GET, LIST, REPORTS } from "../../utils/constants";
-import { fetchYearsURL } from "../../services/urls";
+import getURLs from "../../services/urls";
 
 
 const ReportSelection = ({ periods }) => {
@@ -49,7 +49,7 @@ const ReportSelection = ({ periods }) => {
 
 
     useEffect(() => {
-        makeRequest(fetchYearsURL, GET, null, true, false)
+        makeRequest(getURLs().fetchYearsURL, GET, null, true, false)
             .then(data => {
                 if (data) {
                     setYears(data);
