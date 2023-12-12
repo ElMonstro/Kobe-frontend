@@ -1,6 +1,9 @@
 const resolve_base_url = () => {
-    const base_url = "http://127.0.0.1:8000/api/v1";
+    let base_url = "http://127.0.0.1:8000/api/v1";
     // const base_url = "http://144.126.192.148:8000/api/v1";
+
+    const baseURL = window.localStorage.getItem('baseURL');
+    baseURL && (base_url = baseURL);
 
     return base_url;
 }

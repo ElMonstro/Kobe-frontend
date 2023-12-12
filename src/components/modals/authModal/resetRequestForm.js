@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap";
 
 import { yupPasswordRequestObj } from "../../../utils/validators";
 import "./index.scss";
-import { LOGIN, POST } from "../../../utils/constants";
+import { EMAIL_CAPTURE, POST } from "../../../utils/constants";
 import { makeRequest } from "../../../utils/requestUtils";
 import getURLs from "../../../services/urls";
 
@@ -37,7 +37,7 @@ const ResetRequestForm = ( { setCurrentForm } ) => {
                 </Form.Control.Feedback>
                 
             </Form.Group>
-            <span onClick={ () => setCurrentForm(LOGIN)} className="auth_help_text">
+            <span onClick={ () => setCurrentForm(EMAIL_CAPTURE)} className="auth_help_text">
                     Login? Click here.
             </span>
             

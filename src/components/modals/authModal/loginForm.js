@@ -10,19 +10,19 @@ import { changeLoginStatus } from "../../../redux/actions";
 
 import "./index.scss";
 import { parseJwt } from "../../../utils";
-import { RESET_REQUEST, SCORECARD } from "../../../utils/constants";
+import { EMAIL_CAPTURE, RESET_REQUEST, SCORECARD } from "../../../utils/constants";
 
-const LoginForm = ({ changeLoginStatus, setCurrentForm } ) => {
+const LoginForm = ({ changeLoginStatus, setCurrentForm, authEmail } ) => {
 
     const navigate = useNavigate();
 
     const formik = useFormik({
         initialValues: {
-        email: '',
         password: '',
         },
         validationSchema: yupLoginObj,
         onSubmit: async (values) => {
+            values['email'] = authEmail;
             const response = await AuthService.loginUser(values);
 
             if (response) {
@@ -45,18 +45,6 @@ const LoginForm = ({ changeLoginStatus, setCurrentForm } ) => {
 
     return (
         <Form onSubmit={formik.handleSubmit}>
-            <Form.Group className="email_group" controlId="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control 
-                    type="email" 
-                    placeholder="username@company.com" 
-                    { ...formik.getFieldProps('email') } 
-                    isInvalid={ formik.touched.email && formik.errors.email }
-                />
-                <Form.Control.Feedback type='invalid'>
-                    { formik.errors.email }
-                </Form.Control.Feedback>
-            </Form.Group>
             <Form.Group className="mb-3 password_group" controlId="password">
                 <Form.Label>Password</Form.Label>
                 <Form.Control 
@@ -72,6 +60,9 @@ const LoginForm = ({ changeLoginStatus, setCurrentForm } ) => {
             </Form.Group>
             <span onClick={() => setCurrentForm(RESET_REQUEST)} className="auth_help_text">
                     Forgot Password? Click here.
+            </span>
+            <span onClick={() => setCurrentForm(EMAIL_CAPTURE)} className="auth_help_text">
+                    Back to Email entry
             </span>
             <Button className="login_btn" variant="primary" type="">
                 Login

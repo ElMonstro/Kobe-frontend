@@ -1,10 +1,13 @@
 import * as Yup from 'yup';
 
 export const yupLoginObj = Yup.object({
+    password: Yup.string()
+        .required('* Required'),
+    });
+
+export const yupEmailObj = Yup.object({
     email: Yup.string()
         .email('* Invalid email address')
-        .required('* Required'),
-    password: Yup.string()
         .required('* Required'),
     });
 

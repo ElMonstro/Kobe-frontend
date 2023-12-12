@@ -1,4 +1,5 @@
 import {
+    SET_AUTH_EMAIL,
     SET_CURRENT_ROLE,
     SET_NOTIFICATIONS,
     SET_SHOW_NOTIFICATIONS,
@@ -18,6 +19,7 @@ const initialState = {
     notifications: [],
     showProfile: false,
     webSocket: null,
+    authEmail: '',
 };
 
 const authReducer = ( state=initialState, action ) => {
@@ -53,6 +55,10 @@ const authReducer = ( state=initialState, action ) => {
         case SET_SHOW_PROFILE:
             const { showProfile } = action;
             return { ...state, showProfile };
+
+        case SET_AUTH_EMAIL:
+            const { authEmail } = action;
+            return {...state, authEmail }; 
             
         default:
             return state;
