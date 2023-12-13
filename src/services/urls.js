@@ -39,6 +39,7 @@ const getURLs = () => {
     urls.deletemilestoneURL = id => `${baseURL}/scorecard/objectives/milestones/${id}/delete/`;
     urls.fetchPeriodsURL = `${baseURL}/scorecard/periods/`;
     urls.fetchAuthURL = domain => `${baseURL}/administration/fetch-auth-url/?domain=${domain}`;
+    urls.fetchCompanies = `${baseURL}/administration/companies/`;
     return urls
 };
 

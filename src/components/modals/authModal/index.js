@@ -3,14 +3,14 @@ import {connect} from "react-redux";
 import { Modal } from "react-bootstrap";
 
 import "./index.scss";
-import { LOGIN } from "../../../utils/constants";
+import { EMAIL_CAPTURE, LOGIN } from "../../../utils/constants";
 import LoginForm from "./loginForm";
 import ResetRequestForm from "./resetRequestForm";
 import PasswordResetForm from "./passwordResetForm";
 import EmailCaptureForm from "./emailCaptureForm";
 
 const AuthModal = ({ show, form })  => {
-    if (form === undefined){ form = LOGIN; }
+    if (form === undefined){ form = EMAIL_CAPTURE; }
     
     const [currentForm, setCurrentForm] = useState(form);
     const formMapper = {

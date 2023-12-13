@@ -24,7 +24,8 @@ const LoginForm = ({ changeLoginStatus, setCurrentForm, authEmail } ) => {
         onSubmit: async (values) => {
             values['email'] = authEmail;
             const response = await AuthService.loginUser(values);
-
+            console.log(response);
+            console.log(values)
             if (response) {
                 const user = parseJwt(response?.data.access);
                 delete user.iat;
@@ -36,6 +37,7 @@ const LoginForm = ({ changeLoginStatus, setCurrentForm, authEmail } ) => {
                 let url;
                 user.is_admin? url = '/admin': url = `/${user.role}/${SCORECARD}`
                 navigate(url);
+                
                 // store access tokens in local storage
                 window.localStorage.setItem('tokens', JSON.stringify(response.data));
                 window.localStorage.setItem('user', JSON.stringify(user));
@@ -45,6 +47,10 @@ const LoginForm = ({ changeLoginStatus, setCurrentForm, authEmail } ) => {
 
     return (
         <Form onSubmit={formik.handleSubmit}>
+            <div onClick={() => setCurrentForm(EMAIL_CAPTURE)} className="black_help_text">
+                    Back
+            </div>
+            <br />
             <Form.Group className="mb-3 password_group" controlId="password">
                 <Form.Label>Password</Form.Label>
                 <Form.Control 
@@ -58,12 +64,12 @@ const LoginForm = ({ changeLoginStatus, setCurrentForm, authEmail } ) => {
                     { formik.errors.password }
                 </Form.Control.Feedback> 
             </Form.Group>
+            
             <span onClick={() => setCurrentForm(RESET_REQUEST)} className="auth_help_text">
                     Forgot Password? Click here.
             </span>
-            <span onClick={() => setCurrentForm(EMAIL_CAPTURE)} className="auth_help_text">
-                    Back to Email entry
-            </span>
+            
+           
             <Button className="login_btn" variant="primary" type="">
                 Login
             </Button>

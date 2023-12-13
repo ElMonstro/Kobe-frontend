@@ -7,7 +7,7 @@ import { yupEmailObj } from "../../../utils/validators";
 import { setAuthEmail } from "../../../redux/actions";
 
 import "./index.scss";
-import { GET, RESET_REQUEST } from "../../../utils/constants";
+import { GET, LOGIN, RESET_REQUEST } from "../../../utils/constants";
 import { makeRequest } from "../../../utils/requestUtils";
 import getURLs from "../../../services/urls";
 import resolve_base_url from "../../../services/baseURL";
@@ -21,13 +21,15 @@ const EmailCaptureForm = ({ setCurrentForm, setAuthEmail } ) => {
         validationSchema: yupEmailObj,
         onSubmit: async (values) => {
             const domain = values.email.split('@')[1];
-            setAuthEmail(values.email);
+            
             var baseURL = resolve_base_url();
             makeRequest(getURLs().fetchAuthURL(domain), GET, null, false, false)
                 .then(data => {
                     if (data) {
                         baseURL = data.url;
                     }
+                    setCurrentForm(LOGIN);
+                    setAuthEmail(values.email);
                     window.localStorage.setItem('baseURL', baseURL);
                 });
         },
