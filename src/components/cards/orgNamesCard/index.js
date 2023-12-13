@@ -8,11 +8,12 @@ import getURLs from "../../../services/urls";
 import { POST } from "../../../utils/constants";
 
 import "./index.scss";
+import { useParams } from "react-router-dom";
 
 
 
 const DivisionNamesForm = ({ settings }) => {
-
+    const { companyId } = useParams();
     const formik = useFormik({
         initialValues: {
             division_name: settings.division_name,
@@ -27,7 +28,7 @@ const DivisionNamesForm = ({ settings }) => {
                     delete values[key]
                 }
             }
-            makeRequest(getURLs().settingsURL, POST, values, true);
+            makeRequest(getURLs().adminSettingsURL(companyId), POST, values, true);
         },
     });
 

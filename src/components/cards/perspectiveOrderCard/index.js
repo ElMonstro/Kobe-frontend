@@ -7,10 +7,12 @@ import { yupPerspectiveOrder } from "../../../utils/validators";
 import getURLs from "../../../services/urls";
 import { CUSTOMER_FIRST, FINANCIAL_FIRST, POST } from "../../../utils/constants";
 import "./index.scss";
+import { useParams } from "react-router-dom";
 
 
 const PerspectiveOrderForm = ({ settings }) => {
 
+    const { companyId } = useParams();
     const formik = useFormik({
         initialValues: {
             perspective_order: settings?.perspective_order,
@@ -18,7 +20,7 @@ const PerspectiveOrderForm = ({ settings }) => {
         validationSchema: yupPerspectiveOrder,
         enableReinitialize: true,
         onSubmit: async (values) => {
-           makeRequest( getURLs().settingsURL, POST, values, true);
+           makeRequest( getURLs().adminSettingsURL(companyId), POST, values, true);
         },
     });
 

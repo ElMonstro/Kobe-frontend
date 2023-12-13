@@ -7,10 +7,11 @@ import getURLs from "../../../services/urls";
 import { POST } from "../../../utils/constants";
 import { makeRequest } from "../../../utils/requestUtils";
 import "./index.scss";
+import { useParams } from "react-router-dom";
 
 
 const ThresholdsForm = ({settings})=> {
-
+    const { companyId } = useParams();
     const formik = useFormik({
         initialValues: {
         upper_threshold: settings.upper_threshold,
@@ -19,7 +20,7 @@ const ThresholdsForm = ({settings})=> {
         validationSchema: yupThresholdObj,
         enableReinitialize: true,
         onSubmit: async (values) => {
-            makeRequest(getURLs().settingsURL, POST, values, true);
+            makeRequest(getURLs().adminSettingsURL(companyId), POST, values, true);
         },
     });
 

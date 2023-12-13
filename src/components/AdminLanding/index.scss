@@ -1,0 +1,36 @@
+.admin_landing {
+
+        .titles {
+            padding: 8px;
+            background-color: #fff;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            padding: 5px;
+            color: #000;
+        }
+        .company {
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+
+            .company_logo {
+
+                img {
+                    height: 40px;
+                }
+               
+            }
+
+            
+        }
+
+        
+}

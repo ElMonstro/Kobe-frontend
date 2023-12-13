@@ -47,6 +47,7 @@ import ListsReport from "./components/listReport";
 import AppraisalReport from "./components/appraisal";
 import ProfileModal from "./components/modals/profileModal";
 import InitiativeDeleteRequest from "./components/approvalCont/viewDeletedInitiative";
+import AdminLanding from "./components/AdminLanding";
 
 function App({ isLoggedIn, webSocket, showNotifications }) {
 
@@ -67,7 +68,8 @@ function App({ isLoggedIn, webSocket, showNotifications }) {
         <Routes>
           <Route index element={<Protected> <StaffDashboard /> </Protected>} />
           <Route path="/reset-password/:resetToken" element={<AuthModal show={true} form={ RESET_PASSWORD }/>} ></Route>
-          <Route exact path="/admin" element={
+          <Route path="/landing" element={<Protected> <AdminLanding /> </Protected>} />
+          <Route exact path="/:companyId/admin" element={
             <Protected> 
               <AdminDashboard activeComponent={ORG_STRUCTURE} /> 
             </Protected>} 

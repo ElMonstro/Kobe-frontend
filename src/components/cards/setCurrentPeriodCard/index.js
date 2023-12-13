@@ -6,10 +6,11 @@ import { makeRequest } from "../../../utils/requestUtils";
 import { yupSelectPeriodObj } from "../../../utils/validators";
 import getURLs from "../../../services/urls";
 import { GET, POST } from "../../../utils/constants";
+import { useParams } from "react-router-dom";
 
 const SetCurrentPeriodForm = ({ settings }) => {
     const [periods, setPeriods] = useState([]);
-
+    const { companyId } = useParams();
     const formik = useFormik({
         initialValues: {
             current_period: settings?.current_period,
@@ -17,7 +18,7 @@ const SetCurrentPeriodForm = ({ settings }) => {
         validationSchema: yupSelectPeriodObj,
         enableReinitialize: true,
         onSubmit: async (values) => {
-           makeRequest(getURLs().settingsURL, POST, values, true);
+           makeRequest(getURLs().adminSettingsURL(companyId), POST, values, true);
         },
     });
 

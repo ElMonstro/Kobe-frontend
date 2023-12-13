@@ -7,6 +7,7 @@ import { makeRequest } from "../../../utils/requestUtils";
 import { POST } from "../../../utils/constants";
 import "./index.scss";
 import getURLs from "../../../services/urls";
+import { useParams } from "react-router-dom";
 
 const EditPerspectivesForm = ({ setSettings, settings }) => {
 
@@ -16,6 +17,7 @@ const EditPerspectivesForm = ({ setSettings, settings }) => {
          internal_processes_weight: settings?.internal_processes_weight,
          learning_growth_weight: settings?.learning_growth_weight,
       }
+      const { companyId } = useParams();
 
       if (settings.behaviorals_enabled) {
          initialValues.behaviorals_weight = settings?.behaviorals_weight;
@@ -37,7 +39,7 @@ const EditPerspectivesForm = ({ setSettings, settings }) => {
             });
             return;
         }
-           makeRequest(getURLs().settingsURL, POST, values, true)
+           makeRequest(getURLs().adminSettingsURL(companyId), POST, values, true)
             .then(data => setSettings(data));
         },
     });

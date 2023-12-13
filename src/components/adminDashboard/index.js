@@ -23,6 +23,7 @@ import {
 import 'react-toastify/dist/ReactToastify.css';
 import "./index.scss";
 import SendEmailCont from "./sendEmails";
+import AdminHeader from "../common/header/adminHeader";
 
 const AdminDashboard = props => {
 
@@ -44,7 +45,7 @@ const AdminDashboard = props => {
        
     return (
         <div>
-            <Header />
+            <AdminHeader />
             <div className="cont">
                 <Container fluid className="inner-cont">
                     <Row> 

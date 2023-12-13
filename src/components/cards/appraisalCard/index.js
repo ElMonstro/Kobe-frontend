@@ -5,16 +5,18 @@ import { makeRequest } from "../../../utils/requestUtils";
 import getURLs from "../../../services/urls";
 import { POST } from "../../../utils/constants";
 import "./index.scss";
+import { useParams } from "react-router-dom";
 
 
 const AppraisalSettingsCard = props => {
 
     const { setSettings, settings: { perspectives_report_enabled, objectives_report_enabled, initiatives_report_enabled} } = props; 
+    const { companyId } = useParams();
 
     const onChange = async event => {
         const data = {};
         data[event.target.id] = event.target.checked;
-        const responseData = await makeRequest(getURLs().settingsURL, POST, data, true);
+        const responseData = await makeRequest(getURLs().adminSettingsURL(companyId), POST, data, true);
         responseData && setSettings(responseData);
 
     }

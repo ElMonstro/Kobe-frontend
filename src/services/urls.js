@@ -40,6 +40,10 @@ const getURLs = () => {
     urls.fetchPeriodsURL = `${baseURL}/scorecard/periods/`;
     urls.fetchAuthURL = domain => `${baseURL}/administration/fetch-auth-url/?domain=${domain}`;
     urls.fetchCompanies = `${baseURL}/administration/companies/`;
+    urls.adminOrgChartURL = companyId =>`${baseURL}/administration/companies/${companyId}/org-chart/`;
+    urls.adminCompanyInfoURL = companyId =>`${baseURL}/administration/companies/${companyId}/`;
+    urls.adminSettingsURL = companyId =>`${baseURL}/administration/companies/${companyId}/settings/`;
+    urls.adminInitCompany  = companyId =>`${baseURL}/administration/companies/${companyId}/initialize/`;
     return urls
 };
 

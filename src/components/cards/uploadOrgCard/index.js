@@ -2,13 +2,15 @@ import React from "react";
 import { Card } from "react-bootstrap";
 
 import UploadButton from "../../common/uploadButton";
-import getURLs, { uploadOrgChartURL } from "../../../services/urls";
+import getURLs from "../../../services/urls";
 import exampleOrgFile from "../../../assets/example_org_file.xlsx"
 
 
 import "./index.scss";
+import { useParams } from "react-router-dom";
 
 const UploadOrgCard = ({ setOrgChartSpinner, settings, setOrgChart }) => {
+    const { companyId } = useParams();
     return (
         <Card className="admin_card upload_org_card">
             <div className="card_cont">
@@ -24,7 +26,7 @@ const UploadOrgCard = ({ setOrgChartSpinner, settings, setOrgChart }) => {
                     <UploadButton 
                         disabled={ settings?.are_emails_sent }
                         setSpinnerStatus={ setOrgChartSpinner }
-                        uploadURL={ getURLs().uploadOrgChartURL } 
+                        uploadURL={ getURLs().adminOrgChartURL(companyId) } 
                         contentText="Upload Excel" 
                         className="card_btn" 
                         fileKey="file"

@@ -6,11 +6,12 @@ import { makeRequest } from "../../../utils/requestUtils";
 import SecurityConfirmationModal from "../../modals/securityConfirmationModal";
 
 import "./index.scss";
+import { useParams } from "react-router-dom";
 
 const SendInvitationsCard = ({ settings, setShowConfirmationModal } ) => {
-    
+    const { companyId } = useParams();
     const sendEmails = async () => {
-        return makeRequest(getURLs().sendEmailsURL, PATCH, {}, true, true, "Emails Sent");
+        return makeRequest(getURLs().adminInitCompany(companyId), PATCH, {}, true, true, "Emails Sent");
     }
 
     return (

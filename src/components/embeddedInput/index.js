@@ -9,6 +9,7 @@ import { POST } from "../../utils/constants";
 import { useFormik } from 'formik';
 import "./index.scss";
 import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 
 
 const EmbededInput = ({ defaultValue, initialValueKey, setSettings }) => {
@@ -16,6 +17,7 @@ const EmbededInput = ({ defaultValue, initialValueKey, setSettings }) => {
 
     let initialValues = {};
     initialValues[initialValueKey] = defaultValue;
+    const { companyId } = useParams();
 
     useEffect(() => {
         setEditable(false)
@@ -25,7 +27,7 @@ const EmbededInput = ({ defaultValue, initialValueKey, setSettings }) => {
         initialValues,
         enableReinitialize: true,
         onSubmit: async (values) => {
-            const responseData =  await makeRequest(getURLs().settingsURL, POST, values, true);
+            const responseData =  await makeRequest(getURLs().adminSettingsURL(companyId), POST, values, true);
             responseData && setSettings(responseData);
             responseData && setEditable(false);
         },

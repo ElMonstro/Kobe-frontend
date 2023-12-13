@@ -7,9 +7,10 @@ import { yupApprovalLevels } from "../../../utils/validators";
 import getURLs from "../../../services/urls";
 import { POST } from "../../../utils/constants";
 import "./index.scss";
+import { useParams } from "react-router-dom";
 
 const ApprovalLevelCard = ({ settings }) => {
-
+    const { companyId } = useParams();
     const formik = useFormik({
         initialValues: {
             approval_levels: settings?.approval_levels,
@@ -17,7 +18,7 @@ const ApprovalLevelCard = ({ settings }) => {
         validationSchema: yupApprovalLevels,
         enableReinitialize: true,
         onSubmit: async (values) => {
-           makeRequest(getURLs().settingsURL, POST, values, true);
+           makeRequest(getURLs().adminSettingsURL(companyId), POST, values, true);
         },
     });
 
