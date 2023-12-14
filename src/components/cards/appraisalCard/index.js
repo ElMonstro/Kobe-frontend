@@ -3,7 +3,7 @@ import { Form, Card, Col, Row } from "react-bootstrap";
 
 import { makeRequest } from "../../../utils/requestUtils";
 import getURLs from "../../../services/urls";
-import { POST } from "../../../utils/constants";
+import { PATCH } from "../../../utils/constants";
 import "./index.scss";
 import { useParams } from "react-router-dom";
 
@@ -16,7 +16,7 @@ const AppraisalSettingsCard = props => {
     const onChange = async event => {
         const data = {};
         data[event.target.id] = event.target.checked;
-        const responseData = await makeRequest(getURLs().adminSettingsURL(companyId), POST, data, true);
+        const responseData = await makeRequest(getURLs().adminSettingsURL(companyId), PATCH, data, true);
         responseData && setSettings(responseData);
 
     }

@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { makeRequest } from "../../../utils/requestUtils";
 import { yupCascadeCutoffObj } from "../../../utils/validators";
 import getURLs from "../../../services/urls";
-import { POST } from "../../../utils/constants";
+import { PATCH } from "../../../utils/constants";
 import "./index.scss";
 import { useParams } from "react-router-dom";
 
@@ -20,7 +20,7 @@ const CascadeCutoffForm = ({ settings }) => {
         validationSchema: yupCascadeCutoffObj,
         enableReinitialize: true,
         onSubmit: async (values) => {
-           makeRequest(getURLs().adminSettingsURL(companyId), POST, values, true);
+           makeRequest(getURLs().adminSettingsURL(companyId), PATCH, values, true);
         },
     });
 

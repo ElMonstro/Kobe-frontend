@@ -5,7 +5,7 @@ import { Close } from "@styled-icons/material-twotone/Close";
 import { makeRequest } from "../../utils/requestUtils";
 import getURLs from "../../services/urls";
 import { setSettings } from "../../redux/actions";
-import { POST } from "../../utils/constants";
+import { PATCH } from "../../utils/constants";
 import { useFormik } from 'formik';
 import "./index.scss";
 import { connect } from "react-redux";
@@ -27,7 +27,7 @@ const EmbededInput = ({ defaultValue, initialValueKey, setSettings }) => {
         initialValues,
         enableReinitialize: true,
         onSubmit: async (values) => {
-            const responseData =  await makeRequest(getURLs().adminSettingsURL(companyId), POST, values, true);
+            const responseData =  await makeRequest(getURLs().adminSettingsURL(companyId), PATCH, values, true);
             responseData && setSettings(responseData);
             responseData && setEditable(false);
         },

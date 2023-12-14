@@ -74,22 +74,22 @@ function App({ isLoggedIn, webSocket, showNotifications }) {
               <AdminDashboard activeComponent={ORG_STRUCTURE} /> 
             </Protected>} 
           /> 
-          <Route path="/admin/perspectives" element={
+          <Route path="/:companyId/admin/perspectives" element={
             <Protected> 
               <AdminDashboard activeComponent={PERSPECTIVES} /> 
             </Protected>} 
           />
-          <Route path="/admin/cascade"  element={
+          <Route path="/:companyId/admin/cascade"  element={
             <Protected> 
               <AdminDashboard activeComponent={CASCADE} /> 
             </Protected>} 
             />
-          <Route path="/admin/review-period" element={
+          <Route path="/:companyId/admin/review-period" element={
             <Protected> 
               <AdminDashboard activeComponent={REVEIEW_PERIOD} />
             </Protected>} 
           />
-          <Route path="/admin/send-emails" element={
+          <Route path="/:companyId/admin/send-emails" element={
             <Protected> 
               <AdminDashboard activeComponent={SEND_EMAILS} /> 
             </Protected>} 

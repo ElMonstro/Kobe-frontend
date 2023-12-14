@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 
 import { yupEditPerspectivesWeightObj } from "../../../utils/validators";
 import { makeRequest } from "../../../utils/requestUtils";
-import { POST } from "../../../utils/constants";
+import { PATCH } from "../../../utils/constants";
 import "./index.scss";
 import getURLs from "../../../services/urls";
 import { useParams } from "react-router-dom";
@@ -39,7 +39,7 @@ const EditPerspectivesForm = ({ setSettings, settings }) => {
             });
             return;
         }
-           makeRequest(getURLs().adminSettingsURL(companyId), POST, values, true)
+           makeRequest(getURLs().adminSettingsURL(companyId), PATCH, values, true)
             .then(data => setSettings(data));
         },
     });

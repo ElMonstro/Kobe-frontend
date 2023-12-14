@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { makeRequest } from "../../../utils/requestUtils";
 import { yupSelectPeriodObj } from "../../../utils/validators";
 import getURLs from "../../../services/urls";
-import { GET, POST } from "../../../utils/constants";
+import { GET, PATCH } from "../../../utils/constants";
 import { useParams } from "react-router-dom";
 
 const SetCurrentPeriodForm = ({ settings }) => {
@@ -18,7 +18,7 @@ const SetCurrentPeriodForm = ({ settings }) => {
         validationSchema: yupSelectPeriodObj,
         enableReinitialize: true,
         onSubmit: async (values) => {
-           makeRequest(getURLs().adminSettingsURL(companyId), POST, values, true);
+           makeRequest(getURLs().adminSettingsURL(companyId), PATCH, values, true);
         },
     });
 
