@@ -55,9 +55,13 @@
             .black_help_text {
                 font-size: 17px;
                 cursor: pointer;
-                float: left;
-                font-weight: 900;
+                font-weight: 600;
                 color: #000;
+        
+
+                svg {
+                    height: 30px;
+                }
             }
         }
         

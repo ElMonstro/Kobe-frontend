@@ -20,7 +20,7 @@ const AuthModal = ({ show, form })  => {
         "email_capture": EmailCaptureForm,
     }
     const titleMapper = {
-        "login": "Welcome!",
+        "login": "Enter Password",
         "reset_request": "Send Password Reset Link",
         "reset_password": "Reset Password",
         "email_capture": "Enter Email",

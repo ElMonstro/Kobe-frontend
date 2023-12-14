@@ -19,7 +19,8 @@ import {
 } 
 from "../../../redux/actions";
 import getURLs from "../../../services/urls";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { ArrowBack } from "styled-icons/evaicons-solid";
 
 
 const AdminHeader = ({ 
@@ -32,6 +33,7 @@ const AdminHeader = ({
     const { name: companyName, logo } = companyInfo;
     const user = JSON.parse(localStorage.getItem('user'));
     const { companyId } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -62,6 +64,9 @@ const AdminHeader = ({
     
     return (
         <Navbar className="nav_bar fixed-top" bg="light" variant="light">
+            <div className="back" onClick={() => navigate('/landing')}>
+                    <ArrowBack />
+            </div>
             <Container className="header_container" fluid>
                 <Navbar.Brand >
                     <img className="logo" 
@@ -101,6 +106,7 @@ const AdminHeader = ({
                 </Nav>
 
             </Container>
+            
         </Navbar>
     );
 };

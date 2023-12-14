@@ -11,6 +11,7 @@ import { changeLoginStatus } from "../../../redux/actions";
 import "./index.scss";
 import { parseJwt } from "../../../utils";
 import { EMAIL_CAPTURE, RESET_REQUEST, SCORECARD } from "../../../utils/constants";
+import { ArrowBack } from "styled-icons/evaicons-solid";
 
 const LoginForm = ({ changeLoginStatus, setCurrentForm, authEmail } ) => {
 
@@ -35,9 +36,9 @@ const LoginForm = ({ changeLoginStatus, setCurrentForm, authEmail } ) => {
                 
                 changeLoginStatus(true);
                 let url;
-                user.is_admin? url = '/admin': url = `/${user.role}/${SCORECARD}`
+                user.is_admin? url = '/landing': url = `/${user.role}/${SCORECARD}`
                 navigate(url);
-                
+                setCurrentForm(EMAIL_CAPTURE);
                 // store access tokens in local storage
                 window.localStorage.setItem('tokens', JSON.stringify(response.data));
                 window.localStorage.setItem('user', JSON.stringify(user));
@@ -47,10 +48,7 @@ const LoginForm = ({ changeLoginStatus, setCurrentForm, authEmail } ) => {
 
     return (
         <Form onSubmit={formik.handleSubmit}>
-            <div onClick={() => setCurrentForm(EMAIL_CAPTURE)} className="black_help_text">
-                    Back
-            </div>
-            <br />
+            
             <Form.Group className="mb-3 password_group" controlId="password">
                 <Form.Label>Password</Form.Label>
                 <Form.Control 
@@ -64,10 +62,16 @@ const LoginForm = ({ changeLoginStatus, setCurrentForm, authEmail } ) => {
                     { formik.errors.password }
                 </Form.Control.Feedback> 
             </Form.Group>
+
+            <div onClick={() => setCurrentForm(EMAIL_CAPTURE)} className="black_help_text">
+                <ArrowBack />
+                <span> Back to email </span>
+            </div>
+            <br/>
             
-            <span onClick={() => setCurrentForm(RESET_REQUEST)} className="auth_help_text">
+            <div onClick={() => setCurrentForm(RESET_REQUEST)} className="auth_help_text">
                     Forgot Password? Click here.
-            </span>
+            </div>
             
            
             <Button className="login_btn" variant="primary" type="">

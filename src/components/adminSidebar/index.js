@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { CASCADE, ORG_STRUCTURE, PERSPECTIVES, REVEIEW_PERIOD, SEND_EMAILS } from "../../utils/constants";
 
 import './index.scss';
 import { useParams } from 'react-router-dom';
-
 
 const AdminSidebar = props => {
 
@@ -56,7 +55,11 @@ const AdminSidebar = props => {
                         Send Emails
                     </Link>
                 </Row>
+            
             </Col>
+            <div className="sidebar_footer">
+                
+            </div>
         </div>
     )
 }

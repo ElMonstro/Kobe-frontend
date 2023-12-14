@@ -2,6 +2,7 @@
     padding: 0px 0px;
     font-weight: 500;
     color: #828282;
+    position: relative;
 
   .row {
     height: 45px;
@@ -73,7 +74,14 @@
     a:focus  .blue_rectangle {
         visibility: visible;
     }
+
+.sidebar_footer {
+    position: relative;
+    padding-left: 50px;
+    margin-top: 60px;
+
     
+}   
 
 }
 
