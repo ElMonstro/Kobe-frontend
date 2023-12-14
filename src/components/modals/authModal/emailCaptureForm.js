@@ -53,7 +53,7 @@ const EmailCaptureForm = ({ setCurrentForm, setAuthEmail } ) => {
                     Forgot Password? Click here.
             </span>
             <Button className="login_btn" variant="primary" type="">
-                Login
+                Next
             </Button>
         </Form>
     )

@@ -145,3 +145,17 @@ export const yupObjectiveValidationObj = {
         .required('* Required')
         .test('len', 'Must be less than 100 characters', val => val?.length < 100)
 }
+
+export const yupCompanyValidation = Yup.object({
+    name: Yup.string().required('* Required'),
+    rest_server: Yup.string().required('* Required'),
+    grpc_server: Yup.string().required('* Required'),
+    email_domain: Yup.string().required('* Required')
+});
+
+export const yupEditCompanyValidation = Yup.object({
+    name: Yup.string(),
+    rest_server: Yup.string(),
+    grpc_server: Yup.string(),
+    email_domain: Yup.string()
+});

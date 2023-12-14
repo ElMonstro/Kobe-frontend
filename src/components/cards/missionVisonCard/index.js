@@ -7,9 +7,12 @@ import { makeRequest } from "../../../utils/requestUtils";
 import getURLs from "../../../services/urls";
 import { PATCH } from "../../../utils/constants";
 import "./index.scss";
+import { useParams } from "react-router-dom";
 
 
 const MissionVisionForm = ({ setCompanyInfo, companyInfo }) => {
+
+    const { companyId } = useParams();
 
     const formik = useFormik({
         initialValues: {
@@ -20,7 +23,7 @@ const MissionVisionForm = ({ setCompanyInfo, companyInfo }) => {
         validationSchema: yupMissionFormObj,
         enableReinitialize: true,
         onSubmit: async (values) => {
-           makeRequest(getURLs().companyInfoURL, PATCH, values, true)
+           makeRequest(getURLs().adminCompanyInfoURL(companyId), PATCH, values, true)
             .then(data => setCompanyInfo(data));
         },
     });

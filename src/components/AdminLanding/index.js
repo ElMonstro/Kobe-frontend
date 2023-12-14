@@ -1,67 +1,96 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { connect } from 'react-redux';
-
 
 import 'react-toastify/dist/ReactToastify.css';
 import "./index.scss";
 import { makeRequest } from "../../utils/requestUtils";
 import getURLs from "../../services/urls";
-import { GET } from "../../utils/constants";
+import { GET, POST } from "../../utils/constants";
 import Company from "./company";
 import LandingAdminHeader from "../common/header/landingAdminHeader";
+import CompanyForm from "./companyForm";
+import { yupCompanyValidation } from "../../utils/validators";
+import { setCompanies } from "../../redux/actions";
+import EditCompanyModal from "./editCompanyModal";
 
-const AdminLanding = () => {
-
-    const [companies, setCompanies] = useState([]);
+const AdminLanding = ({ setCompanies, companies }) => {
 
     useEffect(() => { 
         makeRequest(getURLs().fetchCompanies, GET, null, true, false)
         .then(data => data && setCompanies(data));
       }, []);
+
+    const onSubmitCompany = values => {
+        console.log(values);
+        makeRequest(getURLs().fetchCompanies, POST, values, true, true);
+    };
+
+    const initialValues = {
+        name: '',
+        rest_server: '',
+        grpc_server: '',
+        email_domain: ''
+    };
        
     return (
         <div>
             <div className="cont admin_landing">
                 <LandingAdminHeader />
+                <EditCompanyModal />
                 <Container fluid className="inner-cont">
-                        <Row> 
-                            <Col xs lg="9">
-                                    <div className="title">
-                                        Companies
-                                    </div>
-                                    <div className="titles">
-                                        <Row > 
-                                            <Col>
-                                                <div className="company_logo">
-                                                </div>
-                                            </Col> 
-                                            <Col xs lg="3">
-                                                <span>
-                                                    Name
-                                                </span> 
-                                            </Col>
-                                            <Col>
-                                                <span>
-                                                    Rest Server
-                                                </span> 
-                                            </Col>
-                                            <Col>
-                                                <span>
-                                                    GPRC Server
-                                                </span> 
-                                            
-                                            </Col>
-                                        </Row>
-                                    </div>
+                    <Row> 
+                        <Col lg="3">
+                            <div className="title">
+                                Add  Company
+                            </div>
+                            <CompanyForm 
+                                initialValues={initialValues} 
+                                onSubmit={onSubmitCompany} 
+                                enableReinitialize={false}
+                                validationSchema={ yupCompanyValidation }
+                                />
+                        </Col>
+                        <Col >
+                                <div className="title">
+                                    Companies
+                                </div>
+                                <div className="titles">
+                                    <Row > 
+                                        <Col>
+                                            <div >
+                                              &nbsp; Logo
+                                            </div>
+                                        </Col> 
+                                        <Col>
+                                            <span>
+                                                Name
+                                            </span> 
+                                        </Col>
+                                        <Col>
+                                            <span>
+                                                Rest Server
+                                            </span> 
+                                        </Col>
+                                        <Col>
+                                            <span>
+                                                GPRC Server
+                                            </span> 
+                                        
+                                        </Col>
+                                        <Col>
+                                            <span>
+                                                Actions
+                                            </span> 
+                                        </Col>
+                                    </Row>
+                                </div>
                                     
                             {
                                 companies.map(company => <Company key={company.id} {...company}/>)
                             }
                         </Col>
-                        <Col xs lg="9">
-                            
-                        </Col>
+                        
                     </Row>
                 </Container>
             </div>
@@ -70,11 +99,11 @@ const AdminLanding = () => {
 };
 
 const mapDispatchToProps = {
-
+    setCompanies,
 }
 
-const mapStateToProps = ({ adminReducer, authReducer }) => ({
-
+const mapStateToProps = ({ adminReducer: { companies } }) => ({
+    companies,
 });
 
 export default connect(

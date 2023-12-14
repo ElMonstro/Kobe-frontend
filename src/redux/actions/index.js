@@ -10,7 +10,10 @@ import {
     SET_SHOW_PROFILE,
     SET_PROFILE_PIC,
     SET_PERSPECTIVE_ORDER,
-    SET_AUTH_EMAIL
+    SET_AUTH_EMAIL,
+    ADD_COMPANY,
+    SET_COMPANIES,
+    SET_SHOW_EDIT_COMPANY
     } from "./actionTypes";
 
 export const changeLoginStatus = isLoggedIn => ({
@@ -98,4 +101,19 @@ export const setPerspectiveOrder = perspectiveOrder => ({
 export const setAuthEmail = authEmail => ({
     type: SET_AUTH_EMAIL,
     authEmail,
+});
+
+export const addCompany = company => ({
+    type: ADD_COMPANY,
+    company,
+});
+
+export const setCompanies = companies => ({
+    type: SET_COMPANIES,
+    companies,
+});
+
+export const setShowEditCompany = showEditCompany => ({
+    type: SET_SHOW_EDIT_COMPANY,
+    showEditCompany,
 });

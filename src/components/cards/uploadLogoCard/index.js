@@ -5,8 +5,12 @@ import UploadButton from "../../common/uploadButton";
 
 import "./index.scss";
 import { PATCH } from "../../../utils/constants";
+import { useParams } from "react-router-dom";
 
 const UploadLogoCard = () => {
+
+    const { companyId } = useParams();
+
     return (
         <Card className="admin_card">
             <div className="card_cont">
@@ -14,7 +18,7 @@ const UploadLogoCard = () => {
                     Upload Organization Logo
                 </div>
                 <UploadButton 
-                    uploadURL={ getURLs().companyInfoURL} 
+                    uploadURL={ getURLs().adminCompanyInfoURL(companyId)} 
                     contentText="Upload Logo" 
                     className="card_btn" 
                     fileKey="logo"

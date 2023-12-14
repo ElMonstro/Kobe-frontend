@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import './index.scss';
 import defaultLogo from "../../../assets/logo.svg"
 import { BASE_CLOUDINARY_URL } from "../../../services/baseURL";
-import {  getPeriods, logout } from "../../../utils";
+import { logout } from "../../../utils";
 import { makeRequest } from "../../../utils/requestUtils";
 import { GET } from "../../../utils/constants";
 import { 
@@ -26,7 +26,7 @@ import { ArrowBack } from "styled-icons/evaicons-solid";
 const AdminHeader = ({ 
     companyInfo, setSettings, 
     setCompanyInfo, setUser,
-    setOrgChart, setPeriods, 
+    setOrgChart,
     isLoggedIn, fetchSettings
     }) => {
 
@@ -44,7 +44,6 @@ const AdminHeader = ({
             makeRequest(adminSettingsURL(companyId), GET, null, true, false)
                 .then( data => {
                     data && setSettings(data);
-                    data && setPeriods(getPeriods(data.review_period));
                 });
 
 

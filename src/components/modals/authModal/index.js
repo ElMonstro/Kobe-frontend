@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import { Modal } from "react-bootstrap";
 
 import "./index.scss";
-import { EMAIL_CAPTURE, LOGIN } from "../../../utils/constants";
+import { EMAIL_CAPTURE } from "../../../utils/constants";
 import LoginForm from "./loginForm";
 import ResetRequestForm from "./resetRequestForm";
 import PasswordResetForm from "./passwordResetForm";

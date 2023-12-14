@@ -43,10 +43,10 @@ const Header = ({
     const profile_pic_url = userRole?.profile_pic? BASE_CLOUDINARY_URL + userRole.profile_pic: defaultAvatar;
     const fetchNotifications = () => {
         console.log("fetching notifications");
-        !user?.is_admin && makeRequest(getURLs().fetchNotificationsURL, GET, null, true, false)
-                    .then(data => {
-                        data && setNotifications(data.results);
-                    });
+        makeRequest(getURLs().fetchNotificationsURL, GET, null, true, false)
+        .then(data => {
+            data && setNotifications(data.results);
+        });
     }
 
     const handleNotificationsClick = () => setShowNotifications(true);
@@ -72,8 +72,8 @@ const Header = ({
             makeRequest(fetchOrgChartURL, GET, null, true, false)
                 .then( data => setOrgChart(data));
 
-            !user?.is_admin && fetchNotifications();
-            !user?.is_admin && setInterval( fetchNotifications, 120000);
+            fetchNotifications();
+            setInterval( fetchNotifications, 120000);
         }         
         
         setUser(user);
