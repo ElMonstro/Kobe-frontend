@@ -12,6 +12,7 @@ import "./index.scss";
 import { parseJwt } from "../../../utils";
 import { EMAIL_CAPTURE, RESET_REQUEST, SCORECARD } from "../../../utils/constants";
 import { ArrowBack } from "styled-icons/evaicons-solid";
+import getURLs from "../../../services/urls";
 
 const LoginForm = ({ changeLoginStatus, setCurrentForm, authEmail } ) => {
 
@@ -19,14 +20,25 @@ const LoginForm = ({ changeLoginStatus, setCurrentForm, authEmail } ) => {
 
     const formik = useFormik({
         initialValues: {
-        password: '',
+            email: '',
+            password: '',
         },
         validationSchema: yupLoginObj,
         onSubmit: async (values) => {
-            values['email'] = authEmail;
+            const domain = values.email.split('@')[1];
+            
+            var baseURL = resolve_base_url();
+            makeRequest(getURLs().fetchAuthURL(domain), GET, null, false, false)
+                .then(data => {
+                    if (data) {
+                        baseURL = data.url;
+                    }
+                    setCurrentForm(LOGIN);
+                    window.localStorage.setItem('baseURL', baseURL);
+                });
+
             const response = await AuthService.loginUser(values);
-            console.log(response);
-            console.log(values)
+         
             if (response) {
                 const user = parseJwt(response?.data.access);
                 delete user.iat;
@@ -48,6 +60,18 @@ const LoginForm = ({ changeLoginStatus, setCurrentForm, authEmail } ) => {
 
     return (
         <Form onSubmit={formik.handleSubmit}>
+            <Form.Group className="email_group" controlId="email">
+                <Form.Label>Email</Form.Label>
+                <Form.Control 
+                    type="email" 
+                    placeholder="username@company.com" 
+                    { ...formik.getFieldProps('email') } 
+                    isInvalid={ formik.touched.email && formik.errors.email }
+                />
+                <Form.Control.Feedback type='invalid'>
+                    { formik.errors.email }
+                </Form.Control.Feedback>
+            </Form.Group>
             
             <Form.Group className="mb-3 password_group" controlId="password">
                 <Form.Label>Password</Form.Label>
