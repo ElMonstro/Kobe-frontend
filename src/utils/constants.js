@@ -105,4 +105,3 @@ export const QUATERLY = "quaterly";
 export const LOGIN = "login";
 export const RESET_REQUEST = "reset_request";
 export const RESET_PASSWORD = "reset_password";
-export const EMAIL_CAPTURE = "email_capture";
