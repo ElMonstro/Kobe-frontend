@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 import { yupResetPasswordObj } from "../../../utils/validators";
 import "./index.scss";
-import { EMAIL_CAPTURE, PATCH } from "../../../utils/constants";
+import { LOGIN, PATCH } from "../../../utils/constants";
 import { makeRequest } from "../../../utils/requestUtils";
 import getURLs from "../../../services/urls";
 
@@ -19,7 +19,7 @@ const PasswordResetForm = ( { setCurrentForm } ) => {
         validationSchema: yupResetPasswordObj,
         onSubmit: async (values) => {
             makeRequest(getURLs().resetPasswordURL(resetToken), PATCH, values, false, true).then( data => {
-                data && setCurrentForm(EMAIL_CAPTURE);
+                data && setCurrentForm(LOGIN);
             })
         },
     });
@@ -52,7 +52,7 @@ const PasswordResetForm = ( { setCurrentForm } ) => {
                     { formik.errors.confirm_password }
                 </Form.Control.Feedback> 
             </Form.Group>
-            <span onClick={ () => setCurrentForm(EMAIL_CAPTURE)} className="auth_help_text">
+            <span onClick={ () => setCurrentForm(LOGIN)} className="auth_help_text">
                     Login? Click here.
             </span>
             

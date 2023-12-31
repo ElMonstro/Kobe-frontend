@@ -10,7 +10,6 @@ import {
     SET_SHOW_PROFILE,
     SET_PROFILE_PIC,
     SET_PERSPECTIVE_ORDER,
-    SET_AUTH_EMAIL,
     ADD_COMPANY,
     SET_COMPANIES,
     SET_SHOW_EDIT_COMPANY
@@ -96,11 +95,6 @@ export const setProfilePic = role => ({
 export const setPerspectiveOrder = perspectiveOrder => ({
     type: SET_PERSPECTIVE_ORDER,
     perspectiveOrder,
-});
-
-export const setAuthEmail = authEmail => ({
-    type: SET_AUTH_EMAIL,
-    authEmail,
 });
 
 export const addCompany = company => ({
