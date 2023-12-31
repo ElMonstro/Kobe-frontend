@@ -24,7 +24,7 @@ const MissionVisionForm = ({ setCompanyInfo, companyInfo }) => {
         enableReinitialize: true,
         onSubmit: async (values) => {
            makeRequest(getURLs().adminCompanyInfoURL(companyId), PATCH, values, true)
-            .then(data => setCompanyInfo(data));
+            .then(data => data && setCompanyInfo(data));
         },
     });
     
