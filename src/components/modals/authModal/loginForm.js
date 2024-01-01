@@ -27,13 +27,14 @@ const LoginForm = ({ changeLoginStatus, setCurrentForm } ) => {
         validationSchema: yupLoginObj,
         onSubmit: async (values) => {
             const domain = values.email.split('@')[1];
-            
+            window.localStorage.clear();
             var baseURL = resolve_base_url();
             makeRequest(getURLs().fetchAuthURL(domain), GET, null, false, false)
                 .then(async data => {
                     if (data) {
                         baseURL = data.url;
                     }
+
                     window.localStorage.setItem('baseURL', baseURL);
                     const response = await AuthService.loginUser(values);
          

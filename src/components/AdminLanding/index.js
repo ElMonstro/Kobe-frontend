@@ -21,9 +21,14 @@ const AdminLanding = ({ setCompanies, companies }) => {
         .then(data => data && setCompanies(data));
       }, []);
 
-    const onSubmitCompany = values => {
-        console.log(values);
-        makeRequest(getURLs().fetchCompanies, POST, values, true, true);
+    const onSubmitCompany = (values, { resetForm, setErrors }) => {
+        makeRequest(getURLs().fetchCompanies, POST, values, true, true, false, '', '', setErrors)
+            .then(data => {
+                if (data) {
+                    setCompanies([...companies, data]);
+                    resetForm();
+                }
+            });
     };
 
     const initialValues = {

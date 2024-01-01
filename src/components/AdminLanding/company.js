@@ -6,6 +6,7 @@ import { WindowEdit } from "styled-icons/fluentui-system-regular";
 import { connect } from "react-redux";
 import { setCompanyInfo, setShowEditCompany } from "../../redux/actions";
 import { Settings } from "styled-icons/evaicons-solid";
+import { BASE_CLOUDINARY_URL } from "../../services/baseURL";
 
 
 const Company = ({ logo, name, rest_server,  grpc_server, id, email_domain, setShowEditCompany, setCompanyInfo }) => {
@@ -21,7 +22,7 @@ const Company = ({ logo, name, rest_server,  grpc_server, id, email_domain, setS
             <Row> 
                 <Col>
                     <div className="company_logo">
-                        <img  src={logo || defaultLogo } alt="logo"/>
+                        <img  src={logo? BASE_CLOUDINARY_URL + logo: defaultLogo } alt="logo"/>
                     </div>
                 </Col> 
                 <Col >

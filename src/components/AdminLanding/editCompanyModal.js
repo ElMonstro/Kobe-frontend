@@ -18,10 +18,8 @@ const EditCompanyModal = ({ showEditCompany, companyInfo, setShowEditCompany }) 
         grpc_server: companyInfo?.grpc_server,
         email_domain: companyInfo?.email_domain,
     };
-    console.log("companyInfo", companyInfo);
 
     const editCompany = (values) => {
-        console.log("values", values);
         makeRequest(getURLs().adminCompanyInfoURL(companyInfo?.id), PATCH, values, true, true);
     };
 
