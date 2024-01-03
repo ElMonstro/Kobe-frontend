@@ -37,7 +37,7 @@ const LoginForm = ({ changeLoginStatus, setCurrentForm } ) => {
 
                     window.localStorage.setItem('baseURL', baseURL);
                     const response = await AuthService.loginUser(values);
-         
+                    console.log(response)
                     if (response) {
                         const user = parseJwt(response?.data.access);
                         delete user.iat;
@@ -56,8 +56,6 @@ const LoginForm = ({ changeLoginStatus, setCurrentForm } ) => {
                     } 
 
                 });
-
-            
         },
     });
 

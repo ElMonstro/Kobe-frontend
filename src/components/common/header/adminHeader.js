@@ -119,10 +119,9 @@ const mapDispatchToProps = {
     setOrgChart
 }
 
-const mapStateToProps = ({ adminReducer: { companyInfo, orgChart }, authReducer: { isLoggedIn, notifications, user }, }) => ({
+const mapStateToProps = ({ adminReducer: { companyInfo, orgChart }, authReducer: { isLoggedIn }, }) => ({
     companyInfo,
     isLoggedIn,
-    notifications, 
     userRole: orgChart[0]
 });
 
