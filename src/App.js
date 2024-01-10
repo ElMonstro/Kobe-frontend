@@ -13,7 +13,7 @@ import {
   LINKS, OBJECTIVE, SCORE, 
   DASHBOARDS, OVER_VIEW, OVERALL, 
   REPORTS, LIST, DASHBOARD, 
-  APPRAISAL, RESET_PASSWORD, DELETE 
+  APPRAISAL, RESET_PASSWORD, DELETE, WEIGHTS 
 } 
 from "./utils/constants";
 
@@ -48,6 +48,7 @@ import AppraisalReport from "./components/appraisal";
 import ProfileModal from "./components/modals/profileModal";
 import InitiativeDeleteRequest from "./components/approvalCont/viewDeletedInitiative";
 import AdminLanding from "./components/AdminLanding";
+import EditObjectivesWeights from "./components/updateTopObjectivesWeight";
 
 function App({ isLoggedIn, webSocket, showNotifications }) {
 
@@ -113,6 +114,7 @@ function App({ isLoggedIn, webSocket, showNotifications }) {
               <Route path={ CASCADED } element={ <CascadedCards />}/>
               <Route path={ VIEW } element={ <ViewScorecard />} />
               <Route path={ UPDATE } element={ <UpdateScorecardCard />} />
+              <Route path={ WEIGHTS } element={ <EditObjectivesWeights />} />
             </Route>
             <Route path={ DASHBOARDS } element={ <DashboardTab /> }>
               <Route path={ OVERALL } element={ <DashboardTab /> } />

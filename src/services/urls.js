@@ -13,6 +13,7 @@ const getURLs = () => {
     urls.sendEmailsURL = `${baseURL}/administration/send-auth-emails/`;
     urls.fetchUnderlingsURL = `${baseURL}/scorecard/role/fetch-underlings/`;
     urls.createObjectiveURL = `${baseURL}/scorecard/objectives/`;
+    urls.updateWeightsURL = `${baseURL}/scorecard/objectives/update-weights/`;
     urls.fetchSelfCascadedInitURL = `${baseURL}/scorecard/objectives/?is_self_cascaded=true`;
     urls.fetchCascadedObjectiveURL = `${baseURL}/scorecard/objectives/?is_self_cascaded=false`;
     urls.updateObjectiveURL = id => `${baseURL}/scorecard/objectives/${id}/`;
@@ -44,6 +45,7 @@ const getURLs = () => {
     urls.adminCompanyInfoURL = companyId =>`${baseURL}/administration/companies/${companyId}/`;
     urls.adminSettingsURL = companyId =>`${baseURL}/administration/companies/${companyId}/settings/`;
     urls.adminInitCompany  = companyId =>`${baseURL}/administration/companies/${companyId}/initialize/`;
+    
     return urls
 };
 

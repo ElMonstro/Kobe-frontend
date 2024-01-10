@@ -25,6 +25,7 @@ export const CREATE = "create";
 export const CASCADED = "cascaded";
 export const VIEW = "view";
 export const UPDATE = "update";
+export const WEIGHTS = "weights";
 export const FINANCIAL = 'financial';
 export const CUSTOMER = 'customer';
 export const INTERNAL_PROCESSES = 'internal processes';
