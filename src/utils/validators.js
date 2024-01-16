@@ -8,12 +8,6 @@ export const yupLoginObj = Yup.object({
             .required('* Required'),
     });
 
-export const yupEmailObj = Yup.object({
-    email: Yup.string()
-        .email('* Invalid email address')
-        .required('* Required'),
-    });
-
 const getCharacterValidationError = (str) => {
     return `Your password must have at least 1 ${str} character`;
     };
@@ -59,6 +53,16 @@ export const yupMissionFormObj = Yup.object({
     name: Yup.string()
         .required('* Required'),
     });
+
+export const yupCreateUserObj = Yup.object({
+        first_name: Yup.string()
+            .required('* Required'),
+        second_name: Yup.string()
+            .required('* Required'),
+        email: Yup.string('* Invalid email address')
+            .email()
+            .required('* Required'),
+        });
 
 export const yupDivisionNamesObj = Yup.object({
     division_name: Yup.string(),

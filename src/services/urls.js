@@ -45,6 +45,7 @@ const getURLs = () => {
     urls.adminCompanyInfoURL = companyId =>`${baseURL}/administration/companies/${companyId}/`;
     urls.adminSettingsURL = companyId =>`${baseURL}/administration/companies/${companyId}/settings/`;
     urls.adminInitCompany  = companyId =>`${baseURL}/administration/companies/${companyId}/initialize/`;
+    urls.adminCreateCompanyUser = companyId =>`${baseURL}/administration/companies/${companyId}/create-user/`;
     
     return urls
 };
