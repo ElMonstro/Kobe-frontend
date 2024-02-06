@@ -12,7 +12,6 @@
     "chart.js": "^4.0.1",
     "chartjs-gauge": "^0.3.0",
     "chartjs-plugin-labels": "^1.1.0",
-    "firebase": "^9.13.0",
     "formik": "^2.2.9",
     "html2pdf.js": "^0.10.1",
     "lodash.clonedeep": "^4.5.0",
