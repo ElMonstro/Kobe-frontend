@@ -9,7 +9,7 @@ import { PATCH } from "../../../utils/constants";
 import { useParams } from "react-router-dom";
 
 
-const CreateUserForm = ({ se }) => {
+const CreateUserForm = () => {
 
     const { companyId } = useParams();
 

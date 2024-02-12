@@ -166,3 +166,8 @@ export const yupEditCompanyValidation = Yup.object({
     grpc_server: Yup.string(),
     email_domain: Yup.string()
 });
+
+export const yupCreateBehavioral = Yup.object({
+    name: Yup.string().required(),
+    tier_cutoff: Yup.number().required()
+});

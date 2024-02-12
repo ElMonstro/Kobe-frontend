@@ -8,7 +8,7 @@ import DivisionsNamesForm from "../cards/orgNamesCard";
 import ThresholdsForm from "../cards/threshholdsCard";
 import OrgChartCard from "../cards/orgCard";
 import ApprovalLevelCard from "../cards/appprovalLevelCard";
-import CreateUserForm from "../cards/createBoardDirector";
+import CreateUserForm from "../cards/CreateBoardUser";
 
 
 const AdminOrgStructureCont = props => {
@@ -31,7 +31,7 @@ const AdminOrgStructureCont = props => {
             <DivisionsNamesForm { ...props }/>
             <ThresholdsForm { ...props }/>
             <ApprovalLevelCard { ...props }/>
-            <CreateUserForm />
+            {/* <CreateUserForm /> */}
         </div>
     )
 }

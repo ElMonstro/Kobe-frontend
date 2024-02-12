@@ -46,6 +46,7 @@ const getURLs = () => {
     urls.adminSettingsURL = companyId =>`${baseURL}/administration/companies/${companyId}/settings/`;
     urls.adminInitCompany  = companyId =>`${baseURL}/administration/companies/${companyId}/initialize/`;
     urls.adminCreateCompanyUser = companyId =>`${baseURL}/administration/companies/${companyId}/create-user/`;
+    urls.adminCreateGlobalBehaviorals = companyId =>`${baseURL}/administration/companies/${companyId}/behaviorals/`;
     
     return urls
 };
