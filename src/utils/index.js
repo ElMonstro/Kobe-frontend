@@ -405,6 +405,10 @@ export const deleteFromObjectlist = (items, key, deleteId) => {
     return [...items];
 }
 
+export function removeObjectWithId(arr, id) {
+    return arr.filter((obj) => obj.id !== id);
+  }
+
 export const convertFromNestedToFlat = (nestedObject, key) => {
     let flatList = nestedObject[key];
 

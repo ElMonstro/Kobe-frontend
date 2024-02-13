@@ -1,88 +1,73 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button, Card, Row, Col } from "react-bootstrap";
-import { useFormik } from 'formik';
-
-import { useParams } from "react-router-dom";
+import { Card, Col, Row } from "react-bootstrap";
+import CreateBehavioralForm from "./form";
+import { GET, PATCH } from "../../../utils/constants";
 import getURLs from "../../../services/urls";
-import { PATCH } from "../../../utils/constants";
-import { yupCreateBehavioral } from "../../../utils/validators";
 import { makeRequest } from "../../../utils/requestUtils";
+import { useParams } from "react-router-dom";
+import { Bin } from "styled-icons/icomoon";
+import "./index.scss";
+import { removeObjectWithId } from "../../../utils";
 
 
-const CreateGlobalBehavioral = ({ settings }) => {
-
+const CreateBehavioralCard = ({ settings }) => {
+    const [behaviorals, setBehaviorals] = useState([]);
     const { companyId } = useParams();
-    const [tierOptions, setTierOptions] = useState([]);
 
-    const formik = useFormik({
-        initialValues: {
-            name: '',
-            tier_cutoff: 1,
-        },
-        validationSchema: yupCreateBehavioral,
-        enableReinitialize: false,
-        onSubmit: async (values) => {
-           makeRequest(getURLs().adminCreateGlobalBehaviorals(companyId), PATCH, values, true);
-        },
-    });
-
-    useEffect(()=> {
-        const options = [];
-        for (let i=1; i<=settings.tiers; i++) {
-            options.push(<option key={ i } value={ i }>Tier { i }</option>);
+    function deleteBehavior(behavior) {
+        const delete_behavior = () => {
+            makeRequest(getURLs().adminDeleteBehaviorals(companyId), PATCH, behavior, true)
+                .then(data => {
+                    setBehaviorals(removeObjectWithId(behaviorals, behavior.id));
+                });
         }
-        setTierOptions(options);
-    }, [settings])
+
+        return delete_behavior;
+    }
+
+    useEffect(() => {
+        makeRequest(getURLs().adminCreateGlobalBehaviorals(companyId), GET, null, true, false)
+            .then(data =>  data && setBehaviorals(data));
+
+        }, []);
     
     return (
         <Card className="admin_card mission_card">
-            <div className="card_title">Create User</div>
+            <div className="card_title">Create Global Behaviorals</div>
+            <Row className="behaviorals_cont">
 
-            <Form onSubmit={ formik.handleSubmit }>
-                <Form.Group className="mb-3" controlId="name">
-                    <Row>
-                        <Col><Form.Label>Name</Form.Label></Col>
-                        <Col>
-                            <Form.Control 
-                                type="text" 
-                                placeholder="" 
-                                { ...formik.getFieldProps('name') } 
-                                isInvalid={ formik.touched.name && formik.errors.name }
-                            /> 
-                            <Form.Control.Feedback type='invalid'>
-                                { formik.errors.name }
-                            </Form.Control.Feedback>
-                        </Col>
-                    </Row>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="tier_cutoff">
-                    <Row>
-                        <Col><Form.Label>Upper Tier Cutoff</Form.Label></Col> 
-                        <Col>
-                        <Form.Select
-                            { ...formik.getFieldProps('tier_cutoff') } 
-                            isInvalid={ formik.touched.tier_cutoff && formik.errors.tier_cutoff }
-                            >
-                            <option>Tiers</option>
-                            {
-                                tierOptions.map(option => option)
-                            }
-                        </Form.Select>
-                        <Form.Control.Feedback type='invalid'>
-                            { formik.errors.tier_cutoff }
-                        </Form.Control.Feedback>
-                        </Col>
-                    </Row>
-                </Form.Group>
-                <Button className="card_btn" variant="primary" type="">
-                    Save
-                </Button>
-            </Form>
+                <Col>
+                    <CreateBehavioralForm 
+                        settings={ settings } 
+                        setBehaviorals={ setBehaviorals } 
+                        behaviorals={ behaviorals } 
+                        />
+                </Col>
+                <Col className="behaviorals">
+                    <Row className="header">
+                        <Col>Name</Col>
+                        <Col>Tier Cutoff</Col>
+                        <Col></Col>
 
+                    </Row>
+                    { behaviorals.map(behavior =>
+                        <Row className="behavior">
+                            <Col>{ behavior.name }</Col>
+                            <Col>{ behavior.tier_cutoff }</Col>
+                            <Col>
+                                <span className="delete" onClick={deleteBehavior(behavior)}>
+                                    <Bin />
+                                </span>
+                            </Col>
+                        </Row>
+                    )}
+                </Col>
+            </Row>
+        
         </Card>
         
     );
 };
 
 
-export default CreateGlobalBehavioral;
+export default CreateBehavioralCard;
