@@ -21,7 +21,7 @@ const CreateBehavioralForm = ({ settings, setBehaviorals, behaviorals }) => {
         },
         validationSchema: yupCreateBehavioral,
         enableReinitialize: false,
-        onSubmit: async (values) => {
+        onSubmit: (values) => {
            makeRequest(getURLs().adminCreateGlobalBehaviorals(companyId), PATCH, values, true)
             .then(data => data && setBehaviorals([...behaviorals, data]));
         },

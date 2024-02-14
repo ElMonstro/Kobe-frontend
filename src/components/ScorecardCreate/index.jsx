@@ -21,7 +21,7 @@ import { useCallbackPrompt } from "../../hooks/useCallbackPrompt";
 import DialogBox from "../common/dialogBox";
 import ImpactInputs from "./impactInputs";
 
-const ScorecardCreate = ({ periods, actingRole }) => {
+const ScorecardCreate = ({ periods, actingRole, settings }) => {
     const firstInitiative = {
         initiativeId: 'initiative-name-1', 
         weightId: 'initiative-weight-1', 
@@ -206,9 +206,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
     useEffect(() => {
         setShowDialog(formik.dirty)
     }, [formik.dirty])
-
-    console.log(formik.errors);
-
+    console.log(formik.errors)
     return (
         <>
         <DialogBox
@@ -251,6 +249,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
                             initiative={ objective }
                             setInitiatives={ setInitiatives }
                             mode={ mode }
+                            settings = { settings }
                         />
 
                         {
@@ -281,9 +280,10 @@ const ScorecardCreate = ({ periods, actingRole }) => {
 const mapDispatchToProps = {
 }
 
-const mapStateToProps = ({ adminReducer: { periods, orgChart }, }) => ({
+const mapStateToProps = ({ adminReducer: { periods, orgChart, settings }, }) => ({
     periods, 
-    actingRole: orgChart[0]
+    actingRole: orgChart[0],
+    settings
 });
 
 export default connect(

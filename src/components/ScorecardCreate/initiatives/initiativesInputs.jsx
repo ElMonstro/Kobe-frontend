@@ -3,21 +3,21 @@ import { Row, Col } from "react-bootstrap";
 
 import addBtn from "../../../assets/plus_sign.svg";
 import getURLs from "../../../services/urls";
-import { GET } from "../../../utils/constants";
+import { BEHAVIORAL, GET } from "../../../utils/constants";
 import { makeRequest } from "../../../utils/requestUtils";
 import InitiativeInput from "./initiativeInput";
 import CreatedInitative from "./createdInitative";
 import { deleteFromObjectlist } from "../../../utils";
 
 
-const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives }) => {
+const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives, settings }) => {
 
     const [underlings, setUnderlings] = useState([]);
     const [createdInitiatives, setCreatedInitiatives] = useState([]);
     const { is_self_cascaded } = initiative;
     let contClassName;
 
-    if (is_self_cascaded) {
+    if (is_self_cascaded || formik.values.perspective === settings?.behavioral_name) {
         contClassName = "initiatives hidden";
     } else {
         contClassName = "initiatives";

@@ -403,11 +403,11 @@ export const deleteFromObjectlist = (items, key, deleteId) => {
     }
 
     return [...items];
-}
+};
 
 export function removeObjectWithId(arr, id) {
     return arr.filter((obj) => obj.id !== id);
-  }
+};
 
 export const convertFromNestedToFlat = (nestedObject, key) => {
     let flatList = nestedObject[key];
@@ -417,7 +417,7 @@ export const convertFromNestedToFlat = (nestedObject, key) => {
     }
 
     return flatList;
-}
+};
 
 export const calculatePeriodPerfomance = (currentObject) => {
     const last_period_score = currentObject?.last_period_score
@@ -429,7 +429,7 @@ export const calculatePeriodPerfomance = (currentObject) => {
     }
 
     return (percentage_diff / currentObject?.current_period_target);
-}
+};
 
 
 export const createOverallCurrentObject = (perspectives) => {
@@ -445,4 +445,8 @@ export const createOverallCurrentObject = (perspectives) => {
         currentObject.last_period_score += perspective.last_period_score * perspective.weight/100;
     }
     return currentObject;
-}
+};
+
+export const deepCopy = (item) => {
+    return JSON.parse(JSON.stringify(item));
+};

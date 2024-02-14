@@ -33,9 +33,10 @@ const ScorecardNavCard = ({ activeComponent, orgChart, settings }) => {
     useEffect(() => {
         setSelectedClass(activeComponent);
       }, [activeComponent]);
-
-      let createClassName = "";
-        !orgChart?.reporting_to 
+      
+      console.log()
+      let createClassName = "orgChart?.is_ceo ";
+        orgChart?.is_ceo 
         || settings?.behaviorals_enabled
         || orgChart?.tier >  settings?.cascade_cutoff
         ? createClassName = "": createClassName = " hidden";
@@ -63,11 +64,14 @@ const ScorecardNavCard = ({ activeComponent, orgChart, settings }) => {
                         Update
                     </Link>
                 </Col>
-                <Col className={ noneViewClassNames + createClassName }>
-                    <Link id={ WEIGHTS } to={ WEIGHTS }>
-                        Weights
-                    </Link>
-                </Col>
+                {
+                orgChart?.is_ceo && 
+                    <Col className={ noneViewClassNames }>
+                        <Link id={ WEIGHTS } to={ WEIGHTS }>
+                            Weights
+                        </Link>
+                    </Col>
+                }
             </Row>
         </div>
     )

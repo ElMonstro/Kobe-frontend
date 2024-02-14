@@ -12,7 +12,8 @@ import {
     SET_PERSPECTIVE_ORDER,
     ADD_COMPANY,
     SET_COMPANIES,
-    SET_SHOW_EDIT_COMPANY
+    SET_SHOW_EDIT_COMPANY,
+    SET_SHOW_SURVEY
     } from "./actionTypes";
 
 export const changeLoginStatus = isLoggedIn => ({
@@ -85,6 +86,11 @@ export const setWebSocket = webSocket => ({
 export const setShowProfile = showProfile => ({
     type: SET_SHOW_PROFILE,
     showProfile,
+});
+
+export const setShowSurvey = showSurvey => ({
+    type: SET_SHOW_SURVEY,
+    showSurvey,
 });
 
 export const setProfilePic = role => ({

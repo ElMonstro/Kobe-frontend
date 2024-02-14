@@ -49,6 +49,7 @@ import ProfileModal from "./components/modals/profileModal";
 import InitiativeDeleteRequest from "./components/approvalCont/viewDeletedInitiative";
 import AdminLanding from "./components/AdminLanding";
 import EditObjectivesWeights from "./components/updateTopObjectivesWeight";
+import SurveyModal from "./components/modals/surveyModal";
 
 function App({ isLoggedIn, webSocket, showNotifications }) {
 
@@ -65,6 +66,7 @@ function App({ isLoggedIn, webSocket, showNotifications }) {
     <ToastContainer limit={4}/>
       <AuthModal show={!isLoggedIn}/>
       <ProfileModal />
+      <SurveyModal />
       { showNotifications && <NotificationsModal /> }
         <Routes>
           <Route index element={<Protected> <StaffDashboard /> </Protected>} />

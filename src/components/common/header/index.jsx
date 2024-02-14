@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import {ChevronDown} from '@styled-icons/bootstrap/ChevronDown'
 import { connect } from "react-redux";
@@ -21,7 +21,8 @@ import {
     setPeriods,
     setNotifications,
     setShowNotifications,
-    setShowProfile
+    setShowProfile,
+    setShowSurvey
 } 
 from "../../../redux/actions";
 import bell from "../../../assets/bell.svg";
@@ -34,13 +35,16 @@ const Header = ({
     setOrgChart, setPeriods, 
     isLoggedIn, setNotifications, 
     setShowNotifications, notifications,
-    userRole, setShowProfile, fetchSettings
+    userRole, setShowProfile, fetchSettings,
+    setShowSurvey
     }) => {
 
     const { name: companyName, logo } = companyInfo;
     const user = JSON.parse(localStorage.getItem('user'));
     const notificationsNumber = countUnreadNotifications(notifications);
     const profile_pic_url = userRole?.profile_pic? BASE_CLOUDINARY_URL + userRole.profile_pic: defaultAvatar;
+    const interval = useRef();
+
     const fetchNotifications = () => {
         console.log("fetching notifications");
         makeRequest(getURLs().fetchNotificationsURL, GET, null, true, false)
@@ -59,10 +63,13 @@ const Header = ({
             fetchSettings()
             makeRequest(settingsURL, GET, null, true, false)
                 .then( data => {
-                    data && setSettings(data);
-                    data && setPeriods(getPeriods(data.review_period));
+                    if (data) {
+                        setSettings(data);
+                        setShowSurvey(Boolean(data?.surveys.length));
+                        setPeriods(getPeriods(data.review_period));
+                    }
+                    
                 });
-
 
             makeRequest(companyInfoURL, GET, null, true, false)
                 .then( data => {
@@ -72,8 +79,8 @@ const Header = ({
             makeRequest(fetchOrgChartURL, GET, null, true, false)
                 .then( data => setOrgChart(data));
 
-            fetchNotifications();
-            setInterval( fetchNotifications, 120000);
+            clearInterval(interval.current);
+            interval.current = setInterval(fetchNotifications, 120000);
         }         
         
         setUser(user);
@@ -158,10 +165,11 @@ const mapDispatchToProps = {
     setPeriods,
     setNotifications,
     setShowNotifications,
-    setShowProfile
+    setShowProfile, 
+    setShowSurvey
 }
 
-const mapStateToProps = ({ adminReducer: { companyInfo, orgChart }, authReducer: { isLoggedIn, notifications, user }, }) => ({
+const mapStateToProps = ({ adminReducer: { companyInfo, orgChart }, authReducer: { isLoggedIn, notifications }, }) => ({
     companyInfo,
     isLoggedIn,
     notifications, 

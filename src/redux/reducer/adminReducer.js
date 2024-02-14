@@ -18,6 +18,7 @@ const initialState = {
     perspectiveOrder: [],
     companies: [], 
     showEditCompany: false,
+    showSurvey: false,
 };
 
 const adminReducer = ( state=initialState, action ) => {

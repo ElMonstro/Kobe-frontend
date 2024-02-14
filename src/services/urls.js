@@ -48,7 +48,7 @@ const getURLs = () => {
     urls.adminCreateCompanyUser = companyId =>`${baseURL}/administration/companies/${companyId}/create-user/`;
     urls.adminCreateGlobalBehaviorals = companyId =>`${baseURL}/administration/companies/${companyId}/behaviorals/`;
     urls.adminDeleteBehaviorals = companyId =>`${baseURL}/administration/companies/${companyId}/behaviorals/delete/`;
-    
+    urls.updateSurveyURL = `${baseURL}/scorecard/update-surveys/`;
     return urls
 };
 
