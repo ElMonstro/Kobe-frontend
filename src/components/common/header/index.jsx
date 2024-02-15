@@ -80,6 +80,7 @@ const Header = ({
                 .then( data => setOrgChart(data));
 
             clearInterval(interval.current);
+            fetchNotifications();
             interval.current = setInterval(fetchNotifications, 120000);
         }         
         

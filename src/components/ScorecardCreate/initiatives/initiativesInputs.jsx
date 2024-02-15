@@ -10,14 +10,14 @@ import CreatedInitative from "./createdInitative";
 import { deleteFromObjectlist } from "../../../utils";
 
 
-const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives, settings }) => {
+const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives }) => {
 
     const [underlings, setUnderlings] = useState([]);
     const [createdInitiatives, setCreatedInitiatives] = useState([]);
     const { is_self_cascaded } = initiative;
     let contClassName;
 
-    if (is_self_cascaded || formik.values.perspective === settings?.behavioral_name) {
+    if (is_self_cascaded || formik.values.perspective === BEHAVIORAL) {
         contClassName = "initiatives hidden";
     } else {
         contClassName = "initiatives";

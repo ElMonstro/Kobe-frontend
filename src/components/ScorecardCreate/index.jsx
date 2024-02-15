@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form, Button, Card } from "react-bootstrap"
-import { CASCADED, CREATE, EDIT, ERROR, GET, PATCH, PERCENTAGE, POST, SCORECARD } from "../../utils/constants";
+import { BEHAVIORAL, CASCADED, CREATE, EDIT, ERROR, GET, PATCH, PERCENTAGE, POST, SCORECARD } from "../../utils/constants";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from "react-redux";
@@ -156,6 +156,18 @@ const ScorecardCreate = ({ periods, actingRole, settings }) => {
                                                           .required('* Required')
     }
 
+    const yupValidationSchema = Yup.object(validationSchema)
+                        .when((values, schema) => {
+                            console.log(values);
+                            if (values.perspective === BEHAVIORAL) {
+                                
+                                const shape = {}
+                                shape[initiatives[0].initiativeId] = Yup.string();
+                                shape[initiatives[0].cascadeId] = Yup.string();
+                                return schema.shape(shape);
+                            }
+                        })
+
     const onSubmit = async (values, { setFieldError, resetForm }) => {
         
         if (!arePeriodicalInputsValid(values, periods, setFieldError)) {
@@ -199,13 +211,14 @@ const ScorecardCreate = ({ periods, actingRole, settings }) => {
     const formik = useFormik({
         enableReinitialize: reinitializeForm,
         initialValues: initialValues,
-        validationSchema: Yup.object(validationSchema),
+        validationSchema: yupValidationSchema,
         onSubmit: onSubmit,
     });
 
     useEffect(() => {
         setShowDialog(formik.dirty)
     }, [formik.dirty])
+
     console.log(formik.errors)
     return (
         <>
@@ -249,7 +262,6 @@ const ScorecardCreate = ({ periods, actingRole, settings }) => {
                             initiative={ objective }
                             setInitiatives={ setInitiatives }
                             mode={ mode }
-                            settings = { settings }
                         />
 
                         {
