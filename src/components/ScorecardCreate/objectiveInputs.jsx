@@ -14,7 +14,7 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
     let perspectives_object = PERSPECTIVE_OBJECT;
     !settings.behaviorals_enabled && delete perspectives_object.behavioral_name
 
-    if (role?.reporting_to && settings?.behaviorals_enabled) {
+    if (!role?.is_ceo && settings?.behaviorals_enabled) {
         perspectives_object = {
             behavioral_name: BEHAVIORAL
         }

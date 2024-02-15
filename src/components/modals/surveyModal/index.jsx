@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {connect} from 'react-redux';
-import { Col, Modal, Row } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { Model } from "survey-core";
 import { Survey } from "survey-react-ui";
 import "survey-core/defaultV2.min.css";
@@ -8,12 +8,11 @@ import { themeJson } from "./theme";
 
 import "./index.scss";
 import { setShowSurvey } from "../../../redux/actions";
-import { json, page, panel } from "./json";
+import { json, page, panel, rating } from "./json";
 import { deepCopy } from "../../../utils";
 import { makeRequest } from "../../../utils/requestUtils";
 import { PATCH } from "../../../utils/constants";
 import getURLs from "../../../services/urls";
-import { Truenas } from "styled-icons/simple-icons";
 
 
 const SurveyModal = ({ settings }) => {
@@ -27,16 +26,17 @@ const SurveyModal = ({ settings }) => {
         setShowSurvey(Boolean(settings?.surveys?.length));
         settings?.surveys?.forEach(subjectSurveys => {
             const pageCopy = deepCopy(page);
-            pageCopy.title = `${subjectSurveys[0]?.subject.user.first_name} ${subjectSurveys[0]?.subject.user.second_name}`;
             pageCopy.name = `${subjectSurveys[0]?.subject.id}`;
             const panels = [];
 
-            subjectSurveys.forEach(survey => {
+            subjectSurveys.forEach(subjectSurvey => {
                 const panelCopy = deepCopy(panel);
-                panelCopy.name = `${survey.subject.id}`;
-                panelCopy.elements[0].name = `${survey.id}`;
-                panelCopy.elements[0].title = `On a scale from 0 to 10, rate ${survey?.subject.user.first_name}
-                            on their ${survey.objective?.name}`;
+                const ratingCopy = { ...rating }
+                panelCopy.name = `${subjectSurvey.subject.id}`;
+                ratingCopy.name = `${subjectSurvey.id}`;
+                ratingCopy.title = `On a scale from 1 to 10, rate ${subjectSurvey?.subject.user.first_name} 
+                    ${subjectSurvey?.subject.user.second_name} (${subjectSurvey?.subject.name}) on their ${subjectSurvey.objective?.name}`;
+                panelCopy.elements = [ratingCopy];
                 panels.push(panelCopy);
             });
             page.elements = panels;
@@ -57,7 +57,7 @@ const SurveyModal = ({ settings }) => {
         });
 
         makeRequest(getURLs().updateSurveyURL, PATCH, { surveys: values }, true, true)
-            .then(data => data && handleClose());
+            .then(() => handleClose());
     });
 
     const handleClose = () => {

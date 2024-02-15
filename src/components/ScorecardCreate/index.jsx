@@ -4,7 +4,7 @@ import { BEHAVIORAL, CASCADED, CREATE, EDIT, ERROR, GET, PATCH, PERCENTAGE, POST
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { connect } from "react-redux";
-import { useNavigate, useOutletContext, useParams, Prompt } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 
 import "./index.scss";
 import ObjectiveInputs from "./objectiveInputs";

@@ -1,22 +1,22 @@
 
+export const rating = {
+     "type": "rating",
+     "name": "",
+     "title": "",
+     "defaultValue": 5,
+     "rateMin": 1,
+     "rateMax": 10
+};
+
 export const panel = {
     "type": "panel",
     "name": "",
-    "elements": [
-     {
-      "type": "rating",
-      "name": "np-score",
-      "title": "",
-      "defaultValue": 5,
-      "rateMin": 0,
-      "rateMax": 10
-     }
-    ]
-   }
+    "elements": []
+   };
 
 export const page = {
     "name": "",
-    "title": "Joshua Moracha",
+    "title": "",
     "elements": []
    }
 
@@ -30,7 +30,7 @@ export const json = {
      }
     ],
     "pages": [page],
-    "showPrevButton": false,
+    "showPrevButton": true,
     "showQuestionNumbers": "off",
     "widthMode": "static",
     "width": "800"

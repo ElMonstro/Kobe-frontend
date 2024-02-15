@@ -22,7 +22,6 @@ import {
     setNotifications,
     setShowNotifications,
     setShowProfile,
-    setShowSurvey
 } 
 from "../../../redux/actions";
 import bell from "../../../assets/bell.svg";
@@ -36,7 +35,6 @@ const Header = ({
     isLoggedIn, setNotifications, 
     setShowNotifications, notifications,
     userRole, setShowProfile, fetchSettings,
-    setShowSurvey
     }) => {
 
     const { name: companyName, logo } = companyInfo;
@@ -65,7 +63,6 @@ const Header = ({
                 .then( data => {
                     if (data) {
                         setSettings(data);
-                        setShowSurvey(Boolean(data?.surveys.length));
                         setPeriods(getPeriods(data.review_period));
                     }
                     
@@ -167,7 +164,6 @@ const mapDispatchToProps = {
     setNotifications,
     setShowNotifications,
     setShowProfile, 
-    setShowSurvey
 }
 
 const mapStateToProps = ({ adminReducer: { companyInfo, orgChart }, authReducer: { isLoggedIn, notifications }, }) => ({

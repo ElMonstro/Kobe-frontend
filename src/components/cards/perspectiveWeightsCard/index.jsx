@@ -114,18 +114,18 @@ const EditPerspectivesForm = ({ setSettings, settings }) => {
                     </Row>
                 </Form.Group>
                { settings?.behaviorals_enabled &&
-                  <Form.Group className="mb-3" controlId="behavioral_weight">
+                  <Form.Group className="mb-3" controlId="behaviorals_weight">
                         <Row>
-                           <Col><Form.Label>Learning & Growth Weight</Form.Label></Col>      
+                           <Col><Form.Label>Behavioral Weight</Form.Label></Col>      
                            <Col>
                               <Form.Control 
                                     type="text" 
                                     placeholder="" 
-                                    { ...formik.getFieldProps('behavioral_weight') } 
-                                    isInvalid={ formik.touched.behavioral_weight && formik.errors.behavioral_weight }
+                                    { ...formik.getFieldProps('behaviorals_weight') } 
+                                    isInvalid={ formik.touched.behaviorals_weight && formik.errors.behaviorals_weight }
                               />
                               <Form.Control.Feedback type='invalid'>
-                                    { formik.errors.behavioral_weight }
+                                    { formik.errors.behaviorals_weight }
                               </Form.Control.Feedback>
                            </Col>
                         </Row>
