@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Card, Row, Col } from "react-bootstrap"
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import { CREATE, PERSPECTIVE_OBJECT, BEHAVIORAL } from "../../utils/constants";
+import { CREATE, PERSPECTIVE_OBJECT, BEHAVIORAL, NON_PERSPECTIVE } from "../../utils/constants";
 
 
 const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, role, is_self_cascaded }) => {
@@ -19,6 +19,7 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
             behavioral_name: BEHAVIORAL
         }
     }
+    
 
     if (mode === CREATE) {
         nameFieldProps.value = name;
@@ -60,9 +61,16 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
                             disabled={ isDisabled }
                             >
                                 <option>Perspectives</option>
+                                { !settings?.perspective_enabled &&
+                                     <option value={ NON_PERSPECTIVE } className="">
+                                        No Perspective 
+                                    </option>
+                                }
                                 {
                                     Object.keys(perspectives_object).map(perspective => {
-                                        return <option key={ perspective } value={PERSPECTIVE_OBJECT[perspective]} className="">{ settings[perspective] }</option>
+                                        return <option key={ perspective } value={perspectives_object[perspective]} className="">
+                                                    { settings[perspective] }
+                                                </option>
                                     })
                                 }
                             </Form.Select>

@@ -32,6 +32,7 @@ export const INTERNAL_PROCESSES = 'internal processes';
 export const LEARNING_GROWTH = 'learning & growth';
 export const BEHAVIORAL = 'behavioral';
 export const OBJECTIVE = 'objective';
+export const NON_PERSPECTIVE = 'non perspective'
 export const LINKS = 'links';
 export const INITIATIVE = 'initiative';
 export const UNITS = 'units';

@@ -31,7 +31,7 @@ const AdminOrgStructureCont = props => {
             <DivisionsNamesForm { ...props }/>
             <ThresholdsForm { ...props }/>
             <ApprovalLevelCard { ...props }/>
-            {/* <CreateUserForm /> */}
+            <CreateUserForm />
         </div>
     )
 }
