@@ -66,7 +66,7 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
                                         No Perspective 
                                     </option>
                                 }
-                                {
+                                { settings?.perspective_enabled &&
                                     Object.keys(perspectives_object).map(perspective => {
                                         return <option key={ perspective } value={perspectives_object[perspective]} className="">
                                                     { settings[perspective] }

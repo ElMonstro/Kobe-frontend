@@ -10,7 +10,7 @@ import { yupAppraise } from "../../utils/validators";
 import { useOutletContext } from "react-router-dom";
 import ImprovementInput from "./improvementArea";
 import { Plus } from "styled-icons/bootstrap";
-import PreviousImprovement from "./previousImprovement";
+import ImprovementAreas from "./previousImprovements";
 
 const Appraise = ({  }) => {
 
@@ -62,27 +62,7 @@ const Appraise = ({  }) => {
                     </Form.Group>
                 </Card>
                 <Card className="staff_card">
-                    <FieldArray
-                        name="improvement_areas"
-                        render={  arrayHelpers => (
-                            <div className="improvement_areas">
-                                <Row className="appraise_title">
-                                    <Col>Improvement Area</Col>
-                                    <Col>Improvement Activity</Col>
-                                    <Col>Timeline</Col>
-                                    <Col lg={2}>
-                                        Addressed
-                                    </Col>
-                                </Row>
-
-                                {
-                                    previousAppraisal.improvement_areas?.map((area, index) => (
-                                        <PreviousImprovement key={ index } improvement={ area } />
-                                    ))
-                                }
-                            </div>
-                        )}
-                    />
+                    <ImprovementAreas appraisal={ previousAppraisal } />
                 </Card>
                 <Card className="staff_card">
                     <FieldArray

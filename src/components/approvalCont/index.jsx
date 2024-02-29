@@ -75,6 +75,7 @@ const ApprovalModal = () => {
                     <Outlet context={ { 
                         objective: approvalObject?.change_approval_tracker?.objective,
                         evidence: approvalObject?.change_approval_tracker?.evidence,
+                        appraisal: approvalObject?.change_approval_tracker?.appraisal,
                         } } 
                     />
                     <div className="approval_buttons">

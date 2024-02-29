@@ -5,7 +5,7 @@ import { PATCH } from "../../utils/constants";
 import getURLs from "../../services/urls";
 
 
-const PreviousImprovement = ({ improvement }) => {
+const PreviousImprovement = ({ improvement, checkBoxDisabled }) => {
 
     const handleChange = (event) => {
         const is_addressed = event.target.checked;
@@ -30,6 +30,7 @@ const PreviousImprovement = ({ improvement }) => {
                 label=""
                 onChange={ handleChange }
                 defaultChecked={improvement.is_addressed}
+                disabled={ checkBoxDisabled }
             />
         </Col>
     </Row>
