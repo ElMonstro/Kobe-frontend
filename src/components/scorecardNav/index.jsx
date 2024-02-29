@@ -3,7 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 
-import { CASCADED, CREATE, UPDATE, VIEW, WEIGHTS } from "../../utils/constants";
+import { APPRAISE, CASCADED, CREATE, UPDATE, VIEW, WEIGHTS } from "../../utils/constants";
 import './index.scss';
 
 
@@ -72,6 +72,11 @@ const ScorecardNavCard = ({ activeComponent, orgChart, settings }) => {
                         </Link>
                     </Col>
                 }
+                <Col className={ noneViewClassNames }>
+                    <Link id={ APPRAISE } to={ APPRAISE }>
+                        Appraise
+                    </Link>
+                </Col>
             </Row>
         </div>
     )

@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import store from "../redux/store/store.js";
 import { changeLoginStatus, setNotifications, setWebSocket } from "../redux/actions";
 import { BIANNUALS, CHARACTERS, NESTED, OBJECTIVES, PERSPECTIVES, QUARTERS, UNITS } from './constants.js';
-import { socketsMessagesURL } from '../services/urls.js';
 import { LOGOUT } from '../redux/actions/actionTypes.js';
 
 const notificationTypeMapper = {

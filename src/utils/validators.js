@@ -171,3 +171,8 @@ export const yupCreateBehavioral = Yup.object({
     name: Yup.string().required(),
     tier_cutoff: Yup.number().required()
 });
+
+export const yupAppraise = Yup.object({
+    general_comments: Yup.string().required(),
+    improvement_areas: Yup.array().required(),
+});

@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Spinner } from "react-bootstrap";
-import { PERSPECTIVE_OBJECT } from "../../utils/constants";
 import SignOff from "../common/signOff";
 
 import "./index.scss";

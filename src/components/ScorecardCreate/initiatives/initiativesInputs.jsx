@@ -75,7 +75,7 @@ const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives }) =
                 Initiatives
                 <span className="add" onClick={ addInitiative }>
                     <span className="add_btn">
-                        <img src={ addBtn }  alt="Logo"/>
+                        <img src={ addBtn }  alt="add"/>
                     </span> 
                     Add Initiative
                 </span>

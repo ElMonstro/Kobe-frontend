@@ -4,23 +4,22 @@ import { ToastContainer } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { 
-  ORG_STRUCTURE, 
-  PERSPECTIVES, 
-  CASCADE, 
+  ORG_STRUCTURE, PERSPECTIVES, CASCADE, 
   REVEIEW_PERIOD, SEND_EMAILS,
   SCORECARD, CREATE, CASCADED, 
   VIEW, UPDATE, STRATEGY_MAP, 
   LINKS, OBJECTIVE, SCORE, 
   DASHBOARDS, OVER_VIEW, OVERALL, 
   REPORTS, LIST, DASHBOARD, 
-  APPRAISAL, RESET_PASSWORD, DELETE, WEIGHTS 
+  APPRAISAL, RESET_PASSWORD, DELETE, 
+  WEIGHTS, APPRAISE 
 } 
 from "./utils/constants";
 
 import AdminDashboard from "./components/adminDashboard";
 import StaffDashboard from "./components/staffDashboard";
 import Protected from "./components/common/Protected";
-import { connectWebSocket, isLoggedInFromLocalStorage } from "./utils";
+import { isLoggedInFromLocalStorage } from "./utils";
 import store from "./redux/store/store";
 import { changeLoginStatus } from "./redux/actions";
 import { connect } from "react-redux";
@@ -50,11 +49,11 @@ import InitiativeDeleteRequest from "./components/approvalCont/viewDeletedInitia
 import AdminLanding from "./components/AdminLanding";
 import EditObjectivesWeights from "./components/updateTopObjectivesWeight";
 import SurveyModal from "./components/modals/surveyModal";
+import Appraise from "./components/createImprovementPlan";
 
-function App({ isLoggedIn, webSocket, showNotifications }) {
+function App({ isLoggedIn, showNotifications }) {
 
   const loggedIn = isLoggedInFromLocalStorage();
-  // console.log(webSocket)
 
   useEffect (() => {
     store.dispatch(changeLoginStatus(loggedIn));
@@ -117,6 +116,7 @@ function App({ isLoggedIn, webSocket, showNotifications }) {
               <Route path={ VIEW } element={ <ViewScorecard />} />
               <Route path={ UPDATE } element={ <UpdateScorecardCard />} />
               <Route path={ WEIGHTS } element={ <EditObjectivesWeights />} />
+              <Route path={ APPRAISE } element={ <Appraise />} />
             </Route>
             <Route path={ DASHBOARDS } element={ <DashboardTab /> }>
               <Route path={ OVERALL } element={ <DashboardTab /> } />
@@ -144,9 +144,8 @@ function App({ isLoggedIn, webSocket, showNotifications }) {
   );
 }
 
-const mapStateToProps = ({ authReducer: { isLoggedIn, webSocket, showNotifications } }) => ({
+const mapStateToProps = ({ authReducer: { isLoggedIn, showNotifications } }) => ({
   isLoggedIn,
-  webSocket, 
   showNotifications
 });
 
