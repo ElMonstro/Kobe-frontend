@@ -2,7 +2,6 @@ import React from "react";
 import { useOutletContext } from "react-router-dom";
 import { Button, Col, Row } from "react-bootstrap";
 
-import ViewAmendedObjective from "./viewAmendedObjective";
 import ImprovementAreas from "../createImprovementPlan/previousImprovements";
 
 
@@ -11,14 +10,13 @@ const AppraisalApproval = () => {
     const { appraisal } = useOutletContext();
 
     return (
-        <div className="view_objective">
+        <div className="appraisal_approval">
             <div className="general_comments">
-                { appraisal.general_comments }
+                <div className="label">General Comments</div>
+                <div className="comments">{ appraisal?.general_comments }</div>
             </div>
-
-            <ImprovementAreas appraisal={ appraisal } />
-
-           
+            <div className="label">Improvement Areas</div>
+            <ImprovementAreas appraisal={ appraisal } checkBoxDisabled={ true } />
         </div>
     )
 }

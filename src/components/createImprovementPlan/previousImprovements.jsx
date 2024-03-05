@@ -15,9 +15,8 @@ const ImprovementAreas = ({ appraisal, checkBoxDisabled }) => {
                     Addressed
                 </Col>
             </Row>
-
             {
-                appraisal.improvement_areas?.map((area, index) => (
+                appraisal?.improvement_areas?.map((area, index) => (
                     <PreviousImprovement key={ index } improvement={ area } checkBoxDisabled={ checkBoxDisabled } />
                 ))
             }

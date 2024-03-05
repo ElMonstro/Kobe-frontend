@@ -50,6 +50,7 @@ import AdminLanding from "./components/AdminLanding";
 import EditObjectivesWeights from "./components/updateTopObjectivesWeight";
 import SurveyModal from "./components/modals/surveyModal";
 import Appraise from "./components/createImprovementPlan";
+import AppraisalApproval from "./components/approvalCont/appraisalApproval";
 
 function App({ isLoggedIn, showNotifications }) {
 
@@ -105,6 +106,7 @@ function App({ isLoggedIn, showNotifications }) {
             <Route path={ LINKS } element={ <ApprovalLinksCont /> } />
             <Route path={ SCORE } element={ <ScoreUpdateAprroveCont /> } />
             <Route path={ DELETE } element={ <InitiativeDeleteRequest /> } />
+            <Route path={ APPRAISAL } element={ <AppraisalApproval /> } />
           </Route>
           <Route path="/:role" element={<Protected> <StaffDashboard /> </Protected>} >
             <Route index element={<ScorecardCont />} />
