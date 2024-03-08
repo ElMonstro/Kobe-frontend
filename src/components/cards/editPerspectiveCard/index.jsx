@@ -15,7 +15,7 @@ const EditPerspectivesCard = props => {
                {
                   Object.keys(PERSPECTIVE_OBJECT).map(key => {
                      if (key==="behavioral_name" && !settings?.behaviorals_enabled) {
-                        return <></>;
+                        return <div key={key}></div>;
                      }
                      return <EmbededInput setSettings={ setSettings } defaultValue={ settings[key]} key={ key } initialValueKey={ key }/>
                   })

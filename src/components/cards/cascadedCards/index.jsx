@@ -14,7 +14,7 @@ const CascadedCards = (props) => {
 
     useEffect(() => {
         let objectivesTitle;
-        !role?.reporting_to || role?.tier > settings?.cascade_cutoff ? 
+        role?.is_ceo || role?.tier > settings?.cascade_cutoff ? 
         objectivesTitle = "Created Objectives" : objectivesTitle = "Cascaded Objectives";
         setTitle(objectivesTitle);
 

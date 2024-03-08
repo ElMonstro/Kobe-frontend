@@ -13,14 +13,7 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
     const { mode } = useParams();
     let perspectives_object = PERSPECTIVE_OBJECT;
     !settings.behaviorals_enabled && delete perspectives_object.behavioral_name
-
-    if (!role?.is_ceo && settings?.behaviorals_enabled) {
-        perspectives_object = {
-            behavioral_name: BEHAVIORAL
-        }
-    }
     
-
     if (mode === CREATE) {
         nameFieldProps.value = name;
         perspectiveFieldProps.value = perspective;
@@ -66,12 +59,18 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
                                         No Perspective 
                                     </option>
                                 }
+                                
                                 { settings?.perspective_enabled &&
                                     Object.keys(perspectives_object).map(perspective => {
                                         return <option key={ perspective } value={perspectives_object[perspective]} className="">
                                                     { settings[perspective] }
                                                 </option>
                                     })
+                                }
+                                { settings?.behaviorals_enabled &&
+                                     <option value={ BEHAVIORAL } className="">
+                                        {settings?.behavioral_name}
+                                    </option>
                                 }
                             </Form.Select>
                             <Form.Control.Feedback type='invalid'>
@@ -80,24 +79,6 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
                         </Form.Group>
                     </Col>
                 </Row>
-                {/* <Row className="inputs_row">
-                    <Col>
-                    {   displayWeight &&
-                        <Form.Group className="mb-1" controlId="weight">
-                            <Form.Label>Weight (%)</Form.Label>
-                            <Form.Control 
-                            type="text" 
-                            placeholder=""
-                            { ...formik.getFieldProps('weight') }
-                            isInvalid={ formik.touched.weight && formik.errors.weight }
-                            />
-            
-                            <Form.Control.Feedback type='invalid'>
-                                { formik.errors.weight }
-                            </Form.Control.Feedback>
-                        </Form.Group>}
-                    </Col>
-                </Row> */}
             </div>
     </Card>
     );
