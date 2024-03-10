@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Card, Row, Col } from "react-bootstrap"
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -12,8 +12,10 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
     const perspectiveFieldProps = formik.getFieldProps('perspective');
     const { mode } = useParams();
     let perspectives_object = PERSPECTIVE_OBJECT;
-    !settings.behaviorals_enabled && delete perspectives_object.behavioral_name
-    
+    settings.behaviorals_enabled && delete perspectives_object.behavioral_name;
+    const showPerspectives = settings?.perspective_enabled  && 
+        (role?.tier >= settings?.cascade_cutoff || role.is_ceo);
+
     if (mode === CREATE) {
         nameFieldProps.value = name;
         perspectiveFieldProps.value = perspective;
@@ -54,13 +56,13 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
                             disabled={ isDisabled }
                             >
                                 <option>Perspectives</option>
-                                { !settings?.perspective_enabled &&
+                                { !settings?.perspective_enabled || role?.tier >= settings?.perspective_cutoff &&
                                      <option value={ NON_PERSPECTIVE } className="">
                                         No Perspective 
                                     </option>
                                 }
                                 
-                                { settings?.perspective_enabled &&
+                                { showPerspectives &&
                                     Object.keys(perspectives_object).map(perspective => {
                                         return <option key={ perspective } value={perspectives_object[perspective]} className="">
                                                     { settings[perspective] }
