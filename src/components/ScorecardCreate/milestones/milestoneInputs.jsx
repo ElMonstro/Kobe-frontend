@@ -1,36 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 
 import addBtn from "../../../assets/plus_sign.svg";
 import MilestoneInput from "./milestoneInput";
 import { deleteFromObjectlist } from "../../../utils";
 import CreatedMilestone from "./createdMilestone";
+import { FieldArray } from "formik";
 
-
-const Milestones = ({ formik, milestones, initiative, setMilestones }) => {
-
-    const { is_self_cascaded } = initiative;
-    let contClassName;
-
-    if (is_self_cascaded) {
-        contClassName = "milestones";
-    } else {
-        contClassName = "milestones";
-    }
-
-    const [initiativesIndex, setInitiativesIndex] = useState(1);
+const Milestones = ({ formik, initiative }) => {
+  
     const [createdMilestones, setCreatedMilestones] = useState([]);
-
-    const deleteMilestone = deleteId => {
-        if (milestones.length === 1) {
-            return;
-        }
-        const newMilestones = deleteFromObjectlist(milestones, 'deleteId', deleteId);
-        
-        setMilestones([
-            ...newMilestones
-        ]);
-    }
+    const arrayHelpersRef = useRef();
 
     const deleteCreatedMilestone = deleteId => {
   
@@ -45,24 +25,15 @@ const Milestones = ({ formik, milestones, initiative, setMilestones }) => {
         setCreatedMilestones(initiative?.milestones)
     }, [initiative]);
 
-    const addMilestone = e => {
-
-        const currentIndex = initiativesIndex + 1;
-        setInitiativesIndex(currentIndex);
-
-        setMilestones([
-            ...milestones,
-            {
-                milestoneId: `milestone-name-${currentIndex}`,
-                percentageId: `milestone-percentage-${currentIndex}`,
-                deleteId: `delete-milestone-${currentIndex}`
-            },
-        ]);
+    const addMilestone = ( )=> {
+        arrayHelpersRef.current.push({
+            description: '',
+            percentage: ''
+        })
     }
     
-
     return (
-        <div className={ contClassName } id={ milestones.weightId }>
+        <div className="milestones" id="milestones">
             <div className="title mt-3 mb-2">
                 Milestones
                 <span className="add" onClick={ addMilestone }>
@@ -89,18 +60,19 @@ const Milestones = ({ formik, milestones, initiative, setMilestones }) => {
                             />)
                 })
             }
-
-        { 
-            milestones.map( milestone => {
-            return (
-            <MilestoneInput 
-                key={ milestone.milestoneId  } 
-                { ...milestone }
-                formik={ formik }
-                deleteMilestone={ deleteMilestone }
-                />)
-        })
-        }   
+        <FieldArray 
+            render={ arrayHelpers => {
+                formik.values.milestones?.map( (milestone, index) => {
+                    arrayHelpersRef.current = arrayHelpers;
+                    return (
+                        <MilestoneInput 
+                            key={ index  } 
+                            formik={ formik }
+                            arrayHelpers={ arrayHelpers }
+                            />)
+                })
+            }}
+        />
         
     </div>
         );

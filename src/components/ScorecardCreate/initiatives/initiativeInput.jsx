@@ -5,58 +5,59 @@ import { DeleteBin5 } from "@styled-icons/remix-fill/DeleteBin5";
 import { connect } from "react-redux";
 
 
-const InitiativeInput = ({ formik, initiativeId, weightId, cascadeId, deleteId, deleteInitiative, underlings, orgChart }) => {
+const InitiativeInput = ({ formik, index, underlings, orgChart, arrayHelpers }) => {
 
+    const name = `initiatives.${index}.name`;
+    const role = `initiatives.${index}.role`;
+    const weight = `initiatives.${index}.weight`;
 
     const onDeleteInit = e => {
-        const deleteId = e.target.parentElement.parentElement.id;
-        deleteId && deleteInitiative(deleteId);
-
+        arrayHelpers.remove(index)
     }
 
     return (
-        <Row className="inputs_row" id={ initiativeId }>
+        <Row className="inputs_row" id={ name }>
         <Col lg={4}>
-            <Form.Group className="initiative_name" controlId={ initiativeId }>
+            <Form.Group className="initiative_name" controlId={ name }>
                 <Form.Control 
                 type="text"
                 valuedefault="" 
                 placeholder=""
-                { ...formik.getFieldProps(initiativeId) } 
-                isInvalid={ formik.touched[initiativeId] && formik.errors[initiativeId] }
+                { ...formik.getFieldProps(name) } 
+                isInvalid={ formik.touched[name] && formik.errors[name] }
                 />
                 <Form.Control.Feedback type='invalid'>
-                    { formik.errors[initiativeId] }
+                    { formik.errors[name] }
                 </Form.Control.Feedback>
             </Form.Group>
             
         </Col>
         <Col>
-            <Form.Group controlId={ weightId }>
+            <Form.Group controlId={ weight }>
                 <Form.Control 
                     className="initiative_weight" 
                     type="text" 
                     placeholder=""
                     valuedefault=""
-                    { ...formik.getFieldProps(weightId) } 
-                    isInvalid={ formik.touched[weightId] && formik.errors[weightId] }
+                    { ...formik.getFieldProps(weight) } 
+                    isInvalid={ formik.touched[weight] && formik.errors[weight] }
                     disabled
                 />
                 <Form.Control.Feedback type='invalid'>
-                    { formik.errors[weightId] }
+                    { formik.errors[weight] }
                 </Form.Control.Feedback>
             </Form.Group>
         </Col>
         <Col>
-            <Form.Group controlId={ cascadeId }>
+            <Form.Group controlId={ role }>
                 {
                  <Form.Select
                     className="cascade"
                     type="text" 
                     placeholder="Select Role"
                     valuedefault={orgChart?.id}
-                    { ...formik.getFieldProps(cascadeId) } 
-                    isInvalid={ formik.touched[cascadeId] && formik.errors[cascadeId] }
+                    { ...formik.getFieldProps(role) } 
+                    isInvalid={ formik.touched[role] && formik.errors[role] }
                 >
                     <option>Cascade Initiative</option>
                     <option value={ orgChart?.id } key={ orgChart?.id }>Cascade to Self</option>
@@ -74,13 +75,15 @@ const InitiativeInput = ({ formik, initiativeId, weightId, cascadeId, deleteId, 
                 </Form.Select>
                 }
                 <Form.Control.Feedback type='invalid'>
-                    { formik.errors[cascadeId] }
+                    { formik.errors[role] }
                 </Form.Control.Feedback>
                 
             </Form.Group>
         </Col>
         <Col className="delete_btn">
-            <span id={ deleteId } onClick={ onDeleteInit }><DeleteBin5 /></span>
+            {index > 0 && 
+                <span onClick={ onDeleteInit }><DeleteBin5 /></span>
+                }
         </Col>
     </Row>
     );

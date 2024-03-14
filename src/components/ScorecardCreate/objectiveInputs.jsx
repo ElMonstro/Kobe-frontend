@@ -55,8 +55,8 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
                             isInvalid={ formik.touched.perspective && formik.errors.perspective }
                             disabled={ isDisabled }
                             >
-                                <option>Perspectives</option>
-                                { !settings?.perspective_enabled || role?.tier >= settings?.perspective_cutoff &&
+                                <option></option>
+                                { (!settings?.perspective_enabled || role?.tier >= settings?.perspective_cutoff) &&
                                      <option value={ NON_PERSPECTIVE } className="">
                                         No Perspective 
                                     </option>

@@ -1,26 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 import addBtn from "../../../assets/plus_sign.svg"
 import MeasureInput from "./measureInput";
+import TargetInputs from "./targetsInputs";
+import BaselineTargetInputs from "./baselineTargetInputs";
+import QuaterlyTargetsInputs from "./quaterlyTargetsInputs";
+import ThresholdsInputs from "../thresholdsInputs";
+import { FieldArray } from "formik";
+import { PERCENTAGE, UNITS } from "../../../utils/constants";
 
-const MeasuresInputs = ({ formik, measures, setMeasures, initiative, setReinitializeForm }) => {
+const MeasuresInputs = ({ formik, initiative, setReinitializeForm }) => {
 
-    const [measureIndex, setMeasureIndex] = useState(1);
+    const arrayHelpersRef = useRef();
+    const dataType = formik.getFieldProps('data_type').value;
 
-    const addMeasure = e => {
-        const currentIndex = measureIndex + 1;
-        setMeasureIndex(currentIndex);
+    useEffect(() => {
+        const resetUnitTargets = () => {
+            formik.setFieldValue('units_target', 0);
+            formik.setFieldValue('baseline', 0)
+        }
+        dataType === UNITS? formik.setFieldValue('percentage_target', 0): resetUnitTargets();
 
-        setMeasures([
-            ...measures,
-            {
-                measureId: `measure-name-${currentIndex}`, 
-                weightId: `measure-weight-${currentIndex}`, 
-            },
-            
-        ]);
-    }
+    }, [dataType]);
 
+    const addMeasure = () => {
+        arrayHelpersRef.current.push({
+            name: '',
+            weight: ''
+        });
+    };
 
     return (
         <>
@@ -32,22 +40,34 @@ const MeasuresInputs = ({ formik, measures, setMeasures, initiative, setReinitia
                     </span> Add Measure
                 </span>
             </div>
-
-            {
-                measures.map(measure => {
-                    return (
-                    <MeasureInput 
-                        { ...measure }
-                        formik={ formik }
-                        key={ measure.measureId }
-                        initiative={ initiative }
-                        setReinitializeForm={ setReinitializeForm }
-                    />
-                    )
-                })
-            }
-
-            
+            <FieldArray name="measures" render={ arrayHelpers => {
+                return formik.values.measures.map((measure, index) => {
+                    arrayHelpersRef.current = arrayHelpers;
+                        return (
+                            <MeasureInput 
+                                { ...measure }
+                                formik={ formik }
+                                key={ index }
+                                index={ index }
+                                initiative={ initiative }
+                            />
+                        )
+                    })
+                }} 
+            />
+            <TargetInputs 
+                formik={ formik }  
+                targetDisabled={ dataType!==PERCENTAGE } 
+                initiative={initiative }  
+                setReinitializeForm={setReinitializeForm}
+                />
+            <BaselineTargetInputs 
+                targetDisabled={ dataType!==UNITS} 
+                formik={ formik } 
+                initiative={ initiative }
+                />
+            <QuaterlyTargetsInputs formik={ formik } />
+            <ThresholdsInputs formik={ formik } />
         </>
         
         );

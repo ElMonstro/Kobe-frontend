@@ -12,7 +12,7 @@ import ImprovementInput from "./improvementArea";
 import { Plus } from "styled-icons/bootstrap";
 import ImprovementAreas from "./previousImprovements";
 
-const Appraise = ({  }) => {
+const AppraiseForm = () => {
 
     const { setActiveComponent } = useOutletContext();
     const [previousAppraisal, setPreviousAppraisal] = useState({})
@@ -105,4 +105,4 @@ const Appraise = ({  }) => {
     )
 }
 
-export default Appraise;
+export default AppraiseForm;

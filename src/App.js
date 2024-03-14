@@ -49,7 +49,7 @@ import InitiativeDeleteRequest from "./components/approvalCont/viewDeletedInitia
 import AdminLanding from "./components/AdminLanding";
 import EditObjectivesWeights from "./components/updateTopObjectivesWeight";
 import SurveyModal from "./components/modals/surveyModal";
-import Appraise from "./components/createImprovementPlan";
+import AppraiseForm from "./components/createImprovementPlan";
 import AppraisalApproval from "./components/approvalCont/appraisalApproval";
 
 function App({ isLoggedIn, showNotifications }) {
@@ -118,7 +118,7 @@ function App({ isLoggedIn, showNotifications }) {
               <Route path={ VIEW } element={ <ViewScorecard />} />
               <Route path={ UPDATE } element={ <UpdateScorecardCard />} />
               <Route path={ WEIGHTS } element={ <EditObjectivesWeights />} />
-              <Route path={ APPRAISE } element={ <Appraise />} />
+              <Route path={ APPRAISE } element={ <AppraiseForm />} />
             </Route>
             <Route path={ DASHBOARDS } element={ <DashboardTab /> }>
               <Route path={ OVERALL } element={ <DashboardTab /> } />

@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Row, Col } from "react-bootstrap"
 
 
-const BaselineTargetInputs = ({ formik }) => {
+const ThresholdsInputs = ({ formik }) => {
 
     return (
         <Row className="inputs_row">
@@ -41,4 +41,4 @@ const BaselineTargetInputs = ({ formik }) => {
         );
 }
 
-export default BaselineTargetInputs;
+export default ThresholdsInputs;

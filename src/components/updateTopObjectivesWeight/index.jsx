@@ -45,7 +45,6 @@ const EditObjectivesWeights = () => {
             return;
         }
 
-        console.log(values)
         makeRequest(getURLs().updateWeightsURL, PATCH, {objectives: valueList}, true, true);
         },
     });

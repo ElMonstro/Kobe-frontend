@@ -135,79 +135,7 @@ export const areInitiativesValid = (initiativesSchema, data) => {
     }
 };
 
-export const createObjectivePayload = (data, initiativesSchema, measures, periods, milestones) => {
-    const initiativesPayload = [];
-    const measuresPayload = [];
-    const periodTargetsPayload = [];
-    const milestonesPayload = [];
-  
-    initiativesSchema.forEach(initiative => {
-      const initiativePayload = {};
-      if (!data[initiative.cascadeId]) {
-        return;
-      }
-
-      initiativePayload['name'] = data[initiative.initiativeId];
-      if (!initiativePayload['name']) {
-        return
-      }
-      if (data[initiative.weightId] !== "") {
-        initiativePayload['weight'] = data[initiative.weightId];
-      }
-      initiativePayload['role'] = data[initiative.cascadeId];
-
-      delete data[initiative.initiativeId];
-      delete data[initiative.weightId];
-      delete data[initiative.cascadeId];
-  
-      initiativesPayload.push(initiativePayload);
-    });
-
-    milestones?.forEach(milestone => {
-        if (!data[milestone.milestoneId]) {
-            return;
-        }
-        const milestonePayload = {};
-        milestonePayload['description'] = data[milestone.milestoneId];
-        milestonePayload['percentage'] = data[milestone.percentageId];
-        delete data[milestone.milestoneId];
-        delete data[milestone.percentageId];
-
-        milestonesPayload.push(milestonePayload);
-    
-    });
-
-    measures.forEach(measure => {
-        const measurePayload = {};
-        measurePayload['name'] = data[measure.measureId];
-        measurePayload['weight'] = data[measure.weightId];
-        
-        delete data[measure.weightId];
-        delete data[measure.measureId];
-
-        measuresPayload.push(measurePayload);
-  
-    });
-
-    periods.forEach(period => {
-        const periodTargetPayload = {};
-        if (data[period]) {
-            periodTargetPayload['target'] = data[period]
-            periodTargetPayload['period'] = period;
-            periodTargetsPayload.push(periodTargetPayload);
-        } 
-
-        delete data[period];
-    })
-  
-    data.measures = measuresPayload;
-    data.initiatives = initiativesPayload;
-    data.milestones = milestonesPayload;
-
-    console.log(data);
-    if (periodTargetsPayload.length > 0) {
-      data.period_targets = periodTargetsPayload;
-    }
+export const cleanObjectivePayload = (data) => {
     data.data_type === UNITS? delete data["percentage_target"]: delete data["units_target"]
     // Clear empty fields
     Object.keys(data).forEach(key => {
@@ -247,18 +175,16 @@ const getTarget = values => {
     return parseInt(target);
 };
 
-export const arePeriodicalInputsValid = (values, periods, setFieldError) => {
+export const arePeriodicalInputsValid = (values, setFieldError) => {
     let total = 0;
     const target = getTarget(values);
 
-    periods.forEach(period => {
+    values.period_targets.forEach(period => {
         total += parseFloat(values[period]);
     });
 
     if (total !== target) {
-        periods.forEach(period => {
-            setFieldError(period, `All periodical targets have to add up to ${target}`);
-        });
+        setFieldError('period_targets', `All periodical targets have to add up to ${target}`);
 
         return false;
     }

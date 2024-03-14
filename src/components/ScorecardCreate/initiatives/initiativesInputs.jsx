@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 
 import addBtn from "../../../assets/plus_sign.svg";
@@ -8,20 +8,15 @@ import { makeRequest } from "../../../utils/requestUtils";
 import InitiativeInput from "./initiativeInput";
 import CreatedInitative from "./createdInitative";
 import { deleteFromObjectlist } from "../../../utils";
+import { FieldArray } from "formik";
 
 
-const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives }) => {
+const InitiativeInputs = ({ formik, initiative }) => {
 
     const [underlings, setUnderlings] = useState([]);
     const [createdInitiatives, setCreatedInitiatives] = useState([]);
     const { is_self_cascaded } = initiative;
-    let contClassName;
-
-    if (is_self_cascaded || formik.values.perspective === BEHAVIORAL) {
-        contClassName = "initiatives hidden";
-    } else {
-        contClassName = "initiatives";
-    }
+    const arrayHelpersRef = useRef();
 
     useEffect(() => {
         makeRequest(getURLs().fetchUnderlingsURL, GET, null, true, false)
@@ -34,19 +29,6 @@ const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives }) =
         setCreatedInitiatives(initiative?.initiatives)
     }, [initiative])
 
-    const [initiativesIndex, setInitiativesIndex] = useState(1);
-
-    const deleteInitiative = deleteId => {
-        if (initiatives.length === 1) {
-            return;
-        }
-        initiatives.pop();
-        
-        setInitiatives([
-            ...initiatives
-        ]);
-    }
-
     const deleteCreatedInitiative = deleteId => {
         const newInitiatives = deleteFromObjectlist(createdInitiatives, 'id', deleteId);
         setCreatedInitiatives([...newInitiatives]);
@@ -54,23 +36,19 @@ const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives }) =
 
     const addInitiative = e => {
 
-        const currentIndex = initiativesIndex + 1;
-        setInitiativesIndex(currentIndex);
-
-        setInitiatives([
-            ...initiatives,
-            {
-                initiativeId: `intiative-name-${currentIndex}`, 
-                weightId: `initiative-weight-${currentIndex}`, 
-                cascadeId: `cascade-role-${currentIndex}`,
-                deleteId: `delete-${currentIndex}`
-            },
-        ]);
+        arrayHelpersRef.current.push({
+            name: '', 
+            weight: '', 
+            role: '',
+        })
     }
-    
+
+    if (is_self_cascaded || formik.values.perspective === BEHAVIORAL) {
+        return <></>
+    } 
 
     return (
-        <div className={ contClassName } id={ initiatives.weightId }>
+        <div className="initiatives" id="initiatives">
             <div className="title mt-3 mb-2">
                 Initiatives
                 <span className="add" onClick={ addInitiative }>
@@ -98,16 +76,25 @@ const InitiativeInputs = ({ formik, initiatives, initiative, setInitiatives }) =
             })
         }   
 
+        <FieldArray 
+            name="initiatives"
+            render={ arrayHelpers => {
+                return formik.values.initiatives.map( (initiative, index) => {
+                    arrayHelpersRef.current = arrayHelpers;
+                    return <InitiativeInput 
+                                { ...initiative } 
+                                arrayHelpers={ arrayHelpers }
+                                key={ index }
+                                index = { index } 
+                                formik={ formik }
+                                underlings={ underlings }
+                            />
+                })
+            }}
+        />
+
         { 
-            initiatives.map( initiative => {
-            return (<InitiativeInput 
-                        { ...initiative } 
-                        key={ initiative.initiativeId } 
-                        formik={ formik }
-                        deleteInitiative={ deleteInitiative }
-                        underlings={ underlings }
-                />)
-        })
+            
         }   
         
     </div>
