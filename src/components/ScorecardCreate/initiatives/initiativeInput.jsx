@@ -9,7 +9,10 @@ const InitiativeInput = ({ formik, index, underlings, orgChart, arrayHelpers }) 
 
     const name = `initiatives.${index}.name`;
     const role = `initiatives.${index}.role`;
-    const weight = `initiatives.${index}.weight`;
+    let touched = {}
+    let errors = {};
+    formik.touched?.initiatives? touched = formik.touched?.initiatives[index]: touched = {};
+    formik.errors?.initiatives? errors = formik.errors?.initiatives[index]: errors = {};
 
     const onDeleteInit = e => {
         arrayHelpers.remove(index)
@@ -20,32 +23,27 @@ const InitiativeInput = ({ formik, index, underlings, orgChart, arrayHelpers }) 
         <Col lg={4}>
             <Form.Group className="initiative_name" controlId={ name }>
                 <Form.Control 
-                type="text"
-                valuedefault="" 
-                placeholder=""
-                { ...formik.getFieldProps(name) } 
-                isInvalid={ formik.touched[name] && formik.errors[name] }
+                    type="text"
+                    valuedefault="" 
+                    placeholder=""
+                    { ...formik.getFieldProps(name) } 
+                    isInvalid={ touched?.name && errors?.name}
                 />
                 <Form.Control.Feedback type='invalid'>
-                    { formik.errors[name] }
+                    { errors?.name }
                 </Form.Control.Feedback>
             </Form.Group>
             
         </Col>
         <Col>
-            <Form.Group controlId={ weight }>
+            <Form.Group>
                 <Form.Control 
                     className="initiative_weight" 
                     type="text" 
                     placeholder=""
                     valuedefault=""
-                    { ...formik.getFieldProps(weight) } 
-                    isInvalid={ formik.touched[weight] && formik.errors[weight] }
                     disabled
                 />
-                <Form.Control.Feedback type='invalid'>
-                    { formik.errors[weight] }
-                </Form.Control.Feedback>
             </Form.Group>
         </Col>
         <Col>
@@ -57,7 +55,7 @@ const InitiativeInput = ({ formik, index, underlings, orgChart, arrayHelpers }) 
                     placeholder="Select Role"
                     valuedefault={orgChart?.id}
                     { ...formik.getFieldProps(role) } 
-                    isInvalid={ formik.touched[role] && formik.errors[role] }
+                    isInvalid={ touched?.role && errors?.role }
                 >
                     <option>Cascade Initiative</option>
                     <option value={ orgChart?.id } key={ orgChart?.id }>Cascade to Self</option>
@@ -75,7 +73,7 @@ const InitiativeInput = ({ formik, index, underlings, orgChart, arrayHelpers }) 
                 </Form.Select>
                 }
                 <Form.Control.Feedback type='invalid'>
-                    { formik.errors[role] }
+                    { errors?.role }
                 </Form.Control.Feedback>
                 
             </Form.Group>

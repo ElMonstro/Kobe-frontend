@@ -1,43 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Form, Card, Row, Col } from "react-bootstrap"
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
-import { CREATE, PERSPECTIVE_OBJECT, BEHAVIORAL, NON_PERSPECTIVE } from "../../utils/constants";
+import { PERSPECTIVE_OBJECT, BEHAVIORAL, NON_PERSPECTIVE } from "../../utils/constants";
 
 
-const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, role, is_self_cascaded }) => {
+const ObjectiveInputs = ({ formik, settings, disableObjectiveName, role, objectiveTitle }) => {
 
-    const isDisabled = Boolean(initiativeId);
     const nameFieldProps = formik.getFieldProps('name');
     const perspectiveFieldProps = formik.getFieldProps('perspective');
-    const { mode } = useParams();
     let perspectives_object = PERSPECTIVE_OBJECT;
     settings.behaviorals_enabled && delete perspectives_object.behavioral_name;
     const showPerspectives = settings?.perspective_enabled  && 
         (role?.tier >= settings?.cascade_cutoff || role.is_ceo);
 
-    if (mode === CREATE) {
-        nameFieldProps.value = name;
-        perspectiveFieldProps.value = perspective;
-    }
-
-    let ObjectiveTitle;
-    is_self_cascaded? ObjectiveTitle = 'Initiative': ObjectiveTitle = 'Objective'
-    
     return (
         <Card className="staff_card">
-            <div className="card_title title">{ ObjectiveTitle }</div>
+            <div className="card_title title">{ objectiveTitle }</div>
             <div className="inputs_cont">
                 <Row className={ `inputs_row` }>
                     <Col>
                         <Form.Group className="mb-1" controlId="name">
-                            <Form.Label>{ ObjectiveTitle }</Form.Label>
+                            <Form.Label>{ objectiveTitle }</Form.Label>
                             <Form.Control 
                             type="text" 
                             placeholder=""
                             { ...nameFieldProps }
                             isInvalid={ formik.touched.name && formik.errors.name }
-                            disabled={ isDisabled }
+                            disabled={ disableObjectiveName }
                             />
                             <Form.Control.Feedback type='invalid'>
                                 { formik.errors.name }
@@ -53,7 +42,7 @@ const ObjectiveInputs = ({ formik, settings, initiativeId, name, perspective, ro
                             placeholder=""
                             { ...perspectiveFieldProps }
                             isInvalid={ formik.touched.perspective && formik.errors.perspective }
-                            disabled={ isDisabled }
+                            disabled={ disableObjectiveName }
                             >
                                 <option></option>
                                 { (!settings?.perspective_enabled || role?.tier >= settings?.perspective_cutoff) &&

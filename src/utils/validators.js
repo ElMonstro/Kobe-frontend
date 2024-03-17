@@ -1,4 +1,6 @@
 import * as Yup from 'yup';
+import { arePeriodicalInputsValid } from '.';
+import { BEHAVIORAL } from './constants';
 
 export const yupLoginObj = Yup.object({
         email: Yup.string()
@@ -132,7 +134,7 @@ export const yupReviewPeriodObj = Yup.object({
             .required('* Required')
 });
 
-export const yupObjectiveValidationObj = {
+export const yupCreateObjectiveValidationObj = {
     name: Yup.string()
         .required('* Required'),
     perspective: Yup.string()
@@ -144,14 +146,32 @@ export const yupObjectiveValidationObj = {
     target: Yup.number(),
     upper_threshold: Yup.number(),
     lower_threshold: Yup.number(),
-    budget: Yup.number(),
     baseline: Yup.number(),
     percentage_target: Yup.number().min(0),
     unit_target: Yup.number(),
-    evidence_description: Yup.string()
-        .required('* Required')
-        .test('len', 'Must be less than 100 characters', val => val?.length < 100)
-}
+    measures: Yup.array().of(Yup.object({
+        name: Yup.string().required('* Required')
+            .test('len', 'Must be less than 50 characters', val => val?.length < 50),
+        weight: Yup.number()
+    })),
+    initiatives: Yup.array().when(['perspective'], {
+        is: (perspective) => perspective !== BEHAVIORAL,
+        then: Yup.array().of(Yup.object({
+            name: Yup.string().required('* Required'),
+            role: Yup.number().required('* Required'),
+        }))
+    }),
+    period_targets: Yup.array().of(Yup.object({
+        period: Yup.string().required('* Required'),
+        target: Yup.number().required('* Required'),
+    })).test(
+        'Accumulate test',
+        'The quarterly targets must add up to target',
+        (value, ctx) => {
+            return arePeriodicalInputsValid(ctx.parent);
+        }
+    )
+};
 
 export const yupCompanyValidation = Yup.object({
     name: Yup.string().required('* Required'),

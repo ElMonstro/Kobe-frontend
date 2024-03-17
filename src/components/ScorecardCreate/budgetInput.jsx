@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Row, Col } from "react-bootstrap";
 
 
-const BudgetInputs = ({ formik, actingRole, initiative }) => {
+const BudgetInputs = ({ formik, actingRole, initiative, enableEvidence }) => {
     return (
         <Row className="inputs_row">
             <Col>
@@ -28,6 +28,7 @@ const BudgetInputs = ({ formik, actingRole, initiative }) => {
                     placeholder=""
                     { ...formik.getFieldProps('evidence_description') } 
                     isInvalid={ formik.touched.evidence_description && formik.errors.evidence_description }
+                    disabled={ !enableEvidence }
                     />
                     <Form.Control.Feedback type='invalid'>
                         { formik.errors.evidence_description }

@@ -2,7 +2,7 @@ import forge from 'node-forge';
 import { toast } from 'react-toastify';
 import store from "../redux/store/store.js";
 import { changeLoginStatus, setNotifications, setWebSocket } from "../redux/actions";
-import { BIANNUALS, CHARACTERS, NESTED, OBJECTIVES, PERSPECTIVES, QUARTERS, UNITS } from './constants.js';
+import { BEHAVIORAL, BIANNUALS, CHARACTERS, NESTED, OBJECTIVES, PERSPECTIVES, QUARTERS, UNITS } from './constants.js';
 import { LOGOUT } from '../redux/actions/actionTypes.js';
 
 const notificationTypeMapper = {
@@ -136,7 +136,8 @@ export const areInitiativesValid = (initiativesSchema, data) => {
 };
 
 export const cleanObjectivePayload = (data) => {
-    data.data_type === UNITS? delete data["percentage_target"]: delete data["units_target"]
+    data.data_type === UNITS? delete data["percentage_target"]: delete data["units_target"];
+    (data.perspective === BEHAVIORAL) && delete data.initiatives;
     // Clear empty fields
     Object.keys(data).forEach(key => {
         if (data[key]?.length===0) {
@@ -175,21 +176,15 @@ const getTarget = values => {
     return parseInt(target);
 };
 
-export const arePeriodicalInputsValid = (values, setFieldError) => {
+export const arePeriodicalInputsValid = (values) => {
     let total = 0;
     const target = getTarget(values);
 
-    values.period_targets.forEach(period => {
-        total += parseFloat(values[period]);
+    values?.period_targets?.forEach(period => {
+        total += parseFloat(period.target);
     });
 
-    if (total !== target) {
-        setFieldError('period_targets', `All periodical targets have to add up to ${target}`);
-
-        return false;
-    }
-
-    return true;
+    return total === target;
 };
 
 export const isWeightsFieldValid = (values, remainingObjectiveWeight, setFieldError) => {

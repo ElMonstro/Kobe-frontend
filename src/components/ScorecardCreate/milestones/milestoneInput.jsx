@@ -6,6 +6,10 @@ const MileStone = ({ formik, index, arrayHelpers }) => {
 
     const description = `milestones.${index}.description`;
     const percentage = `milestones.${index}.percentage`;
+    let touched = {}
+    let errors = {};
+    formik.touched?.milestones? touched = formik.touched?.milestones[index]: touched = {};
+    formik.errors?.milestones? errors = formik.errors?.milestones[index]: errors = {};
 
     const onDelete = () => {
         arrayHelpers.remove(index)
@@ -19,16 +23,15 @@ const MileStone = ({ formik, index, arrayHelpers }) => {
                         type="text"
                         placeholder=""
                         { ...formik.getFieldProps(description) } 
-                        isInvalid={ formik.touched[description] && formik.errors[description] }
+                        isInvalid={ touched?.description && errors?.description }
                     />
                     <Form.Control.Feedback type='invalid'>
-                        { formik.errors[description] }
+                        { errors?.description }
                     </Form.Control.Feedback>
                 </Form.Group>
                 
             </Col>
             <Col>
-            
             </Col>
             <Col>
                 <Form.Group controlId={ percentage }>
@@ -37,11 +40,11 @@ const MileStone = ({ formik, index, arrayHelpers }) => {
                         className="cascade"
                         type="text" 
                         { ...formik.getFieldProps(percentage) } 
-                        isInvalid={ formik.touched[percentage] && formik.errors[percentage] }
+                        isInvalid={ touched?.percentage && errors?.percentage }
                     />
                     }
                     <Form.Control.Feedback type='invalid'>
-                        { formik.errors[percentage] }
+                        { errors?.percentage }
                     </Form.Control.Feedback>
                     
                 </Form.Group>

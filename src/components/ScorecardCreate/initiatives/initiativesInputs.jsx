@@ -10,12 +10,10 @@ import CreatedInitative from "./createdInitative";
 import { deleteFromObjectlist } from "../../../utils";
 import { FieldArray } from "formik";
 
-
-const InitiativeInputs = ({ formik, initiative }) => {
-
+const InitiativeInputs = ({ formik, objective }) => {
+    
     const [underlings, setUnderlings] = useState([]);
     const [createdInitiatives, setCreatedInitiatives] = useState([]);
-    const { is_self_cascaded } = initiative;
     const arrayHelpersRef = useRef();
 
     useEffect(() => {
@@ -26,8 +24,8 @@ const InitiativeInputs = ({ formik, initiative }) => {
     }, []);
 
     useEffect(() => {
-        setCreatedInitiatives(initiative?.initiatives)
-    }, [initiative])
+        setCreatedInitiatives(objective?.initiatives)
+    }, [objective])
 
     const deleteCreatedInitiative = deleteId => {
         const newInitiatives = deleteFromObjectlist(createdInitiatives, 'id', deleteId);
@@ -35,15 +33,13 @@ const InitiativeInputs = ({ formik, initiative }) => {
     }
 
     const addInitiative = e => {
-
         arrayHelpersRef.current.push({
             name: '', 
-            weight: '', 
             role: '',
-        })
-    }
+        });
+    };
 
-    if (is_self_cascaded || formik.values.perspective === BEHAVIORAL) {
+    if (formik.values.perspective === BEHAVIORAL) {
         return <></>
     } 
 
@@ -92,11 +88,6 @@ const InitiativeInputs = ({ formik, initiative }) => {
                 })
             }}
         />
-
-        { 
-            
-        }   
-        
     </div>
         );
 }

@@ -1,20 +1,16 @@
 import React from "react";
 import { Form, Row, Col } from "react-bootstrap";
-import { useParams } from "react-router-dom";
 
-const MeasureInput = ({ formik, initiative, index }) => {
+const MeasureInput = ({ formik, index }) => {
 
-    const { measures } = initiative;
-    const { mode } = useParams();
     const name = `measures.${index}.name`;
     const weight = `measures.${index}.weight`;
     const nameFieldProps = formik.getFieldProps(name);
-
-    if (mode === "edit" && measures.length === 0) {
-        const { name } = measures[0];
-        nameFieldProps.value = name;
-    };
-    
+    let touched = {}
+    let errors = {};
+    formik.touched?.measures? touched = formik.touched?.measures[index]: touched = {};
+    formik.errors?.measures? errors = formik.errors?.measures[index]: errors = {};
+        
     return (
         <Row className="inputs_row measure_inputs">
             <Col>
@@ -24,10 +20,10 @@ const MeasureInput = ({ formik, initiative, index }) => {
                     type="text" 
                     placeholder=""
                     { ...nameFieldProps } 
-                    isInvalid={ formik.touched[name] && formik.errors[name] }
+                    isInvalid={ touched.name && errors.name }
                     />
                     <Form.Control.Feedback type='invalid'>
-                        { formik.errors[name] }
+                        { errors.name }
                     </Form.Control.Feedback>
                 </Form.Group>
                 
@@ -40,11 +36,11 @@ const MeasureInput = ({ formik, initiative, index }) => {
                     placeholder=""
                     value={ 100 }
                     { ...formik.getFieldProps(weight) } 
-                    isInvalid={ formik.touched[weight] && formik.errors[weight] }
+                    isInvalid={ touched.weight && errors.weight }
                     disabled
                     />
                     <Form.Control.Feedback type='invalid'>
-                        { formik.errors[weight] }
+                        { errors?.weight }
                     </Form.Control.Feedback>
                 </Form.Group>
             </Col>

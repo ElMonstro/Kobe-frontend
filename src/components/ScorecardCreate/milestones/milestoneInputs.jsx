@@ -7,7 +7,7 @@ import { deleteFromObjectlist } from "../../../utils";
 import CreatedMilestone from "./createdMilestone";
 import { FieldArray } from "formik";
 
-const Milestones = ({ formik, initiative }) => {
+const Milestones = ({ formik, objective }) => {
   
     const [createdMilestones, setCreatedMilestones] = useState([]);
     const arrayHelpersRef = useRef();
@@ -22,8 +22,8 @@ const Milestones = ({ formik, initiative }) => {
     }
 
     useEffect(() => {
-        setCreatedMilestones(initiative?.milestones)
-    }, [initiative]);
+        setCreatedMilestones(objective?.milestones)
+    }, [objective]);
 
     const addMilestone = ( )=> {
         arrayHelpersRef.current.push({

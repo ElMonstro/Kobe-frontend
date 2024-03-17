@@ -1,8 +1,5 @@
 import React from "react";
-import { Form, Row, Col } from "react-bootstrap"
-import { useParams } from "react-router-dom";
-import { PERCENTAGE, UNITS } from "../../../utils/constants";
-
+import { Form, Row, Col } from "react-bootstrap";
 
 const BaselineTargetInputs = ({ formik, targetDisabled }) => {
 

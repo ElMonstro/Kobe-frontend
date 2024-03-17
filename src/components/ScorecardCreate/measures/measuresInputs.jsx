@@ -58,13 +58,11 @@ const MeasuresInputs = ({ formik, initiative, setReinitializeForm }) => {
             <TargetInputs 
                 formik={ formik }  
                 targetDisabled={ dataType!==PERCENTAGE } 
-                initiative={initiative }  
                 setReinitializeForm={setReinitializeForm}
                 />
             <BaselineTargetInputs 
                 targetDisabled={ dataType!==UNITS} 
                 formik={ formik } 
-                initiative={ initiative }
                 />
             <QuaterlyTargetsInputs formik={ formik } />
             <ThresholdsInputs formik={ formik } />
