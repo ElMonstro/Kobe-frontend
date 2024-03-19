@@ -1,0 +1,152 @@
+
+.approval_modal {
+    .modal_backdrop {
+        padding-right: 10px!important;
+        opacity: 0.5;
+        .modal {
+            padding-left: 0px!important;
+        }
+    }
+   
+    .approval_model_content {
+
+        background: #FFFFFF;
+        box-shadow: 4px 4px 25px -7px rgba(0, 0, 0, 0.25);
+        border-radius: 6px;
+        border: none;
+
+        .approval_modal_body {
+            color: #828282;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 28px;
+        }
+
+        .approval_nav {
+            width: fit-content;
+            
+            a {
+                background: #FFFFFF;
+                border: 1px solid #035476;
+                height: 24px auto;
+                width: 200px;
+                text-decoration: none;
+                color: #333333;
+                display: block;
+                text-align: center;
+                padding-bottom: 2px;
+        
+                &.selected_mode {
+                    background: #035476;
+                    color: #FFFFFF;
+                }
+            }
+        }
+    }
+}
+
+.view_objective {
+    .objective_row {
+        padding-left: 0px!important;
+    }
+
+    .header {
+        font-size: 22!important;
+        font-weight: 700;
+        margin-bottom: 10px;
+
+        .second_half {
+            font-size: 22!important;
+            font-weight: 700;
+        }
+    }
+
+    .objective {
+        .measure {
+            font-size: medium;
+        }
+
+        .evidence {
+            overflow: hidden;
+            cursor: pointer;
+            width: 150px!important;
+            color: blue;
+        }
+
+        .period_targets {
+            .period {
+                margin-right: 10px;
+                font-weight: 600;
+                text-transform: capitalize;
+            }
+        }
+    }
+
+    .objective_header {
+        font-weight: 500;
+        padding-left: 16px;
+        padding-top: 10px;
+        padding-bottom: 5px;
+        border-bottom: #e6ecf2 solid 1px;
+        background-color: #f0f3f6;
+        font-size: 18px;
+        color: #686767;
+        margin-bottom: 20px;
+
+    }
+}
+
+.links_cont {
+    margin-left: 10px;
+
+    .objective {
+        background-color: #FFFFFF;
+    }
+    .links_header {
+        font-size: 18px;
+        margin: 5px 0px;
+        font-weight: 700;
+    }
+}
+
+.approval_buttons {
+    margin-right: 20px;
+    margin-top: 30px;
+
+    .response_button {
+        border: none;
+    }
+
+    .approve {
+        background-color: #01a02e;
+        margin-right: 10px;
+    }
+
+    .reject {
+        background-color: #e60101;
+    }
+
+    button:focus {
+        outline: none!important;
+    }
+
+}
+
+.rejection_modal {
+    .rejection_model_content {
+        box-shadow: 4px 4px 25px -7px rgba(0, 0, 0, 0.25);
+        border-radius: 6px;
+        border: none;
+    }
+    
+    .submit_reject {
+        float: right;
+        margin-top: 10px;
+        background-color: #e60101;
+        border: none;
+    }
+
+    .modal_backdrop {
+        opacity: 1!important;
+    }
+}

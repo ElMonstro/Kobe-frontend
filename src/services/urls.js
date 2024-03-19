@@ -1,0 +1,38 @@
+import baseUrl, { sockets_url } from './baseURL';
+
+const accessToken = JSON.parse(window.localStorage.getItem('tokens'))?.access;
+const baseURL = baseUrl();
+
+export const loginURL = `${baseURL}/auth/login/`;
+export const settingsURL = `${baseURL}/administration/settings/`;
+export const companyInfoURL = `${baseURL}/administration/company-info/`;
+export const uploadOrgChartURL = `${baseURL}/administration/org-chart/`;
+export const fetchOrgChartURL = `${baseURL}/auth/org-chart/`;
+export const sendEmailsURL = `${baseURL}/administration/send-auth-emails/`;
+export const fetchUnderlingsURL = `${baseURL}/scorecard/role/fetch-underlings/`;
+export const createObjectiveURL = `${baseURL}/scorecard/objectives/`;
+export const fetchSelfCascadedInitURL = `${baseURL}/scorecard/objectives/?is_self_cascaded=true`;
+export const fetchCascadedObjectiveURL = `${baseURL}/scorecard/objectives/?is_self_cascaded=false`;
+export const updateObjectiveURL = id => `${baseURL}/scorecard/objectives/${id}/`;
+export const amendObjectiveURL = (id, mode) => `${baseURL}/scorecard/objectives/${id}/amend/?mode=${mode}`;
+export const fetchPerspectivesURL = role =>  `${baseURL}/scorecard/role/${role}/perspectives/`;
+export const fetchStrategyMapPerspectivesURL = `${baseURL}/scorecard/objectives/strategy-map/`;
+export const linkObjectiveURL = id => `${baseURL}/scorecard/objectives/${id}/link-objectives/`;
+export const fetchApprovalObject = approvalToken =>  `${baseURL}/scorecard/approvals/${approvalToken}/`;
+export const fetchNotificationsURL = `${baseURL}/auth/notifications/`;
+export const setSeenNotificationsURL = `${baseURL}/auth/notifications/set-seen/`;
+export const socketsMessagesURL = `${sockets_url}/messages/?token=${accessToken}`;
+export const fetchUnderAllUnderlingsUrl = (role, year, period) => `${baseURL}/auth/underlings-scores/role/${role}/years/${year}/periods/${period}/`;
+export const roleHistoryURL = (role, year) => `${baseURL}/scorecard/role/${role}/years/${year}/`;
+export const objectiveHistoryURL = (id) => `${baseURL}/scorecard/objectives/${id}/history/`;
+export const perspectiveHistoryURL = (id, year) => `${baseURL}/scorecard/perspectives/${id}/years/${year}/`;
+export const fetchYearsURL = `${baseURL}/scorecard/years/`;
+export const fetchReportPerspectives = (role, year, period) => `${baseURL}/scorecard/history/${role}/years/${year}/periods/${period}/`;
+export const updatePasswordURL =  `${baseURL}/auth/update-password/`;
+export const resetPasswordURL = (resetToken) => `${baseURL}/auth/reset-password/${resetToken}/`;
+export const resetPasswordRequestURL =  `${baseURL}/auth/reset-password-request/`;
+export const updateRoleURL =  `${baseURL}/auth/update-role/`;
+export const fetchApproversURL =  `${baseURL}/auth/fetch-approvers/`;
+export const deleteinitiativeURL = id => `${baseURL}/scorecard/objectives/${id}/delete/`;
+export const deletemilestoneURL = id => `${baseURL}/scorecard/objectives/milestones/${id}/delete/`;
+export const fetchPeriodsURL = `${baseURL}/scorecard/periods/`;

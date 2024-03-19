@@ -1,0 +1,99 @@
+.notifications_modal {
+    .header_title {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 28px;
+        color: #828282;
+
+    }
+
+    .ringing_bell {
+        margin-right: 5px;
+    }
+    
+    .notifications_modal_content {
+        width: 2000px!important;
+        height: 850px;
+        background: #FFFFFF;
+        box-shadow: 4px 4px 25px -7px rgba(0, 0, 0, 0.25);
+        border-radius: 6px;
+        border: none;
+        
+    }
+
+    .notifications_modal_body {
+        padding: 20px 40px;
+        overflow-y: scroll;
+    }
+}
+
+.notifications {
+    .notification {
+        margin-bottom: 10px;
+        border: 0.5px solid #b9b9b9;
+        padding: 10px 10px 10px 15px;
+
+        .blue_circle {
+            width: 9px;
+            height: 9px;
+            background: #2D9CDB;
+            border-radius: 50%;
+            margin-top: 10px;
+        }
+
+        .blue_circle_cont {
+            margin-right: 5px;
+            float: left;
+        }
+
+        
+
+        .content {
+            margin-left: 20px;
+        }
+      
+
+        .title {
+            font-weight: 500;
+            font-size: 17px;
+            line-height: 28px;
+            letter-spacing: 0.035em;
+            color: #404040;
+        }
+
+        .time {
+            float: right;
+            margin-right: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #b9b9b9;
+        }
+
+        .body {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 28px;
+            letter-spacing: 0.035em;
+            color: #828282;
+        }
+
+        .link_button {
+            background: #2D9CDB;
+            border-radius: 4px;
+            margin-top: 10px;
+            border: #2D9CDB;
+
+            &.edit {
+                background-color: #ffa800;
+                border: #ffa800;
+            }
+        }
+    }
+
+    .unread {
+        background: #ebf6fc;
+        border-left: 4px solid #2D9CDB;
+    }
+}

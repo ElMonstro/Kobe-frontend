@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import {ChevronRight} from "@styled-icons/evaicons-solid/ChevronRight";
-import {ChevronDown} from "@styled-icons/evaicons-solid/ChevronDown";
+import {CaretDown} from "@styled-icons/boxicons-regular/CaretDown";
+import {CaretRight} from "@styled-icons/boxicons-regular/CaretRight";
 import { Col, Row } from "react-bootstrap";
 
 import {
-  ActionsWrapper,
   Collapse,
   StyledName,
   VerticalLine,
@@ -14,15 +13,23 @@ import { StyledNode } from "./TreeNode.style";
 
 import { useTreeContext } from "../state/TreeContext";
 
+const NodeName = ({ isOpen, name, openCloseNode, handleNameClick, isHighligted }) => {
 
-const NodeName = ({ isOpen, name, handleClick }) => (
-  <StyledName onClick={handleClick} className="employee_name">
-    {isOpen ? <ChevronDown /> : <ChevronRight />}
-    &nbsp;&nbsp;{name}
+  useEffect(() => {
+  }, [isHighligted])
+  let className;
+  isHighligted? className = "employee_name highlighted": className="employee_name";
+
+  return <StyledName className={className}>
+    {isOpen ? <CaretDown onClick={openCloseNode} /> : <CaretRight onClick={openCloseNode} />}
+    &nbsp;&nbsp;
+    <span onClick={handleNameClick}>
+       {name} 
+    </span>
   </StyledName>
-);
+};
 
-const Node = ({ id, name, children, node }) => {
+const Node = ({ id, name, children, node, job_grade, department, staff_no, designation, isHighligted }) => {
   const { onNodeClick } = useTreeContext();
   const [isOpen, setIsOpen] = useState(false);
   const [childs, setChilds] = useState([]);
@@ -30,7 +37,6 @@ const Node = ({ id, name, children, node }) => {
   useEffect(() => {
     setChilds([children]);
   }, [children]);
-
 
   const handleNodeClick = React.useCallback(
     (event) => {
@@ -41,7 +47,7 @@ const Node = ({ id, name, children, node }) => {
   );
 
   return (
-    <StyledNode id={id} onClick={handleNodeClick} className="tree__node">
+    <StyledNode id={id} className="tree__node">
       <VerticalLine>
         <div className="org_row">
           <Row>
@@ -49,16 +55,18 @@ const Node = ({ id, name, children, node }) => {
               <NodeName
                 name={name}
                 isOpen={isOpen}
-                handleClick={() => setIsOpen(!isOpen)}
+                openCloseNode={() => setIsOpen(!isOpen)}
+                handleNameClick={handleNodeClick}
+                isHighligted={isHighligted}
               />
             </Col>
 
             <Col className="employee_details">
               <Row>
-                <Col className="employee_detail"><span>CEO</span></Col>
-                <Col className="employee_detail"><span>C3</span></Col>
-                <Col className="employee_detail"><span>THOSG356</span></Col>
-                <Col className="employee_detail"><span>"</span></Col>
+                <Col className="employee_detail"><span>{ designation }</span></Col>
+                <Col className="employee_detail"><span>{ job_grade }</span></Col>
+                <Col className="employee_detail"><span>{ staff_no }</span></Col>
+                <Col className="employee_detail"><span>{department || '\"'}</span></Col>
               </Row>
               
             </Col>

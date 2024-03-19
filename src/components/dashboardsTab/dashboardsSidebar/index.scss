@@ -1,0 +1,70 @@
+.dashboards_sidebar_cont {
+    height: 805px;
+    width: 300px;
+    background-color: #fff;
+}
+
+.dashboards_sidebar {
+        
+        
+    padding: 25px 20px;
+
+    .overall_perfomance {
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 28px;
+        text-transform: uppercase;
+        color: #828282;
+        padding-bottom: 20px!important;
+        cursor: pointer;
+
+        &:hover {
+            color: #2a2929;
+        }
+    }
+
+    .perspectives {
+
+        font-weight: 500;
+        line-height: 28px;
+        height: auto;
+        color: #828282;
+    
+        .row {
+            height: auto;
+        }
+    
+        .perspective {
+            height: fit-content;
+        }
+    
+        .perspective_name {
+            font-size: 18px;
+        }
+    
+        .name {
+            font-size: 16px!important;
+            margin-right: 10px;
+            font-weight: 500;
+            overflow: hidden;
+            width: 160px;
+    
+            &:hover {
+                color: #2a2929;
+            }
+        }
+    }
+    
+    .objectives {
+        padding-left: 20px;
+    }
+    
+    .initiatives {
+        padding-left: 20px;
+    }
+    
+    .icon {
+        margin-right: 10px; 
+    }
+
+}

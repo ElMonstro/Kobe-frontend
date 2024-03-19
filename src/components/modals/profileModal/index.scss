@@ -1,0 +1,154 @@
+.profile_modal {
+
+    .profile_modal_content {
+        min-height: 550px;
+        width: 1350px!important;
+
+        .profile_modal_body {
+            margin-top: 10px;
+            width: 1200px!important;
+
+            .left_col {
+                border-right: 0.5px solid #eceef0;
+
+            }
+
+            .profile_title {
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 28px;
+                letter-spacing: 0.035em;
+                color: #828282;
+                text-transform: capitalize;
+                margin-bottom: 10px;
+            }
+
+            .instructions {
+                width: 262px;
+                height: 91px;
+                text-align: center;
+                font-weight: 239;
+                font-size: 12px;
+                line-height: 28px;
+                color: #828282;
+                font-stretch: 100;
+                padding-top: 20%;
+            }
+        }
+    }
+
+    .profile_header {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 28px;
+        color: #828282;
+
+        img {
+            margin-right: 10px;
+            padding-bottom: 5px;
+        }
+    }
+}
+
+.profile_pic_cont {
+
+    position: relative;
+
+    .profile_title {
+        text-align: center;
+    }
+
+    .profile_btn {
+        height: fit-content;
+        width: fit-content;
+        float: right;
+        position: absolute;
+        right: 70px;
+        bottom: 150px;
+        text-align: center;
+
+        #file_name_text {
+            display: none;
+        }
+    }
+
+    .edit_icon {
+        background-color: #fff;
+        border: none;
+        float: right;
+        width: fit-content;
+        height: fit-content;
+        padding: 0;
+        border-radius: 50%;
+
+        .upload_icon {
+
+            width: 25px;
+            height: 25px;
+            background: #035476;
+            border-radius: 50%;
+
+            img {
+                margin-bottom: 4px;
+                margin-left: 2px;
+            }
+        }
+
+        &:focus {
+            outline: none!important;
+        }
+    }
+
+    .profile_pic {
+        color: #828282;
+        text-align: center;
+
+        img {
+            border-radius: 50%;
+            height: 115px;
+            width: 115px;
+        }
+
+        .name {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 28px;
+        }
+
+        .position {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 28px;
+            letter-spacing: 0.035em;
+            
+        }
+    }
+}
+
+.profile_form {
+
+    width: 900px;
+    
+    input {
+        width: 330px;
+    }
+
+    .form-label {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 28px;
+        color: #4F4F4F;
+    }
+
+    button {
+        width: 114px;
+        height: 36px;
+        float: right;
+        background: #2D9CDB;
+        border-radius: 4px;
+        margin-right: 100px;
+    }
+}

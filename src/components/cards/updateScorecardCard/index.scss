@@ -1,0 +1,105 @@
+.update_scorecard {
+    padding: 0 0 20px 0!important;
+    margin-bottom: 10px;
+
+    .col-lg-3, .col {
+        padding: 0 0 0 0!important;
+        display: flex;
+        align-items: center;
+    }
+
+    .title_bar {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 28px;
+        letter-spacing: 0.035em;
+        color: #828282;
+        margin-left: 0;
+        padding: 5px 35px;
+
+    }
+
+    .initiatives>:nth-child(even) {
+        background: #F2F2F2;
+    } 
+
+    .initiative {
+        min-height: 44px;
+        margin: 0;
+        padding: 8px 15px 8px 35px;
+
+        .status_col {
+            display: flex;
+            align-items: center;
+        }
+
+        .budget {
+            width: 73px;
+            height: 24px;
+            background: #F2F2F2;
+            border: 0.5px solid #BDBDBD;
+        }
+
+        .cost_input {
+            width: 75px;
+            height: 24px;
+            background: rgba(244, 211, 33, 0.3);
+            border: 0.5px solid #BDBDBD;
+        }
+
+        .score_input {
+            width: 70px;
+            height: 24px;
+            left: 638px;
+            top: 99px;
+            background: rgba(244, 211, 33, 0.3);
+            border: 0.5px solid #BDBDBD;
+        }
+
+        .evidence_input {
+            width: 67px;
+            height: 28px;
+
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 28px;
+            /* identical to box height, or 200% */
+
+            letter-spacing: 0.035em;
+
+            /* Gray 3 */
+
+            color: #828282;
+        }
+
+        .initiative_name {
+            overflow: hidden;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 16px;
+            letter-spacing: 0.035em;
+            color: #4F4F4F;
+
+        }
+
+        .status_color {
+            width: 11px;
+            height: 11px;
+            margin-right: 8px;
+            border-radius: 13px;
+        }
+        
+        .status_text {
+            text-transform: capitalize;
+        }
+
+        .update_btn {
+            background-color: inherit;
+            border: 1px solid #BDBDBD;
+            color: #000;
+            cursor: pointer;
+          
+        }
+
+    }
+}

@@ -1,0 +1,120 @@
+.staff_cont {
+
+    padding: 20px 0px 20px 25%!important;
+    background-color: #E6ECF2;
+    min-height: 1000px;
+
+    textarea:focus, input:focus {
+        outline: none!important;
+    }
+
+    .col {
+        padding: 0!important;
+    }
+
+    .sidebar_col {
+        position: fixed;
+        left: 0;
+        top: 81px;
+        width: 25%;
+        min-width: 378px;
+        padding-left: 10px;
+        z-index: 1000;
+    }
+
+    .staff_card {
+        border: none;
+
+        .card-header {
+            background-color: #fff!important;
+        }
+    
+        .card_title {
+            border-bottom: 1px solid #E0E0E0;
+            padding: 10px 35px;
+        }
+
+    }
+
+    .dashboard_btn {
+        cursor: pointer;
+        float: right;
+        background: #FFFFFF;
+        border: 1px solid #035476;
+        height: 30px;
+        margin-left: 10px;
+        padding: 0px 2px;
+        text-transform: capitalize;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 28px;
+        letter-spacing: 0.035em;
+        color: #333333;
+    }
+
+    .performance_context_switch {
+        select {
+            border: none;
+
+            &:focus {
+                outline: none
+            }
+        }
+    }
+
+    .print_btn {
+        
+        width: 74px;
+        padding: 0px 0px 0px 7px;
+
+        .text {
+            margin-right: 7px;
+            
+        }
+
+        svg {
+            height: 15px;
+        }
+    }
+
+    .print_content_display {
+        display: none;
+    }
+}
+
+@media print 
+{
+    @page {
+      size: A4; /* DIN A4 standard, Europe */
+      margin: 5mm;
+    }
+    html, body {
+        width: 210mm;
+        /* height: 297mm; */
+        height: 282mm;
+        font-size: 11px;
+        background: #FFF;
+        overflow: visible;
+    }
+    body {
+        padding-top:10mm;
+    }
+
+    .print_content_display {
+        display: inline!important;
+    }
+
+    .dashboard_children {
+        margin-top: 20px!important
+    }
+}
+
+.title {
+    margin-left: 0;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    text-transform: uppercase;
+    color: #BDBDBD;
+}

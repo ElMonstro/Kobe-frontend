@@ -1,0 +1,28 @@
+.staff_sidebar {
+    background-color: #fff;
+    min-height: 780px;
+    padding: 15px 0 0 36px;
+    
+    .employee_details {
+        display: none;
+    }
+
+    .employee_name {
+        width: 90%!important;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 28px;
+        letter-spacing: 0.035em;
+        color: #828282;
+    }
+
+    .sidebar_cont {
+        
+        .title {
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 28px;
+            text-transform: uppercase;
+        }
+    }
+}

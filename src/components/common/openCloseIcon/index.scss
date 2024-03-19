@@ -1,0 +1,26 @@
+.open_close_icon {
+
+    margin-right: 5px;
+    cursor: pointer;
+
+    svg {
+        fill: black!important;
+        height: 13px;
+        width: 13px;
+        background-color: #D9D9D9;
+        vertical-align: middle;
+        border-radius: 50%;
+}
+}
+
+.no_background {
+    svg {
+        background-color: inherit!important;
+    }
+}
+
+.no_chevron {
+    svg {
+        fill: #D9D9D9!important;
+    }
+}

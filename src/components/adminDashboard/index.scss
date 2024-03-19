@@ -4,6 +4,7 @@
     padding: 20px 28px!important;
     background-color: #E6ECF2!important;
     min-height: 944px;
+    margin-top: 81px;
 
     .col {
         padding: 0!important;
@@ -16,6 +17,10 @@
         height: 36px;
         width: 134px;
         margin-top: 10px;
+
+        &:focus {
+            outline: none;
+        }
     }
 
     .card_title {

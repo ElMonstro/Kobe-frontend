@@ -1,1 +1,51 @@
 
+.hidden {
+    display: none;
+}
+
+.not_hidden {
+    display: flex;
+}
+
+.white_bg {
+    background-color: #fff!important;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.good {
+    background: #16C046;
+}
+
+.poor {
+    background: #F21212;
+}
+
+.satisfactory {
+    background: #FFA800;
+}
+
+.good_color {
+    color: #16C046;
+}
+
+.poor_color {
+    color: #F21212;
+}
+
+.satisfactory_color {
+    color: #FFA800;
+}
+
+
+textarea:focus, input:focus, button:focus{
+    outline: none!important;
+}
+
+.dashboard, .nav_bar {
+    min-width: 1400px!important;
+}

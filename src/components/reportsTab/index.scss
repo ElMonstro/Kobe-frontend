@@ -1,0 +1,133 @@
+.reports_tab {
+    background-color: #E6ECF2!important;
+    position: relative;
+
+    .path {
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 28px;
+        text-transform: uppercase;
+        color: #4F4F4F;
+        position: absolute;
+        top: 8px;
+
+        .path_string {
+            cursor: pointer;
+        }
+
+        .home {
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        
+    }
+
+}
+
+.selection_container {
+    padding-top: 40px;
+}
+
+.report_selection {
+    width: 729px;
+    height: 527px;
+    margin: auto;
+    background: #FFFFFF;
+    border-radius: 16px!important;
+
+    .header {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 28px;
+        color: #000000;
+        height: 50px;
+        border-bottom: 1px solid #BDBDBD;
+        border-top-left-radius: 16px!important;
+        border-top-right-radius: 16px!important;
+    }
+
+    .report_type {
+        height: 240px;
+        border-bottom: 1px solid #BDBDBD;
+
+        text-align: center;
+        
+        .report_icon {
+            width: 125px;
+            height: 105px;
+            left: 304px;
+            top: 95px;
+            background: #F2F2F2;
+            border-radius: 7px;
+            margin: auto;
+            cursor: pointer;
+            margin-top: 50px;
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 28px;
+            color: #000000;
+            
+
+            &#appraisal {
+                padding-top: 2px;
+            }
+
+            &#list {
+                padding-top: 18px;
+            }
+
+            &#dashboard {
+                padding-top: 13px;
+            }
+
+            .img {
+                margin-left: 10px;
+            }
+
+            &.chosen {
+                border: 0.5px solid #035476;
+            }
+        }
+    }
+
+    .period_selection {
+        text-align: center;
+
+        .label {
+            margin-top: 20px;
+            margin-bottom: 30px;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 28px;
+            color: #4F4F4F;
+        }
+
+        .inputs {
+            margin: auto;
+
+            select {
+                width: 126px;
+                height: 27px;
+                background: #F2F2F2;
+                border-radius: 3px;
+                margin-right: 20px;
+                border: none;
+                text-transform: capitalize;
+                padding-left: 6px;
+            }
+
+            .view_report {
+                width: 205.83px;
+                height: 39px;
+                background: #035476;
+                border-radius: 4px;
+                border: none;
+                margin-top: 30px;
+            }
+        }
+    }
+}

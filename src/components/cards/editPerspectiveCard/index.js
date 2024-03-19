@@ -1,35 +1,25 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import { Close } from "@styled-icons/material-twotone/Close";
 
+import { PERSPECTIVE_OBJECT } from "../../../utils/constants";
+import EmbededInput from "../../embeddedInput";
 import "./index.scss";
 
 
 const EditPerspectivesCard = props => {
-    return (
-        <Card className="admin_card edit_perpectives">
-            <div className="card_title">Edit Perspectives</div>
+   const {setSettings, settings } = props;
 
-                <div className="perspective_input">
-                    <input type="text" value="Financial" disabled/>
-                    <span className="save_btn">Edit</span>
-                 </div>
-                 <div className="perspective_input">
-                    <input type="text" value="Customer" disabled/>
-                    <span className="save_btn">Edit</span>
-                 </div>
-                 <div className="perspective_input">
-                    <input type="text" value="Internal Processes" name="IA" disabled/>
-                    <span className="save_btn">Edit</span>
-                 </div>
-                 <div className="perspective_input">
-                    <input type="text" value="Learning and Growth" disabled/>
-                    <span className="save_btn">Edit</span>
-                 </div>
-                 <div className="perspective_input">
-                    <input type="text" value="Behavioral Perspectives" name="bp"/>
-                    <span className="save_btn">Edit</span>
-                 </div>
+    return (
+        <Card className="admin_card edit_perpectives" id="edit_perspective">
+            <div className="card_title">Edit Perspectives</div>
+               {
+                  Object.keys(PERSPECTIVE_OBJECT).map(key => {
+                     if (key==="behavioral_name" && !settings?.behaviorals_enabled) {
+                        return <></>;
+                     }
+                        return <EmbededInput setSettings={ setSettings } defaultValue={ settings[key]} key={ key } initialValueKey={ key }/>
+                  })
+               }
         </Card>
         
     );

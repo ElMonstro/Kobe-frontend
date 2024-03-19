@@ -1,0 +1,25 @@
+.employee_name {
+    svg {
+        fill: #828282!important;
+        height: 15px;
+        width: 15px;
+        font-size: 20px;
+        background-color: white;
+        vertical-align: middle;
+        border-radius: 50%;
+        border: 2px solid #828282;
+    }
+
+    font-weight: 650;
+    font-size: 17px;
+    line-height: 28px;
+    letter-spacing: 0.035em;
+    padding-left: 5px;
+    border-radius: 5px;
+    
+}
+
+.highlighted {
+    color: #045476!important;
+    background-color: #e6ecf1!important;
+}
