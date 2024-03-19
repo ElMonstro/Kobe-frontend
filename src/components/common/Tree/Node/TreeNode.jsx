@@ -70,7 +70,7 @@ const Node = ({ id, name, children, node, job_grade, department, staff_no, desig
             </Row>
             
         </div>
-        <div className={ `tree__node--collapsible ${ collapsibleClass }` } isOpen={isOpen}>
+        <div className={ `tree__node--collapsible ${ collapsibleClass }` }>
           {childs}
         </div>
       </div>
