@@ -17,10 +17,10 @@ const MeasureInput = ({ formik, index }) => {
                 <Form.Group className="mb-1" controlId={ name }>
                     <Form.Label>Description</Form.Label>
                     <Form.Control 
-                    type="text" 
-                    placeholder=""
-                    { ...nameFieldProps } 
-                    isInvalid={ touched.name && errors.name }
+                        type="text" 
+                        placeholder=""
+                        { ...nameFieldProps } 
+                        isInvalid={ touched.name && errors.name }
                     />
                     <Form.Control.Feedback type='invalid'>
                         { errors.name }
@@ -32,12 +32,12 @@ const MeasureInput = ({ formik, index }) => {
                 <Form.Group className="mb-1" controlId={ weight }>
                     <Form.Label>Weight</Form.Label>
                     <Form.Control 
-                    type="text" 
-                    placeholder=""
-                    value={ 100 }
-                    { ...formik.getFieldProps(weight) } 
-                    isInvalid={ touched.weight && errors.weight }
-                    disabled
+                        type="text" 
+                        placeholder=""
+                        value={ 100 }
+                        { ...formik.getFieldProps(weight) } 
+                        isInvalid={ touched.weight && errors.weight }
+                        disabled
                     />
                     <Form.Control.Feedback type='invalid'>
                         { errors?.weight }

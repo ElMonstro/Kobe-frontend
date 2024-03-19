@@ -1,8 +1,7 @@
 import React from "react";
 import { Form, Row, Col } from "react-bootstrap";
 
-
-const BudgetInputs = ({ formik, actingRole, initiative, enableEvidence }) => {
+const BudgetInputs = ({ formik, enableBudget, enableEvidence }) => {
     return (
         <Row className="inputs_row">
             <Col>
@@ -13,7 +12,7 @@ const BudgetInputs = ({ formik, actingRole, initiative, enableEvidence }) => {
                     placeholder=""
                     { ...formik.getFieldProps('budget') } 
                     isInvalid={ formik.touched.budget && formik.errors.budget }
-                    disabled={!initiative.is_self_cascaded}
+                    disabled={ !enableBudget }
                     />
                     <Form.Control.Feedback type='invalid'>
                         { formik.errors.budget }

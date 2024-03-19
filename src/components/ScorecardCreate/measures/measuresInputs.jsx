@@ -41,7 +41,7 @@ const MeasuresInputs = ({ formik, initiative, setReinitializeForm }) => {
                 </span>
             </div>
             <FieldArray name="measures" render={ arrayHelpers => {
-                return formik.values.measures.map((measure, index) => {
+                return formik.values.measures?.map((measure, index) => {
                     arrayHelpersRef.current = arrayHelpers;
                         return (
                             <MeasureInput 

@@ -23,7 +23,8 @@ const ScorecardForm = ({
         objective, enableInitiatives, 
         enableMilestones, disableObjectiveName,
         actingRole, enableImpact, 
-        objectiveTitle, enableEvidence
+        objectiveTitle, enableEvidence,
+        enableBudget
     }) => {
 
     const navigate = useNavigate();
@@ -31,7 +32,7 @@ const ScorecardForm = ({
     const [reinitializeForm, setReinitializeForm] = useState(enableReinitialize);
     const [showPrompt, confirmNavigation, cancelNavigation] = useCallbackPrompt(showDialog);
 
-    const submitHandler = async (values, { setFieldError, resetForm }) => {
+    const submitHandler = async (values, { resetForm }) => {
 
         console.log(values)
 
@@ -41,8 +42,8 @@ const ScorecardForm = ({
         }
 
         values = cleanObjectivePayload(values);
-
-        onSubmit(values, { setFieldError, resetForm });
+        setShowDialog(false);
+        await onSubmit(values, { resetForm });
     }
 
     const yupValidationSchema = Yup.object(validationSchema);
@@ -92,7 +93,7 @@ const ScorecardForm = ({
                             
                             <BudgetInputs 
                                 formik={ formik } actingRole={ actingRole } 
-                                initiative={ objective } enableEvidence={ enableEvidence} 
+                                enableBudget={ enableBudget } enableEvidence={ enableEvidence} 
                             />
                             { enableInitiatives &&
                                 <InitiativeInputs 

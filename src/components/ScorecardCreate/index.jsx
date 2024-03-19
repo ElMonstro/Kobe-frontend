@@ -14,27 +14,26 @@ const ScorecardCreate = ({ periods, actingRole }) => {
 
     const { setActiveComponent } = useOutletContext();
     const initialValues = {
-        upper_threshold: '',
-        lower_threshold: '',
-        name: '',
-        perspective: '',
-        data_type: '',
-        quaterly_target: '',
-        baseline: '',
-        percentage_target: '',
-        units_target: '',
-        measures: [ 
-            {
-                name: '', 
-                weight: '', 
-            },
-        ],
-        initiatives: [
-            {
-                name: '', 
-                role: actingRole?.id,
-            }
-        ],
+            upper_threshold: '',
+            lower_threshold: '',
+            name: '',
+            perspective: '',
+            data_type: '',
+            baseline: '',
+            percentage_target: '',
+            units_target: '',
+            measures: [ 
+                {
+                    name: '', 
+                    weight: '', 
+                },
+            ],
+            initiatives: [
+                {
+                    name: '', 
+                    role: actingRole?.id,
+                }
+            ],
         }
 
     if (actingRole?.is_ceo) {
@@ -58,7 +57,7 @@ const ScorecardCreate = ({ periods, actingRole }) => {
             setActiveComponent(CREATE);
         }, []);
 
-    const onSubmit = async (values, { setFieldError, resetForm }) => {
+    const onSubmit = async (values, { resetForm }) => {
         const { createObjectiveURL } = getURLs();
         makeRequest(createObjectiveURL, POST, values, true)
                 .then(data => {

@@ -136,8 +136,12 @@ export const areInitiativesValid = (initiativesSchema, data) => {
 };
 
 export const cleanObjectivePayload = (data) => {
-    data.data_type === UNITS? delete data["percentage_target"]: delete data["units_target"];
+    data.data_type === UNITS? data["percentage_target"] = 0: data["units_target"] = 0;
     (data.perspective === BEHAVIORAL) && delete data.initiatives;
+
+    data.initiatives = data.initiatives?.filter(initiative => initiative.name && initiative.role);
+    data.milestones = data.milestones?.filter(milestone => milestone.description && milestone.percentage);
+
     // Clear empty fields
     Object.keys(data).forEach(key => {
         if (data[key]?.length===0) {

@@ -23,7 +23,7 @@ const MemberMenuCont = ({ currentRole, orgChart, setCurrentRole }) => {
     
     return (
         <div className="members_container">
-            { currentRole.permissions === UPDATE ? 
+            { currentRole?.permissions === UPDATE ? 
                 <>
                     <div className="members_nav_cont">
                         <MemberNavCard 

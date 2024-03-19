@@ -15,7 +15,7 @@ const QuaterlyTargetInputs = ({ formik, periods }) => {
                 <Row className="inputs_row period_target">
                     <Col>
                         {
-                            formik.values.period_targets?.slice(0, periodHalfLength).map(
+                            formik.values.period_targets?.slice(0, periodHalfLength)?.map(
                                 (period, index) => {
                                     return <QuaterlyTargetInput 
                                                 period={ period }
@@ -28,7 +28,7 @@ const QuaterlyTargetInputs = ({ formik, periods }) => {
                     </Col>
                     <Col>
                         {
-                            formik.values.period_targets?.slice(periodHalfLength).map(
+                            formik.values.period_targets?.slice(periodHalfLength)?.map(
                                 (period, index) => {
                                     index = index + periodHalfLength;
                                     return <QuaterlyTargetInput 

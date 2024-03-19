@@ -51,6 +51,7 @@ import EditObjectivesWeights from "./components/updateTopObjectivesWeight";
 import SurveyModal from "./components/modals/surveyModal";
 import AppraiseForm from "./components/createImprovementPlan";
 import AppraisalApproval from "./components/approvalCont/appraisalApproval";
+import ScorecardUpdate from "./components/ScorecardCreate/scorecardEdit";
 
 function App({ isLoggedIn, showNotifications }) {
 
@@ -113,7 +114,7 @@ function App({ isLoggedIn, showNotifications }) {
             <Route path={ SCORECARD } element={<ScorecardCont />} >
               <Route index element={ <ViewScorecard />}/>
               <Route path={ CREATE } element={ <ScorecardCreate/> }/>
-              <Route path={`${CREATE}/:initiativeId/:mode`} element={ <ScorecardCreate/> }/>
+              <Route path={`${UPDATE}/:initiativeId/:mode`} element={ <ScorecardUpdate /> }/>
               <Route path={ CASCADED } element={ <CascadedCards />}/>
               <Route path={ VIEW } element={ <ViewScorecard />} />
               <Route path={ UPDATE } element={ <UpdateScorecardCard />} />

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import { CREATE, EDIT, INITIATIVE, SCORECARD } from "../../../utils/constants";
+import { CREATE, EDIT, INITIATIVE, SCORECARD, UPDATE } from "../../../utils/constants";
 
 import "./index.scss";
 
@@ -16,7 +16,7 @@ const CascadedInitiative = ({ name, id, type})=> {
     const { role } = useParams();
 
     const handleClick = e => {
-        const url = `/${role}/${SCORECARD}/${CREATE}/${e.target.id}/${buttonType}`;
+        const url = `/${role}/${SCORECARD}/${UPDATE}/${e.target.id}/${buttonType}`;
         navigate(url);
     };
 

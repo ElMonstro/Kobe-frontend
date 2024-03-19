@@ -12,7 +12,6 @@ const ThresholdsInputs = ({ formik }) => {
                     <Form.Control 
                     type="text" 
                     placeholder=""
-                    { ...formik.getFieldProps('upper_threshold') } 
                     isInvalid={ formik.touched.upper_threshold && formik.errors.upper_threshold }
                     disabled
                     />
@@ -28,7 +27,6 @@ const ThresholdsInputs = ({ formik }) => {
                     <Form.Control 
                     type="text" 
                     placeholder=""
-                    { ...formik.getFieldProps('lower_threshold') } 
                     isInvalid={ formik.touched.lower_threshold && formik.errors.lower_threshold }
                     disabled
                     />

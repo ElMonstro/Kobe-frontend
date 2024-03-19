@@ -11,7 +11,7 @@ import { deleteFromObjectlist } from "../../../utils";
 import { FieldArray } from "formik";
 
 const InitiativeInputs = ({ formik, objective }) => {
-    
+
     const [underlings, setUnderlings] = useState([]);
     const [createdInitiatives, setCreatedInitiatives] = useState([]);
     const arrayHelpersRef = useRef();
@@ -75,7 +75,7 @@ const InitiativeInputs = ({ formik, objective }) => {
         <FieldArray 
             name="initiatives"
             render={ arrayHelpers => {
-                return formik.values.initiatives.map( (initiative, index) => {
+                return formik.values.initiatives?.map( (initiative, index) => {
                     arrayHelpersRef.current = arrayHelpers;
                     return <InitiativeInput 
                                 { ...initiative } 

@@ -4,16 +4,12 @@ import { useParams } from "react-router-dom";
 import { PERCENTAGE, UNITS } from "../../../utils/constants";
 
 
-const TargetInputs = ({ formik, targetDisabled, setReinitializeForm }) => {
+const TargetInputs = ({ formik, targetDisabled }) => {
 
     const dataTypeProps = formik.getFieldProps('data_type');
     const percentageTargetProps = formik.getFieldProps('percentage_target')
     const { mode } = useParams();
 
-    if (dataTypeProps.value) {
-        setReinitializeForm(false);
-    }
-    
     return (
         <>
             <div className="title">

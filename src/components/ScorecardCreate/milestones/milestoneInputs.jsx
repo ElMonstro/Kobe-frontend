@@ -25,7 +25,7 @@ const Milestones = ({ formik, objective }) => {
         setCreatedMilestones(objective?.milestones)
     }, [objective]);
 
-    const addMilestone = ( )=> {
+    const addMilestone = () => {
         arrayHelpersRef.current.push({
             description: '',
             percentage: ''
@@ -61,13 +61,15 @@ const Milestones = ({ formik, objective }) => {
                 })
             }
         <FieldArray 
+            name="milestones"
             render={ arrayHelpers => {
-                formik.values.milestones?.map( (milestone, index) => {
+                return formik.values.milestones?.map( (milestone, index) => {
                     arrayHelpersRef.current = arrayHelpers;
                     return (
                         <MilestoneInput 
                             key={ index  } 
                             formik={ formik }
+                            index={ index }
                             arrayHelpers={ arrayHelpers }
                             />)
                 })
