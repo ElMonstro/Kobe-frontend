@@ -5,11 +5,8 @@ import { ThemeProvider } from "styled-components";
 import { useDidMountEffect } from "../../../utils/treeUtils";
 import { TreeContext, reducer } from "./state";
 
-import { StyledTree } from "../Tree/Tree.style";
 import { Node } from "../Tree/Node/TreeNode";
 import "./tree.scss";
-import { C } from "styled-icons/simple-icons";
-
 
 const Tree = ({ children, data, onNodeClick, onUpdate, currentNode }) => {
   const [state, dispatch] = useReducer(reducer, data);
@@ -35,13 +32,13 @@ const Tree = ({ children, data, onNodeClick, onUpdate, currentNode }) => {
           },
         }}
       >
-        <StyledTree>
-          {isImparative ? (
-            <TreeRecursive data={state} parentNode={state} currentNode={currentNode} />
-          ) : (
-            children
-          )}
-        </StyledTree>
+        <div className="tree">
+            {isImparative ? (
+              <TreeRecursive data={state} parentNode={state} currentNode={currentNode} />
+            ) : (
+              children
+            )}
+        </div>
       </TreeContext.Provider>
     </ThemeProvider>
   );

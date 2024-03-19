@@ -1,25 +1,72 @@
-.employee_name {
-    svg {
-        fill: #828282!important;
-        height: 15px;
-        width: 15px;
-        font-size: 20px;
-        background-color: white;
-        vertical-align: middle;
-        border-radius: 50%;
-        border: 2px solid #828282;
+.tree {
+    .employee_name {
+        svg {
+            fill: #828282!important;
+            height: 15px;
+            width: 15px;
+            font-size: 20px;
+            background-color: white;
+            vertical-align: middle;
+            border-radius: 50%;
+            border: 2px solid #828282;
+        }
+    
+        font-weight: 650;
+        font-size: 17px;
+        line-height: 28px;
+        letter-spacing: 0.035em;
+        padding-left: 5px;
+        border-radius: 5px;
+        
     }
 
-    font-weight: 650;
-    font-size: 17px;
-    line-height: 28px;
-    letter-spacing: 0.035em;
-    padding-left: 5px;
-    border-radius: 5px;
-    
-}
+    .tree__node {
+        font-weight: bold;
+        padding-left: 10px;
 
-.highlighted {
-    color: #045476!important;
-    background-color: #e6ecf1!important;
+        .tree__file {
+            padding-left: 10px;
+        }
+
+        .vertical__line {
+            position: relative;
+            :before {
+                content: "";
+                display: block;
+                position: absolute;
+                top: -2px; /* just to hide 1px peek */
+                left: 1px;
+                width: 0;
+                height: 100%;
+                border: 1px solid #dbdbdd;
+                z-index: -1;
+        }
+
+        .node__name {
+            background-color: white;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .tree__node--collapsible {
+            height: max-content;
+            overflow: hidden;
+            transition: 0.3s ease-in-out;
+
+            &.open {
+                max-height: 800px;
+            }
+
+            &.closed {
+                max-height: 0px;
+            }
+        }
+        }
+    }
+    
+    .highlighted {
+        color: #045476!important;
+        background-color: #e6ecf1!important;
+    }
 }

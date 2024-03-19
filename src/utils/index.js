@@ -1,4 +1,3 @@
-import forge from 'node-forge';
 import { toast } from 'react-toastify';
 import store from "../redux/store/store.js";
 import { changeLoginStatus, setNotifications, setWebSocket } from "../redux/actions";
@@ -67,16 +66,6 @@ export const fireNotification = (type, message) => {
         s = s.replace(reg, arguments[i + 1]);
     }
     return s;
-};
-
-export function encryptData( publicKey, string){
-    const pubKey = forge.pki.publicKeyFromPem(publicKey);
-    const encrypted = pubKey.encrypt(string, "RSA-OAEP", {
-        md: forge.md.sha256.create(),
-        mgf1: forge.mgf1.create()
-    });
-    return forge.util.encode64(encrypted);
-
 };
 
 export function checkSessionStatus (response) {

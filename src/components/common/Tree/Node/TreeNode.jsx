@@ -4,14 +4,8 @@ import {CaretDown} from "@styled-icons/boxicons-regular/CaretDown";
 import {CaretRight} from "@styled-icons/boxicons-regular/CaretRight";
 import { Col, Row } from "react-bootstrap";
 
-import {
-  Collapse,
-  StyledName,
-  VerticalLine,
-} from "../Tree.style";
-import { StyledNode } from "./TreeNode.style";
-
 import { useTreeContext } from "../state/TreeContext";
+import "../tree.scss";
 
 const NodeName = ({ isOpen, name, openCloseNode, handleNameClick, isHighligted }) => {
 
@@ -20,19 +14,21 @@ const NodeName = ({ isOpen, name, openCloseNode, handleNameClick, isHighligted }
   let className;
   isHighligted? className = "employee_name highlighted": className="employee_name";
 
-  return <StyledName className={className}>
+  return <div className={className}>
     {isOpen ? <CaretDown onClick={openCloseNode} /> : <CaretRight onClick={openCloseNode} />}
     &nbsp;&nbsp;
     <span onClick={handleNameClick}>
        {name} 
     </span>
-  </StyledName>
+  </div>
 };
 
 const Node = ({ id, name, children, node, job_grade, department, staff_no, designation, isHighligted }) => {
   const { onNodeClick } = useTreeContext();
   const [isOpen, setIsOpen] = useState(false);
   const [childs, setChilds] = useState([]);
+  let collapsibleClass = '';
+  isOpen? collapsibleClass = 'open': collapsibleClass = 'closed';
 
   useEffect(() => {
     setChilds([children]);
@@ -47,8 +43,8 @@ const Node = ({ id, name, children, node, job_grade, department, staff_no, desig
   );
 
   return (
-    <StyledNode id={id} className="tree__node">
-      <VerticalLine>
+    <div id={id} className="tree__node">
+      <div className="vertical__line">
         <div className="org_row">
           <Row>
             <Col>
@@ -74,11 +70,11 @@ const Node = ({ id, name, children, node, job_grade, department, staff_no, desig
             </Row>
             
         </div>
-        <Collapse className="tree__node--collapsible" isOpen={isOpen}>
+        <div className={ `tree__node--collapsible ${ collapsibleClass }` } isOpen={isOpen}>
           {childs}
-        </Collapse>
-      </VerticalLine>
-    </StyledNode>
+        </div>
+      </div>
+    </div>
   );
 };
 
