@@ -4,7 +4,11 @@
     padding: 20px 28px!important;
     background-color: #E6ECF2!important;
     min-height: 944px;
-    margin-top: 81px;
+    margin-top: 61px;
+
+    .org_row {
+        background-color: #fff!important;
+    }
 
     .col {
         padding: 0!important;
@@ -81,5 +85,7 @@
             width: 240px;
         }
     }
+
+    
 
 }

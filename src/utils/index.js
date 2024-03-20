@@ -1,9 +1,7 @@
-import forge from 'node-forge';
 import { toast } from 'react-toastify';
 import store from "../redux/store/store.js";
 import { changeLoginStatus, setNotifications, setWebSocket } from "../redux/actions";
-import { BIANNUALS, CHARACTERS, NESTED, OBJECTIVES, PERSPECTIVES, QUARTERS, UNITS } from './constants.js';
-import { socketsMessagesURL } from '../services/urls.js';
+import { BEHAVIORAL, BIANNUALS, CHARACTERS, NESTED, OBJECTIVES, PERSPECTIVES, QUARTERS, UNITS } from './constants.js';
 import { LOGOUT } from '../redux/actions/actionTypes.js';
 
 const notificationTypeMapper = {
@@ -70,16 +68,6 @@ export const fireNotification = (type, message) => {
     return s;
 };
 
-export function encryptData( publicKey, string){
-    const pubKey = forge.pki.publicKeyFromPem(publicKey);
-    const encrypted = pubKey.encrypt(string, "RSA-OAEP", {
-        md: forge.md.sha256.create(),
-        mgf1: forge.mgf1.create()
-    });
-    return forge.util.encode64(encrypted);
-
-};
-
 export function checkSessionStatus (response) {
     if (response.status === 401) {      
         store.dispatch(changeLoginStatus(false));
@@ -136,80 +124,13 @@ export const areInitiativesValid = (initiativesSchema, data) => {
     }
 };
 
-export const createObjectivePayload = (data, initiativesSchema, measures, periods, milestones) => {
-    const initiativesPayload = [];
-    const measuresPayload = [];
-    const periodTargetsPayload = [];
-    const milestonesPayload = [];
-  
-    initiativesSchema.forEach(initiative => {
-      const initiativePayload = {};
-      if (!data[initiative.cascadeId]) {
-        return;
-      }
+export const cleanObjectivePayload = (data) => {
+    data.data_type === UNITS? data["percentage_target"] = 0: data["units_target"] = 0;
+    (data.perspective === BEHAVIORAL) && delete data.initiatives;
 
-      initiativePayload['name'] = data[initiative.initiativeId];
-      if (!initiativePayload['name']) {
-        return
-      }
-      if (data[initiative.weightId] !== "") {
-        initiativePayload['weight'] = data[initiative.weightId];
-      }
-      initiativePayload['role'] = data[initiative.cascadeId];
+    data.initiatives = data.initiatives?.filter(initiative => initiative.name && initiative.role);
+    data.milestones = data.milestones?.filter(milestone => milestone.description && milestone.percentage);
 
-      delete data[initiative.initiativeId];
-      delete data[initiative.weightId];
-      delete data[initiative.cascadeId];
-  
-      initiativesPayload.push(initiativePayload);
-    });
-
-    milestones?.forEach(milestone => {
-        if (!data[milestone.milestoneId]) {
-            return;
-        }
-        const milestonePayload = {};
-        milestonePayload['description'] = data[milestone.milestoneId];
-        milestonePayload['percentage'] = data[milestone.percentageId];
-        delete data[milestone.milestoneId];
-        delete data[milestone.percentageId];
-
-        milestonesPayload.push(milestonePayload);
-    
-    });
-
-    measures.forEach(measure => {
-        const measurePayload = {};
-        measurePayload['name'] = data[measure.measureId];
-        measurePayload['weight'] = data[measure.weightId];
-        
-        delete data[measure.weightId];
-        delete data[measure.measureId];
-
-        measuresPayload.push(measurePayload);
-  
-    });
-
-    periods.forEach(period => {
-        const periodTargetPayload = {};
-        if (data[period]) {
-            periodTargetPayload['target'] = data[period]
-            periodTargetPayload['period'] = period;
-            periodTargetsPayload.push(periodTargetPayload);
-        } 
-
-        delete data[period];
-    })
-  
-    data.measures = measuresPayload;
-    data.initiatives = initiativesPayload;
-    data.milestones = milestonesPayload;
-
-    console.log(data);
-    if (periodTargetsPayload.length > 0) {
-      data.period_targets = periodTargetsPayload;
-    }
-    data.data_type === UNITS? delete data["percentage_target"]: delete data["units_target"]
     // Clear empty fields
     Object.keys(data).forEach(key => {
         if (data[key]?.length===0) {
@@ -248,23 +169,15 @@ const getTarget = values => {
     return parseInt(target);
 };
 
-export const arePeriodicalInputsValid = (values, periods, setFieldError) => {
+export const arePeriodicalInputsValid = (values) => {
     let total = 0;
     const target = getTarget(values);
 
-    periods.forEach(period => {
-        total += parseFloat(values[period]);
+    values?.period_targets?.forEach(period => {
+        total += parseFloat(period.target);
     });
 
-    if (total !== target) {
-        periods.forEach(period => {
-            setFieldError(period, `All periodical targets have to add up to ${target}`);
-        });
-
-        return false;
-    }
-
-    return true;
+    return total === target;
 };
 
 export const isWeightsFieldValid = (values, remainingObjectiveWeight, setFieldError) => {
@@ -303,7 +216,7 @@ export const webSocketMessageHandler = event => {
 };
 
 export const connectWebSocket = () => {
-    const webSocket = new WebSocket(socketsMessagesURL);
+    const webSocket = new WebSocket('socketsMessagesURL');
     store.dispatch(setWebSocket(webSocket));
     webSocket.onmessage = webSocketMessageHandler;
     webSocket.onclose = connectWebSocket;
@@ -403,7 +316,11 @@ export const deleteFromObjectlist = (items, key, deleteId) => {
     }
 
     return [...items];
-}
+};
+
+export function removeObjectWithId(arr, id) {
+    return arr.filter((obj) => obj.id !== id);
+};
 
 export const convertFromNestedToFlat = (nestedObject, key) => {
     let flatList = nestedObject[key];
@@ -413,7 +330,7 @@ export const convertFromNestedToFlat = (nestedObject, key) => {
     }
 
     return flatList;
-}
+};
 
 export const calculatePeriodPerfomance = (currentObject) => {
     const last_period_score = currentObject?.last_period_score
@@ -425,7 +342,7 @@ export const calculatePeriodPerfomance = (currentObject) => {
     }
 
     return (percentage_diff / currentObject?.current_period_target);
-}
+};
 
 
 export const createOverallCurrentObject = (perspectives) => {
@@ -441,4 +358,8 @@ export const createOverallCurrentObject = (perspectives) => {
         currentObject.last_period_score += perspective.last_period_score * perspective.weight/100;
     }
     return currentObject;
-}
+};
+
+export const deepCopy = (item) => {
+    return JSON.parse(JSON.stringify(item));
+};

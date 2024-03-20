@@ -1,10 +1,13 @@
 import {
+    ADD_COMPANY,
+    SET_COMPANIES,
     SET_COMPANY_INFO,
     SET_ORG_CHART,
     SET_PERIODS,
     SET_PERSPECTIVE_ORDER,
     SET_PROFILE_PIC,
     SET_SETTINGS,
+    SET_SHOW_EDIT_COMPANY,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -12,7 +15,10 @@ const initialState = {
     companyInfo: {},
     orgChart: [],
     periods: [],
-    perspectiveOrder: []
+    perspectiveOrder: [],
+    companies: [], 
+    showEditCompany: false,
+    showSurvey: false,
 };
 
 const adminReducer = ( state=initialState, action ) => {
@@ -42,6 +48,19 @@ const adminReducer = ( state=initialState, action ) => {
         case SET_PERSPECTIVE_ORDER:
             const { perspectiveOrder } = action;
             return {...state, perspectiveOrder};
+
+        case SET_COMPANIES:
+            let { companies } = action;
+            return {...state, companies};
+
+        case ADD_COMPANY:
+            const { company } = action;
+            companies = [...state.companies, company];
+            return {...state, companies};
+
+        case SET_SHOW_EDIT_COMPANY:
+            const { showEditCompany } = action;
+            return {...state, showEditCompany};
             
         default:
             return state;

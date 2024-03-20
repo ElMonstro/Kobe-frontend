@@ -3,6 +3,19 @@
     height: 61px;  
     padding: 0;
     border-bottom: #e6ecf2 1px solid;
+
+    .back {
+      color: #000;
+      cursor: pointer;
+      position: absolute;
+      top: 15px;
+      left: 20px;
+  
+      svg {
+          height: 30px;
+      }
+  
+  }
     
     .avatar_menu {
         float: right;
@@ -100,7 +113,6 @@
     .dropdown-menu {
         min-width: 85px!important;
     }
-
       
     
 }

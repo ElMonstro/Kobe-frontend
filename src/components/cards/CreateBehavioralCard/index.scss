@@ -1,0 +1,23 @@
+.behaviorals_cont {
+
+    form {
+        select {
+            width: 360px;
+            height: 45px;
+        }
+    }
+
+    .header {
+        font-weight: 700;
+    }
+
+    .behavior {
+        .delete {
+            cursor: pointer;
+            svg {
+                height: 20px;
+            }
+        }
+    }
+
+}

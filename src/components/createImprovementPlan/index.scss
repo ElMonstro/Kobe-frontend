@@ -1,0 +1,68 @@
+.scorecard_appraise {
+
+    .staff_card {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    
+
+    form {
+        .form_btns {
+            float: right!important;
+            width: fit-content;
+    
+            button {
+                width: 114px;
+                height: 36px;
+                border-radius: 4px;
+            }
+    
+            .submit_btn {
+                background: #2D9CDB;
+                color: #fff;
+                margin-left: 10px;
+            }
+    
+            .cancel_btn {
+                background-color: inherit;
+                border: 1px solid #BDBDBD;
+                color: #000
+            }
+            
+        }
+    }
+
+    .improvement_areas {
+        input, textarea {
+            width: 95%;
+        }
+        .improvement_row {
+            margin-bottom: 10px;
+        }
+    }
+
+    .icon {
+        cursor: pointer;
+        color: gray;
+        svg {
+            height: 40px;
+        }
+    }
+
+    .address {
+        width: 80px;
+        height: 30px;
+        input {
+            cursor: pointer!important;
+        }
+        
+    }
+}
+
+.appraise_title {
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: gray;
+
+}

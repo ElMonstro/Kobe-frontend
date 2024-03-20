@@ -9,7 +9,11 @@ import {
     SET_WEB_SOCKET,
     SET_SHOW_PROFILE,
     SET_PROFILE_PIC,
-    SET_PERSPECTIVE_ORDER
+    SET_PERSPECTIVE_ORDER,
+    ADD_COMPANY,
+    SET_COMPANIES,
+    SET_SHOW_EDIT_COMPANY,
+    SET_SHOW_SURVEY
     } from "./actionTypes";
 
 export const changeLoginStatus = isLoggedIn => ({
@@ -84,6 +88,11 @@ export const setShowProfile = showProfile => ({
     showProfile,
 });
 
+export const setShowSurvey = showSurvey => ({
+    type: SET_SHOW_SURVEY,
+    showSurvey,
+});
+
 export const setProfilePic = role => ({
     type: SET_PROFILE_PIC,
     role,
@@ -92,4 +101,19 @@ export const setProfilePic = role => ({
 export const setPerspectiveOrder = perspectiveOrder => ({
     type: SET_PERSPECTIVE_ORDER,
     perspectiveOrder,
+});
+
+export const addCompany = company => ({
+    type: ADD_COMPANY,
+    company,
+});
+
+export const setCompanies = companies => ({
+    type: SET_COMPANIES,
+    companies,
+});
+
+export const setShowEditCompany = showEditCompany => ({
+    type: SET_SHOW_EDIT_COMPANY,
+    showEditCompany,
 });

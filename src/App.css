@@ -49,3 +49,8 @@ textarea:focus, input:focus, button:focus{
 .dashboard, .nav_bar {
     min-width: 1400px!important;
 }
+
+.card_btn {
+    width: 134px;
+    background-color: #2D9CDB;;
+}

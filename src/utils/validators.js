@@ -1,11 +1,13 @@
 import * as Yup from 'yup';
+import { arePeriodicalInputsValid } from '.';
+import { BEHAVIORAL } from './constants';
 
 export const yupLoginObj = Yup.object({
-    email: Yup.string()
-        .email('* Invalid email address')
-        .required('* Required'),
-    password: Yup.string()
-        .required('* Required'),
+        email: Yup.string()
+            .email('* Invalid email address')
+            .required('* Required'),
+        password: Yup.string()
+            .required('* Required'),
     });
 
 const getCharacterValidationError = (str) => {
@@ -53,6 +55,16 @@ export const yupMissionFormObj = Yup.object({
     name: Yup.string()
         .required('* Required'),
     });
+
+export const yupCreateUserObj = Yup.object({
+        first_name: Yup.string()
+            .required('* Required'),
+        second_name: Yup.string()
+            .required('* Required'),
+        email: Yup.string('* Invalid email address')
+            .email()
+            .required('* Required'),
+        });
 
 export const yupDivisionNamesObj = Yup.object({
     division_name: Yup.string(),
@@ -122,7 +134,7 @@ export const yupReviewPeriodObj = Yup.object({
             .required('* Required')
 });
 
-export const yupObjectiveValidationObj = {
+export const yupCreateObjectiveValidationObj = {
     name: Yup.string()
         .required('* Required'),
     perspective: Yup.string()
@@ -134,11 +146,53 @@ export const yupObjectiveValidationObj = {
     target: Yup.number(),
     upper_threshold: Yup.number(),
     lower_threshold: Yup.number(),
-    budget: Yup.number(),
     baseline: Yup.number(),
     percentage_target: Yup.number().min(0),
     unit_target: Yup.number(),
-    evidence_description: Yup.string()
-        .required('* Required')
-        .test('len', 'Must be less than 100 characters', val => val?.length < 100)
-}
+    measures: Yup.array().of(Yup.object({
+        name: Yup.string().required('* Required')
+            .test('len', 'Must be less than 50 characters', val => val?.length < 50),
+        weight: Yup.number()
+    })),
+    initiatives: Yup.array().when(['perspective'], {
+        is: (perspective) => perspective !== BEHAVIORAL,
+        then: Yup.array().of(Yup.object({
+            name: Yup.string().required('* Required'),
+            role: Yup.number().required('* Required'),
+        }))
+    }),
+    period_targets: Yup.array().of(Yup.object({
+        period: Yup.string().required('* Required'),
+        target: Yup.number().required('* Required'),
+    })).test(
+        'Accumulate test',
+        'The quarterly targets must add up to target',
+        (value, ctx) => {
+            return arePeriodicalInputsValid(ctx.parent);
+        }
+    )
+};
+
+export const yupCompanyValidation = Yup.object({
+    name: Yup.string().required('* Required'),
+    rest_server: Yup.string().required('* Required'),
+    grpc_server: Yup.string().required('* Required'),
+    email_domain: Yup.string().required('* Required')
+});
+
+export const yupEditCompanyValidation = Yup.object({
+    name: Yup.string(),
+    rest_server: Yup.string(),
+    grpc_server: Yup.string(),
+    email_domain: Yup.string()
+});
+
+export const yupCreateBehavioral = Yup.object({
+    name: Yup.string().required(),
+    tier_cutoff: Yup.number().required()
+});
+
+export const yupAppraise = Yup.object({
+    general_comments: Yup.string().required(),
+    improvement_areas: Yup.array().required(),
+});

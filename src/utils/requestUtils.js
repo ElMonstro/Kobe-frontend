@@ -44,7 +44,7 @@ export const notificationHandler = (response, successMessage, errorMessage) => {
 } 
 
 // Make a function to centralize all backend requests
-export const makeRequest =  async (url, method, data, authenticated=true, notify=true, isFormData=false, sucessMessage, errorMessage) => {
+export const makeRequest =  async (url, method, data, authenticated=true, notify=true, isFormData=false, sucessMessage, errorMessage, fieldErrorHandler) => {
     let headerDetails;
     const request = requestTypeMapper[method];
     let response;
@@ -57,12 +57,9 @@ export const makeRequest =  async (url, method, data, authenticated=true, notify
     authenticated?  headerDetails = getHeaderDetails(isFormData): headerDetails = null;
 
     try {
-        if (method === GET) {
+        if (method === GET || method === 'delete') {
             response = await request(url, headerDetails);
         
-        }
-        else if (method === 'delete') {
-            response = await request(url, headerDetails);
         }
          else {
             response = await request(url, data, headerDetails);
@@ -73,6 +70,8 @@ export const makeRequest =  async (url, method, data, authenticated=true, notify
     } catch (error) {
         console.log(error)
         notify && notificationHandler(error.response);
+        error.response?.data?.detail || (fieldErrorHandler && fieldErrorHandler(error.response?.data))
+
         if (error.response.status === 401) {
             logout();
         }

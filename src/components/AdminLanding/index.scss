@@ -1,0 +1,65 @@
+.admin_landing {
+
+        .landing_col {
+            float: left;
+        }
+
+        .titles {
+            padding: 8px;
+            background-color: #fff;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .title {
+            padding: 5px;
+            color: #000;
+        }
+        .company {
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+
+            .company_logo {
+
+                img {
+                    height: 40px;
+                }
+               
+            }
+
+            
+        }
+        .actions {
+            margin-right: 20px;
+            svg {
+                height: 30px;
+            }
+        }
+        
+}
+
+.company_modal_content {
+    padding: 10px!important;
+
+    .modal-header {
+        padding: 5px;
+    }
+
+    .title {
+        color: #000;
+        margin-left: 40px;
+    }
+}
+
+.company_form {
+    width: 400px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 5px;
+}
