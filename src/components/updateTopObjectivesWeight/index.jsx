@@ -7,7 +7,6 @@ import { yupEditPerspectivesWeightObj } from "../../utils/validators";
 import { PATCH, WEIGHTS } from "../../utils/constants";
 import "./index.scss";
 import getURLs from "../../services/urls";
-import { data } from "autoprefixer";
 import { GET } from "../../utils/constants";
 import { makeRequest } from "../../utils/requestUtils";
 
