@@ -193,6 +193,10 @@ export const yupCreateBehavioral = Yup.object({
 });
 
 export const yupAppraise = Yup.object({
-    general_comments: Yup.string().required(),
-    improvement_areas: Yup.array().required(),
+    general_comments: Yup.string().required('* Required'),
+    improvement_areas: Yup.array().of(Yup.object({
+        improvement_area: Yup.string().required('* Required'),
+        improvement_activity: Yup.string().required('* Required'),
+        timeline: Yup.string().required('* Required')
+    })),
 });

@@ -7,6 +7,10 @@ const ImprovementInput = ({ formik, index, arrayHelpers }) => {
     const improvementArea = `improvement_areas.${index}.improvement_area`;
     const improvementActivity = `improvement_areas.${index}.improvement_activity`;
     const timeline = `improvement_areas.${index}.timeline`;
+    let touched = {}
+    let errors = {};
+    formik.touched?.improvement_areas? touched = formik.touched?.improvement_areas[index]: touched = {};
+    formik.errors?.improvement_areas? errors = formik.errors?.improvement_areas[index]: errors = {};
 
     const onDelete = () => {
         arrayHelpers.remove(index);
@@ -21,10 +25,10 @@ const ImprovementInput = ({ formik, index, arrayHelpers }) => {
                     valuedefault="" 
                     placeholder=""
                     { ...formik.getFieldProps(improvementArea) } 
-                    isInvalid={ formik.touched[improvementArea] && formik.errors[improvementArea] }
+                    isInvalid={ touched.improvement_area && errors.improvement_area }
                     />
                     <Form.Control.Feedback type='invalid'>
-                        { formik.errors[improvementArea] }
+                        { errors.improvement_area }
                     </Form.Control.Feedback>
                 </Form.Group>
                 
@@ -38,10 +42,10 @@ const ImprovementInput = ({ formik, index, arrayHelpers }) => {
                         placeholder=""
                         valuedefault=""
                         { ...formik.getFieldProps(improvementActivity) } 
-                        isInvalid={ formik.touched[improvementActivity] && formik.errors[improvementActivity] }
+                        isInvalid={ touched.improvement_activity  && errors.improvement_activity }
                     />
                     <Form.Control.Feedback type='invalid'>
-                        { formik.errors[improvementActivity] }
+                        { errors.improvement_activity }
                     </Form.Control.Feedback>
                 </Form.Group>
             </Col>
@@ -53,10 +57,10 @@ const ImprovementInput = ({ formik, index, arrayHelpers }) => {
                         placeholder="2 weeks"
                         valuedefault=""
                         { ...formik.getFieldProps(timeline) } 
-                        isInvalid={ formik.touched[timeline] && formik.errors[timeline] }
+                        isInvalid={ touched.timeline && errors.timeline }
                     />
                     <Form.Control.Feedback type='invalid'>
-                        { formik.errors[timeline] }
+                        { errors.timeline }
                     </Form.Control.Feedback>
                     
                 </Form.Group>

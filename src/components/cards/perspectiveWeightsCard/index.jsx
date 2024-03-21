@@ -14,7 +14,7 @@ const EditPerspectivesForm = ({ setSettings, settings }) => {
     const { companyId } = useParams();
     let initialValues = {}
 
-    if (settings.perspective_enabled) {
+    if (settings?.perspective_enabled) {
         initialValues = {
             financial_weight: settings?.financial_weight,
             customer_weight: settings?.customer_weight,
@@ -46,7 +46,7 @@ const EditPerspectivesForm = ({ setSettings, settings }) => {
             return;
         }
            makeRequest(getURLs().adminSettingsURL(companyId), PATCH, values, true)
-            .then(data => setSettings(data));
+            .then(data => data && setSettings(data));
         },
     });
     
@@ -166,6 +166,5 @@ const EditPerspectivesForm = ({ setSettings, settings }) => {
         
     );
 };
-
 
 export default EditPerspectivesForm;

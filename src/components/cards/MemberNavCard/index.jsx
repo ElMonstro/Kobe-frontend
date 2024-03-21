@@ -41,11 +41,13 @@ const MemberNavCard = ({ activeComponent, currentRole }) => {
                         Scorecard
                     </Link>
                 </Col>
-                <Col id={ STRATEGY_MAP }>
-                    <Link to={ `/${role}/${STRATEGY_MAP}/`}>
-                        Strategy Map
-                    </Link>
-                </Col>
+                { settings?.perspective_enabled &&
+                    <Col id={ STRATEGY_MAP }>
+                        <Link to={ `/${role}/${STRATEGY_MAP}/`}>
+                            Strategy Map
+                        </Link>
+                    </Col>
+                }
                 <Col id={ DASHBOARDS }>
                     <Link to={ `/${role}/${DASHBOARDS}/` }>
                         Dashboards
@@ -64,8 +66,9 @@ const MemberNavCard = ({ activeComponent, currentRole }) => {
 const mapDispatchToProps = {
 }
 
-const mapStateToProps = ({ authReducer: { currentRole } }) => ({
+const mapStateToProps = ({ authReducer: { currentRole }, adminReducer: { settings } }) => ({
     currentRole,
+    settings
 });
 
 export default connect(

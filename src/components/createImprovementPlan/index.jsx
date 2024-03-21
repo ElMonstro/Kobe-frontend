@@ -29,8 +29,9 @@ const AppraiseForm = () => {
         validationSchema: yupAppraise,
         enableReinitialize: true,
 
-        onSubmit: (values) => {
+        onSubmit: (values, { resetForm }) => {
         makeRequest(getURLs().appraiseURL, POST, values, true)
+            .then(data => data && resetForm());
         },
     });
 

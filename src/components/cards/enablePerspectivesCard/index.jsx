@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 
 const PesrpectiveSwitchForm = props => {
 
-    const { setSettings, settings: { perspective_enabled } } = props; 
+    const { setSettings, settings } = props; 
     const { companyId } = useParams();
 
     const onChange = async event => {
@@ -35,7 +35,7 @@ const PesrpectiveSwitchForm = props => {
                         <Col><Form.Check
                          type="switch" placeholder="" 
                          onChange={ onChange }
-                         checked={ Boolean(perspective_enabled) }
+                         checked={ Boolean(settings?.perspective_enabled) }
                          /> </Col>
                     </Row>
                 </Form.Group>
