@@ -2,4 +2,57 @@
     .sd-page__title {
         color: white!important;
     }
+
+
+}
+
+.survey_landing {
+    position: relative;
+    height: 500px;
+    font-size: 30px;
+    color: #fff;
+    padding: 20px;
+    overflow: hidden;
+    background-image: url('/src/assets/complete-survey.svg');
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: bottom;
+
+
+    .db_img {
+        opacity: 0.2;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: auto;
+    }
+
+    p {
+        position: relative;
+    }
+
+    .start_btn {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        background-color: #fff;
+        color: #2e5abc;
+        font-weight: 600;
+        height: 45px;
+        font-size: 20px;
+
+        &:hover {
+            background-color: #2e5abc;
+            color: #fff;
+            border-color: #fff;
+        }
+    }
+}
+
+.survey_modal_body {
+    padding: 0;
+    margin: 0;
+    padding-bottom: 15px;
+    background-color: #2e5abc;
 }

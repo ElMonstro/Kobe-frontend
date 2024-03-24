@@ -8,7 +8,7 @@ import { DASHBOARDS, OVER_VIEW, REPORTS, SCORECARD, STRATEGY_MAP } from "../../.
 import './index.scss';
 
 
-const MemberNavCard = ({ activeComponent, currentRole }) => {
+const MemberNavCard = ({ activeComponent, currentRole, settings }) => {
 
     const setSelectedClass = activeComponent => {
         let selectedElements = document.getElementsByClassName("current");

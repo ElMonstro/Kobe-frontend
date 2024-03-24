@@ -13,12 +13,14 @@ import { deepCopy } from "../../../utils";
 import { makeRequest } from "../../../utils/requestUtils";
 import { PATCH } from "../../../utils/constants";
 import getURLs from "../../../services/urls";
+import SurveyLanding from "./surveyLanding";
 
 
 const SurveyModal = ({ settings }) => {
 
     const [modelJson, setModelJson] = useState(deepCopy({}));
     const [showSurvey, setShowSurvey] = useState(false);
+    const [startSurvey, setStartSurvey] = useState(false);
 
     useEffect(() => {
         const jsonCopy = deepCopy(json);
@@ -83,8 +85,11 @@ const SurveyModal = ({ settings }) => {
                         Behavioral Survey
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body className="profile_modal_body">
-                    <Survey model={survey} />
+                <Modal.Body className="survey_modal_body">
+                    { startSurvey?
+                        <Survey model={survey} />:
+                        <SurveyLanding setStartSurvey={ setStartSurvey } />    
+                    }
                 </Modal.Body>
             </Modal>
         </div>
