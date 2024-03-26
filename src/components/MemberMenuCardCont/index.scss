@@ -4,6 +4,7 @@
     margin-top: 180px;
 
     
+    
     .members_nav_cont {
         position: fixed;
         top: 61px;
@@ -14,6 +15,14 @@
         padding-top: 20px; 
         background-color: #E6ECF2;
         border-bottom: #E6ECF2 2px solid;
+    }
+    .members_content{
+        // position: fixed;
+        // top: 12rem;
+        // width: 72%;
+         // overflow: auto;
+        width: 98.5%;
+       
     }
 
     .board_message {
