@@ -25,6 +25,7 @@
             margin-right: 10px;
         }
     }
+    
 
     .form_btns {
         float: right!important;
@@ -40,6 +41,7 @@
             background: #2D9CDB;
             color: #fff;
             margin-left: 10px;
+            width: auto; //change
         }
 
         .cancel_btn {
@@ -49,6 +51,20 @@
         }
         
     }
+
+    .spinner-container {
+        position: fixed;
+        top: 55%;
+        left: 55%;
+        transform: translate(-50%, -50%);
+        /* Adjust top/left values and margin if needed */
+      }
+      .overlay {
+        opacity: 0.5; /* Adjust this value for desired transparency */
+        // background-color: rgba(255, 255, 255, 0.5)
+        background-color: rgba(204, 204, 204, 0.5);
+        margin-top: 4.5rem;
+      }      
 
     .quarter {
         margin-left: 0;
