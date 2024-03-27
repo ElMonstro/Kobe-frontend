@@ -25,7 +25,6 @@ const ScorecardCreate = ({ periods, actingRole }) => {
             measures: [ 
                 {
                     name: '', 
-                    weight: '', 
                 },
             ],
             initiatives: [

@@ -17,7 +17,8 @@ const CreateBehavioralForm = ({ settings, setBehaviorals, behaviorals }) => {
     const formik = useFormik({
         initialValues: {
             name: '',
-            tier_cutoff: 2,
+            upper_tier_cutoff: 1,
+            lower_tier_cutoff: 2,
         },
         validationSchema: yupCreateBehavioral,
         enableReinitialize: false,
@@ -53,13 +54,13 @@ const CreateBehavioralForm = ({ settings, setBehaviorals, behaviorals }) => {
                     </Col>
                 </Row>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="tier_cutoff">
+            <Form.Group className="mb-3" controlId="upper_tier_cutoff">
                 <Row>
                     <Col><Form.Label>Upper Tier Cutoff</Form.Label></Col> 
                     <Col>
                     <Form.Select
-                        { ...formik.getFieldProps('tier_cutoff') } 
-                        isInvalid={ formik.touched.tier_cutoff && formik.errors.tier_cutoff }
+                        { ...formik.getFieldProps('upper_tier_cutoff') } 
+                        isInvalid={ formik.touched.upper_tier_cutoff && formik.errors.upper_tier_cutoff }
                         >
                         <option>Tiers</option>
                         {
@@ -67,11 +68,31 @@ const CreateBehavioralForm = ({ settings, setBehaviorals, behaviorals }) => {
                         }
                     </Form.Select>
                     <Form.Control.Feedback type='invalid'>
-                        { formik.errors.tier_cutoff }
+                        { formik.errors.upper_tier_cutoff }
                     </Form.Control.Feedback>
                     </Col>
                 </Row>
             </Form.Group>
+            <Form.Group className="mb-3" controlId="lower_tier_cutoff">
+                <Row>
+                    <Col><Form.Label>Lower Tier Cutoff</Form.Label></Col> 
+                    <Col>
+                    <Form.Select
+                        { ...formik.getFieldProps('lower_tier_cutoff') } 
+                        isInvalid={ formik.touched.lower_tier_cutoff && formik.errors.lower_tier_cutoff }
+                        >
+                        <option>Tiers</option>
+                        {
+                            tierOptions.map(option => option)
+                        }
+                    </Form.Select>
+                    <Form.Control.Feedback type='invalid'>
+                        { formik.errors.lower_tier_cutoff }
+                    </Form.Control.Feedback>
+                    </Col>
+                </Row>
+            </Form.Group>
+            
             <Button className="card_btn" variant="primary" type="">
                 Save
             </Button>

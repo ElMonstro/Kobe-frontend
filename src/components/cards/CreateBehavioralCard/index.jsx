@@ -46,15 +46,17 @@ const CreateBehavioralCard = ({ settings }) => {
                 <Col className="behaviorals">
                     <Row className="header">
                         <Col>Name</Col>
-                        <Col>Tier Cutoff</Col>
-                        <Col></Col>
+                        <Col>Upper Cutoff</Col>
+                        <Col>Lower Cutoff</Col>
+                        <Col lg={1}></Col>
 
                     </Row>
                     { behaviorals.map(behavior =>
                         <Row className="behavior">
                             <Col>{ behavior.name }</Col>
-                            <Col>{ behavior.tier_cutoff }</Col>
-                            <Col>
+                            <Col>{ behavior.upper_tier_cutoff }</Col>
+                            <Col>{ behavior.lower_tier_cutoff }</Col>
+                            <Col lg={1}>
                                 <span className="delete" onClick={deleteBehavior(behavior)}>
                                     <Bin />
                                 </span>
