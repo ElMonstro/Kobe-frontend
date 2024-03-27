@@ -1,5 +1,9 @@
 .view_scorecard {
     padding-bottom: 10px;
+    // New change
+    position: absolute;
+    top: 3rem;
+    width: 100%;
 
     .perspectives>:nth-child(odd) {
         background: #F2F2F2;

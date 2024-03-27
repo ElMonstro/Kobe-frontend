@@ -1,9 +1,7 @@
 .members_container {
     margin: 0 20px;
     position: relative;
-    margin-top: 180px;
-
-    
+    margin-top: 180px;    
     
     .members_nav_cont {
         position: fixed;
@@ -16,13 +14,15 @@
         background-color: #E6ECF2;
         border-bottom: #E6ECF2 2px solid;
     }
-    .members_content{
-        // position: fixed;
-        // top: 12rem;
-        // width: 72%;
-         // overflow: auto;
-        width: 98.5%;
-       
+    .members_content{               
+        width: 98.5%;       
+            .dashboard_btns{               
+                    position: fixed;
+                    top: 13rem;
+                    left: 87%;
+                    z-index: 1000;       
+               
+            }              
     }
 
     .board_message {

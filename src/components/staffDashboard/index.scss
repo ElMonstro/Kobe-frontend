@@ -23,6 +23,9 @@
     }
 
     .staff_card {
+        // position: absolute;
+        // top: 3rem;
+        // width: 100%;
         border: none;
 
         .card-header {
@@ -34,6 +37,11 @@
             padding: 10px 35px;
         }
 
+    }
+    .cascaded_initiatives, .update_scorecard, .scorecard_appraise, .strategy_map_view, .strategy_map_create, .dashboards_tab{
+         position: absolute;
+        top: 3rem;
+        width: 100%;
     }
 
     .dashboard_btn {

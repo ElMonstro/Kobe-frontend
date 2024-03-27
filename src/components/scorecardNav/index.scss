@@ -1,4 +1,8 @@
-.scorecard_nav {
+.scorecard_nav, .strategy_map_nav {
+    position: fixed;
+    top: 12rem;
+    z-index: 1000;
+    
     a {
         background: #FFFFFF;
         border: 1px solid #035476;
